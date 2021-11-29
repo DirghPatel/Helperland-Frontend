@@ -1,0 +1,68 @@
+.navbar{
+    background-color: #525252;
+    font-size: 17px;
+    padding: 4px 0px !important;
+}
+/* .main{
+    width: 100vw;
+} */
+.navbar_main{
+    padding: 0 15px !important;
+}
+.navbar_book , .navbar_helper{
+    padding: 10px 18px;
+    background-color: #29626D;
+    border: 1px solid #FFFFFF80;
+    margin: 0 5px;
+}
+
+.navbar_prices{
+    padding: 10px 18px;
+    background-color: #00607200;
+    border: 1px solid #FFFFFF80;
+    margin: 0 5px;
+}
+.navbar_login{
+    padding: 10px 22px;
+    background-color: #29626D;
+    border: 1px solid #FFFFFF80;
+    margin: 0 5px;
+}
+
+.navbar_list{
+    flex-grow: initial !important;
+    position: relative;
+}
+
+.navbar ul{
+    min-width: 260px;
+    padding: 0px 12px;
+}
+
+@media (max-width: 1197px){
+    .navbar_book , .navbar_prices , .navbar_helper , .navbar_login{
+        border: none;
+        background-color: #525252;
+        margin: 10px 0;
+        padding: 0;
+    }
+    .navbar_login ,.navbar_helper{
+        border: 1px solid #fff;
+        padding: 10px 20px;
+        margin: 5px 0px;
+    }
+    .nav-item{
+        width: fit-content;
+    }
+    .navbar_list{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .navbar_list ul{
+        margin: 0 !important;
+    }
+    .navbar_list ul li a{
+        padding: 10px 0;
+    }
+}

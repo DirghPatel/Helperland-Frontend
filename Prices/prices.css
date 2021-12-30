@@ -200,3 +200,7 @@ hr{
         max-width: 95vw;
     }
 }
+
+.nav_select1{
+    border: 1px solid #FFFFFF80;
+}

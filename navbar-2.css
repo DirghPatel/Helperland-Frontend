@@ -1,0 +1,126 @@
+.navbar {
+  background-color: #525252;
+  font-size: 17px;
+  padding: 4px 0px;
+  animation: none !important;
+  z-index: 100;
+}
+.navbar_main {
+  padding: 0 15px !important;
+}
+.navbar_book {
+  background-color: #29626d;
+  border: 1px solid #ffffff80;
+  margin: 0 5px;
+}
+.nav-link {
+  padding: 7px 18px !important;
+  margin: 0 5px;
+}
+.nav-item {
+  margin: 0px 4px;
+}
+.nav-item:hover {
+  border: 1px solid #ffffff80;
+}
+.navbar_login {
+  background-color: #29626d;
+  border: 1px solid #ffffff80;
+  margin: 0 5px;
+}
+
+.navbar_helper {
+  background-color: #29626d;
+  border: 1px solid #ffffff80;
+  margin: 0 5px;
+}
+
+.navbar_list {
+  flex-grow: initial !important;
+}
+.navbar ul {
+  min-width: 260px;
+  padding: 0px 12px;
+}
+.nav_icons1,
+.nav_icons2 {
+  border-left: 1px solid #e1e1e1;
+  margin: 0;
+  padding-left: 20px;
+  margin-right: 20px;
+}
+.navbar-toggler {
+  box-shadow: none !important;
+}
+.navcol_third {
+  display: flex;
+}
+.navcol_first,
+.navcol_second,
+.navcol_fourth {
+  display: none;
+}
+.navcol .nav-item a,
+.navcol p {
+  color: #fff;
+}
+.navcol p {
+  font-size: 14px;
+}
+.navcol .nav-item a {
+  font-size: 16px;
+}
+@media (max-width: 990px) {
+  .navbar_login,
+  .navbar_helper,
+  .navbar_book {
+    border: 1px solid #fff;
+    margin: 5px 0px;
+    background-color: #525252;
+    padding: 0;
+  }
+  .nav-item {
+    width: fit-content;
+  }
+  .navbar_list {
+    position: fixed;
+    background-color: white;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 250px;
+  }
+  .navbar_list ul {
+    margin: 0 !important;
+  }
+  .navbar_list ul li a {
+    padding: 10px 0;
+  }
+  .navcol {
+    width: 100%;
+    border-bottom: 1px solid rgb(44, 44, 44);
+    padding: 10px 0;
+  }
+  .navcol_third {
+    display: block;
+  }
+  .navcol_fourth {
+    display: flex !important;
+  }
+  .navcol .nav-item a,
+  .navcol p {
+    color: #646464;
+  }
+  .navcol_first,
+  .navcol_second,
+  .navcol_fourth {
+    display: block;
+  }
+  .nav_icons2 {
+    display: none;
+  }
+  .nav_icons1 {
+    border-right: 1px solid #e1e1e1;
+    padding: 0px 10px;
+  }
+}

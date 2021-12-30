@@ -1,0 +1,156 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.body{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+html{
+    overflow-x: hidden;
+}
+.main_container{
+    background: url(./assets/first/backgroung.jpg) center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 928px;
+    height: fit-content;
+}
+.form_outer{
+    background-color: #fff;
+    min-height: 664px;
+    width: 430px;
+    padding-left: 35px;
+    padding-right: 35px;
+    margin-top: 40px;
+}
+.main_form input{
+    border: solid 1px #c8c8c8;
+    min-height: 46px;
+    border-radius: 0;
+}
+.form-group{
+    margin: 18px 0;
+    
+}
+.form_outer h3{
+    margin: 28px 0;
+}
+
+.main_form input::placeholder{
+    font-size: 16px;
+    color: #a0a0a0;
+}
+.form_areacode{
+    max-width: 46px;
+    background-color: #c8c8c8 !important;
+}
+.form_checkbox{
+    border: solid 1px #c8c8c8;
+    width: 20px;
+}
+.checkbox_outer p{
+    font-size: 14px;
+}
+.form_btn{
+    min-width: 166px;
+    min-height: 46px;
+    background-color:#1d7a8c !important;
+    color: white !important;
+    font-size: 16px !important;
+}
+.checkbox_outer span a{
+    color: #1fb6ff !important;
+    text-decoration: none !important;
+}
+.howItWorks{
+    min-height: 1196px;
+    height: fit-content;
+}
+.hiw_heading{
+    margin-top: 68px;
+    margin-bottom: 73px;
+}
+.hiw_card{
+    min-width: 740px;
+    color: #4f4f4f;
+    margin: 20px 0;
+    justify-content: space-between;
+}
+
+.hiw_card h2{
+    font-size: 30px;
+    margin-bottom: 16px;
+}
+.hiw_card p{
+    font-size: 18px;
+}
+.card_desc{
+    margin-bottom: 48px;
+}
+.hiw_left svg, .hiw_right svg{
+    position: absolute;
+    z-index: -1;
+}
+.hiw_left svg{
+    left: 0;
+}
+.svg_1{
+    top:0;
+}
+.svg_2{
+    top: 40%;
+}
+.svg_3{
+    bottom: 0;
+}
+.hiw_right svg{
+    right: 0;
+}
+.svg_4{
+    top:0;
+}
+.svg_5{
+    top: 40%;
+}
+.svg_6{
+    bottom: 0;
+}
+
+@media (max-width: 768px){
+    .hiw_card{
+        flex-direction: column;
+        min-width: fit-content;
+        text-align: center;
+    }
+
+    .card_content1{
+        order: 1;
+    }
+    .card_desc{
+        margin-bottom: 20px;
+    }
+    .card_image{
+        margin-bottom: 10px;
+    }
+    .form_outer{
+        width: 420px;   
+        padding: 0 10px;
+    }
+}
+@media (max-width: 425px){
+    .svg_2{
+        top: 35%;
+    }
+    .svg_3{
+        top: 60%;
+    }
+    .svg_4{
+        top: 20%;
+    }
+    .svg_5{
+        top: 50%;
+    }
+    .form_outer{
+        width: 310px;   
+    }
+}

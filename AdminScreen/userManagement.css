@@ -1,0 +1,173 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.navbar{
+    background-color: #1fb6ff !important;
+    padding: 0;
+    height: fit-content;
+    min-height: 61px;
+}
+.helperlandLogo{
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 37.5px;
+}
+.blueColor{
+    color: #1fb6ff;
+}
+.navbar-toggler{
+    border: none !important;
+}
+.navbar-toggler:focus{
+    border: none !important;
+    box-shadow: none !important;
+}
+.sidebarMain{
+    min-width: 272px;
+    width: 272px;
+}
+.offcanvas{
+    top: 61px;
+}
+.offcanvas-body{
+    padding: 0;
+}
+.offcanvas-body p{
+    border-bottom: 1px solid #e5e5e5;
+    padding: 10px;
+}
+.userManagement{
+    padding: 20px;
+    background-color: #f2f4f5;
+    min-height: calc(100vh - 61px);
+}
+.userManagementHeader h1{
+    font-size: 22px;
+    font-weight: 700;
+    color: #646464;
+    padding: 10px 0;
+}
+.userManagementHeader a{
+    background-color: #1fb6ff;
+    padding: 12px 15px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+.phonecodeForm{
+    max-width: 57px;
+}
+.width215{
+    width: 215px;
+}
+.formMain{
+    /* height: 46px; */
+    /* flex-wrap: wrap; */
+    /* min-width: fit-content; */
+    list-style: none;
+    margin-bottom: -15px;
+    padding: 0;
+}
+.formMain li{
+    display: inline-block;
+}
+.marginInput{
+    margin: 0 13px;
+}
+.formMain input , select{
+    padding: 13px 10px;
+    border: 1px solid #dedddd;
+    max-height: 46px;
+    border-radius: 4px;
+}
+.formWrapper{
+    background-color: #fff;
+    padding: 20px 15px;
+    border: 1px solid #e1e1e1;
+}
+.searchButton{
+    padding: 11px 15px;
+    background-color: #1fb6ff;
+    border: none;
+    min-width: 84px;
+    border-radius: 4px;
+}
+.clearButton{
+    padding: 11px 15px;
+    border: none;
+    min-width: 84px;
+    border-radius: 4px;
+}
+.dropDownBtn{
+    background-color: transparent;
+    border: none;
+    color: black;
+}
+td{
+    font-size: 16px;
+    vertical-align: middle;
+}
+.statusActive{
+    color: white;
+    background-color: #67b644;
+    padding: 5px 10px;
+}
+.statusInActive{
+    color: white;
+    background-color: #ff6b6b;
+    padding: 5px 10px;
+}
+table{
+    border: 1px solid #e1e1e1;
+    background-color: #fff;
+    width: 100%;
+    min-width: 900px;
+}
+thead{
+    background-color: #f9f9f9;
+}
+tbody{
+    border-top: none !important;
+}
+.userManageTable{
+    overflow-x: auto;
+    border: 1px solid #e1e1e1;
+}
+@media (min-width: 1200px){
+    .offcanvas{
+        /* position: sticky; */
+        visibility: visible;
+        transition: transform .3s ease-in-out;
+    }
+    .offcanvas-start{
+        transform: translate(0%);
+    }
+    .offcanvas-backdrop {
+        display: none;
+    }
+    .userManagement{
+        padding-left: 296px;
+    }
+}
+
+@media (max-width: 768px){
+    .navbar .container-fluid{
+        flex-direction: column;
+        padding: 10px 12px;
+    }
+    .logoContainer{
+        float: left;
+        width: 100%;
+    }
+    .adminDetailContainer{
+        justify-content: flex-end;
+        width: 100%;
+    }
+    .offcanvas{
+        top: 112.25px;
+    }
+}
+@media (max-width: 425px){
+    .userManagementHeader{
+        flex-direction: column;
+    }
+}

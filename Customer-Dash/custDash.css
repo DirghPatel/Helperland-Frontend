@@ -31,6 +31,7 @@ body{
 .dash_sidebar {
   width: 262px;
   min-height: fit-content !important;
+  background-color: #1d7a8c;
 }
 .dash_sidebar ul {
   height: fit-content;

@@ -124,27 +124,10 @@ form {
 .container_map {
   margin-top: 80px;
 }
-.map_image {
-  width: 100vw;
-  height: auto;
-}
 
-.email_left_a,
-.email_right {
-  display: none;
-}
-.email_form {
-  justify-content: center !important;
-}
 
 @media (max-width: 768px) {
-  .map_marker {
-    top: 8vw;
-    left: 43vw;
-  }
-  .email_form form {
-    max-width: none;
-  }
+
   .logos_inner {
     margin: 0 1vw;
   }

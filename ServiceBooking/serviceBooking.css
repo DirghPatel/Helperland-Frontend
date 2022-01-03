@@ -1,0 +1,35 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.nav_select5{
+    background-color: rgba(0,95,113,.6)!important;
+    border: 1px solid #e1e1e1;
+}
+
+.bookService_heading{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #4f4f4f;
+    margin-top: 30px;
+}
+.bookService_heading h1{
+    font-size: 36px;
+    font-weight: 500;
+    color: #4f4f4f;
+}
+.bookService_box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.left_line , .right_line{
+    width: 62px;
+    height: 1px;
+    background-color: #CCCCCC;
+    margin: 0px 8px;
+}

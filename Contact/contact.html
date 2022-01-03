@@ -17,6 +17,53 @@
 </head>
 
 <body>
+    <nav class="navbar navbar-expand-xl sticky-top" id="navbar">
+        <div class="container-fluid navbar_main">
+            <a class="navbar-brand py-0" href="../Homepage/home.html">
+                <img src="../nav-footer-assets/logo.png" alt="" height="54px" width="73px">
+            </a>
+            <button class="navbar-toggler text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="40"
+                    height="40"
+                    fill="#fff"
+                    class="bi bi-list"
+                    viewBox="0 0 16 16"
+                    >
+                    <path
+                        fill-rule="evenodd"
+                        d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
+                    />
+                </svg>
+            </button>
+            <div class="offcanvas offcanvas-end" id="navbarText" aria-labelledby="offcanvasExampleLabel" tabindex="-1">
+                <div class="offcanvas-body navbar_list">
+                    <div class="nav-item navbar_book rounded-pill" >
+                        <a class="nav-link text-light" href="#" id="bookNow">Book now</a>
+                    </div>
+                    <div class="nav-item rounded-pill nav_select1">
+                        <a class="nav-link text-light" href="../Prices/prices.html" id="pricesServices">Prices & services</a>
+                    </div>
+                    <div class="nav-item rounded-pill nav_select2">
+                        <a class="nav-link text-light" href="#" id="warranty">Warranty</a>
+                    </div>
+                    <div class="nav-item rounded-pill nav_select3">
+                        <a class="nav-link text-light" href="#" id="blog">Blog</a>
+                    </div>
+                    <div class="nav-item rounded-pill nav_select4">
+                        <a class="nav-link text-light" href="../Contact/contact.html" id="contact">Contact</a>
+                    </div>
+                    <div class="nav-item navbar_login rounded-pill">
+                        <a href="#" class="text-decoration-none text-light nav-link">Login</a>
+                    </div>
+                    <div class="nav-item navbar_helper rounded-pill">
+                        <a href="#" class="text-decoration-none text-light nav-link">Become a Helper</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
     <div class="container-fluid p-0">
         <!-- <nav class="navbar navbar-expand-xl" id="navbar">
             <div class="container-fluid navbar_main">
@@ -112,7 +159,7 @@
         <div class="container-fluid form_cover">
             <h4 class="text-center form_heading">Get in touch with us</h4>
             <div class="touch_form d-flex align-items-center justify-content-center">
-                <form method="POST" class="d-flex flex-column">
+                <form method="" action="" class="d-flex flex-column">
                     <div class="row justify-content-center">
                         <div class="col">
                             <input type="text" name="firstname" placeholder="First name" class="form_in w-100 h-100">
@@ -123,7 +170,7 @@
                     </div>
                     <div class="row justify-content-center">
                         <div class="col d-flex">
-                            <input type="number" name="areacode" class="form_areacode form_in">
+                            <input type="number" name="areacode" value="+49" class="form_areacode form_in form-control" disabled >
                             <input type="number" name="number" placeholder="Mobile number" class=" form_in w-100 h-100">
                         </div>
                         <div class="col">
@@ -150,22 +197,73 @@
             </div>
         </div>
     </div>
-    <div class="container_map position-relative">
+    <!-- <div class="container_map position-relative">
         <img src="./assets/contact/map.jpg" alt="" class="map_image">
         <div class="map_marker position-absolute">
             <svg xmlns="http://www.w3.org/2000/svg" width="48" height="67">
                 <path fill-rule="evenodd" fill="#FF6060" d="M45.959 16.672c-.238-.894-.722-1.846-1.08-2.68C40.598 3.688 31.242.5 23.688.5 13.575.5 2.437 6.785.95 20.782v2.859c0 .119.041 1.191.54 1.728.393 7.021 5.649 13.759 10.16 20.429 3.638 7.147 8.02 14.177 12.48 21.502 2.559-4.883 5.227-9.529 7.843-13.996.713-1.311 1.541-2.621 2.255-3.873.475-.833 1.384-1.666 2.052-2.441 3.971-7.743 11.2-15.546 11.2-23.23v-3.156c0-.834-1.3-3.752-1.521-3.932zM23.873 31.27c-2.973 0-6.226-1.731-7.473-5.842-.599-.654-.58-1.966-.58-2.086v-1.846c0-5.24 4.444-7.623 8.309-7.623 4.759 0 8.439 3.812 8.439 8.578 0 4.765-3.937 8.819-8.695 8.819z"/>
             </svg>        
         </div>
+    </div> -->
+    <div class="container_map">
+        <iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.6979157244114!2d72.49824711445191!3d23.034861321650208!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e8352e403437b%3A0xdc9d4dae36889fb9!2sTatvaSoft!5e0!3m2!1sen!2sin!4v1640187081460!5m2!1sen!2sin">
+        </iframe>
     </div>
-    <div id="footer"></div>
+
+    <!-- <div id="footer"></div> -->
+
+    <div class="footer_section w-100">
+        <div class="footer_main d-flex justify-content-center align-items-center position-relative">
+            <div class="d-flex justify-content-between h-100 align-items-center footer_inner position-relative">
+                <div class="footer_left">
+                    <img src="../nav-footer-assets/logo.png" alt="" height="78" width="106">
+                </div>
+                <div class="footer_mid">
+                    <ul class="d-flex p-0 text-center m-0">
+                        <li>
+                            <a href="./Homepage/home.html" class="text-decoration-none">HOME</a>
+                        </li>
+                        <li>
+                            <a href="./About/about.html" class="text-decoration-none">ABOUT</a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-decoration-none">TESTIMONIAL</a>
+                        </li>
+                        <li>
+                            <a href="./FAQS/faqs.html" class="text-decoration-none">FAQS</a>
+                        </li>
+                        <li>
+                            <a href="" class="text-decoration-none">INSURANCE POLICY</a>
+                        </li>
+                        <li>
+                            <a href="" class="text-decoration-none">IMPRESSUM</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer_right d-flex align-items-center justify-content-evenly">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="9" height="18">
+                        <path fill-rule="evenodd" fill="#CCC" d="M1.947 3.48v2.481H0v3.033h1.947V18.1h4.001V8.995h2.685S8.885 7.541 9.7 5.95H5.963V3.876c0-.31.437-.728.868-.728H9.11V.9H6.46C1.848.9 1.947 3.27 1.947 3.48z"/>
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <path fill-rule="evenodd" fill="#CCC" d="M14.48 20H5.519A5.524 5.524 0 0 1 0 14.482V5.52C0 2.477 2.475.2 5.519.2h8.961c3.043 0 5.519 2.277 5.519 5.32v8.962A5.525 5.525 0 0 1 14.48 20zm3.744-5.518V5.52a3.748 3.748 0 0 0-3.744-3.744H5.519A3.749 3.749 0 0 0 1.774 5.52v8.962a3.749 3.749 0 0 0 3.745 3.744h8.961a3.748 3.748 0 0 0 3.744-3.744zm-2.855-8.536c-.099 0-.678-.14-.92-.381-.242-.243.221-.578.221-.921 0-.342-.463-.678-.221-.92.242-.242.821-.381.92-.381.343 0 1.111.139.92.381.242.242.381.578.381.92 0 .342-.139.678-.381.921.171.241-.577.381-.92.381zm-5.37 9.208c-2.841 0-5.153-2.312-5.153-5.054 0-2.941 2.312-5.252 5.153-5.252 2.842 0 5.153 2.311 5.153 5.252 0 2.742-2.311 5.054-5.153 5.054zm0-8.532c-1.863 0-3.379 1.516-3.379 3.478 0 1.764 1.516 3.28 3.379 3.28s3.379-1.516 3.379-3.28c0-1.962-1.516-3.478-3.379-3.478z"/>
+                    </svg>                                        
+                </div>
+            </div>
+        </div>
+        <div class="footer_end d-flex align-items-center justify-content-center position-relative">
+            <p class="m-0 text-center">©2018 Helperland. All rights reserved. &nbsp;&nbsp;<span><a href="" class="text-decoration-none">Terms and Conditions</a></span> | <span><a href="" class="text-decoration-none">Privacy Policy</a></span></p>
+        </div>
+    </div>
+
+
 
     <script>
         
-        $(function () {
-            $("#navbar_load").load("../navbar.html");
-            $("#footer").load("../footer.html");
-        });
+        // $(function () {
+        //     $("#navbar_load").load("../navbar.html");
+        //     $("#footer").load("../footer.html");
+        // });
     
         $('select').change(function() {
             console.log("hello");

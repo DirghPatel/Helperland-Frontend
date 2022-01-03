@@ -1,0 +1,102 @@
+.minheight46{
+    min-height: 46px;
+}
+.borderlight{
+    border: 1px solid #e1e1e1;
+}
+.paddinginside{
+    padding: 10px;
+}
+.dash_contents{
+    padding: 0px 20px;
+}
+.tab-content{
+    padding: 20px;
+}
+label{
+   font-size: 16px;
+   /* font-weight: 700; */
+   color: #646464; 
+   margin-bottom: 5px;
+}
+
+input{
+    color: #646464;
+}
+tbody{
+    border-top: none !important;
+}
+#myAddressesTable th ,#myAddressesTable td{
+    padding: 10px 20px;
+}
+.nav-item{
+    border: none !important;
+    margin: 0;
+}
+.nav-tabs .nav-link{
+    border: none;
+    border-bottom: 4px solid #e1e1e1 !important;
+    margin: 0;
+    color: #646464;
+    font-weight: 700;
+}
+.nav-tabs .active{
+    border-bottom-color: #1d7a8c !important;
+}
+
+.account-status{
+    font-size: 20px;
+    color: #646464;
+}
+.account-status span{
+    color: #67b644;
+}
+.itemAvatar{
+    float: left;
+    height: 91px;
+    width: 91px;
+    flex: none !important;
+    padding: 0;
+    margin: 0 10px;
+    border: 3px solid #e1e1e1;
+    transition: none !important;
+}
+.avatar{
+    vertical-align: middle;
+}
+.btn-check:checked+.btn-outline-primary{
+    background-color: #1d7a8c;
+    border-color: #1d7a8c;
+    transition: none;
+}
+.itemAvatar:hover{
+    border-color: #1d7a8c !important;
+}
+.label-main{
+    font-size: 18px;
+}
+.save_button{
+    background-color: #1d7a8c;
+    padding: 5px 15px;
+    width: fit-content;
+    /* max-width: 50px !important; */
+}
+@media (max-width: 768px){
+    
+   
+    .dash_contents{
+        padding: 0px 5px;
+        width: 95vw !important;
+    }
+    .tab-content{
+        padding: 20px 0px;
+        width: fit-content;
+    }
+    select{
+        margin: 0 0px !important;
+    }
+    .custDash_main{
+        margin: 0px !important;
+        padding: 5px;
+    }
+}

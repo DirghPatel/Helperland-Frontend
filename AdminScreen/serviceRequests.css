@@ -8,6 +8,11 @@
   height: fit-content;
   min-height: 61px;
 }
+button:focus , input:focus , textarea:focus , select:focus{
+  box-shadow: none !important;
+  border: 2px solid #1d7a8c !important;
+  outline: #1d7a8c !important;
+}
 .helperlandLogo {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 37.5px;

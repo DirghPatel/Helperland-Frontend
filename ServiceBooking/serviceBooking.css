@@ -2,11 +2,13 @@
     margin: 0;
     padding: 0;
 }
+html{
+    overflow-x: hidden;
+}
 .nav_select5{
     background-color: rgba(0,95,113,.6)!important;
     border: 1px solid #e1e1e1;
 }
-
 .bookService_heading{
     display: flex;
     flex-direction: column;
@@ -33,3 +35,384 @@
     background-color: #CCCCCC;
     margin: 0px 8px;
 }
+.bookService_container{
+    max-width: 100vw;
+    margin: 20px auto !important;
+    justify-content: space-evenly;
+}
+.bookService_Right{
+    width: fit-content !important;
+    color: #4f4f4f;
+    /* padding: 0 !important; */
+}
+.bookService_Left{
+    width: 70%;
+    /* padding: 0 !important; */
+}
+.faqs{
+    max-width: 360px;
+}
+.borderbottom{
+    border-bottom: 1px solid #c8c8c8;
+}
+.paymentSummary{
+    box-shadow: 0 0 10px #0000004d !important;
+}
+.paymentSummary_heading{
+    background-color: #1d7a8c;
+    padding: 22px 20px;
+    font-size: 18px;
+    color: #fff;
+}
+.padding20{
+    padding: 20px;
+}
+hr{
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+}
+.inner-wrapper{
+    max-width: 360px;
+}
+
+.paymentBig{
+    color: #1d7a8c;
+    font-size: 42px;
+    font-weight: 700;
+}
+.totalPayment{
+    font-size: 20px;
+    color: #1d7a8c;
+}
+.smallFont{
+    font-size: 14px;
+}
+.paymentSummary_Bottom{
+    background-color: #f3f3f3;
+}
+.paymentSummary_Bottom a{
+    color: #8d8d8d !important;
+}
+.greenButton{
+    background-color: #1d7a8c !important;
+    max-width: 175px;
+}
+.height46{
+    height: 46px;
+}
+#setupServiceTab input{
+    max-width: 250px;
+}
+.paddinginner{
+    padding: 10px;
+}
+.borderlight{
+    border: 1px solid #dedddd;
+}
+.dash_contents ul li{
+    margin: 0;
+    background-color: #f3f3f3;
+}
+button:focus , input:focus , textarea:focus , select:focus{
+    box-shadow: none !important;
+    border: 2px solid #1d7a8c !important;
+    outline: #1d7a8c !important;
+}
+.dash_contents ul li a{
+    position: relative;
+    justify-content: center;
+    border-radius: 0 !important;
+    margin: 0;
+    padding: 19px 7px !important;
+    color: #646464;
+    font-size: 18px;    
+    font-weight: 600;
+    height: 100%;
+}
+.dash_contents ul li a:hover{
+    color: #1d7a8c;
+}
+.nav-item:hover{
+    border: none;
+}
+.bookService_Left .dash_contents .nav{
+    flex-wrap: nowrap;
+}
+.nav-tabs .nav-item .active{
+    background-color: #1d7a8c !important;
+}
+.nav-tabs .nav-item .active::after{
+    position: absolute;
+    content: "";
+    height: 0;
+    width: 0;
+    top: 100%;
+    border-width: 14px 14px 0 14px;
+    border-color: #1d7a8c transparent transparent transparent;
+    border-style: solid;
+    left: 50%;
+    margin-left: -14px;
+}
+.title_wrapper{
+    position: relative;
+    display: inline-block;
+    padding-left: 28px;
+}
+.bg_wrapper{
+    display: inline-block;
+    margin-left: -16px;
+    background-size: 32px;
+    height: 32px;
+    width: 32px;
+    position: absolute;
+    margin-top: -16px;
+    left: 10px;
+    top: 50%;
+}
+.setupServiceTabControllerBG{
+    background: url(./assets/setup-service.png);
+}
+.schedulePlanTabControllerBG{
+    background: url(./assets/schedule-plan.png);
+}
+.yourDetailsTabControllerBG{
+    background: url(./assets/user-details.png);
+}
+.makePaymentTabControllerBG{
+    background: url(./assets/payment.png);
+}
+.active>.title_wrapper>.bg_wrapper{
+    background-position: 0 -32px;
+}
+.label_wrapper{
+    float: left;
+    width: 20%;
+}
+.itemAvatar{
+    position: relative;
+    display: block;
+    float: left;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 0 7px !important;
+    transition: none !important;
+    width: fit-content;
+    border: none !important;
+}
+#setupServiceTab{
+    min-height: 300px;
+}
+.color646464{
+    color: #646464;
+}
+.avatarGroup{
+    flex-wrap: wrap;
+    height: 100%;
+}
+.itemAvatar input{
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+.btn-outline-primary:hover{
+    background-color: transparent !important;
+}
+.itemAvatar input:checked ~.img_outer{
+    border: 3px solid #1d7a8c;
+    padding: 23px;
+}
+.itemAvatar input:checked ~.img_outer img{
+    left: -56px;
+}
+.itemAvatar span{
+    color: #646464;
+}
+.avatar{
+    vertical-align: middle;
+}
+.btn-check:checked+.btn-outline-primary{
+    background-color: #1d7a8c;
+    border-color: #1d7a8c;
+    transition: none;
+}
+.itemAvatar:hover{
+    border-color: #1d7a8c !important;
+}
+
+.img_wrapper{
+    width: 56px;
+    height: 56px;
+    overflow: hidden;
+    position: relative;
+}
+.img_wrapper img{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.img_outer{
+    padding: 25px;
+    border: 1px solid #c8c8c8;
+    display: inline-block;
+}
+#schedulePlanTab{
+    overflow-x: hidden;
+}
+#pets , #acceptterms{
+    height: 20px;
+    width: 50px;
+}
+.address_list{
+    list-style: none;
+}
+.address_list input{
+    height: 15px;
+    width: 15px;
+}
+.address_listItem{
+    background-color: transparent !important;
+    border: 1px solid #c8c8c8;
+}
+.addNewAddressBtn{
+    color: #1d7a8c !important;
+    border: 2px solid #1d7a8c !important;
+}
+
+.accordion-item{
+    padding: 10px 5px;
+}
+.accordion-button{
+    width: fit-content !important;
+    padding: 0 !important;
+    border: none !important;
+}
+.accordion-button:focus{
+    border: none;
+    box-shadow: none !important;
+}
+.accordion-button::after{
+    margin-left: 2px !important;
+    transform: rotate(-90deg);
+}
+.accordion-button:not(.collapsed)::after{
+    transform: rotate(0deg) !important;
+}
+.faqsPage_Redirect{
+    color: #1d7a8c;
+    font-size: 16px;
+}
+.newAddress_collapse{
+    padding: 15px;
+    border: 1px solid #c8c8c8;
+    border-radius: 3px;
+    background-color: #f8f8f8;
+}
+
+.successBG{
+    background-color: #67b644;
+    position: relative;
+    height: 60px;
+    width: 60px;
+    margin: auto;
+}
+.successBG img{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50% , -50%);
+}
+.select_button{
+    border: 1px solid #646464 !important;
+    padding: 5px 20px !important;
+  }
+  
+.favouriteList{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+}
+.favouriteListItem{
+    border: 1px solid #e1e1e1;
+    /* margin: 5px; */
+    padding: 20px 0px !important;
+}
+.accordion-button:focus{
+    border: none !important;
+}
+.accordion-button:not(.collapsed){
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+@media (max-width: 1440px){
+    .title_wrapper{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+        height: fit-content;
+    }
+    .bg_wrapper{
+        position: relative;
+        margin-top: 0px;
+    }
+}
+@media (max-width: 1024px){
+    .paymentSummary , .faqs{
+        width: 300px;
+    }
+    .bookService_Left , .bookService_Right{
+        padding: 0 10px !important;
+    }
+}
+@media (max-width: 990px){
+    .nav-fill .nav-link .nav_title{
+        display: none;
+    }
+    .avatarGroup{
+        display: grid !important;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-column-gap: 15px;
+        grid-row-gap: 15px;
+        justify-items: center;
+    }
+    .label_wrapper{
+        width: fit-content;
+    }
+}
+@media (max-width: 768px){
+    .bookService_Right{
+        /* display: none; */
+        margin-top: 50px !important;
+    }
+    .bookService_Left{
+        width: 90% !important;
+    }
+    .paymentSummary , .faqs{
+        width: fit-content;
+    }
+    .favouriteList{
+        grid-template-columns: auto auto;
+    }
+    #acceptterms{
+        height: 20px;
+        width: 80px;
+    }
+}
+@media (max-width: 425px){
+    .avatarGroup{
+        grid-template-columns: 1fr 1fr;
+    }
+    .serviceTab_wrapper{
+        flex-direction: column;
+    }
+    .serviceTab_wrapper button{
+        margin-top: 10px;
+        min-height: 46px;
+    }
+}
+
+

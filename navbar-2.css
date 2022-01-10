@@ -8,10 +8,8 @@
 .navbar_main {
   padding: 0 15px !important;
 }
-.navbar_book {
-  background-color: #29626d;
-  border: 1px solid #ffffff80;
-  margin: 0 5px;
+.navbar_wrapper{
+    width: 100%;
 }
 .nav-link {
   padding: 7px 18px !important;
@@ -22,25 +20,6 @@
 }
 .nav-item:hover {
   border: 1px solid #ffffff80;
-}
-.navbar_login {
-  background-color: #29626d;
-  border: 1px solid #ffffff80;
-  margin: 0 5px;
-}
-
-.navbar_helper {
-  background-color: #29626d;
-  border: 1px solid #ffffff80;
-  margin: 0 5px;
-}
-
-.navbar_list {
-  flex-grow: initial !important;
-}
-.navbar ul {
-  min-width: 260px;
-  padding: 0px 12px;
 }
 .nav_icons1,
 .nav_icons2 {
@@ -71,30 +50,8 @@
   font-size: 16px;
 }
 @media (max-width: 990px) {
-  .navbar_login,
-  .navbar_helper,
-  .navbar_book {
-    border: 1px solid #fff;
-    margin: 5px 0px;
-    background-color: #525252;
-    padding: 0;
-  }
   .nav-item {
     width: fit-content;
-  }
-  .navbar_list {
-    position: fixed;
-    background-color: white;
-    top: 0;
-    right: 0;
-    height: 100%;
-    width: 250px;
-  }
-  .navbar_list ul {
-    margin: 0 !important;
-  }
-  .navbar_list ul li a {
-    padding: 10px 0;
   }
   .navcol {
     width: 100%;
@@ -122,5 +79,11 @@
   .nav_icons1 {
     border-right: 1px solid #e1e1e1;
     padding: 0px 10px;
+  }
+  .navbar_wrapper{
+      width: fit-content;
+  }
+  .sidebarMain{
+      max-width: 272px !important; 
   }
 }

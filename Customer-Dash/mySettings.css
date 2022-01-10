@@ -4,6 +4,12 @@
 .borderlight{
     border: 1px solid #e1e1e1;
 }
+.greenButton{
+    background-color: #1d7a8c !important;
+}
+.color646464{
+    color: #646464;
+}
 .paddinginside{
     padding: 10px;
 }
@@ -19,7 +25,11 @@ label{
    color: #646464; 
    margin-bottom: 5px;
 }
-
+button:focus , input:focus , textarea:focus , select:focus{
+    box-shadow: none !important;
+    border: 2px solid #1d7a8c !important;
+    outline: #1d7a8c !important;
+}
 input{
     color: #646464;
 }

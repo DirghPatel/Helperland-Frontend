@@ -44,6 +44,9 @@
   color: #f1f1f1;
   font-size: 14px;
 }
+.footer_mid ul li a:hover ,.footer_end p span a:hover{
+  color: #1d7a8c;
+}
 .footer_right{
   min-width: 106px;
 }

@@ -13,7 +13,11 @@ html{
     height: auto;
     width: 100vw;
 }
-
+button:focus , input:focus , textarea:focus , select:focus{
+    box-shadow: none !important;
+    border: 2px solid #1d7a8c !important;
+    outline: #1d7a8c !important;
+}
 .prices_heading{
     display: flex;
     flex-direction: column;

@@ -21,11 +21,16 @@ body{
   position: relative;
   height: fit-content !important;
 }
+button:focus , input:focus , textarea:focus , select:focus{
+  box-shadow: none !important;
+  border: 2px solid #1d7a8c !important;
+  outline: #1d7a8c !important;
+}
 #footer{
   margin-top: -80px;
 }
 .dash_sidebar {
-  width: 262px;
+  min-width: 250px;
   min-height: fit-content !important;
 }
 .dash_sidebar ul {
@@ -33,21 +38,22 @@ body{
   background-color: #1d7a8c;
   list-style: none;
   padding: 0;
-  border-top: 1px solid #e1e1e1;
+  width: 100%;
+  /* border-top: 1px solid #e1e1e1; */
   border-bottom: 1px solid #e1e1e1;
 }
-
 .dash_sidebar ul li {
   border-top: 1px solid #e1e1e1;
-  border-bottom: 1px solid #e1e1e1;
-  border-collapse: unset;
-  padding: 13px;
-  padding-left: 15px;
 }
 .dash_sidebar ul li a {
-  font-size: 20px;
+  font-size: 18px;
   text-decoration: none;
   cursor: pointer;
+  padding: 17px 15px;
+  display: block;
+}
+.dash_sidebar ul li a:hover{
+  background-color: #146371;
 }
 .sidebar_inner {
   position: sticky;
@@ -192,7 +198,9 @@ td {
   /* margin: 5px; */
   padding: 20px 0px !important;
 }
-
+.cursorPointer{
+  cursor: pointer;
+}
 
 /* -------- modal --------  */
 .table_payment{
@@ -309,6 +317,10 @@ td {
       margin-left: auto;
       margin-right: auto;
     }
+    iframe{
+      width: 100%;
+      height: 300px;
+    }
 }
 
 @media (max-width:425px){
@@ -316,7 +328,7 @@ td {
     grid-template-columns: auto;
   }
 }
-
+/* 
 #newServiceRequestTable,
         #upcomingServicesTable,
         #serviceScheduleTable,
@@ -325,6 +337,6 @@ td {
         #blockCustomerTable,
         #notificationTable{
           display: none;
-}
+} */
 
 

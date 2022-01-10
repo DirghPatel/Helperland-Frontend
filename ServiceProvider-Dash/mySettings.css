@@ -19,7 +19,11 @@ label{
    color: #646464; 
    margin-bottom: 5px;
 }
-
+button:focus , input:focus , textarea:focus , select:focus{
+    box-shadow: none !important;
+    border: 2px solid #1d7a8c !important;
+    outline: #1d7a8c !important;
+}
 input{
     color: #646464;
 }

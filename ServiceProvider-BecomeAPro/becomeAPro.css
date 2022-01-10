@@ -115,7 +115,11 @@ html{
 .svg_6{
     bottom: 0;
 }
-
+button:focus , input:focus , textarea:focus , select:focus{
+    box-shadow: none !important;
+    border: 2px solid #1d7a8c !important;
+    outline: #1d7a8c !important;
+}
 @media (max-width: 768px){
     .hiw_card{
         flex-direction: column;

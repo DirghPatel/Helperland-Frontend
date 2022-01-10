@@ -9,7 +9,11 @@
 html {
   overflow-x: hidden;
 }
-
+button:focus , input:focus , textarea:focus , select:focus{
+  box-shadow: none !important;
+  border: 2px solid #1d7a8c !important;
+  outline: #1d7a8c !important;
+}
 .nav_right_icon{
     display: none !important;
 }

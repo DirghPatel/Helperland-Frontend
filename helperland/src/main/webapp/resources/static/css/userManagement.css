@@ -1,0 +1,203 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.navbar{
+    background-color: #1fb6ff !important;
+    padding: 0;
+    height: fit-content;
+    min-height: 61px;
+}
+.modal-open{
+	padding: 0 !important;
+}
+button:focus , input:focus , textarea:focus , select:focus{
+    box-shadow: none !important;
+    border: 1px solid #1d7a8c !important;
+    outline: #1d7a8c !important;
+}
+.helperlandLogo{
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 37.5px;
+}
+.blueColor{
+    color: #1fb6ff;
+}
+.navbar-toggler{
+    border: none !important;
+}
+.navbar-toggler:focus{
+    border: none !important;
+    box-shadow: none !important;
+}
+.sidebarMain {
+  min-width: 272px !important;
+  width: 272px !important;
+}
+.offcanvas {
+  top: 61px !important;
+}
+.offcanvas-body {
+  padding: 0 !important;
+}
+.offcanvas-body a p {
+  border-bottom: 1px solid #e5e5e5 !important;
+  padding: 10px !important;
+}
+.userManagement{
+    padding: 20px;
+    background-color: #f2f4f5;
+    min-height: calc(100vh - 61px);
+}
+.userManagementHeader h1{
+    font-size: 22px;
+    font-weight: 700;
+    color: #646464;
+    padding: 10px 0;
+}
+.userManagementHeader a{
+    background-color: #1fb6ff;
+    padding: 12px 15px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+.phonecodeForm{
+    max-width: 57px;
+}
+.width215{
+    width: 215px;
+}
+.formMain{
+    list-style: none;
+    margin-bottom: -15px;
+    padding: 0;
+}
+.formMain li{
+    display: inline-block;
+}
+.marginInput{
+    margin: 0 13px;
+}
+.formMain input , select{
+    padding: 13px 10px;
+    border: 1px solid #dedddd;
+    max-height: 46px;
+    border-radius: 4px;
+}
+.formWrapper{
+    background-color: #fff;
+    padding: 20px 15px;
+    border: 1px solid #e1e1e1;
+}
+.searchButton{
+    padding: 11px 15px;
+    background-color: #1fb6ff;
+    border: none;
+    min-width: 84px;
+    border-radius: 4px;
+}
+.clearButton{
+    padding: 11px 15px;
+    border: none;
+    min-width: 84px;
+    border-radius: 4px;
+}
+.dropDownBtn{
+    background-color: transparent !important;
+    border: 2px solid transparent !important;
+    border-radius: 0 !important;
+    color: black;
+}
+td,
+td a {
+  font-size: 16px;
+  vertical-align: middle;
+  color: #646464;
+}
+th {
+  color: #646464;
+}
+.statusActive{
+    color: white;
+    background-color: #67b644;
+    padding: 5px 10px;
+}
+.statusInActive{
+    color: white;
+    background-color: #ff6b6b;
+    padding: 5px 10px;
+}
+table{
+    border: 1px solid #e1e1e1;
+    background-color: #fff;
+    width: 100%;
+    min-width: 900px;
+}
+thead{
+    background-color: #f9f9f9;
+}
+tbody{
+    border-top: none !important;
+}
+.userManageTable{
+    overflow-x: auto;
+    border: 1px solid #e1e1e1;
+}
+.minheight46 {
+  min-height: 46px;
+  padding: 10px;
+}
+.borderlight {
+  border: 1px solid #e1e1e1;
+  color: #646464;
+}
+label {
+  color: #646464;
+  font-weight: bold;
+}
+.blueBtn {
+  color: white !important;
+  background-color: #1fb6ff !important;
+}
+@media (min-width: 1200px){
+    .offcanvas{
+        /* position: sticky; */
+        visibility: visible !important;
+        transition: transform .3s ease-in-out !important;
+    }
+    .offcanvas-start{
+        transform: translate(0%) !important;
+    }
+    .offcanvas-backdrop {
+        display: none !important;
+    }
+    .userManagement{
+        padding-left: 296px;
+    }
+}
+
+@media (max-width: 768px){
+    .navbar .container-fluid{
+        flex-direction: column;
+        padding: 10px 12px;
+    }
+    .logoContainer{
+        float: left;
+        width: 100%;
+    }
+    .adminDetailContainer{
+        justify-content: flex-end;
+        width: 100%;
+    }
+    .offcanvas{
+        top: 110px;
+    }
+    .modal-body{
+    flex-direction: column !important;
+  }
+}
+@media (max-width: 425px){
+    .userManagementHeader{
+        flex-direction: column;
+    }
+}

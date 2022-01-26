@@ -1,0 +1,66 @@
+.navbar{
+    background-color: #525252;
+    font-size: 17px;
+    padding: 4px 0px;
+}
+.navbar_main{
+    padding: 0 15px !important;
+}
+.navbar_book {
+    background-color: #29626D;
+    border: 1px solid #FFFFFF80;
+    margin: 0 5px;
+}
+.nav-link{
+    padding: 7px 18px !important;
+    margin: 0 5px;
+}
+.nav-item{
+    margin: 0px 4px;
+}
+.nav-item:hover{
+    border: 1px solid #FFFFFF80;
+}
+.navbar_login{
+    background-color: #29626D;
+    border: 1px solid #FFFFFF80;
+    margin: 0 5px;
+}
+
+.navbar_helper{
+    background-color: #29626D;
+    border: 1px solid #FFFFFF80;
+    margin: 0 5px;
+}
+.nav_icons{
+    border-left: 1px solid #e1e1e1;
+    margin: 0;
+    padding-left: 20px;
+    margin-right: 20px;
+}
+.navbar_list{
+    justify-content: flex-end;
+}
+@media (max-width: 1197px){
+    #navbarText{
+        max-width: 250px;
+    }
+    .nav-item{
+        width: fit-content;
+    }
+    .navbar_list a{
+        color: #646464 !important;
+    }
+    .navbar_list a:hover{
+        color: #1d7a8c !important;
+    }
+    .navbar_login ,.navbar_helper , .navbar_book{
+        margin: 5px 0px;
+        color: #fff;
+        background-color: transparent;
+    }
+    .nav-item{
+        margin: 0;
+    }
+
+}

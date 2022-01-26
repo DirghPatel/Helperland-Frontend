@@ -1,0 +1,345 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body{
+  min-height: 100vh;
+}
+.modal-open{
+	padding: 0 !important;
+}
+.navbar{
+  position: sticky;
+  top: 0;
+}
+.spDash_header {
+  height: 120px;
+  width: 100%;
+  font-size: 30px;
+  background-color: #f9f9f9;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #e1e1e1;
+}
+.spDash_main {
+  position: relative;
+  height: fit-content !important;
+}
+button:focus , input:focus , textarea:focus , select:focus{
+  box-shadow: none !important;
+  border: 1px solid #1d7a8c !important;
+  outline: #1d7a8c !important;
+}
+#footer{
+  margin-top: -80px;
+}
+.dash_sidebar {
+  min-width: 250px;
+  min-height: fit-content !important;
+}
+.dash_sidebar ul {
+  height: fit-content;
+  background-color: #1d7a8c;
+  list-style: none;
+  padding: 0;
+  width: 100%;
+  /* border-top: 1px solid #e1e1e1; */
+  border-bottom: 1px solid #e1e1e1;
+}
+.dash_sidebar ul li {
+  border-top: 1px solid #e1e1e1;
+}
+.dash_sidebar ul li a {
+  font-size: 18px;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 17px 15px;
+  display: block;
+}
+.dash_sidebar ul li a:hover{
+  background-color: #146371;
+}
+.sidebar_inner {
+  position: sticky;
+  top: 100px;
+  width: 262px;
+}
+.dash_content {
+  width: 80%;
+  margin-left: 30px;
+}
+.table_1{
+  color: #646464;
+  border: 1px solid #e1e1e1;
+}
+.table_1 thead {
+  background-color: #f9f9f9;
+  border: 1px solid #e1e1e1 !important;
+}
+.table_1 tr td a{
+  color: #646464;
+}
+.table_1 tr td a img{
+  margin-right: 5px;
+}
+.table_1 th,
+td {
+  vertical-align: middle;
+}
+
+.cancel_button{
+  background-color: #ff6b6b !important;
+  padding: 8px 16px !important;
+  border: none !important;
+}
+.accept_button{
+  background-color: #1d7a8c !important;
+  padding: 8px 16px !important;
+  border: none !important;
+}
+.myRatingTable_body{
+  border: 1px solid #e1e1e1 !important;
+  margin-top: 10px;
+  padding: 10px;
+  /* color: #646464; */
+}
+.myRatingTable_body a , .myRatingTable_body p{
+  color: #646464;
+}
+.ratingTable_innerRow1{
+  border-bottom: 1px solid #e1e1e1;
+  align-items: center;
+  justify-content: space-between;
+}
+.myRatingTable_body img{
+  margin-right: 5px;
+}
+.serviceReqHead ,  .serviceHistoryHead , .myRatingHead{
+  margin: 5px;
+  color: #646464;
+}
+.serviceReqHead select , .serviceHistoryHead select , .myRatingHead select{
+  color: #646464;
+  padding: 4px 7px;
+  width: 90px;
+}
+.myRatingHead select{
+  width: 120px;
+}
+
+.serviceReqHead input{
+  padding: 4px 7px;
+}
+
+.paymentStatusSettled{
+  background-color: #67b644;
+  width: fit-content;
+}
+.counter{
+  font-size: 44px;
+  line-height: 100px;
+  font-weight: 700;
+  color: #fff;
+  position: relative;
+  white-space: nowrap;
+  /* background-color: #1fb7ff; */
+  margin-bottom: 10px;
+}
+.leftBorder{
+  border-left: 1px solid #e1e1e1;
+}
+.counter::after{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background: #1fb6ff;
+  margin-top: -50px;
+  margin-left: -50px;
+  content: "";
+  height: 100px;
+  width: 100px;
+  border-radius: 500px;
+  z-index: -1;
+}
+.counter.counterRed::after{
+  background-color: #fd6966;
+}
+
+.counter.counterGreen::after{
+  background-color: #2cc896;
+}
+.dashOptions p{
+  font-size: 20px;
+  color: #646464;
+  margin-bottom: 10px;
+}
+
+.optionBtn{
+  color: #1d7a8c !important;
+  border: 1px solid #1d7a8c !important;
+  padding: 5px 15px !important;
+}
+
+.spProfile{
+  height: 88px;
+  width: 88px;
+  border: 1px solid #acacac !important;
+}
+
+.block_button{
+  background-color: #fd6966 !important;
+  padding: 5px 20px !important;
+}
+
+.blockCustList{
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+}
+.blockCustListItem{
+  border: 1px solid #e1e1e1;
+  /* margin: 5px; */
+  padding: 20px 0px !important;
+}
+.cursorPointer{
+  cursor: pointer;
+}
+
+/* -------- modal --------  */
+.table_payment{
+  font-size: 22px;
+  color: #1d7a8c;
+}
+.serviceDetailsModal{
+  max-width: 900px;
+}
+.serviceModalLeft p{
+  margin-bottom: 0;
+}
+.sp_icon{
+  border: 1px solid #aaa;
+}
+.serviceModalLeft{
+  padding: 15px;
+}
+.serviceModalRight{
+  border-left: 1px solid #e1e1e1;
+  padding: 0 15px;
+}
+#serviceDetails .modal-dialog{
+  width: 90%;
+  max-width: 800px;
+  color: #4f4f4f;
+}
+
+
+@media (max-width: 1140px){
+  .dash_sidebar{
+      width: 230px;
+  }
+  .dash_sidebar ul{
+      max-width: 100%;
+  }
+  .dash_content{
+    margin-left: 25px;
+  }
+}
+@media (max-width: 990px){
+    .dash_content{
+        width: 90%;
+        max-width: 90%;
+        margin-left: 0;
+    }
+}
+@media(max-width: 768px){
+    .table_1 , .table_1 tbody{
+      border: none !important;
+    }
+    .table_1 thead{
+      display: none !important; 
+    }
+    .table_1 tbody tr{
+      display: flex !important;
+      flex-direction: column !important;
+      box-shadow: 0 0 6px rgb(0,0,0,0.25);
+      padding: 15px;
+      margin-bottom: 35px;
+    }
+    .table_1 tbody tr td{
+      border-top: 1px solid #e1e1e1;
+      border-bottom: none;
+    }
+    .table_1 tbody tr th{
+      border-bottom: none;
+    }
+    .button_main{
+      padding-bottom: 0 !important;
+      padding-top: 15px !important;
+    }
+    .service_date{
+      display: flex !important;
+    }
+    .service_date a{
+      margin-right: 20px;
+    }
+    .ratingTable_innerRow1 , .ratingTable_innerRow2 {
+      flex-direction: column;
+      border-bottom: 1px solid #e1e1e1;
+    }
+    .ratingTable_innerRow2{
+      width: 100%;
+    }
+    .leftBorder{
+      border-left: none;
+      border-top: 1px solid #e1e1e1;
+    }
+    .dashOptions{
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .dashOptions a{
+      width: 100vw !important;
+    }
+    .blockCustList{
+      grid-template-columns: auto auto;
+    }
+    .modal-body{
+      flex-direction: column !important;
+    }
+    .serviceModalRight{
+      border: none;
+    }
+    .serviceModalLeft{
+      padding-bottom: 0;
+    }
+    hr{
+      margin: 13px 0;
+    }
+    .modal-dialog{
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+    iframe{
+      width: 100%;
+      height: 300px;
+    }
+}
+
+@media (max-width:425px){
+  .blockCustList{
+    grid-template-columns: auto;
+  }
+}
+/* 
+#newServiceRequestTable,
+        #upcomingServicesTable,
+        #serviceScheduleTable,
+        #serviceHistoryTable,
+        #myRatingTable,
+        #blockCustomerTable,
+        #notificationTable{
+          display: none;
+} */
+
+

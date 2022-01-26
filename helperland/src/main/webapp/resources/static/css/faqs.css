@@ -1,0 +1,181 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.modal-open{
+	padding: 0 !important;
+}
+html{
+    overflow-x: hidden;
+    padding: 0;
+}
+input:focus , textarea:focus , select:focus{
+    box-shadow: none !important;
+    border: 1px solid #1d7a8c !important;
+    outline: #1d7a8c !important;
+}
+.main_image img{
+    height: auto;
+    width: 100vw;
+}
+.faqs{
+    max-width: 950px;
+    position: relative;
+    padding: 0 !important;
+    margin-top: 40px;
+    margin-bottom: 80px;
+}
+.faqs_heading{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.faq_box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.left_line , .right_line{
+    width: 62px;
+    height: 1px;
+    background-color: #CCCCCC;
+    margin: 0px 8px;
+}
+
+.content_head{
+    max-width: 500px;
+    text-align: center;
+    margin: 36px 0;
+}
+
+.faqs_accordion{
+    /* max-width: 950px; */
+    width: 100%;    
+    min-width: fit-content;
+}
+.btn-1{
+    padding: 23px 0;
+    font-size: 24px;
+    background-color: #1d7a8c;
+    margin-bottom: 0;
+    border: none;
+    border-radius: 0;
+    flex: 0.5;
+    color: #fff;
+    cursor: pointer;
+}
+.btn-2{
+    padding: 23px 0;
+    font-size: 24px;
+    margin-bottom: 0;
+    border: none;
+    border-radius: 0;
+    flex: 0.5;
+    background-color: #f6f6f6;
+    cursor: pointer;
+}
+.accordion_head{
+    border-bottom: 4px solid #1d7a8c;
+}
+
+.accordion{
+    max-width: 100%;
+    margin-top: 50px;
+}
+/* 
+.accordion-button{
+    width: fit-content !important;
+} */
+
+.accordion-header p{
+    font-size: 16px;
+    margin: 0 !important;
+    color: #646464;
+    font-weight: bold;
+}
+
+.accordion-body{
+    color:#646464;
+    font-size: 16px;
+    padding: 0 0 0 36px !important;
+    margin-top: 15px;
+}
+
+.accordion-item{
+    margin: 15px 0 !important;
+}
+
+.accordion-header .btn{
+    padding-left: 0px !important;
+}
+.btn-check:focus+.btn, .btn:focus{
+	background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    outline: none !important;
+}
+
+#accordionServiceProvider{
+    display: none;
+}
+
+#logInModal .modal-content{
+    padding: 20px;
+    padding-top: 0;
+    color: #646464;
+}
+.modalInputEmail{
+    padding: 5px 40px 5px 15px;
+    width: 100%;
+}
+.inputHeightBorder{
+    height: 46px;
+    border: 1px solid #e1e1e1;
+}
+
+.logInModal .form-group img{
+    position: absolute;
+    left: auto;
+    right: 10px;
+    top: 10px;
+}
+.submitButton{
+    padding: 15px 30px !important;
+    background-color: #1d7a8c !important;
+}
+.forgotPasswordRedirect{
+    color: #1d7a8c;
+    text-decoration: none;
+}
+
+@media (max-width: 1024px){
+    .faqs{
+        max-width: 90vw;
+    }
+}
+@media (max-width: 768px){
+    .btn-1 , .btn-2{
+        font-size: 15px;
+    }
+}
+
+
+@media (max-width: 425px){
+    .btn-1 , .btn-2{
+        min-height: 55px;
+        padding: 5px;
+        text-align: center;
+    }
+    
+}
+
+.btn:not(.collapsed)>img{
+    transform: rotate(90deg);
+    transition: 0.3s ease;
+}
+.btn:focus{
+    box-shadow: none !important;
+}

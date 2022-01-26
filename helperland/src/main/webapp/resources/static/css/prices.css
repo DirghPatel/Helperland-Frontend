@@ -1,0 +1,239 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.modal-open{
+	padding: 0 !important;
+}
+html{
+    overflow-x: hidden;
+    padding: 0;
+}
+
+.main_image img{
+    height: auto;
+    width: 100vw;
+}
+button:focus , input:focus , textarea:focus , select:focus{
+    box-shadow: none !important;
+    border: 1px solid #1d7a8c !important;
+    outline: #1d7a8c !important;
+}
+.prices_heading{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #4f4f4f;
+    margin-top: 30px;
+}
+.prices_heading h1{
+    font-size: 36px;
+}
+.prices_box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.left_line , .right_line{
+    width: 62px;
+    height: 1px;
+    background-color: #CCCCCC;
+    margin: 0px 8px;
+}
+
+.prices_card{
+    max-width: 553px;
+    align-items: center;
+    border: solid 1px #b0c9ce !important;
+    border-radius: 0 !important;
+}
+
+.prices_card .card-header{
+    background-color: #1d7a8c;
+    font-size: 28px;
+}
+.prices_card .card-title{
+    color: #646464;
+    font-size: 30px;
+    font-weight: normal;
+    margin-top: 13px;
+}
+.card_euro{
+    font-size: 48px;
+}
+.price_card_list{
+    list-style: none;
+}
+.price_card_list li{
+    display: flex;
+    color: #646464;
+}
+.price_card_list li p{
+    margin-left: 10px;
+}
+
+hr{
+    margin: 50px auto !important;
+    width: 75vw;
+    align-self: center;
+}
+.services_cover{
+    display: flex;
+}
+.services_icon{
+    height: 108px;
+    width: 108px;
+    border: solid 1px #b0c9ce;
+}
+.services_inner{
+    width: 145px;
+    margin: 40px 3vw;
+}
+.services_content{
+    margin-top: 17px !important;
+}
+.services_content p{
+    color: #646464;
+    margin-bottom: 12px !important;
+}
+.services_content h5{
+    color: #1d7a8c;
+}
+
+.prices_areas{
+    background-color: #f6f6f6;
+    min-height: 707px;
+}
+
+.services_card{
+    background-color: transparent !important;
+    flex: none !important;
+}
+.services_card_list li{
+    margin-bottom: 14px;
+}
+.services_card_list li p{
+    font-size: 16px;
+    color: #4f4f4f;
+}
+
+.services_card h5{
+    margin-bottom: 18px;
+}
+
+.whyhelperland .prices_heading{
+    margin-bottom: 15px;
+}
+.why_cover{
+    color: #646464;
+}
+.why_left , .why_right{
+    width: 360px;
+    margin: 0 45px;
+}
+
+.why_left p , .why_right p{
+    font-size: 14px;
+    margin-top: 13px;
+}
+
+.left_up , .right_up{
+    margin-bottom: 40px;
+}
+
+#logInModal .modal-content{
+    padding: 20px;
+    padding-top: 0;
+    color: #646464;
+}
+.modalInputEmail{
+    padding: 5px 40px 5px 15px;
+    width: 100%;
+}
+.inputHeightBorder{
+    height: 46px;
+    border: 1px solid #e1e1e1;
+}
+
+.logInModal .form-group img{
+    position: absolute;
+    left: auto;
+    right: 10px;
+    top: 10px;
+}
+.submitButton{
+    padding: 15px 30px !important;
+    background-color: #1d7a8c !important;
+}
+.forgotPasswordRedirect{
+    color: #1d7a8c;
+    text-decoration: none;
+}
+
+@media (max-width: 1024px){
+    .why_cover{
+        height: fit-content;
+        flex-direction: column;
+    }
+    .why_left , .why_right{
+        margin: 0px 0px;
+    }
+    .left_up , .right_up , .left_down , .right_down{
+        margin-bottom: 25px;
+        text-align: center !important;
+    }
+    /* .why_cover br{
+        display: none;  
+    } */
+    .services_inner{
+        width: fit-content;
+        margin-left: 10px !important;
+        margin-right: 10px !important;
+    }
+
+}
+
+@media(max-width: 768px){
+    .services_cover{
+        display: grid !important;
+        grid-template-columns: 1fr 1fr 1fr;
+        justify-items: center;
+    }
+    .prices_areas .card-group{
+        flex-direction: column;
+    }
+
+    .footer_mid ul{
+        display: grid !important;
+        grid-template-columns: 1fr 2fr 1fr;
+        gap: 0px 10px;
+        padding: 20px 0 !important;
+        margin: 0;
+    }
+    .footer_main{
+        flex-direction: column;
+        height: fit-content !important;
+        padding: 20px 0px;
+        justify-content: space-between !important;
+    }
+    .services_cover{
+        grid-template-columns: 1fr 1fr;
+        justify-items: center;
+    }
+}
+
+@media (max-width : 425px){
+    .why_left , .why_right{
+        width: fit-content;
+    }
+    .why_mid img{
+        max-width: 95vw;
+    }
+}
+
+.nav_select1{
+    border: 1px solid #FFFFFF80;
+}

@@ -1,0 +1,82 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.modal-open{
+	padding: 0 !important;
+}
+html{
+    overflow-x: hidden;
+    padding: 0;
+}
+button:focus , input:focus , textarea:focus , select:focus{
+    box-shadow: none !important;
+    border: 1px solid #1d7a8c !important;
+    outline: #1d7a8c !important;
+}
+.main_image img{
+    max-height: 368px;
+    height: auto;
+    width: 100vw;
+    margin-top: -2px !important;
+}
+.about_heading{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 38px;
+    color: #4f4f4f;
+}
+.about_box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-top: 10px;
+}
+.left_line , .right_line{
+    width: 62px;
+    height: 1px;
+    background-color: #CCCCCC;
+    margin: 0px 8px;
+}
+.about_us_content , .story_content{
+    max-width: 63vw;
+    margin-top: 38px;
+    color: #646464;
+}
+#logInModal .modal-content{
+    padding: 20px;
+    padding-top: 0;
+    color: #646464;
+}
+.modalInputEmail{
+    padding: 5px 40px 5px 15px;
+    width: 100%;
+}
+.inputHeightBorder{
+    height: 46px;
+    border: 1px solid #e1e1e1;
+}
+
+.logInModal .form-group img{
+    position: absolute;
+    left: auto;
+    right: 10px;
+    top: 10px;
+}
+.submitButton{
+    padding: 15px 30px !important;
+    background-color: #1d7a8c !important;
+}
+.forgotPasswordRedirect{
+    color: #1d7a8c;
+    text-decoration: none;
+}
+
+@media (max-width: 768px){
+    .about_us_content , .story_content{
+        max-width: 90vw;
+    }   
+}

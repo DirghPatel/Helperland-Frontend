@@ -1,0 +1,80 @@
+.minheight46{
+    min-height: 46px;
+}
+.borderlight{
+    border: 1px solid #e1e1e1;
+}
+.greenButton{
+    background-color: #1d7a8c !important;
+}
+.color646464{
+    color: #646464;
+}
+.paddinginside{
+    padding: 10px;
+}
+.dash_contents{
+    padding: 0px 20px;
+}
+.tab-content{
+    padding: 20px;
+}
+label{
+   font-size: 16px;
+   font-weight: 700;
+   color: #646464; 
+   margin-bottom: 5px;
+}
+button:focus , input:focus , textarea:focus , select:focus{
+    box-shadow: none !important;
+    border: 1px solid #1d7a8c !important;
+    outline: #1d7a8c !important;
+}
+input{
+    color: #646464 !important;
+}
+tbody{
+    border-top: none !important;
+}
+#myAddressesTable th ,#myAddressesTable td{
+    padding: 10px 20px;
+}
+.nav-item{
+    border: none !important;
+    margin: 0;
+}
+.nav-tabs .nav-link{
+    border: none !important;
+    border-bottom: 4px solid #e1e1e1 !important;
+    margin: 0;
+    color: #646464;
+    font-weight: 700;
+}
+.nav-tabs .nav-link:hover{
+	color: #1d7a8c !important;
+}
+.nav-tabs .active{
+    border-bottom-color: #1d7a8c !important;
+}
+@media (max-width: 768px){
+    #myDetailsTab .row>*{
+        width: 100% !important;
+        flex-shrink: 0 !important;
+        max-width: 100% !important;
+    }
+    .dash_contents{
+        padding: 0px 5px;
+        width: 95vw !important;
+    }
+    .tab-content{
+        padding: 20px 0px;
+        width: fit-content;
+    }
+    select{
+        margin: 0 0px !important;
+    }
+    .custDash_main{
+        margin: 0px !important;
+        padding: 5px;
+    }
+}

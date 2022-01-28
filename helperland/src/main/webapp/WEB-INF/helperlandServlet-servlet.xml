@@ -7,15 +7,20 @@
    xmlns:context = "http://www.springframework.org/schema/context"
    xmlns:p = "http://www.springframework.org/schema/p"
    xmlns:mvc = "http://www.springframework.org/schema/mvc"
+   xmlns:tx = "http://www.springframework.org/schema/tx"
    xsi:schemaLocation = "http://www.springframework.org/schema/beans     
    http://www.springframework.org/schema/beans/spring-beans.xsd
    http://www.springframework.org/schema/context 
    http://www.springframework.org/schema/context/spring-context.xsd
    http://www.springframework.org/schema/mvc 
-   http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+   http://www.springframework.org/schema/mvc/spring-mvc.xsd
+   http://www.springframework.org/schema/tx 
+   http://www.springframework.org/schema/tx/spring-tx.xsd">
 
    
-   <context:component-scan base-package="helperland.controller"></context:component-scan>
+   <context:component-scan base-package="helperland.controller, helperland.service , helperland.dao , helperland.models , helperland.interceptors"></context:component-scan>
+   <tx:annotation-driven/>
+   
    <mvc:annotation-driven />
    <mvc:resources mapping="/resources/**" location="/resources/static/" />
    
@@ -27,10 +32,43 @@
       <property name = "suffix" value = ".jsp" />
    </bean>
    
-  <!--  	<mvc:annotation-driven />
-	<mvc:resources location="/resources/" mapping="/resources/**"/> --> 
-	
-	
+   <bean name="ds" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+	        <property name="url" value="jdbc:mysql://localhost:3306/helperland"/>
+	        <property name="username" value="root" />
+	        <property name="password" value="dirghpatel"/>
+	    </bean>
+		
+		<bean name="factory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean" >
+	        <property name="dataSource" ref="ds"/>
+	        <property name="hibernateProperties">
+	            <props>
+	                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL57Dialect</prop>
+	                <prop key="hibernate.show_sql">true</prop>
+	                <prop key="hibernate.hbm2ddl.auto">update</prop>
+	            </props>
+	        </property>
+	        
+	        <property name="annotatedClasses">
+	        	<list>
+	        	<value>
+	        			helperland.models.User
+	        		</value>
+	        		<value>
+	        			helperland.models.ContactUs
+	        		</value>
+	        	</list>
+	        </property>
+	    </bean>	
+	    
+	    <bean class="org.springframework.orm.hibernate5.HibernateTransactionManager" name="transactionManager">
+			<property name="sessionFactory" ref="factory"></property>
+		</bean>	
+		
+		<bean class="org.springframework.orm.hibernate5.HibernateTemplate" name = "hibernateTemplate">
+			<property name="sessionFactory" ref="factory"></property>	
+		</bean>
+   
 	
 </beans>
 

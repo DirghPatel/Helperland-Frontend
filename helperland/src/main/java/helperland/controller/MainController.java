@@ -1,39 +1,61 @@
 package helperland.controller;
 
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import helperland.models.loginModel;
-import helperland.models.userRegister;
+import helperland.service.ContactUsServiceImpl;
+
+
 
 @Controller
+@ComponentScan(basePackages={"helperland.dao,helperland.models,helperland.service,helperland.interceptors"})
 public class MainController {
+	
+	@Autowired
+	private ContactUsServiceImpl contactUsService;	
+	
 	
 	@RequestMapping({"/home" , "/"})
 	public String home() {
 		System.out.println("a inside");
 		return "home";
 	}
-	@RequestMapping("/contact")
+	@RequestMapping(value = "/contact" , method = RequestMethod.GET)
 	public String contact() {
 		System.out.println("b inside");
 		return "contact";
+	}
+	
+	@RequestMapping(value  = "/contact" , method=RequestMethod.POST)
+	public String handleContactUs(@Valid @ModelAttribute helperland.models.ContactUs contactUs , BindingResult br , Model model) {
+		
+		if(br.hasErrors()) {
+			System.out.println("errors");
+			model.addAttribute("error" , "please enter all fields to submit form");
+			model.addAttribute("displayError" , "style='display: block !important;'");
+			return "contact";
+		}
+		else {
+			model.addAttribute("success" , "Your response submitted. Thank you!");
+			model.addAttribute("displaySuccess" , "style='display: block !important;'");
+			contactUs.setName(contactUs.getFirstname() , contactUs.getLastname());
+			contactUs.setCreated_by(this.contactUsService.getContactUsUser(contactUs));
+			this.contactUsService.createContactUs(contactUs);
+			return "contact";
+		}
 	}
 	@RequestMapping( value = "/about")
 	public String about() {
 		System.out.println("b inside");
 		return "about";
-	}
-	@RequestMapping( value = "/login")
-	public String login(@ModelAttribute("login") loginModel loginmodel , Model model) {
-		System.out.println("b inside");
-		
-		model.addAttribute("email" , loginmodel.email);
-		
-		return "login";
 	}
 	@RequestMapping("/faqs")
 	public String faqs() {
@@ -63,14 +85,7 @@ public class MainController {
 		return "userRegistration";
 	}
 	
-	@RequestMapping(value = "/reguser" , method = RequestMethod.POST)
-	public String regUser(@ModelAttribute ("userreg") userRegister user , Model model) {
-		
-		model.addAttribute("type" , user.getUserType());
-		model.addAttribute("firstname" , user.getFirstname());
-		model.addAttribute("user",user);
-		return "register";
-	}
+
 	
 }
 

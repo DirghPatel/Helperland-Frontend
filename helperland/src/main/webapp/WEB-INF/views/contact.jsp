@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page isELIgnored = "false" %>
 
 <!DOCTYPE html>
 <html>
@@ -115,10 +116,18 @@
         <div class="container-fluid form_cover">
             <h4 class="text-center form_heading">Get in touch with us</h4>
             <div class="touch_form d-flex align-items-center justify-content-center">
-                <form method="" action="" class="d-flex flex-column">
+                 <form method="post" action="contact" class="d-flex flex-column">
+                    <div class="alert alert-danger alert-dismissible fade show d-none " ${displayError } role="alert">
+					  ${error }
+					  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+					</div>
+					<div class="alert alert-success alert-dismissible fade show d-none " ${displaySuccess } role="alert">
+					  ${success }
+					  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+					</div>
                     <div class="row justify-content-center">
                         <div class="col">
-                            <input type="text" name="firstname" placeholder="First name" class="form_in w-100 h-100">
+                            <input type="text" required name="firstname" path="firstname" placeholder="First name" class="form_in w-100 h-100">
                         </div>
                         <div class="col">
                             <input type="text" name="lastname" placeholder="Last name" class="form_in w-100 h-100">
@@ -126,15 +135,15 @@
                     </div>
                     <div class="row justify-content-center">
                         <div class="col d-flex">
-                            <input type="text" name="areacode" value="+49" class="form_areacode form_in" disabled >
-                            <input type="text" name="number" placeholder="Mobile number" class=" form_in w-100 h-100">
+                            <input type="text" name="areacode" value="+49" class="form_areacode form_in" disabled>
+                            <input type="text" required name="phone_number" placeholder="Mobile number" class=" form_in w-100 h-100">
                         </div>
                         <div class="col">
-                            <input type="email" name="email" placeholder="Email address" class="form_in w-100 h-100">
+                            <input type="email" required name="email" placeholder="Email address" class="form_in w-100 h-100">
                         </div>
                     </div>
                     <div class="form_select">
-                        <select class="w-100 p-0 form_in" aria-label="Default select">
+                        <select class="w-100 p-0 form_in" required aria-label="Default select" name="subject_type">
                             <option value="general" class="w-100">General</option>
                             <option value="inquiry" class="w-100">Inquiry</option>
                             <option value="renewal" class="w-100">renewal</option>
@@ -142,13 +151,16 @@
                         </select>
                     </div>
                     <div class="textarea">
-                        <textarea name="" id="" class="w-100 h-100 p-0 form_in" placeholder="Message" ></textarea>
+                        <textarea name="message"  class="w-100 h-100 p-0 form_in" placeholder="Message" ></textarea>
                     </div>
+                    
                     <div class="form_btn w-100 mt-3 d-flex align-items-center justify-content-center">
                         <button type="submit" class="btn submit_btn rounded-pill text-white">
                             Submit
                         </button>
                     </div>
+                    <input type="hidden" name="created_on" id="created_on">
+                    <input type="hidden" name="is_deleted" value="0">
                 </form>
             </div>
         </div>
@@ -291,6 +303,13 @@
         
     </div>
 
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
     <script>
         
         // $(function () {
@@ -306,13 +325,13 @@
                 $("select").css("color" , "black");
             }
         });
+        
+        var dt = new Date();
+        var t = moment(new Date()).format("YYYY/MM/DD HH:mm:ss");
+		$('#created_on').val(t);
 
     </script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-    crossorigin="anonymous"></script>
+    
 </body>
 
 </html>

@@ -14,6 +14,7 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 </head>
 <body>
     <nav class="navbar navbar-expand-xl sticky-top" id="navbar">
@@ -66,37 +67,57 @@
   
 
 
-
+	
     <div class="container-fluid p-0 main_container">
       <!-- <div id="navbar_load"></div> -->
+      
       <div class="main_image d-flex align-items-center justify-content-center flex-column">
+        	
+		<div class="position-absolute w-100 " style="top : 70px">
+        	<div class="alert alert-danger alert-dismissible fade show d-none w-75 m-0 mx-auto mt-1" ${displayError } role="alert">
+			  ${error }
+			  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+			<div class="alert alert-success alert-dismissible fade show d-none w-75 m-0 mx-auto mt-1" ${displaySuccess } role="alert">
+			  ${success } 
+			  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+			<div class="alert alert-warning alert-dismissible fade show d-none w-75 m-0 mx-auto mt-1" ${displayAlreadyUser } role="alert">
+			  ${alreadyUser } 
+			  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+        </div>
+        
         <div class="form_outer">
+        
           <h3 class="text-center">Register Now!</h3>
-          <form class="main_form">
-            <input type="hidden" id="userType" name="userType" value="service_provider">
+          <form class="main_form" action="user-register" method="post">
+            <input type="hidden" id="userType" name="user_type_id" value="2">
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="First name" id="firstname" required>
+              <input type="text" class="form-control" autofocus name="first_name" placeholder="First name" id="firstname" required>
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Last name" id="lastname" required>
+              <input type="text" class="form-control" name="last_name" placeholder="Last name" id="lastname" required>
             </div>
             <div class="form-group">
-              <input type="email" class="form-control" placeholder="Email Address" id="email" required>
-            </div>
-            <div class="form-group d-flex">
-                <input type="text" name="areacode" disabled class="form_areacode form-control p-0 ps-1" value="+46">
-                <input type="text" name="phonenumber" placeholder="Phone Number" id="phonenumber" class="form-control" required>
-            </div>
-            <small id="phoneNumberMessage"></small>
-            <div class="form-group">
-              <input type="password" class="form-control" placeholder="Password" id="password" required>
+              <input type="email" class="form-control" name="email" placeholder="Email Address" id="email" required>
             </div>
             <div class="form-group">
-              <input type="password" class="form-control" placeholder="Confirm Password" id="confirmpassword" required>
+            	<div class="d-flex">
+                	<input type="text" name="areacode" readonly="readonly" disabled class="form_areacode form-control p-0 ps-1" value="+49">
+                	<input type="text" name="mobile" placeholder="Phone Number" id="mobile" class="form-control" required>
+                </div>
+	            <small id="phoneNumberMessage"></small>
+            </div>
+            <div class="form-group">
+              <input type="password" name="password" class="form-control" placeholder="Password" id="password" required title="Password must include uppercase letter , lowercase letter , number , special character and length should be more than 8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[/\w/]).{8,}">
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" name="confirmpassword" placeholder="Confirm Password" id="confirmpassword" required>
               <small id="confirmPasswordMessage"></small>
             </div>
             <div class="form-group d-flex align-items-center justify-content-start checkbox_outer">
-              <input type="checkbox" class="me-1 form_checkbox" required>
+              <input type="checkbox" class="me-1 form_checkbox" name="termsandconditions" required>
               <p class="m-0">I accept&nbsp;<span><a href="#">terms and conditions</a></span> &nbsp;&&nbsp; <span><a href="#">privacy policy</a></span></p>
             </div>
             <div class="d-flex w-100 align-items-center justify-content-center">
@@ -107,7 +128,20 @@
                 </span>
               </button>
             </div>
+            
+            <input type="hidden" name="is_registered_user" value="1">
+            <input type="hidden" name="works_with_pet" value="1">
+            <input type="hidden" name="modified_by" value="1">
+            <input type="hidden" name="is_approved" value="1">
+            <input type="hidden" name="is_active" value="0">
+            <input type="hidden" name="is_deleted" value="0">
+            <input type="hidden" name="is_online" value="1">
+            <input type="hidden" name="created_date" id="created_date" value="">
+            <input type="hidden" name="modified_date" id="modified_date" value="">
+                
+            
           </form>
+          
         </div>
         <a href="#howItWorks" style="margin-top: 42px;">
           <svg xmlns="http://www.w3.org/2000/svg" width="47" height="47">
@@ -254,7 +288,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body logInModal p-2">
-                        <form action="loggedin" method="post">
+                        <form action="login" method="post">
                             <div class="form-group position-relative my-3">
                                 <input type="email" placeholder="Email Address" name="email" class="modalInputEmail inputHeightBorder">
                                  <img
@@ -345,10 +379,21 @@
             }
         });
 
+        var dt = new Date();
+        /* var dtstring = dt.getFullYear()
+            + '-' +(dt.getMonth())
+            + '-' +(dt.getDate())
+            + ' ' +(dt.getHours())
+            + ':' +(dt.getMinutes())
+            + ':' +(dt.getSeconds()); */
+		
+        var t = moment(new Date()).format("YYYY/MM/DD HH:mm:ss");
+		$('#created_date').val(t);
+		$('#modified_date').val(t);
         
 
         $(function () {
-            $("#phonenumber").keypress(function (e) {
+            $("#mobile").keypress(function (e) {
                 var keyCode = e.keyCode || e.which;
                 $("#phoneNumberMessage").html("");
                 var regex = /^[0-9]+$/;

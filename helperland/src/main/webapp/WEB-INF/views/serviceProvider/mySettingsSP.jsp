@@ -27,7 +27,7 @@
                     <div class="offcanvas offcanvas-end navbar_offcanvas sidebarMain" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
                         <div class="offcanvas-body justify-content-end sidebarInner">
                             <div class="navcol_first navcol m-0 p-0">
-                                <p class="nav-link">Welcome,<br>First customer</p>
+                                <p class="nav-link">Welcome,<br>${user.first_name } ${user.last_name }</p>
                             </div>
                             <div class="navcol_second navcol">
                                 <!-- <div class="nav-item nav_select1"  id="dashBoard1">
@@ -108,7 +108,7 @@
                         <ul class="dropdown-menu dropdown-menu-end p-1 px-3">
                             <li class="border-bottom" style="font-size: 14px;">
                                 <p class="mb-0">Welcome,</p>
-                                <p class="mb-1 fw-bold">First Customer</p>
+                                <p class="mb-1 fw-bold">${user.first_name }</p>
                             </li>
                             <li><a class="dropdown-item px-1" type="button" href="dash">My Dashboard</a></li>
                             <li><a class="dropdown-item px-1" type="button" href="mysettings" >My Settings</a></li>
@@ -138,7 +138,7 @@
 
 
         <div class="position-relative spDash_header d-flex align-items-center justify-content-center">
-            <p class="m-0">Welcome, <span class="text-bold">Sandip!</span></p>
+            <p class="m-0">Welcome, <span class="text-bold">${user.first_name }!</span></p>
         </div>
 
 
@@ -209,19 +209,19 @@
                                 <div class="col-md-4 mb-4">
                                     <div class="form-group d-flex flex-column">
                                         <label for="firstname">First Name</label>
-                                        <input type="text" name="firstname" value="First" class="minheight46 borderlight paddinginside form-control">
+                                        <input type="text" name="firstname" value="${user.first_name }" class="minheight46 borderlight paddinginside form-control">
                                     </div>
                                 </div>
                                 <div class="col-md-4 mb-4">
                                     <div class="form-group d-flex flex-column">
                                         <label for="firstname">Last Name</label>
-                                        <input type="text" name="firstname" value="Last" class="minheight46 borderlight paddinginside form-control">
+                                        <input type="text" name="firstname" value="${user.last_name }" class="minheight46 borderlight paddinginside form-control">
                                     </div>
                                 </div>
                                 <div class="col-md-4 mb-4">
                                     <div class="form-group d-flex flex-column">
                                         <label for="firstname">Email Address</label>
-                                        <input type="email" name="address" value="cust@gmail.com" disabled class="minheight46 borderlight paddinginside form-control">
+                                        <input type="email" name="address" value="${user.email }" disabled class="minheight46 borderlight paddinginside form-control">
                                     </div>
                                 </div>
                                 <div class="col-md-4 mb-4">
@@ -229,7 +229,7 @@
                                         <label for="firstname">Mobile Number</label>
                                         <div class="d-flex">
                                             <input type="text" value="+49" disabled style="max-width: 52px;" class="minheight46 borderlight paddinginside form-control">
-                                            <input type="text" name="mobilenumber" value="9848291932" class="minheight46 borderlight paddinginside form-control">
+                                            <input type="text" name="mobilenumber" value="${user.mobile }" class="minheight46 borderlight paddinginside form-control">
                                         </div>
                                     </div>
                                 </div>

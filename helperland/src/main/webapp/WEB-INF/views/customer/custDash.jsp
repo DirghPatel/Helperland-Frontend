@@ -2,7 +2,10 @@
     pageEncoding="UTF-8"%>
     
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page isELIgnored="false"%>
+
+
 
 
 <!DOCTYPE html>
@@ -18,8 +21,9 @@
     </script>
 </head>
 <body>
+
     <div style="min-height: 100vh; padding-bottom: 170px;">
-        
+
         <nav class="navbar navbar-expand-lg w-100" id="navbar">
             <div class="container-fluid navbar_main">
                 <a class="navbar-brand py-0" href="/helperland/home">
@@ -29,7 +33,7 @@
                     <div class="offcanvas offcanvas-end navbar_offcanvas sidebarMain" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
                         <div class="offcanvas-body justify-content-end sidebarInner">
                             <div class="navcol_first navcol m-0 p-0">
-                                <p class="nav-link">Welcome,<br>First customer</p>
+                                <p class="nav-link">Welcome,<br>${user.first_name } ${user.last_name }</p>
                             </div>
                             <div class="navcol_second navcol">
                                 <div class="nav-item nav_select1"  id="dashBoard1">
@@ -100,7 +104,7 @@
                         <ul class="dropdown-menu dropdown-menu-end p-1 px-3">
                             <li class="border-bottom" style="font-size: 14px;">
                                 <p class="mb-0">Welcome,</p>
-                                <p class="mb-1 fw-bold">First Customer</p>
+                                <p class="mb-1 fw-bold">${user.first_name }</p>
                             </li>
                             <li><a class="dropdown-item px-0" type="button" href="dash">My Dashboard</a></li>
                             <li><a class="dropdown-item px-0" type="button" href="mysettings" >My Settings</a></li>
@@ -128,10 +132,9 @@
             </div>
         </nav>
 
-		<p>${loginModel.email}</p>
 	
         <div class="position-relative custDash_header d-flex align-items-center justify-content-center">
-            <p class="m-0">Welcome, <span class="text-bold">Sandip!</span></p>
+            <p class="m-0">Welcome, <span class="text-bold">${user.first_name }!</span></p>
         </div>
 
 
@@ -471,7 +474,7 @@
             </div>
         </div>
     </div>
-
+ 
     <!-- <script src="./custDash.js"></script> -->
     <!-- <script>
         $(function () {

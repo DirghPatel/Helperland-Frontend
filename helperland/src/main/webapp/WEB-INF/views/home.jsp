@@ -398,7 +398,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body logInModal p-2">
-                        <form action="loggedin" method="post">
+                        <form action="login" method="post">
                             <div class="form-group position-relative my-3">
                                 <input type="email" placeholder="Email Address" name="email" class="modalInputEmail inputHeightBorder">
                                 <img
@@ -417,6 +417,7 @@
                                 <input type="checkbox" value="rememberme" id="rememberme">
                                 <label for="rememberme" class="control-label">Remember me</label>
                             </div>
+                            
                             <button type="submit" class="my-3 btn submitButton text-light w-100 rounded-pill" >
                                 Login
                             </button>

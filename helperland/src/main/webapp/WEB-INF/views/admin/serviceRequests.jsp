@@ -24,7 +24,7 @@
             </div>
             <div class="d-flex align-items-center adminDetailContainer">
                 <img src="<c:url value = "/resources/assets/adminScreen/user.png" />" alt="" height="36" width="36">
-                <p class="mb-0 mx-3 text-white">James Smith</p>
+                <p class="mb-0 mx-3 text-white">${user.first_name } ${user.last_name }</p>
                 <a href="">
                     <img src="<c:url value = "/resources/assets/adminScreen/logout.png" />" alt="" height="29" width="26">
                 </a>

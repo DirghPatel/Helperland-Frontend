@@ -1,7 +1,11 @@
+<%@page import="org.springframework.security.web.header.Header"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+ 
+
+<%@ page isELIgnored = "false" %>
 
 
 <!DOCTYPE html>
@@ -15,6 +19,7 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script> 
 </head>
 
 
@@ -68,6 +73,18 @@
             </div>
         </nav>
 
+		<div class="alert alert-danger alert-dismissible fade show d-none mx-4 mt-3"${displayLoginError} role="alert">
+		  
+		  ${loginErrorMessage }
+		  <%-- <% out.println(request.getAttribute("loginError")); %> --%>
+		  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+		
+		<div class="alert alert-danger alert-dismissible fade show d-none mx-4 mt-3" ${displayNotUser } role="alert">
+		  ${notUser }
+		  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+		
         <div class="userReg_heading position-relative mt-5">
             <h1>Create An Account</h1>
             <div class="userReg_box">
@@ -79,31 +96,43 @@
 
 
         <div class="userRegForm_wrapper my-5">
-            <form action="reguser" class="userRegForm" method="post">
-                <input type="hidden" id="userType" name="userType" value="customer">
+            <form action="user-register" class="userRegForm" method="post">
+                <div class="alert alert-danger alert-dismissible fade show d-none " ${displayError } role="alert">
+				  ${error }
+				  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+				</div>
+				<div class="alert alert-success alert-dismissible fade show d-none " ${displaySuccess } role="alert">
+				  ${success } 
+				  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+				</div>
+				<div class="alert alert-warning alert-dismissible fade show d-none " ${displayAlreadyUser } role="alert">
+				  ${alreadyUser } 
+				  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+				</div>
+                <input type="hidden" id="userType" name="user_type_id" value="1">
                 <div class="row">
                     <div class="col-sm-6 mb-4">
                         <div class="form-group d-flex flex-column">
-                            <input type="text" required name="firstname" placeholder="First name" class="inputHeightBorderPadding form-control">
+                            <input type="text" autofocus name="first_name" placeholder="First name" class="inputHeightBorderPadding form-control">
                         </div>
                     </div>
                     <div class="col-sm-6 mb-4">
                         <div class="form-group d-flex flex-column">
-                            <input type="text" required name="lastname" id="lastname" placeholder="Last name" class="inputHeightBorderPadding form-control">
+                            <input type="text" required name="last_name" id="lastname" placeholder="Last name" class="inputHeightBorderPadding form-control">
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-6 mb-4">
                         <div class="form-group d-flex flex-column">
-                            <input type="email" required name="emailaddress" id="emailaddress" placeholder="Email Address" class="inputHeightBorderPadding form-control">
+                            <input type="email" required name="email" id="emailaddress" placeholder="Email Address" class="inputHeightBorderPadding form-control">
                         </div>
                     </div>
                     <div class="col-sm-6 mb-4">
                         <div class="form-group d-flex flex-column">
                             <div class="d-flex">
-                                <input type="text" name="mobilecode" value="+49" readonly="readonly" style="max-width: 55px;" class="inputHeightBorderPadding form-control">
-                                <input type="text" name="mobilenumber" id="mobilenumber" placeholder="Mobile number" class="inputHeightBorderPadding form-control">
+                                <input type="text" name="mobilecode" value="+49" readonly="readonly" disabled style="max-width: 55px;" class="inputHeightBorderPadding form-control">
+                                <input type="text" name="mobile" id="mobile" placeholder="Mobile number" class="inputHeightBorderPadding form-control">
                             </div>
                             <small id="mobileNumberMessage"></small>
                         </div>
@@ -113,6 +142,7 @@
                     <div class="col-sm-6 mb-4">
                         <div class="form-group d-flex flex-column">
                             <input type="password" required name="password" title="Password must include uppercase letter , lowercase letter , number , special character and length should be more than 8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[/\w/]).{8,}" id="password" placeholder="Password" class="inputHeightBorderPadding form-control">
+                        	
                         </div>
                     </div>
                     <div class="col-sm-6 mb-4">
@@ -134,13 +164,26 @@
                 <div class="text-center mt-4"> 
                     <button class="btn submitButton text-light rounded-pill"  disabled id="registerButton">Register</button>
                 </div>
+                
+                <input type="hidden" name="is_registered_user" value="1">
+                <input type="hidden" name="works_with_pet" value="1">
+                <input type="hidden" name="modified_by" value="1">
+                <input type="hidden" name="is_approved" value="1">
+                <input type="hidden" name="is_active" value="0">
+                <input type="hidden" name="is_deleted" value="0">
+                <input type="hidden" name="is_online" value="1">
+                <input type="hidden" name="created_date" id="created_date" value="">
+                <input type="hidden" name="modified_date" id="modified_date" value="">
+                
             </form>
             <div class="text-center mt-3 color646464">
                 Already registered? 
                 <span><a class="colorGreen text-decoration-none" href="#logInModal" data-bs-target="#logInModal" data-bs-toggle="modal" data-bs-dismiss="modal" id="logInButton">Login now</a></span>
             </div>
         </div>
+  
     </div>
+    
     <div class="footer_section w-100" style="margin-top: -150px;">
         <div class="footer_main d-flex justify-content-center align-items-center position-relative">
             <div class="d-flex justify-content-between h-100 align-items-center footer_inner position-relative">
@@ -202,23 +245,24 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body logInModal p-2">
-                        <form action="loggedin" method="post">
+                        <form action="login" method="post">
                             <div class="form-group position-relative my-3">
-                                <input type="email" placeholder="Email Address" name="email" class="modalInputEmail inputHeightBorder">
+                                <input type="email" required placeholder="Email Address" name="email" autofocus="autofocus" class="modalInputEmail inputHeightBorder" />
                                 <img
 									src="<c:url value = "/resources/assets/homepage/first/user.png" />" alt="" height="21"
 									width="20">
                             </div>
                             
                             <div class="form-group position-relative my-3">
-                                <input type="password" placeholder="Password" name="password" class="modalInputEmail inputHeightBorder">
+                                <input type="password" placeholder="Password" name="password" class="modalInputEmail inputHeightBorder" />
                                 <img
 									src="<c:url value = "/resources/assets/homepage/first/user.png" />" alt="" height="21"
 									width="20">
+								<%-- <form:errors name="password" cssClass="error"/> --%>
                             </div>
 
                             <div class="form-group">
-                                <input type="checkbox" value="rememberme" id="rememberme">
+                                <input type="checkbox" value="rememberme" id="rememberme" />
                                 <label for="rememberme" class="control-label">Remember me</label>
                             </div>
                             <button type="submit" class="my-3 btn submitButton text-light w-100 rounded-pill" >
@@ -283,9 +327,23 @@
                 $('#registerButton').attr('disabled' , true);
             }
         });
-
+        
+        
+        
+        var dt = new Date();
+        /* var dtstring = dt.getFullYear()
+            + '-' +(dt.getMonth())
+            + '-' +(dt.getDate())
+            + ' ' +(dt.getHours())
+            + ':' +(dt.getMinutes())
+            + ':' +(dt.getSeconds()); */
+		
+        var t = moment(new Date()).format("YYYY/MM/DD HH:mm:ss");
+		$('#created_date').val(t);
+		$('#modified_date').val(t);
+        
         $(function () {
-            $("#mobilenumber").keypress(function (e) {
+            $("#mobile").keypress(function (e) {
                 var keyCode = e.keyCode || e.which;
                 $("#mobileNumberMessage").html("");
                 var regex = /^[0-9]+$/;

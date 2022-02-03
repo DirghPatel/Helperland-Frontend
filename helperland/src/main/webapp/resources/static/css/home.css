@@ -3,8 +3,11 @@
     padding: 0;
 }
 html{
-    overflow-x: hidden;
+     overflow-x: hidden;
     padding: 0;
+}
+body{
+	padding: 0px !important;
 }
 .main{
     height: 100vh;

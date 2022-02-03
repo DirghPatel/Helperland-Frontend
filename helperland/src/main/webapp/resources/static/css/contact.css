@@ -2,8 +2,8 @@
   margin: 0;
   padding: 0;
 }
-.modal-open{
-	padding: 0 !important;
+body{
+	padding: 0px !important;
 }
 html {
    overflow-x: hidden;
@@ -21,7 +21,9 @@ button:focus , input:focus , textarea:focus , select:focus{
   height: auto;
   width: 100vw;
 }
-
+.warning-alert{
+	display: none;
+}
 .contact_heading {
   display: flex;
   flex-direction: column;

@@ -392,6 +392,7 @@
                                 <option value="german"> German</option>
                             </select>
                         </div>
+                        <input type="hidden" name="modified_date" id="modified_date" value="">
                         <button type="submit" class="btn reschedule_button text-light rounded-pill px-4 mt-3">
                             Save
                         </button>
@@ -572,16 +573,17 @@
                         <form action="">
                             <div class="form-group mb-2 col-sm-4">
                                 <label for="oldPassword">Old Password</label>
-                                <input type="password" name="oldPassword" placeholder="Current Password" class="form-control minheight46" maxlength="20" required>
+                                <input type="password" name="oldPassword" placeholder="Current Password" class="form-control minheight46" required >
                             </div>
                             <div class="form-group mb-2 col-sm-4">
                                 <label for="newPassword">New Password</label>
-                                <input type="password" name="newPassword" class="form-control minheight46" placeholder="Password" maxlength="20" required>
+                                <input type="password" id="password" name="newPassword" class="form-control minheight46" placeholder="Password" maxlength="14" required title="Password must include uppercase letter , lowercase letter , number , special character and length should be between 6 to 14" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{6,14}$">
                             </div>
                             <div class="form-group mb-2 col-sm-4">
                                 <label for="confirmPassword">Confirm Password</label>
-                                <input type="password" name="confirmPassword" class="form-control minheight46 " placeholder="New Password" maxlength="20" required>
+                                <input type="password" name="confirmPassword" id="confirmpassword" class="form-control minheight46 " placeholder="New Password" maxlength="14" required>
                             </div>
+                            <input type="hidden" name="modified_date" id="modified_date2" value="">
                             <button type="submit" class="btn reschedule_button px-4 mt-3 text-light rounded-pill">
                                 Save
                             </button>
@@ -653,7 +655,33 @@
     </script> -->
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+	<script>
+		
 
+	    $('#password, #confirmpassword').on('keyup', function () {
+	        if ($('#password').val() == $('#confirmpassword').val()) {
+	            $('#confirmPasswordMessage').html('Looks Good!').css('color', 'green');
+	            $('#registerButton').removeAttr('disabled');
+	        } 
+	        else {
+	            $('#confirmPasswordMessage').html('Enter same password again').css('color', 'red');
+	        }
+	        if ($('#password').val() != $('#confirmpassword').val()) {
+	            $('#registerButton').attr('disabled' , true);
+	        }
+	        if($('#password').val().length == 0){
+	        	$('#registerButton').attr('disabled' , true);	
+	        }
+	    });
+	    
+	    
+	    
+	    var dt = new Date();
+		
+	    var t = moment(new Date()).format("YYYY/MM/DD HH:mm:ss");
+		$('#modified_date , #modified_date2').val(t);
+	
+	</script>
 
 </body>
 </html>

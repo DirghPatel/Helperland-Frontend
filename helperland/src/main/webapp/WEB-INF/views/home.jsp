@@ -63,6 +63,30 @@
         </div>
     </nav>
     <!-- <div id="navbar" class="sticky-top"></div> -->
+    <div class="position-absolute w-100 d-flex justify-content-center" style="top: 10px; z-index: 100000;">
+	    <div class="alert alert-danger alert-dismissible fade show d-none w-75" ${displayUserNotFound } role="alert">
+		  ${userNotFound } 
+		  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+	    
+	    <div class="alert alert-success alert-dismissible fade show d-none w-75" ${displaySuccessPasswordChange } role="alert">
+		  ${successPasswordChange } 
+		  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+		
+		<div class="alert alert-success alert-dismissible fade show d-none w-75" ${displaySuccessMessage } role="alert">
+		  ${successMessage } 
+		  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+		
+		<div class="alert alert-warning alert-dismissible fade show d-none w-75" ${displayErrorMessage } role="alert">
+		  ${errorMessage } 
+		  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+		
+		
+	</div>
+    
     <div class="container-fluid main position-relative">
         
         <div class="main_content text-light" id="main_content">
@@ -442,7 +466,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body ">
-                        <form action="">
+                        <form action="forgot" method="post">
                             <div class="d-flex mb-3">
                                 <input type="email" placeholder="Email Address" name="email" class="modalInputEmail inputHeightBorder">
                             </div>
@@ -487,20 +511,6 @@
             })
         });
     </script>
-    <!-- <script>
-        $(document).ready(function(){
-            $('#logInModal').modal('show')
-        });
-     </script> -->
-    
-    <!-- <script>
-        $("#navbar").load("../navbar.html");
-        $("#footer").load("../footer.html");
-        $("#country_selector").countrySelect({
-            defaultCountry: "gb",
-        });
-    </script> -->
-
 </body>
 
 

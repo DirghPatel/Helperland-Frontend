@@ -105,7 +105,7 @@ public class MainController {
 				return "userRegistration";
 			}
 			else if(user.getUser_type_id() == 2) {
-				model.addAttribute("error" , "please enter all fields to submit form");
+				model.addAttribute("error" , "please enter all fields perfectly to submit form");
 				model.addAttribute("displayError" , "style='display: block !important;'");
 				System.out.println("errror");
 				return "becomeAPro";

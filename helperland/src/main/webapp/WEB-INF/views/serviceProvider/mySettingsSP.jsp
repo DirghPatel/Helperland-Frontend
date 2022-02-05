@@ -486,6 +486,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <input type="hidden" name="modified_date" id="modified_date" value="">
                             <button type="submit" class="btn save_button text-light rounded-pill m-3 ms-0">
                                 Save
                             </button>
@@ -496,16 +497,17 @@
                         <form action="">
                             <div class="form-group mb-2 col-md-4">
                                 <label for="oldPassword">Old Password</label>
-                                <input type="password" name="oldPassword" placeholder="Current Password" class="form-control minheight46" maxlength="20" required>
+                                <input type="password" name="oldPassword" placeholder="Current Password" class="form-control minheight46"  required>
                             </div>
                             <div class="form-group mb-2 col-md-4">
                                 <label for="newPassword">New Password</label>
-                                <input type="password" name="newPassword" class="form-control minheight46" placeholder="Password" maxlength="20" required>
+                                <input type="password" name="newPassword" id="password" class="form-control minheight46" placeholder="Password" maxlength="14" required>
                             </div>
                             <div class="form-group mb-2 col-md-4">
                                 <label for="confirmPassword">Confirm Password</label>
-                                <input type="password" name="confirmPassword" class="form-control minheight46 " placeholder="New Password" maxlength="20" required>
+                                <input type="password" name="confirmPassword" id="confirmpassword" class="form-control minheight46 " placeholder="New Password" maxlength="14" required>
                             </div>
+                            <input type="hidden" name="modified_date" id="modified_date2" value="">
                             <button type="submit" class="btn save_button px-4 mt-3 text-light rounded-pill">
                                 Save
                             </button>
@@ -624,11 +626,32 @@
     </div>
     
     <script src="./spDash.js"></script>
-    <!-- <script>
-        $(function () {
-            $("#footer").load("../footer.html");
-        });
-    </script> -->
+    
+    <script>
+
+	    $('#password, #confirmpassword').on('keyup', function () {
+	        if ($('#password').val() == $('#confirmpassword').val()) {
+	            $('#confirmPasswordMessage').html('Looks Good!').css('color', 'green');
+	            $('#registerButton').removeAttr('disabled');
+	        } 
+	        else {
+	            $('#confirmPasswordMessage').html('Enter same password again').css('color', 'red');
+	        }
+	        if ($('#password').val() != $('#confirmpassword').val()) {
+	            $('#registerButton').attr('disabled' , true);
+	        }
+	        if($('#password').val().length == 0){
+	        	$('#registerButton').attr('disabled' , true);	
+	        }
+	    });
+        
+        
+        
+        var dt = new Date();
+		
+        var t = moment(new Date()).format("YYYY/MM/DD HH:mm:ss");
+		$('#modified_date').val(t);
+    </script>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>

@@ -504,94 +504,80 @@
 	</div>
 
 
-	<!-- ------------- login modals --------------  -->
-	<div class="logInPopUp">
+    <!-- ------------- login modals --------------  -->
+    <div class="logInPopUp">
 
-		<div class="modal fade" id="logInModal" aria-hidden="true"
-			aria-labelledby="logInModalLabel" tabindex="-1">
-			<div
-				class="modal-dialog modal-dialog-centered vertical-align-center modal-md">
-				<div class="modal-content">
-					<!-- <div class="modal-body"> -->
-					<div class="modal-header">
-						<h3 class="modal-title" id="logInModalLabel">Login to your
-							account</h3>
-						<button type="button" class="btn-close" data-bs-dismiss="modal"
-							aria-label="Close"></button>
-					</div>
-					<div class="modal-body logInModal p-2">
-						<form action="loggedin" method="post">
-							<div class="form-group position-relative my-3">
-								<input type="email" placeholder="Email Address" name="email"
-									class="modalInputEmail inputHeightBorder"> <img
-									src="<c:url value = "/resources/assets/homepage/first/user.png" />" alt="" height="21"
+        <div class="modal fade" id="logInModal" aria-hidden="true" aria-labelledby="logInModalLabel" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered vertical-align-center modal-md">
+                <div class="modal-content">
+                    <!-- <div class="modal-body"> -->
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="logInModalLabel">Login to your account</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body logInModal p-2">
+                        <form action="login" method="post">
+                            <div class="form-group position-relative my-3">
+                                <input type="email" placeholder="Email Address" name="email" class="modalInputEmail inputHeightBorder">
+                                <img
+									src=" <c:url value = "/resources/assets/homepage/first/user.png" />" alt="" height="21"
 									width="20">
-							</div>
-
-							<div class="form-group position-relative my-3">
-								<input type="password" placeholder="Password" name="password"
-									class="modalInputEmail inputHeightBorder"> <img
-									src="<c:url value = "/resources/assets/homepage/first/user.png" />" alt="" height="21"
+                            </div>
+                            
+                            <div class="form-group position-relative my-3">
+                                <input type="password" placeholder="Password" name="password" class="modalInputEmail inputHeightBorder">
+                                <img
+									src="<c:url value = "/resources/assets/homepage/first/lock.png" />" alt="" height="21"
 									width="20">
-							</div>
+                            </div>
 
-							<div class="form-group">
-								<input type="checkbox" value="rememberme" id="rememberme">
-								<label for="rememberme" class="control-label">Remember
-									me</label>
-							</div>
-							<button type="submit"
-								class="my-3 btn submitButton text-light w-100 rounded-pill">
-								Login</button>
-						</form>
-						<div class="text-center mt-2">
-							<a href="forgotPasswordModal" class="forgotPasswordRedirect"
-								data-bs-target="#forgotPasswordModal" data-bs-toggle="modal"
-								data-bs-dismiss="modal">Forgot Password?</a>
-						</div>
-						<div class="text-center">
-							Don't have account? <span> <a
-								class="forgotPasswordRedirect" href="user-register">Create
-									an account? </a></span>
-						</div>
+                            <div class="form-group">
+                                <input type="checkbox" value="rememberme" id="rememberme">
+                                <label for="rememberme" class="control-label">Remember me</label>
+                            </div>
+                            
+                            <button type="submit" class="my-3 btn submitButton text-light w-100 rounded-pill" >
+                                Login
+                            </button>
+                        </form>
+                        <div class="text-center mt-2">
+                            <a href="forgotPasswordModal" class="forgotPasswordRedirect" data-bs-target="#forgotPasswordModal" data-bs-toggle="modal" data-bs-dismiss="modal">Forgot Password?</a>
+                        </div>
+                        <div class="text-center">
+                            Don't have account? <span> <a class="forgotPasswordRedirect" href="user-register">Create an account? </a></span>
+                        </div>
 
-					</div>
-				</div>
-			</div>
-		</div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-		<div class="modal fade" id="forgotPasswordModal" aria-hidden="true"
-			aria-labelledby="forgotPasswordModalLabel2" tabindex="-1">
-			<div class="modal-dialog modal-dialog-centered modal-md">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title me-3" id="forgotPasswordModalLabel2">Forgot
-							Password</h4>
-						<button type="button" class="btn-close" data-bs-dismiss="modal"
-							aria-label="Close"></button>
-					</div>
-					<div class="modal-body ">
-						<form action="">
-							<div class="d-flex mb-3">
-								<input type="email" placeholder="Email Address" name="email"
-									class="modalInputEmail inputHeightBorder">
-							</div>
-							<button type="submit"
-								class="my-3 btn submitButton text-light w-100 rounded-pill">
-								Send</button>
-						</form>
-						<div class="text-center mt-2">
-							<a href="logInModal" class="forgotPasswordRedirect"
-								data-bs-target="#logInModal" data-bs-toggle="modal"
-								data-bs-dismiss="modal">Login now</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+        <div class="modal fade" id="forgotPasswordModal" aria-hidden="true" aria-labelledby="forgotPasswordModalLabel2" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered modal-md">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title me-3" id="forgotPasswordModalLabel2">Forgot Password</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body ">
+                        <form action="forgot" method="post">
+                            <div class="d-flex mb-3">
+                                <input type="email" placeholder="Email Address" name="email" class="modalInputEmail inputHeightBorder">
+                            </div>
+                            <button type="submit" class="my-3 btn submitButton text-light w-100 rounded-pill" >
+                                Send
+                            </button>
+                        </form>
+                        <div class="text-center mt-2">
+                            <a href="logInModal" class="forgotPasswordRedirect" data-bs-target="#logInModal" data-bs-toggle="modal" data-bs-dismiss="modal">Login now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-
-	</div>
+        
+    </div>
 	<!-- <div id="footer"></div> -->
 	<!-- <script>
     $(function () {

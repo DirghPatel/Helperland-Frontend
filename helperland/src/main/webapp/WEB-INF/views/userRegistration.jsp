@@ -125,14 +125,14 @@
                 <div class="row">
                     <div class="col-sm-6 mb-4">
                         <div class="form-group d-flex flex-column">
-                            <input type="email" required name="email" id="emailaddress" placeholder="Email Address" class="inputHeightBorderPadding form-control">
+                            <input type="text" required name="email" id="emailaddress" placeholder="Email Address" class="inputHeightBorderPadding form-control">
                         </div>
                     </div>
                     <div class="col-sm-6 mb-4">
                         <div class="form-group d-flex flex-column">
                             <div class="d-flex">
                                 <input type="text" name="mobilecode" value="+49" readonly="readonly" disabled style="max-width: 55px;" class="inputHeightBorderPadding form-control">
-                                <input type="text" name="mobile" id="mobile" placeholder="Mobile number" class="inputHeightBorderPadding form-control">
+                                <input type="text" name="mobile" required id="mobile" placeholder="Mobile number" class="inputHeightBorderPadding form-control">
                             </div>
                             <small id="mobileNumberMessage"></small>
                         </div>
@@ -141,8 +141,7 @@
                 <div class="row">
                     <div class="col-sm-6 mb-4">
                         <div class="form-group d-flex flex-column">
-                            <input type="password" required name="password" title="Password must include uppercase letter , lowercase letter , number , special character and length should be more than 8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[/\w/]).{8,}" id="password" placeholder="Password" class="inputHeightBorderPadding form-control">
-                        	
+                            <input type="password" required name="password" id="password" placeholder="Password" class="inputHeightBorderPadding form-control" title="Password must include uppercase letter , lowercase letter , number , special character and length should be between 6 to 14" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{6,14}$" >
                         </div>
                     </div>
                     <div class="col-sm-6 mb-4">
@@ -247,24 +246,24 @@
                     <div class="modal-body logInModal p-2">
                         <form action="login" method="post">
                             <div class="form-group position-relative my-3">
-                                <input type="email" required placeholder="Email Address" name="email" autofocus="autofocus" class="modalInputEmail inputHeightBorder" />
+                                <input type="email" placeholder="Email Address" name="email" class="modalInputEmail inputHeightBorder">
                                 <img
-									src="<c:url value = "/resources/assets/homepage/first/user.png" />" alt="" height="21"
+									src=" <c:url value = "/resources/assets/homepage/first/user.png" />" alt="" height="21"
 									width="20">
                             </div>
                             
                             <div class="form-group position-relative my-3">
-                                <input type="password" placeholder="Password" name="password" class="modalInputEmail inputHeightBorder" />
+                                <input type="password" placeholder="Password" name="password" class="modalInputEmail inputHeightBorder">
                                 <img
-									src="<c:url value = "/resources/assets/homepage/first/user.png" />" alt="" height="21"
+									src="<c:url value = "/resources/assets/homepage/first/lock.png" />" alt="" height="21"
 									width="20">
-								<%-- <form:errors name="password" cssClass="error"/> --%>
                             </div>
 
                             <div class="form-group">
-                                <input type="checkbox" value="rememberme" id="rememberme" />
+                                <input type="checkbox" value="rememberme" id="rememberme">
                                 <label for="rememberme" class="control-label">Remember me</label>
                             </div>
+                            
                             <button type="submit" class="my-3 btn submitButton text-light w-100 rounded-pill" >
                                 Login
                             </button>
@@ -289,7 +288,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body ">
-                        <form action="">
+                        <form action="forgot" method="post">
                             <div class="d-flex mb-3">
                                 <input type="email" placeholder="Email Address" name="email" class="modalInputEmail inputHeightBorder">
                             </div>
@@ -315,28 +314,26 @@
 
     <script>
 
-        $('#password, #confirmpassword').on('keyup', function () {
-            if ($('#password').val() == $('#confirmpassword').val()) {
-                $('#confirmPasswordMessage').html('Looks Good!').css('color', 'green');
-                $('#registerButton').removeAttr('disabled');
-            } 
-            else {
-                $('#confirmPasswordMessage').html('Enter same password again').css('color', 'red');
-            }
-            if ($('#password').val() != $('#confirmpassword').val()) {
-                $('#registerButton').attr('disabled' , true);
-            }
-        });
+	    $('#password, #confirmpassword').on('keyup', function () {
+	        if ($('#password').val() == $('#confirmpassword').val()) {
+	            $('#confirmPasswordMessage').html('Looks Good!').css('color', 'green');
+	            $('#registerButton').removeAttr('disabled');
+	        } 
+	        else {
+	            $('#confirmPasswordMessage').html('Enter same password again').css('color', 'red');
+	        }
+	        if ($('#password').val() != $('#confirmpassword').val()) {
+	            $('#registerButton').attr('disabled' , true);
+	        }
+	        if($('#password').val().length == 0){
+	        	$('#registerButton').attr('disabled' , true);	
+	        }
+	    });
+	    
         
         
         
         var dt = new Date();
-        /* var dtstring = dt.getFullYear()
-            + '-' +(dt.getMonth())
-            + '-' +(dt.getDate())
-            + ' ' +(dt.getHours())
-            + ':' +(dt.getMinutes())
-            + ':' +(dt.getSeconds()); */
 		
         var t = moment(new Date()).format("YYYY/MM/DD HH:mm:ss");
 		$('#created_date').val(t);

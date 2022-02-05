@@ -1,5 +1,7 @@
 package helperlandBackend.dao;
 
+import java.util.Optional;
+
 import javax.persistence.NoResultException;
 
 import org.hibernate.Session;
@@ -34,6 +36,27 @@ public class UserDaoImpl implements UserDao {
 		  Query<UserModel> query = session.createQuery("from user where email =:userName",UserModel.class);
 		  query.setParameter("userName", email);
 		  UserModel user = query.getSingleResult();
+		  System.out.println(user);
+		  return user;
+		}
+		catch (NoResultException e) {
+			return null;
+		}
+	}
+	
+	@Transactional
+	public void updateUser(UserModel user) {
+		this.hibernateTemplate.update(user);
+	}
+	
+	@Transactional
+	public Optional<UserModel> findByResetToken(String resetToken) {
+		// TODO Auto-generated method stub
+		Session session = factory.getCurrentSession();
+		try {
+		  Query<UserModel> query = session.createQuery("from user where reset_token =:token",UserModel.class);
+		  query.setParameter("token", resetToken);
+		  Optional<UserModel> user = Optional.of(query.getSingleResult());
 		  System.out.println(user);
 		  return user;
 		}

@@ -1,5 +1,7 @@
 package helperlandBackend.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,4 +30,11 @@ public class UserServiceImpl implements UserService  {
 		return userDao.loginUser(email);
 	}
 
+	public void updateUser(UserModel user) {
+			this.userDao.updateUser(user);
+		}
+		
+	public Optional<UserModel> findUserByResetToken(String resetToken) {
+		return userDao.findByResetToken(resetToken);
+	}
 }

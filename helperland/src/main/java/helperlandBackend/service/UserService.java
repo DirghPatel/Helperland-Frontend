@@ -1,5 +1,7 @@
 package helperlandBackend.service;
 
+import java.util.Optional;
+
 import helperlandBackend.models.UserModel;
 
 //@Service
@@ -32,5 +34,9 @@ public interface UserService{
 	public int createUser(UserModel user);
 	
 	public UserModel loginUser(String email);
+	
+	public void updateUser(UserModel user);
+	
+	public Optional<UserModel> findUserByResetToken(String resetToken);
 	
 }

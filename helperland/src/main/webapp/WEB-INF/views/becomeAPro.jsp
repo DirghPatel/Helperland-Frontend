@@ -277,6 +277,7 @@
       </div>
     </div>
     
+    <!-- ------------- login modals --------------  -->
     <div class="logInPopUp">
 
         <div class="modal fade" id="logInModal" aria-hidden="true" aria-labelledby="logInModalLabel" tabindex="-1">
@@ -291,15 +292,15 @@
                         <form action="login" method="post">
                             <div class="form-group position-relative my-3">
                                 <input type="email" placeholder="Email Address" name="email" class="modalInputEmail inputHeightBorder">
-                                 <img
-									src="<c:url value = "/resources/assets/homepage/first/user.png" />" alt="" height="21"
+                                <img
+									src=" <c:url value = "/resources/assets/homepage/first/user.png" />" alt="" height="21"
 									width="20">
                             </div>
                             
                             <div class="form-group position-relative my-3">
                                 <input type="password" placeholder="Password" name="password" class="modalInputEmail inputHeightBorder">
                                 <img
-									src="<c:url value = "/resources/assets/homepage/first/user.png" />" alt="" height="21"
+									src="<c:url value = "/resources/assets/homepage/first/lock.png" />" alt="" height="21"
 									width="20">
                             </div>
 
@@ -307,6 +308,7 @@
                                 <input type="checkbox" value="rememberme" id="rememberme">
                                 <label for="rememberme" class="control-label">Remember me</label>
                             </div>
+                            
                             <button type="submit" class="my-3 btn submitButton text-light w-100 rounded-pill" >
                                 Login
                             </button>
@@ -331,7 +333,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body ">
-                        <form action="">
+                        <form action="forgot" method="post">
                             <div class="d-flex mb-3">
                                 <input type="email" placeholder="Email Address" name="email" class="modalInputEmail inputHeightBorder">
                             </div>
@@ -364,20 +366,22 @@
     
     <script>
 
-        $('#password, #confirmpassword').on('keyup', function () {
-            console.log("up");
-            if ($('#password').val() == $('#confirmpassword').val()) {
-                $('#confirmPasswordMessage').html('Looks Good!').css('color', 'green');
-                $('#registerButton').attr('disabled' , false);
-            } 
-            else {
-                $('#confirmPasswordMessage').html('Enter same password again').css('color', 'red');
-            }
-
-            if ($('#password').val() != $('#confirmpassword').val()) {
-              $('#registerButton').attr('disabled' , true);
-            }
-        });
+	    $('#password, #confirmpassword').on('keyup', function () {
+	        if ($('#password').val() == $('#confirmpassword').val()) {
+	            $('#confirmPasswordMessage').html('Looks Good!').css('color', 'green');
+	            $('#registerButton').removeAttr('disabled');
+	        } 
+	        else {
+	            $('#confirmPasswordMessage').html('Enter same password again').css('color', 'red');
+	        }
+	        if ($('#password').val() != $('#confirmpassword').val()) {
+	            $('#registerButton').attr('disabled' , true);
+	        }
+	        if($('#password').val().length == 0){
+	        	$('#registerButton').attr('disabled' , true);	
+	        }
+	    });
+    
 
         var dt = new Date();
         /* var dtstring = dt.getFullYear()

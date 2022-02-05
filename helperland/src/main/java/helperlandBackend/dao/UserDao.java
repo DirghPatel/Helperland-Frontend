@@ -1,5 +1,7 @@
 package helperlandBackend.dao;
 
+import java.util.Optional;
+
 import helperlandBackend.models.UserModel;
 
 
@@ -9,6 +11,10 @@ public interface UserDao{
 	public int saveUser(UserModel user);
 	
 	public UserModel loginUser(String email);
+	
+	Optional<UserModel> findByResetToken(String resetToken);
+
+	public void updateUser(UserModel user);
 }
 
 //@Repository

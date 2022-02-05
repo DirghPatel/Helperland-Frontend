@@ -9,7 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
+
+import helperlandBackend.validator.ValidPassword;
 
 
 @Entity(name="user")
@@ -23,18 +26,20 @@ public class UserModel{
 	
 	private int user_type_id;
 
-	@NotBlank(message = "cant be blank")
+	@NotBlank
 	private String first_name;
 
-	@NotBlank(message = "cant be blank")
+	@NotBlank
 	private String last_name;	
 	
-	@NotBlank(message = "cant be blank")
+	@Email
+	@NotBlank
 	private String email;
 	
-	@NotBlank(message = "cant be blank")
+	@NotBlank
 	private String mobile;
 	
+	@ValidPassword
 	@Size(min = 6 , max=14)
 	private String password;
 	
@@ -47,6 +52,7 @@ public class UserModel{
 	private int is_online;
 	private Date created_date;
 	private Date modified_date;
+	private String reset_token;
 	
 	public Date getModified_date() {
 		return modified_date;
@@ -162,6 +168,14 @@ public class UserModel{
 	}
 	public void setIs_online(int is_online) {
 		this.is_online = is_online;
+	}
+
+	public String getReset_token() {
+		return reset_token;
+	}
+
+	public void setReset_token(String reset_token) {
+		this.reset_token = reset_token;
 	}
 	
 	

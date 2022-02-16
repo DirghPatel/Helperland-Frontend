@@ -47,7 +47,12 @@
     }
     .nav-item{
         width: fit-content;
+        border: none !important;
     }
+    .nav-item:hover{
+    	border: none;
+    	color: #1d7a8c;
+	}
     .navbar_list a{
         color: #646464 !important;
     }

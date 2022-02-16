@@ -1,12 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+
+
 
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
+	<c:set var="sr" value="${service_requests }" />
+	<c:set var="u" value="${users }" />
+	<c:set var="srAddress" value="${srAddress }" />
 	<link href='<c:url value="/resources/css/spDash.css" />' rel="stylesheet" />
 	<link href='<c:url value="/resources/css/navbar-2.css" />' rel="stylesheet" />
 	<link href='<c:url value="/resources/css/footer.css" />' rel="stylesheet" />
@@ -16,8 +22,8 @@
 </head>
 <body>
     <div style="min-height: 100vh; padding-bottom: 80px;">
-
-        <nav class="navbar navbar-expand-lg w-100" id="navbar">
+	
+        <nav class="navbar navbar-expand-lg w-100 sticky-top" id="navbar">
             <div class="container-fluid navbar_main">
                 <a class="navbar-brand py-0" href="/helperland/home">
                     <img src="<c:url value = "/resources/assets/nav-footer-assets/logo.png" />" alt="" height="54px" width="73px">
@@ -61,10 +67,13 @@
                                     <a class="nav-link" href="mysettings">My Settings</a>
                                 </div>
                                 <div class="nav-item nav_select1">
-                                    <a class="nav-link" href="#">Logout</a>
+                                    <a class="nav-link" href="/helperland/logout">Logout</a>
                                 </div>
                             </div>
                             <div class="navcol_third navcol position-relative">
+                            	<div class="nav-item rounded-pill nav_select5">
+                                    <a class="nav-link" href="/helperland/service-booking" id="pricesServices">Book Now</a>
+                                </div>
                                 <div class="nav-item rounded-pill nav_select1">
                                     <a class="nav-link" href="/helperland/prices" id="pricesServices">Prices & services</a>
                                 </div>
@@ -111,7 +120,7 @@
                             </li>
                             <li><a class="dropdown-item px-1" type="button" href="dash">My Dashboard</a></li>
                             <li><a class="dropdown-item px-1" type="button" href="mysettings" >My Settings</a></li>
-                            <li><a class="dropdown-item px-1" type="button">Logout</a></li>
+                            <li><a class="dropdown-item px-1" type="button" href="/helperland/logout">Logout</a></li>
                         </ul>
                     </div>
                     <div>
@@ -211,74 +220,53 @@
                                 <th scope="col" class="text-center">Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">323436</th>
-                                <td class="service_date cursorPointer" href="#serviceDetails" data-bs-toggle="modal">
-                                    <a class="d-flex text-decoration-none ">
-                                        <img src="<c:url value = "/resources/assets/spDash/calender.png" />" alt="" height="19" width="16">
-                                        <p class="m-0">09/04/2018</p>
-                                    </a>
-                                    <a class="d-flex text-decoration-none">
-                                        <img src="<c:url value = "/resources/assets/spDash/clock.png" />" alt="" height="19" width="16">
-                                        <p class="m-0">12:00 - 18:00</p>
-                                    </a>
-                                </td>
-                                <td>
-                                    <a class="text-decoration-none">
-                                        <p class="m-0">David Bough</p>
-                                        <p class="m-0">
-                                            <img src="<c:url value = "/resources/assets/spDash/home.png" />" alt="" height="19" width="16">
-                                            <span>
-                                                Musterstrabe 5,12345 Bonn
-                                            </span> 
-                                        </p>
-                                    </a>
-                                </td>
-                                <td>
-                                    <p class="m-0 text-center">40.50 $</p>
-                                </td>
-                                <td>
-                                    <p class="m-0 text-center">15km</p>
-                                </td>
-                                <td class="text-center button_main">
-                                    <a class="accept_button rounded-pill text-light text-decoration-none">Accept</a>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <th scope="row">323436</th>
-                                <td class="service_date cursorPointer" href="#serviceDetails" data-bs-toggle="modal">
-                                    <a class="d-flex text-decoration-none ">
-                                        <img src="<c:url value = "/resources/assets/spDash/calender.png" />" alt="" height="19" width="16">
-                                        <p class="m-0">09/04/2018</p>
-                                    </a>
-                                    <a class="d-flex text-decoration-none">
-                                        <img src="<c:url value = "/resources/assets/spDash/clock.png" />" alt="" height="19" width="16">
-                                        <p class="m-0">12:00 - 18:00</p>
-                                    </a>
-                                </td>
-                                <td>
-                                    <a class="text-decoration-none">
-                                        <p class="m-0">David Bough</p>
-                                        <p class="m-0">
-                                            <img src="<c:url value = "/resources/assets/spDash/home.png" />" alt="" height="19" width="16">
-                                            <span>
-                                                Musterstrabe 5,12345 Bonn
-                                            </span> 
-                                        </p>
-                                    </a>
-                                </td>
-                                <td>
-                                    <p class="m-0 text-center">40.50 $</p>
-                                </td>
-                                <td>
-                                    <p class="m-0 text-center">15km</p>
-                                </td>
-                                <td class="text-center button_main">
-                                    <a class="accept_button rounded-pill text-light text-decoration-none">Accept</a>
-                                </td>
-                            </tr>
+                        <tbody id="req_refresh">
+							<c:forEach var="sr" items="${service_requests }" varStatus = "i">
+								<tr>
+	                                <th scope="row" id="serviceRequestId">${sr.service_req_id }</th>
+	                                <td class="service_date cursorPointer" href="#serviceDetails" data-bs-toggle="modal" id="${sr.service_req_id }" onclick="myFunction($(this).attr('id'))">
+	                                    <a class="d-flex text-decoration-none ">
+	                                        <img src="<c:url value = "/resources/assets/spDash/calender.png" />" alt="" height="19" width="16">
+	                                        <p class="m-0"><fmt:formatDate type = "date" value = "${sr.service_start_date}" pattern="dd/MM/yyyy"/></p>
+	                                    </a>
+	                                    <a class="d-flex text-decoration-none">
+	                                        <img src="<c:url value = "/resources/assets/spDash/clock.png" />" alt="" height="19" width="16">
+	                                        <p class="m-0">
+	                                        	<fmt:formatDate type = "time" value = "${sr.service_start_date}" pattern="hh:mm"/>-<span id="endTime${i.index }"></span>
+	                                        </p>
+	                                    </a>
+	                                </td>
+	                                <td>
+	                                    <a class="text-decoration-none">
+	                                        <p class="m-0">
+	                                        	<c:forEach var="u" items="${users }">
+	                                        		<c:if test="${u.user_id == sr.user_id}"> ${u.first_name } ${u.last_name }</c:if>
+	                                        	</c:forEach>
+	                                        </p>
+	                                        <p class="m-0">
+	                                            <img src="<c:url value = "/resources/assets/spDash/home.png" />" alt="" height="19" width="16">
+	                                            <span>
+	                                            
+	                                            	<c:forEach var="srAddress" items="${srAddress }">
+	                                            		<c:if test="${sr.service_req_id == srAddress.service_req_id }">
+	                                            			${srAddress.address_line1 } ${srAddress.address_line2 } ${srAddress.postal_code } ${srAddress.city }
+	                                            		</c:if>
+	                                            	</c:forEach>
+	                                            </span> 
+	                                        </p>
+	                                    </a>
+	                                </td>
+	                                <td>
+	                                    <p class="m-0 text-center">${sr.total_cost } $</p>
+	                                </td>
+	                                <td>
+	                                    <p class="m-0 text-center">${sr.distance }km</p>
+	                                </td>
+	                                <td class="text-center button_main">
+	                                    <a class="accept_button rounded-pill text-light text-decoration-none" data-spID ="${sr.service_req_id }" onclick="acceptFunction($(this).attr('data-spID'))" style="cursor: pointer">Accept</a>
+	                                </td>
+	                            </tr>
+							</c:forEach>
 
                         </tbody>
                     </table>
@@ -299,29 +287,29 @@
                             </div>
                         <div class="modal-body d-flex serviceDetailsModal p-2">
                             <div class="serviceModalLeft">
-                                <h4>22/12/2021 09:00 -14:30</h4>
-                                <p><b>Duration:</b>5.5 Hrs</p>
+                                <h4 id="sdDate"> </h4>
+                                <p><b>Duration : </b>&nbsp<span id="sdDuration"></span></p>
 
                                 <hr>
 
-                                <p><b>Service Id:</b>8502</p>
-                                <p><b>Extras:</b>Inside cabinets, Inside fridge, Inside oven, Laundry wash & dry, Interior windows</p>
-                                <p><b>Net Amount:</b> <span class="table_payment fw-bolder">99,00 €</span> </p>
+                                <p><b>Service Id:</b>&nbsp<span id="sdId"></span></p>
+                                <p><b>Extras:</b><span id="sdExtra"></span></p>
+                                <p><b>Net Amount:</b> <span class="table_payment fw-bolder" id="sdAmount"></span> </p>
                                 
                                 <hr>
                                 
-                                <p><b>Service Address:</b>Test 65, 53225 Bonn</p>
-                                <p><b>Billing Address:</b>Same as cleaning Address</p>
-                                <p><b>Phone:</b>+49 9988556644</p>
-                                <p><b>Email:</b>cust001@yopmail.com</p>
+                                <p><b>Service Address:</b><span id="sdAddress"></span></p>
+                                <p><b>Billing Address: </b>Same as cleaning Address</p>
+                                <p><b>Phone:</b> +91 <span id="sdPhone"></span></p>
+                                <p><b>Email:</b><span id="sdEmail"></span></p>
                                 
                                 <hr>
                                 
                                 <p><b>Comments</b></p>
                                 <div>
-                                    <p>Hello</p>
+                                    <p id="sdComments"></p>
                                 </div>
-                                <p>I don't have pets at home</p>
+                                <p id="sdPets"></p>
                                 
                                 <hr>
                                 
@@ -332,6 +320,25 @@
                                 </iframe>
                             </div>
 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="serviceAcceptPopUp">
+
+            <div class="modal fade" id="serviceAccept" aria-hidden="true" aria-labelledby="serviceAcceptLabel" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered vertical-align-center">
+                    <div class="modal-content">
+                        <!-- <div class="modal-body"> -->
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="serviceAcceptLabel">Service Accept</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                        <div class="modal-body serviceAcceptModal p-2">
+							<p>Accepted the service!</p>
+							<button type="button" data-bs-dismiss="modal" aria-label="Close" class="accept_button rounded-pill text-light text-decoration-none">Ok</button>
                         </div>
                     </div>
                 </div>
@@ -391,13 +398,166 @@
         </div>
     </div>
     
-    <!-- <script src="./spDash.js"></script> -->
-    <!-- <script>
-        $(function () {
-            $("#footer").load("../footer.html");
-        });
-    </script> -->
+    <script>
     
+    	$(document).ready(function() {
+    		
+    		<c:forEach var="sr" items="${service_requests }" varStatus="i">
+    			
+	    		var d = new Date("${sr.service_start_date}");
+	    		console.log(d);
+				
+				var t1 = d.getHours()+"."+d.getMinutes();
+				var a = parseFloat("${sr.service_hours}") ;  
+				var b = parseFloat("${sr.extra_hours}");
+				var totalTime = a+b ; 
+				
+				var dt1 = ((d.getHours() * 60) + d.getMinutes()) / 60;
+				var dt2 = (dt1 + totalTime) * 60;
+				
+				var h1 = Math.floor(dt2 / 60);
+				var m1 = dt2 % 60;
+				
+				if(m1==0){
+					var time2 = h1 + ":00	";	
+					$("#endTime${i.index}").html(time2);
+				}
+				else{
+					var time2 = h1 + ":" + m1;
+					$("#endTime${i.index}").html(time2);
+				}
+    			
+    		</c:forEach>
+    		
+    		
+    	})
+    
+    </script>
+    
+    <script>
+    
+    	function myFunction(id){
+    		console.log(id);
+    		$.ajax({
+				url : "service-details-data",
+				type : "POST",
+				data : id,
+				contentType : "application/json",
+				success : function(data) {
+						console.log(data);
+						
+						var d = new Date(data[0].service_start_date);
+						
+						var date1 = d.getDate() + "/" + d.getMonth() + "/" + d.getFullYear();
+						if(d.getMinutes() == 0){
+							var time1 = d.getHours() + ":00" ;
+						}
+						else{
+							var time1 = d.getHours() + ":" + d.getMinutes();	
+						}
+						var t1 = d.getHours()+"."+d.getMinutes();
+						var totalTime = data[0].service_hours + data[0].extra_hours;
+						
+						var dt1 = ((d.getHours() * 60) + d.getMinutes()) / 60;
+						var dt2 = (dt1 + totalTime) * 60;
+						
+						var h1 = Math.floor(dt2 / 60);
+						var m1 = dt2 % 60;
+						
+						if(m1==0){
+							var time2 = h1 + ":00	";		
+						}
+						else{
+							var time2 = h1 + ":" + m1;
+						}
+						
+						
+						$("#sdDate").html(date1 +" "+ time1 + "-" + time2); 
+						$("#sdDuration").html(data[0].service_hours + data[0].extra_hours);
+						$("#sdId").html(data[0].service_req_id);
+						$("#sdAmount").html(data[0].total_cost + ",00 $");
+						$("#sdComments").html(data[0].comments);
+						
+						if(data[0].has_pets == 0){
+							$("#sdPets").html("I don't have pets at home.");
+						}
+						else{
+							$("#sdPets").html("I have pets at home.");	
+						}
+						
+						var extraServices = " ";
+						
+						console.log(data[2].cabinet);
+						
+						if(data[2].cabinet == 1){
+							extraServices = extraServices + " Inside Cabinets, ";
+						}
+						if(data[2].windows == 1){
+							extraServices = extraServices + " Interior Windows, ";
+						}
+						if(data[2].laundry == 1){
+							extraServices = extraServices + " Inside Wash, ";
+						}
+						if(data[2].refrigerator == 1){
+							extraServices = extraServices + " Inside Fridge, ";
+						}
+						if(data[2].oven == 1){
+							extraServices = extraServices + " Inside Oven, ";
+						}
+						console.log(extraServices);
+						$("#sdExtra").html(extraServices);
+						
+						if(data[1].state != null){
+							$("#sdAddress").html(" "+data[1].address_line1 + " " + data[1].address_line2 + ", "+data[1].postal_code +" "+data[1].city+" "+data[1].state);
+						}
+						if(data[1].state == null){
+							$("#sdAddress").html(" "+data[1].address_line1 + " " + data[1].address_line2 + ", "+data[1].postal_code +" "+data[1].city);
+						}
+						if(data[1].mobile != null){
+							$("#sdPhone").html(" "+data[1].mobile);
+						}
+						if(data[1].email != null){
+							$("#sdEmail").html(" "+data[1].email);
+						}
+				},
+				error : function(xhr, textStatus, xml) {
+					console.log("error");
+					console.log(xhr);
+					console.log(textStatus);
+					console.log(xml);
+				}
+			})
+    		
+    	}
+    	
+    	function acceptFunction(id){
+    		console.log(id);
+    		$.ajax({
+				url : "service-accept",
+				type : "POST",
+				data : id,
+				contentType : "application/json",
+				success : function(data) {
+					
+					$("#serviceAccept").modal('show');
+					/* $("#req_refresh").load(" #req_refresh > *"); */
+					
+					location.reload();
+					
+				},
+				error : function(xhr, textStatus, xml) {
+					console.log("error");
+					console.log(xhr);
+					console.log(textStatus);
+					console.log(xml);
+				}
+			})
+    		
+    	}
+    
+    </script>
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>

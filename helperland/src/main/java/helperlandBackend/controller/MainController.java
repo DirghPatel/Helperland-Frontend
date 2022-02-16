@@ -1,11 +1,18 @@
 package helperlandBackend.controller;
 
 import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
@@ -15,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import helperlandBackend.models.ContactUs;
+import helperlandBackend.models.UserAddress;
 import helperlandBackend.models.UserModel;
 import helperlandBackend.service.ContactUsServiceImpl;
 import helperlandBackend.service.UserServiceImpl;
@@ -35,16 +43,36 @@ public class MainController {
 	
 	
 	@RequestMapping({"/home" , "/"})
-	public String home() {
-		System.out.println("a inside");
-		return "home";
+	public String home(Model model) {
+		Object loggedInUserDetailsObject = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if(loggedInUserDetailsObject instanceof UserDetails) {
+			System.out.println(loggedInUserDetailsObject);
+			
+			User loggedInUserDetails = (User)loggedInUserDetailsObject;
+			UserModel currentUser = userService.getUserByEmail(loggedInUserDetails.getUsername());
+			model.addAttribute("user" , currentUser);
+			return "home";
+		}
+		else {
+			return "home";
+		}
 	}
 	
 	
 	@RequestMapping(value = "/contact" , method = RequestMethod.GET)
-	public String contact() {
-		System.out.println("b inside");
-		return "contact";
+	public String contact(Model model) {
+		Object loggedInUserDetailsObject = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if(loggedInUserDetailsObject instanceof UserDetails) {
+			System.out.println(loggedInUserDetailsObject);
+			
+			User loggedInUserDetails = (User)loggedInUserDetailsObject;
+			UserModel currentUser = userService.getUserByEmail(loggedInUserDetails.getUsername());
+			model.addAttribute("user" , currentUser);
+			return "contact";
+		}
+		else {
+			return "contact";
+		}
 	}
 	
 	@RequestMapping(value  = "/contact" , method=RequestMethod.POST)
@@ -66,25 +94,71 @@ public class MainController {
 		}
 	}
 	@RequestMapping( value = "/about")
-	public String about() {
-		return "about";
+	public String about(Model model) {
+		Object loggedInUserDetailsObject = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if(loggedInUserDetailsObject instanceof UserDetails) {
+			System.out.println(loggedInUserDetailsObject);
+			
+			User loggedInUserDetails = (User)loggedInUserDetailsObject;
+			UserModel currentUser = userService.getUserByEmail(loggedInUserDetails.getUsername());
+			model.addAttribute("user" , currentUser);
+			return "about";
+		}
+		else {
+			return "about";
+		}
+		
+		
+		
 	}
 	@RequestMapping("/faqs")
-	public String faqs() {
-		return "faqs";
+	public String faqs(Model model) {
+		Object loggedInUserDetailsObject = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if(loggedInUserDetailsObject instanceof UserDetails) {
+			System.out.println(loggedInUserDetailsObject);
+			
+			User loggedInUserDetails = (User)loggedInUserDetailsObject;
+			UserModel currentUser = userService.getUserByEmail(loggedInUserDetails.getUsername());
+			model.addAttribute("user" , currentUser);
+			return "faqs";
+		}
+		else {
+			return "faqs";
+		}
 	}
 	@RequestMapping("/prices")
-	public String prices() {
-		return "prices";
+	public String prices(Model model) {
+		Object loggedInUserDetailsObject = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if(loggedInUserDetailsObject instanceof UserDetails) {
+			System.out.println(loggedInUserDetailsObject);
+			
+			User loggedInUserDetails = (User)loggedInUserDetailsObject;
+			UserModel currentUser = userService.getUserByEmail(loggedInUserDetails.getUsername());
+			model.addAttribute("user" , currentUser);
+			return "prices";
+		}
+		else {
+			return "prices";
+		}
 	}
 	
 	@RequestMapping("/become-a-pro")
-	public String becomeAPro() {
+	public String becomeAPro(Model model) {
 		return "becomeAPro";
 	}
 	
 	@RequestMapping("/service-booking")
-	public String serviceBooking() {
+	public String serviceBooking(Model model) {
+		
+		User loggedInUserDetails = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+		UserModel currentUser = userService.getUserByEmail(loggedInUserDetails.getUsername());
+		
+		
+		List<UserAddress> allAddresses = this.userService.getAllAddress(currentUser.getUser_id());
+		model.addAttribute("addresses",allAddresses);
+		model.addAttribute("user" , currentUser);
+		
 		return "serviceBooking";
 	}
 	@RequestMapping(value = "/user-register" , method = RequestMethod.GET)
@@ -93,7 +167,7 @@ public class MainController {
 	}
 
 	@RequestMapping(value = "/user-register" , method = RequestMethod.POST)
-	public String regUser(@Valid @ModelAttribute ("userreg") UserModel user , BindingResult br, Model model , HttpSession session) throws IOException {
+	public String regUser(@Valid @ModelAttribute ("userreg") UserModel user , BindingResult br, Model model , HttpSession session , HttpServletRequest request) throws IOException {
 		
         System.out.println(user.getFirst_name() + user.getPassword());
 		if(br.hasErrors()) {
@@ -113,8 +187,9 @@ public class MainController {
 		return "userRegistration";
 		}
 		else {
-			
-			if(this.userService.createUser(user) == 0) {
+			int k = this.userService.createUser(user);
+			if(k == 0) {
+				System.out.println("aaaaaaaaaaaaaaaaaaaa");
 				if(user.getUser_type_id() == 2) {
 					model.addAttribute("alreadyUser" , "You already have an account, Please Login!!");
 					model.addAttribute("displayAlreadyUser" , "style='display: block !important;'");
@@ -131,62 +206,41 @@ public class MainController {
 			}
 			else {
 				
-				this.userService.createUser(user);
-				
-				if(user.getUser_type_id() == 1) {
-					session.setAttribute("user" , user);
-					return "redirect:/customer/dash";
-				}
-				else if(user.getUser_type_id() == 2) {
-					session.setAttribute("user" , user);
-					return "redirect:/service-provider/dash";
-				}
-				else {
+//				this.userService.createUser(user);
+//				System.out.println("-------------------------");
+//				if(user.getUser_type_id() == 1) {
+//					session.setAttribute("user" , user);
+//					return "redirect:/customer/dash";
+//				}
+//				else if(user.getUser_type_id() == 2) {
+//					session.setAttribute("user" , user);
+//					return "redirect:/service-provider/dash";
+//				}
+//				else {
+//					return "home";
+//				}
+				try {
+					request.login(user.getEmail(), user.getPassword());
+					if(user.getUser_type_id() == 1) {
+						session.setAttribute("user" , user);
+						return "redirect:/customer/dash";
+					}
+					else if(user.getUser_type_id() == 2) {
+						session.setAttribute("user" , user);
+						return "redirect:/service-provider/dash";
+					}
+					else {
+						return "home";
+					}
+				} catch (ServletException e) {
+					e.printStackTrace();
 					return "home";
 				}
 			}
 		}
         
 	}
-	
-//	@RequestMapping(value = "/login" , method = RequestMethod.POST)
-//	public String loginUser(@ModelAttribute ("login") userRegister login,@RequestParam("password") String password ,Model model , HttpSession session) {
-//		
-////		  UserDetails userLogin = userService.loadUserByUsername(login.getEmail());
-//		  userRegister userLogin = userService.loginUser(login.getEmail());
-//		  
-//		  System.out.println(userLogin);
-//		  if(userLogin != null) {
-//
-//			   if(userLogin.getPassword().equals(login.getPassword())) {
-//				   session.setAttribute("username", userLogin);
-//				   if(userLogin.getUser_type_id() == 1) {
-//					   return "redirect:/customer/dash";
-//				   }
-//				   else if(userLogin.getUser_type_id() == 2) {
-//					   return "redirect:/service-provider/dash";
-//				   }
-//				   else if(userLogin.getUser_type_id() == 3){
-//					   return "redirect:/admin/service-requests";
-//				   }
-//				   else {
-//					   System.out.println("main else");
-//					   return "redirect:/user-register";
-//				   }
-//			   }
-//			   else {
-//				   model.addAttribute("errorMessage" , "invalid username or password");
-//				   model.addAttribute("displayLoginError" , "style='display: block !important;'");
-//				   return "userRegistration";
-//			   }
-//		  }
-//		  else {
-//			  model.addAttribute("notUser" , "Can't find account with this email. Please Create Your Account.");
-//			  model.addAttribute("displayNotUser" , "style='display: block !important;'");
-//			  return "userRegistration";
-//		  }
-//	}
-	
+
 	@RequestMapping(value = "/login")
 	public String login(Model model) {
 		System.out.println("inside login");
@@ -195,7 +249,10 @@ public class MainController {
 		return "userRegistration";
 	}
 	
-	
+	@RequestMapping(value = "/accessDenied")
+	public String accessDenied(Model model) {
+		return "403accessDenied";
+	}
 	
 	
 	

@@ -1,42 +1,27 @@
 package helperlandBackend.service;
 
+import java.util.List;
 import java.util.Optional;
 
+import helperlandBackend.models.ServiceRequestAddress;
+import helperlandBackend.models.UserAddress;
 import helperlandBackend.models.UserModel;
-
-//@Service
-//public class UserService  {
-//
-//	@Autowired
-//	private UserDao userDao;
-//	
-//	public int createUser(UserModel user) {
-//		
-//		UserModel alreadyUser = userDao.loginUser(user.getEmail());
-//		
-//		if(alreadyUser == null) {
-//			return this.userDao.saveUser(user);
-//		}
-//		else{
-//			return 0;
-//		}
-//	}
-//
-//	public UserModel loginUser(String email) {
-//		return userDao.loginUser(email);
-//	}
-//
-//}
-
 
 public interface UserService{
 	
 	public int createUser(UserModel user);
 	
-	public UserModel loginUser(String email);
+	public UserModel getUserByEmail(String email);
+	
+	public List<UserModel> getAllUser();
 	
 	public void updateUser(UserModel user);
 	
 	public Optional<UserModel> findUserByResetToken(String resetToken);
 	
+	public int saveUserAddress(UserAddress userAddress);
+	
+	public List<UserAddress> getAllAddress(int id);
+	
+	public UserAddress getAllAddressByAddressId(int id);
 }

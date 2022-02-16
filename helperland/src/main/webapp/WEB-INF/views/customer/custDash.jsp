@@ -5,26 +5,23 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page isELIgnored="false"%>
 
-
-
-
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
+	<c:set var="user" value="${user }" />
+	<c:set var="sr" value="${service_requests }" />
 	<link href='<c:url value="/resources/css/navbar-2.css" />' rel="stylesheet" />
 	<link href='<c:url value="/resources/css/custDash.css" />' rel="stylesheet" />
 	<link href='<c:url value="/resources/css/footer.css" />' rel="stylesheet" />
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
-    </script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
 <body>
-
     <div style="min-height: 100vh; padding-bottom: 170px;">
 
-        <nav class="navbar navbar-expand-lg w-100" id="navbar">
+        <nav class="navbar navbar-expand-lg w-100 sticky-top" id="navbar">
             <div class="container-fluid navbar_main">
                 <a class="navbar-brand py-0" href="/helperland/home">
                     <img src="<c:url value = "/resources/assets/nav-footer-assets/logo.png" />" alt="" height="54px" width="73px">
@@ -55,7 +52,7 @@
                                     <a class="nav-link" href="mysettings">My Settings</a>
                                 </div>
                                 <div class="nav-item nav_select1" id="logOut">
-                                    <a class="nav-link" href="#">Logout</a>
+                                    <a class="nav-link" href="/helperland/logout">Logout</a>
                                 </div>
                             </div>
                             <div class="navcol_third navcol position-relative">
@@ -108,7 +105,7 @@
                             </li>
                             <li><a class="dropdown-item px-0" type="button" href="dash">My Dashboard</a></li>
                             <li><a class="dropdown-item px-0" type="button" href="mysettings" >My Settings</a></li>
-                            <li><a class="dropdown-item px-0" type="button">Logout</a></li>
+                            <li><a class="dropdown-item px-0" type="button" href="/helperland/logout">Logout</a></li>
                         </ul>
                     </div>
                     <div>
@@ -290,6 +287,61 @@
                                     <a href="#cancelServiceRequest" data-bs-toggle="modal" role="button" class="cancel_button rounded-pill text-light text-decoration-none">Cancel</a>
                                 </td>
                             </tr>
+                            
+                            <c:forEach var="sr" items="${sr }">
+                            	
+                            	<tr>
+	                                <td scope="row">${sr.service_req_id }</td>
+	                                <td class="service_date cursorPointer" href="#serviceDetails" data-bs-toggle="modal" >
+	                                    <a class="d-flex text-decoration-none align-items-center">
+	                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16">
+	                                            <path fill-rule="evenodd" fill="#646464" d="M.365 16.9V1.715H3.32V.9h1.478v.815h2.463V.9h1.477v.815h2.463V.9h1.477v.815h2.955V16.9H.365zM14.156 5.165H1.843v9.365h12.313V5.165zM5.783 9.108H4.305V7.63h1.478v1.478zm0 3.542H4.305v-2.063h1.478v2.063zm2.955-3.542H7.261V7.63h1.477v1.478zm0 3.542H7.261v-2.063h1.477v2.063zm2.955-3.542h-1.477V7.63h1.477v1.478zm0 3.542h-1.477v-2.063h1.477v2.063z"/>
+	                                        </svg>
+	                                        <p class="mb-0 ms-1">${sr.service_start_date }</p>
+	                                    </a>
+	                                    <a class="d-flex text-decoration-none">
+	                                        <p class="m-0">${sr.service_start_date }</p>
+	                                    </a>
+	                                </td>
+	                                <td>
+	                                    <div class="d-flex">
+	                                        <div class="sp_icon me-2 rounded-circle d-flex align-items-center justify-content-center">
+	                                            <img src="<c:url value = "/resources/assets/custDash/cap.png" />" alt="" height="20" width="30">
+	                                        </div>
+	                                        <div class="d-flex flex-column">
+	                                            <p class="mb-0">Lyum Watson</p>
+	                                            <div class="d-flex align-items-center">
+	                                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
+	                                                    <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
+	                                                </svg>
+	                                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
+	                                                    <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
+	                                                </svg>
+	                                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
+	                                                    <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
+	                                                </svg>
+	                                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
+	                                                    <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
+	                                                </svg>
+	                                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
+	                                                    <path fill-rule="evenodd" fill="#d4d4d4" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
+	                                                </svg>
+	                                                <p class="mb-0">4</p>
+	                                            </div>
+	                                        </div>
+	                                    </div>
+	                                </td>
+	                                <td>
+	                                    <p class="m-0 text-center  table_payment fw-bold">$ ${sr.total_cost } ,00</p>
+	                                </td>
+	                                <td class="button_main text-center">
+	                                    <a href="#scheduleServiceRequest" data-bs-toggle="modal" role="button" class="reschedule_button rounded-pill text-light text-decoration-none">Reschedule</a>
+	                                    <a href="#cancelServiceRequest" data-bs-toggle="modal" role="button" class="cancel_button rounded-pill text-light text-decoration-none">Cancel</a>
+	                                </td>
+	                            </tr>
+                            
+                            </c:forEach> 
+                            
                         </tbody>
                     </table>
                 </div>

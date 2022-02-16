@@ -17,7 +17,7 @@ public class LoginUserService implements UserDetailsService{
 	private UserDao userDao;
 	
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		UserModel user = userDao.loginUser(username);
+		UserModel user = userDao.getUserByEmail(username);
 
 		UserBuilder builder = null;
 		if (user != null) {

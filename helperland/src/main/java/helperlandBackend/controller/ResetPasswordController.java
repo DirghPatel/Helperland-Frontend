@@ -39,7 +39,7 @@ public class ResetPasswordController {
 	@RequestMapping(value = "/forgot" , method=RequestMethod.POST)
 	public String processForgotPasswordForm(Model model, @RequestParam("email") String userEmail, HttpServletRequest request , RedirectAttributes redirectAttributes) {
 
-		UserModel user = userService.loginUser(userEmail);
+		UserModel user = userService.getUserByEmail(userEmail);
 
 		if (user != null) {
 			

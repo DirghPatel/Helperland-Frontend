@@ -18,7 +18,7 @@
     <div style="min-height: 100vh; padding-bottom: 80px;">
         <!-- <div id="navbar_load"></div> -->
 
-        <nav class="navbar navbar-expand-lg w-100" id="navbar">
+        <nav class="navbar navbar-expand-lg w-100 sticky-top" id="navbar">
             <div class="container-fluid navbar_main">
                 <a class="navbar-brand py-0" href="/helperland/home">
                     <img src="<c:url value = "/resources/assets/nav-footer-assets/logo.png" />" alt="" height="54px" width="73px">
@@ -66,6 +66,9 @@
                                 </div>
                             </div>
                             <div class="navcol_third navcol position-relative">
+                            	<div class="nav-item rounded-pill nav_select5">
+                                    <a class="nav-link" href="/helperland/service-booking" id="pricesServices">Book Now</a>
+                                </div>
                                 <div class="nav-item rounded-pill nav_select1">
                                     <a class="nav-link" href="/helperland/prices" id="pricesServices">Prices & services</a>
                                 </div>

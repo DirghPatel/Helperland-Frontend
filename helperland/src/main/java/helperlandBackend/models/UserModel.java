@@ -53,6 +53,7 @@ public class UserModel{
 	private Date created_date;
 	private Date modified_date;
 	private String reset_token;
+	private String postal_code;
 	
 	public Date getModified_date() {
 		return modified_date;
@@ -72,7 +73,6 @@ public class UserModel{
 
 	public UserModel() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	public int getUser_id() {
@@ -129,16 +129,6 @@ public class UserModel{
 	public void setWorks_with_pet(int works_with_pet) {
 		this.works_with_pet = works_with_pet;
 	}
-	
-	@Override
-	public String toString() {
-		return "user [user_id=" + user_id + ", user_type_id=" + user_type_id + ", first_name=" + first_name
-				+ ", last_name=" + last_name + ", email=" + email + ", mobile=" + mobile + ", password=" + password
-				+ ", is_registered_user=" + is_registered_user + ", works_with_pet=" + works_with_pet + ", modified_by="
-				+ modified_by + ", is_approved=" + is_approved + ", is_active=" + is_active + ", is_deleted="
-				+ is_deleted + ", is_online=" + is_online + "]";
-	}
-
 	public int getModified_by() {
 		return modified_by;
 	}
@@ -177,6 +167,24 @@ public class UserModel{
 	public void setReset_token(String reset_token) {
 		this.reset_token = reset_token;
 	}
+
+	public String getPostal_code() {
+		return postal_code;
+	}
+
+	public void setPostal_code(String postal_code) {
+		this.postal_code = postal_code;
+	}
 	
+	
+	@Override
+	public String toString() {
+		return "user [user_id=" + user_id + ", user_type_id=" + user_type_id + ", first_name=" + first_name
+				+ ", last_name=" + last_name + ", email=" + email + ", mobile=" + mobile + ", password=" + password
+				+ ", is_registered_user=" + is_registered_user + ", works_with_pet=" + works_with_pet + ", modified_by="
+				+ modified_by + ", is_approved=" + is_approved + ", is_active=" + is_active + ", is_deleted="
+				+ is_deleted + ", is_online=" + is_online + "]";
+	}
+
 	
 }

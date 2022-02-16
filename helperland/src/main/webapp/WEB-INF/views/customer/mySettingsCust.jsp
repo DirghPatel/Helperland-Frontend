@@ -17,7 +17,7 @@
 <body>
     <div style="min-height: 100vh; padding-bottom: 170px;">
         
-        <nav class="navbar navbar-expand-lg w-100" id="navbar">
+        <nav class="navbar navbar-expand-lg w-100 sticky-top" id="navbar">
             <div class="container-fluid navbar_main">
                 <a class="navbar-brand py-0" href="/helperland/home">
                     <img src="<c:url value = "/resources/assets/nav-footer-assets/logo.png" />" alt="" height="54px" width="73px">
@@ -48,7 +48,7 @@
                                     <a class="nav-link" href="mysettings">My Settings</a>
                                 </div>
                                 <div class="nav-item nav_select1" id="logOut">
-                                    <a class="nav-link" href="#">Logout</a>
+                                    <a class="nav-link" href="/helperland/logout">Logout</a>
                                 </div>
                             </div>
                             <div class="navcol_third navcol position-relative">

@@ -29,14 +29,12 @@ public class SuccessHandler implements AuthenticationSuccessHandler {
 			Authentication authentication) throws IOException, ServletException {
 		
 		HttpSession session = request.getSession();
+		User loggedInUserDetails = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
-		
-		org.springframework.security.core.userdetails.User loggedInUserDetails = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		
-		UserModel loggedInUser = userService.loginUser(loggedInUserDetails.getUsername());
+		UserModel loggedInUser = userService.getUserByEmail(loggedInUserDetails.getUsername());
 		session.setAttribute("user", loggedInUser);
 		
-		System.out.println(loggedInUser);
+		System.out.println("----------"+loggedInUser);
 		
 		Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
         if (roles.contains("ROLE_CUSTOMER")) {

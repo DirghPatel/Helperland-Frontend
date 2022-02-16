@@ -70,6 +70,18 @@
 				<value>
 					helperlandBackend.models.ContactUs
 				</value>
+				<value>
+					helperlandBackend.models.UserAddress
+				</value>
+				<value>
+					helperlandBackend.models.ServiceRequest
+				</value>
+				<value>
+					helperlandBackend.models.ServiceRequestAddress
+				</value>
+				<value>
+					helperlandBackend.models.ServiceRequestExtra
+				</value>
 			</list>
 		</property>
 	</bean>
@@ -93,6 +105,9 @@
 	<bean id="successHandler"
 		class="helperlandBackend.controller.SuccessHandler" />
 
+	<bean name="customAccessDeniedHandler" 
+  		class="helperlandBackend.controller.CustomAccessDeniedHandler" />
+  		
 	<security:http auto-config="true" use-expressions="true">
 
 
@@ -104,14 +119,19 @@
 			login-processing-url="/login"
 			authentication-success-handler-ref="successHandler"
 			username-parameter="email" password-parameter="password"
-			authentication-failure-url="/login?=error"/>
+			authentication-failure-url="/login?=error"
+		/>
+			
+	    <security:access-denied-handler ref="customAccessDeniedHandler"/>
 
 		<!-- for logout functionality -->
 		<security:logout logout-url="/logout"
-			invalidate-session="true" logout-success-url="/login?logout=true" />
+			logout-success-url="/home"
+			invalidate-session="true"  
+			/>
 
-		<security:intercept-url pattern="/*"
-			access="permitAll" />
+		<!-- <security:intercept-url pattern="/*"
+			access="permitAll" /> -->
 
 		<security:intercept-url pattern="/customer/*"
 			access="hasRole('ROLE_CUSTOMER') " />
@@ -122,18 +142,24 @@
 		<security:intercept-url pattern="/admin/*"
 			access="hasRole('ROLE_ADMIN') " />
 
-		<security:intercept-url pattern="/"
+		<security:intercept-url pattern="/ , /home , /faqs , /prices , /contact , /about , /become-a-pro , /user-register , /reset , /login"
 			access="permitAll" />
 
-		<security:intercept-url pattern="/login"
-			access="permitAll" />
+	<!-- 	<security:intercept-url pattern="/login"
+			access="permitAll" /> -->
 
 		<security:intercept-url pattern="/resources/**"
 			access="permitAll" />
+			
+		<security:intercept-url
+			pattern="/service-booking" access="hasRole('ROLE_CUSTOMER') " />
 
 		<security:csrf disabled="true" />
 
 		<!-- <security:access-denied-handler ref="accessDeniedHandler"/> -->
+		
+		<security:session-management invalid-session-url = "/">
+		</security:session-management>
 
 	</security:http>
 

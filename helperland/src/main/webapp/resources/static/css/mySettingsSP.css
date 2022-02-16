@@ -37,6 +37,9 @@ tbody{
     border: none !important;
     margin: 0;
 }
+.nav-item:hover{
+	border: none !important;
+}
 .nav-tabs .nav-link{
     border: none !important;
     border-bottom: 4px solid #e1e1e1 !important;
@@ -46,6 +49,7 @@ tbody{
 }
 .nav-tabs .active{
     border-bottom-color: #1d7a8c !important;
+    color: #1d7a8c !important;
 }
 
 .account-status{

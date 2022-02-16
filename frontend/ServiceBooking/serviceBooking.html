@@ -77,7 +77,7 @@
                     <div class="dash_contents w-100">
                         <ul class="nav nav-fill nav-tabs nav-pills justify-content-center mb-3" id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link active" id="setupServiceTabController" data-bs-toggle="tab" data-bs-target="#setupServiceTab" type="button" aria-controls="setupService" aria-selected="true">
+                                <a class="nav-link active activeBg" id="setupServiceTabController" data-bs-toggle="tab" data-bs-target="#setupServiceTab" type="button" aria-controls="setupService" aria-selected="true">
                                     <!-- <img src="./assets/setup-service.png" alt="" class="nav_image"> -->
                                     <span class="title_wrapper">
                                         <span class="setupServiceTabControllerBG bg_wrapper"></span>
@@ -602,6 +602,56 @@
     </div>
 
     <script>
+
+        $("#setupServiceTabController").on("click" , function(){
+            if($("#setupServiceTabController").hasClass("active")){
+                $("#setupServiceTabController").addClass("activeBg");
+                
+                $("#makePaymentTabController").removeClass("activeBg")
+                $("#schedulePlanTabController").removeClass("activeBg");
+                $("#yourDetailsTabController").removeClass("activeBg");
+
+                $("#schedulePlanTabController").prop('disabled' , true);
+                $("#yourDetailsTabController").prop('disabled' , true);
+                $("#makePaymentTabController").prop('disabled' , true);
+            }
+        })
+
+        $("#schedulePlanTabController").on("click" , function(){
+            if($("#schedulePlanTabController").hasClass("active")){
+                $("#schedulePlanTabController").addClass("activeBg");
+                $("#setupServiceTabController").addClass("activeBg");
+
+                $("#yourDetailsTabController").removeClass("activeBg");
+                $("#makePaymentTabController").removeClass("activeBg")
+
+                $("#yourDetailsTabController").prop('disabled' , true);
+                $("#makePaymentTabController").prop('disabled' , true);
+            }
+        })
+
+        $("#yourDetailsTabController").on("click" , function(){
+            if($("#yourDetailsTabController").hasClass("active")){
+                $("#yourDetailsTabController").addClass("activeBg")
+                $("#setupServiceTabController").addClass("activeBg");
+                $("#schedulePlanTabController").addClass("activeBg");
+
+                $("#makePaymentTabController").removeClass("activeBg")
+
+                $("#makePaymentTabController").prop('disabled' , true);
+            }
+        })
+
+        $("#makePaymentTabController").on("click" , function(){
+            if($("#makePaymentTabController").hasClass("active")){
+
+                $("#makePaymentTabController").addClass("activeBg")
+                $("#setupServiceTabController").addClass("activeBg");
+                $("#schedulePlanTabController").addClass("activeBg");
+                $("#yourDetailsTabController").addClass("activeBg");
+
+            }
+        })
 
         $('#cabinet').change(function() {
             if(this.checked) {

@@ -62,6 +62,7 @@ public class ServiceRequest {
 	private int has_issue;
 	private int payment_done;
 	private String record_version;
+	private String cancel_comment;
 	
 	@Transient
 	private int refrigerator;
@@ -282,6 +283,13 @@ public class ServiceRequest {
 		this.windows = windows;
 	}
 	
+	
+	public String getCancel_comment() {
+		return cancel_comment;
+	}
+	public void setCancel_comment(String cancel_comment) {
+		this.cancel_comment = cancel_comment;
+	}
 	@Override
 	public String toString() {
 		return "ServiceRequest [service_req_id=" + service_req_id + ", user_id=" + user_id + ", service_id="
@@ -303,7 +311,7 @@ public class ServiceRequest {
 			float discount, float total_cost, String comments, String payment_transaction_ref_no, float payment_due,
 			int job_status, int service_provider_id, Date sp_accepted_date, int has_pets, int status, Date created_date,
 			Date modified_date, int modified_by, float refunded_amount, float distance, int has_issue, int payment_done,
-			String record_version, int refrigerator, int oven, int laundry, int cabinet, int windows, int address_id) {
+			String record_version, int refrigerator, int oven, int laundry, int cabinet, int windows, int address_id, String cancel_comment) {
 		super();
 		this.service_req_id = service_req_id;
 		this.user_id = user_id;
@@ -339,6 +347,7 @@ public class ServiceRequest {
 		this.cabinet = cabinet;
 		this.windows = windows;
 		this.address_id = address_id;
+		this.cancel_comment = cancel_comment;
 	}
 	public ServiceRequest() {
 		super();

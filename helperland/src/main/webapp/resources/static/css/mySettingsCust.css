@@ -60,6 +60,9 @@ tbody{
 .nav-tabs .active{
     border-bottom-color: #1d7a8c !important;
 }
+.reschedule_button{
+	width: fit-content !important;
+}
 @media (max-width: 768px){
     #myDetailsTab .row>*{
         width: 100% !important;

@@ -3,6 +3,7 @@ package helperlandBackend.dao;
 import java.util.List;
 import java.util.Optional;
 
+import helperlandBackend.models.FavouriteBlockedModel;
 import helperlandBackend.models.ServiceRequestAddress;
 import helperlandBackend.models.UserAddress;
 import helperlandBackend.models.UserModel;
@@ -15,6 +16,8 @@ public interface UserDao{
 	
 	public UserModel getUserByEmail(String email);
 	
+	public UserModel getUserByUserId(int user_id);
+	
 	public List<UserModel> getAllUser();
 	
 	Optional<UserModel> findByResetToken(String resetToken);
@@ -26,6 +29,18 @@ public interface UserDao{
 	public List<UserAddress> getAllAddress(int id);
 	
 	public UserAddress getAllAddressByAddressId(int id);
+	
+	public int addFavBlock(FavouriteBlockedModel favBlockModel);
+	
+	public List<FavouriteBlockedModel> getFavBlockByUserId(int user_id); 
+	
+	public FavouriteBlockedModel getFavBlockByUserIdAndTargetUserId(int user_id , int target_user_id); 
+	
+	public FavouriteBlockedModel getFavBlockById(int id); 
+	
+	public void updateFavBlock(FavouriteBlockedModel favBlock);
+	
+	public void updateUserAddress(UserAddress userAddress);
 
 }
 

@@ -6,6 +6,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
+	<c:set var="user" value="${user }"/>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
 	<link href='<c:url value="/resources/css/navbar-2.css" />' rel="stylesheet" />
 	<link href='<c:url value="/resources/css/spDash.css" />' rel="stylesheet" />
@@ -15,6 +16,7 @@
     </script>
 </head>
 <body>
+
     <div style="min-height: 100vh; padding-bottom: 80px;">
         <!-- <div id="navbar_load"></div> -->
 
@@ -62,7 +64,7 @@
                                     <a class="nav-link" href="mysettings">My Settings</a>
                                 </div>
                                 <div class="nav-item nav_select1">
-                                    <a class="nav-link" href="#">Logout</a>
+                                    <a class="nav-link" href="/helperland/logout">Logout</a>
                                 </div>
                             </div>
                             <div class="navcol_third navcol position-relative">
@@ -115,7 +117,7 @@
                             </li>
                             <li><a class="dropdown-item px-1" type="button" href="dash">My Dashboard</a></li>
                             <li><a class="dropdown-item px-1" type="button" href="mysettings" >My Settings</a></li>
-                            <li><a class="dropdown-item px-1" type="button">Logout</a></li>
+                            <li><a class="dropdown-item px-1" type="button" href="/helperland/logout">Logout</a></li>
                         </ul>
                     </div>
                     <div>
@@ -202,37 +204,37 @@
                     <!-- ------- my details ---------  -->
                     <div class="tab-pane fade show active" id="myDetailsTab" role="tabpanel" aria-labelledby="myDetails">
                         <h3 class="account-status">Account Status: 
-                            <span class="fw-normal">Active</span>
-                            <img class="avatar rounded-circle" src="<c:url value = "/resources/assets/spDash/avatar-female.png" />" alt="" height="85">
+                			<span class="fw-normal">Active</span>        
+                            <img class="avatar rounded-circle" src="<c:url value = "/resources/assets/spDash/${user.user_profile_picture }.png" />" alt="" height="85">
                         </h3>
                         <label for="" class="fw-bold label-main">Basic Details</label>
                         <hr>
-                        <form>
+                        <form method="post" action="update-mydetails">
                             <div class="row">
                                 <div class="col-md-4 mb-4">
                                     <div class="form-group d-flex flex-column">
                                         <label for="firstname">First Name</label>
-                                        <input type="text" name="firstname" value="${user.first_name }" class="minheight46 borderlight paddinginside form-control">
+                                        <input type="text" name="first_name" value="${user.first_name }" class="minheight46 borderlight paddinginside form-control">
                                     </div>
                                 </div>
                                 <div class="col-md-4 mb-4">
                                     <div class="form-group d-flex flex-column">
                                         <label for="firstname">Last Name</label>
-                                        <input type="text" name="firstname" value="${user.last_name }" class="minheight46 borderlight paddinginside form-control">
+                                        <input type="text" name="last_name" value="${user.last_name }" class="minheight46 borderlight paddinginside form-control">
                                     </div>
                                 </div>
                                 <div class="col-md-4 mb-4">
                                     <div class="form-group d-flex flex-column">
                                         <label for="firstname">Email Address</label>
-                                        <input type="email" name="address" value="${user.email }" disabled class="minheight46 borderlight paddinginside form-control">
+                                        <input type="email" name="email" value="${user.email }" disabled class="minheight46 borderlight paddinginside form-control">
                                     </div>
                                 </div>
                                 <div class="col-md-4 mb-4">
                                     <div class="form-group d-flex flex-column">
                                         <label for="firstname">Mobile Number</label>
                                         <div class="d-flex">
-                                            <input type="text" value="+49" disabled style="max-width: 52px;" class="minheight46 borderlight paddinginside form-control">
-                                            <input type="text" name="mobilenumber" value="${user.mobile }" class="minheight46 borderlight paddinginside form-control">
+                                            <input type="text" value="+91" disabled style="max-width: 52px;" class="minheight46 borderlight paddinginside form-control">
+                                            <input type="text" name="mobile" value="${user.mobile }" class="minheight46 borderlight paddinginside form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -240,62 +242,63 @@
                                     <div class="form-group">
                                         <div class="d-flex flex-column">
                                             <label for="birthdate">Date Of Birth</label>
-                                            <div class="d-flex justify-content-between">
-                                                <div class="d-inline-block w-100">
-                                                    <select name="birthdate" id="" class="minheight46 borderlight paddinginside w-100">
-                                                        <option value="" >Day</option>
-                                                        <option value="01">01</option>
-                                                        <option value="02">02</option>
-                                                        <option value="03">03</option>
-                                                        <option value="04">04</option>
-                                                        <option value="05">05</option>
-                                                        <option value="06">06</option>
-                                                        <option value="07">07</option>
-                                                        <option value="08">08</option>
-                                                        <option value="09">09</option>
-                                                        <option value="10">10</option>
-                                                        <option value="11">11</option>
-                                                        <option value="12">12</option>
-                                                        <option value="13">13</option>
-                                                        <option value="14">14</option>
-                                                        <option value="15">15</option>
-                                                        <option value="16">16</option>
-                                                        <option value="17">17</option>
-                                                        <option value="18">18</option>
-                                                        <option value="19">19</option>
-                                                        <option value="20">20</option>
-                                                        <option value="21">21</option>
-                                                        <option value="22">22</option>
-                                                        <option value="23">23</option>
-                                                        <option value="24">24</option>
-                                                        <option value="25">25</option>
-                                                        <option value="26">26</option>
-                                                        <option value="27">27</option>
-                                                        <option value="28">28</option>
-                                                        <option value="29">29</option>
-                                                        <option value="30">30</option>
-                                                        <option value="31">31</option>
-                                                    </select>
+                                            <div class="d-flex justify-content-between w-100">
+                                                <div class="d-inline-block w-75">
+                                                    <select name="birthdate" id="birthdate" required class="minheight46 borderlight w-100">
+	                                                    <option value="" >Day</option>
+	                                                    <option value="1">01</option>
+	                                                    <option value="2">02</option>
+	                                                    <option value="3">03</option>
+	                                                    <option value="4">04</option>
+	                                                    <option value="5">05</option>
+	                                                    <option value="6">06</option>
+	                                                    <option value="7">07</option>
+	                                                    <option value="8">08</option>
+	                                                    <option value="9">09</option>
+	                                                    <option value="10">10</option>
+	                                                    <option value="11">11</option>
+	                                                    <option value="12">12</option>
+	                                                    <option value="13">13</option>
+	                                                    <option value="14">14</option>
+	                                                    <option value="15">15</option>
+	                                                    <option value="16">16</option>
+	                                                    <option value="17">17</option>
+	                                                    <option value="18">18</option>
+	                                                    <option value="19">19</option>
+	                                                    <option value="20">20</option>
+	                                                    <option value="21">21</option>
+	                                                    <option value="22">22</option>
+	                                                    <option value="23">23</option>
+	                                                    <option value="24">24</option>
+	                                                    <option value="25">25</option>
+	                                                    <option value="26">26</option>
+	                                                    <option value="27">27</option>
+	                                                    <option value="28">28</option>
+	                                                    <option value="29">29</option>
+	                                                    <option value="30">30</option>
+	                                                    <option value="31">31</option>
+	
+	                                                </select>
                                                 </div>
                                                 <div class="d-inline-block w-100">
-                                                    <select name="birthmonth" id="" class="minheight46 borderlight paddinginside w-100" >
-                                                        <option value="" >Month</option>
-                                                        <option value="january">January</option>
-                                                        <option value="february">February</option>
-                                                        <option value="march">March</option>
-                                                        <option value="april">April</option>
-                                                        <option value="may">May</option>
-                                                        <option value="june">June</option>
-                                                        <option value="july">July</option>
-                                                        <option value="august">August</option>
-                                                        <option value="september">September</option>
-                                                        <option value="october">October</option>
-                                                        <option value="november">November</option>
-                                                        <option value="december">December</option>
-                                                    </select>
+                                                    <select name="birthmonth" id="birthmonth" required class="minheight46 borderlight w-100" >
+	                                                    <option value="" >Month</option>
+	                                                    <option value="1">January</option>
+	                                                    <option value="2">February</option>
+	                                                    <option value="3">March</option>
+	                                                    <option value="4">April</option>
+	                                                    <option value="5">May</option>
+	                                                    <option value="6">June</option>
+	                                                    <option value="7">July</option>
+	                                                    <option value="8">August</option>
+	                                                    <option value="9">September</option>
+	                                                    <option value="10">October</option>
+	                                                    <option value="11">November</option>
+	                                                    <option value="12">December</option>
+	                                                </select>
                                                 </div>
-                                                <div class="d-inline-block w-100">
-                                                    <select name="birthyear" id="" class="minheight46 borderlight paddinginside w-100">
+                                                <div class="d-inline-block w-75">
+                                                    <select name="birthyear" id="birthyear" required class="minheight46 borderlight w-100">
                                                         <option value="" >Year</option>
                                                         <option value="2000">2000</option>
                                                         <option value="1999">1999</option>
@@ -391,6 +394,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <input type="hidden" name="date_of_birth" id="date_of_birth" value="${user.date_of_birth }"/>
                                 <div class="col-md-4 mb-4">
                                     <div class="form-group">
                                         <div class="d-flex flex-column">
@@ -409,17 +413,17 @@
                                     <label for="" class="control-label ">
                                         Gender
                                     </label>
-                                    <div>
-                                        <div class="radio d-inline mx-2 ms-0">
-                                            <input type="radio" value="male" name="gender" checked>
+                                    <div id="genderRadios">
+                                        <div class="radio d-inline mx-2 ms-0 aaa">
+                                            <input type="radio" <c:if test="${user.gender == 0 }">checked</c:if> value="0" name="gender">
                                             <label for="male">Male</label>
                                         </div>
-                                        <div class="radio d-inline mx-2">
-                                            <input type="radio" value="female" name="gender">
+                                        <div class="radio d-inline mx-2 aaa">
+                                            <input type="radio" <c:if test="${user.gender == 1 }">checked</c:if> value="1" name="gender">
                                             <label for="female">Female</label>
                                         </div>
-                                        <div class="radio d-inline mx-2">
-                                            <input type="radio" value="rathernottosay" name="gender">
+                                        <div class="radio d-inline mx-2 aaa">
+                                            <input type="radio" <c:if test="${user.gender == 2 }">checked</c:if> value="2" name="gender">
                                             <label for="rathernottosay">Rather Not To Say</label>
                                         </div>
                                     </div>
@@ -427,32 +431,32 @@
                                 <div class="col-md-12 my-3 ">
                                     <label for="" class="mb-2">Select Avatar</label>
                                     <div class="btn-group d-table-row  avatarGroup" role="group" aria-label="Basic radio toggle button group">
-                                        <input type="radio" class="btn-check" value="car" name="avatarRadio" id="btnradio1" autocomplete="off">
+                                        <input type="radio" <c:if test="${user.user_profile_picture == 'avatar-car' }">checked</c:if> class="btn-check" value="car" name="user_profile_picture" id="btnradio1" autocomplete="off" >
                                         <label class="btn btn-outline-primary itemAvatar rounded-circle mt-2" for="btnradio1">
                                             <img class="avatar" src="<c:url value = "/resources/assets/spDash/avatar-car.png" />" alt="" height="85">
                                         </label>
                                     
-                                        <input type="radio" class="btn-check" value="female" name="avatarRadio" id="btnradio2" autocomplete="off">
+                                        <input type="radio" <c:if test="${user.user_profile_picture == 'avatar-female' }">checked</c:if> class="btn-check" value="avatar-female" name="user_profile_picture" id="btnradio2" autocomplete="off">
                                         <label class="btn btn-outline-primary itemAvatar rounded-circle mt-2" for="btnradio2">
                                             <img class="avatar" src="<c:url value = "/resources/assets/spDash/avatar-female.png" />" alt="" height="85">
                                         </label>
                                     
-                                        <input type="radio" class="btn-check" value="hat" name="avatarRadio" id="btnradio3" autocomplete="off">
+                                        <input type="radio" <c:if test="${user.user_profile_picture == 'avatar-hat' }">checked</c:if> class="btn-check" value="avatar-hat" name="user_profile_picture" id="btnradio3" autocomplete="off">
                                         <label class="btn btn-outline-primary itemAvatar rounded-circle mt-2" for="btnradio3">
                                             <img class="avatar " src="<c:url value = "/resources/assets/spDash/avatar-hat.png" />" alt="" height="85">
                                         </label>
 
-                                        <input type="radio" class="btn-check" value="iron" name="avatarRadio" id="btnradio4" autocomplete="off">
+                                        <input type="radio" <c:if test="${user.user_profile_picture == 'avatar-iron' }">checked</c:if> class="btn-check" value="avatar-iron" name="user_profile_picture" id="btnradio4" autocomplete="off">
                                         <label class="btn btn-outline-primary itemAvatar rounded-circle mt-2" for="btnradio4">
                                             <img class="avatar" src="<c:url value = "/resources/assets/spDash/avatar-iron.png" />" alt="" height="85">
                                         </label>
 
-                                        <input type="radio" class="btn-check" value="male" name="avatarRadio" id="btnradio5" autocomplete="off">
+                                        <input type="radio" <c:if test="${user.user_profile_picture == 'avatar-male' }">checked</c:if> class="btn-check" value="avatar-male" name="user_profile_picture" id="btnradio5" autocomplete="off">
                                         <label class="btn btn-outline-primary itemAvatar rounded-circle mt-2" for="btnradio5">
                                             <img class="avatar" src="<c:url value = "/resources/assets/spDash/avatar-male.png" />" alt="" height="85">
                                         </label>
 
-                                        <input type="radio" class="btn-check" value="ship" name="avatarRadio" id="btnradio6" autocomplete="off">
+                                        <input type="radio" <c:if test="${user.user_profile_picture == 'avatar-ship' }">checked</c:if> class="btn-check" value="avatar-ship" name="user_profile_picture" id="btnradio6" autocomplete="off">
                                         <label class="btn btn-outline-primary itemAvatar rounded-circle mt-2" for="btnradio6">
                                             <img class="avatar" src=<c:url value = "/resources/assets/spDash/avatar-ship.png" /> alt="" height="85">
                                         </label>
@@ -463,44 +467,40 @@
                                 <div class="col-md-4 mb-4">
                                     <div class="form-group d-flex flex-column">
                                         <label for="streetname">Street Name</label>
-                                        <input type="text" value="test street" placeholder="Street Name" name="streetname" class="borderlight minheight46 paddinginside w-100">
+                                        <input type="text" value="${address.address_line1 }" placeholder="Street Name" name="address_line1" class="borderlight minheight46 paddinginside w-100">
                                     </div>
                                 </div>
                                 <div class="col-md-4 mb-4">
                                     <div class="form-group d-flex flex-column">
                                         <label for="housenumber">House number</label>
-                                        <input type="text" value="test street" placeholder="House Number" name="housenumber" class="borderlight minheight46 paddinginside w-100">
+                                        <input type="text" value="${address.address_line2 }" placeholder="House Number" name="address_line2" class="borderlight minheight46 paddinginside w-100">
                                     </div>
                                 </div>
                                 <div class="col-md-4 mb-4">
                                     <div class="form-group d-flex flex-column">
                                         <label for="postalcode">Postal Code</label>
-                                        <input type="text" value="test street" placeholder="Postal Code" name="postalcode" class="borderlight minheight46 paddinginside w-100">
+                                        <input type="text" value="${address.postal_code }" placeholder="Postal Code" name="postal_code" class="borderlight minheight46 paddinginside w-100">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group d-flex flex-column">
                                         <label for="city">City</label>
-                                        <div class="d-inline-block">
-                                            <select name="city" id="" class="minheight46 borderlight paddinginside w-100" >
-                                                <option value="troisdorf" >Troisdorf</option>
-                                            </select>
-                                        </div>
+                                         <input type="text" value="${address.city }" placeholder="City" name="city" class="borderlight minheight46 paddinginside w-100">
                                     </div>
                                 </div>
-                            </div>
-                            <input type="hidden" name="modified_date" id="modified_date" value="">
-                            <button type="submit" class="btn save_button text-light rounded-pill m-3 ms-0">
+                            </div>  
+                            <button type="submit" class="btn save_button text-light rounded-pill m-3 ms-0" id="myDetailsSaveBtn">
                                 Save
                             </button>
                         </form>
                     </div>
                     <!-- ----------- change password ----------- -->
                     <div class="tab-pane fade" role="tabpanel" id="changePasswordTab" aria-labelledby="changePassword">
-                        <form action="">
+                        <form action="/helperland/change-password" method="POST" id="passwordChangeForm">
                             <div class="form-group mb-2 col-md-4">
                                 <label for="oldPassword">Old Password</label>
-                                <input type="password" name="oldPassword" placeholder="Current Password" class="form-control minheight46"  required>
+                                <input type="password" name="oldPassword" id="oldPassword" placeholder="Current Password" class="form-control minheight46"  required>
+                            	<small class="text-danger" id="wrongPassword"></small>
                             </div>
                             <div class="form-group mb-2 col-md-4">
                                 <label for="newPassword">New Password</label>
@@ -509,67 +509,12 @@
                             <div class="form-group mb-2 col-md-4">
                                 <label for="confirmPassword">Confirm Password</label>
                                 <input type="password" name="confirmPassword" id="confirmpassword" class="form-control minheight46 " placeholder="New Password" maxlength="14" required>
+                            	<small class="text-danger" id="differentPassword"></small>
                             </div>
-                            <input type="hidden" name="modified_date" id="modified_date2" value="">
-                            <button type="submit" class="btn save_button px-4 mt-3 text-light rounded-pill">
+                            <button type="submit" class="btn save_button px-4 mt-3 text-light rounded-pill" id="changePasswordBtn" disabled>
                                 Save
                             </button>
                         </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        
-        
-
-
-        <div class="serviceDetailsPopUp">
-
-            <div class="modal fade" id="serviceDetails" aria-hidden="true" aria-labelledby="serviceDetailsLabel" tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered vertical-align-center">
-                    <div class="modal-content">
-                        <!-- <div class="modal-body"> -->
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="serviceDetailsLabel">Service Details</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                        <div class="modal-body d-flex serviceDetailsModal p-2">
-                            <div class="serviceModalLeft">
-                                <h4>22/12/2021 09:00 -14:30</h4>
-                                <p><b>Duration:</b>5.5 Hrs</p>
-
-                                <hr>
-
-                                <p><b>Service Id:</b>8502</p>
-                                <p><b>Extras:</b>Inside cabinets, Inside fridge, Inside oven, Laundry wash & dry, Interior windows</p>
-                                <p><b>Net Amount:</b> <span class="table_payment fw-bolder">99,00 €</span> </p>
-                                
-                                <hr>
-                                
-                                <p><b>Service Address:</b>Test 65, 53225 Bonn</p>
-                                <p><b>Billing Address:</b>Same as cleaning Address</p>
-                                <p><b>Phone:</b>+49 9988556644</p>
-                                <p><b>Email:</b>cust001@yopmail.com</p>
-                                
-                                <hr>
-                                
-                                <p><b>Comments</b></p>
-                                <div>
-                                    <p>Hello</p>
-                                </div>
-                                <p>I don't have pets at home</p>
-                                
-                                <hr>
-                                
-                            </div>
-                            <div class="serviceModalRight">
-                                <iframe width="350px" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.6979157244114!2d72.49824711445191!3d23.034861321650208!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e8352e403437b%3A0xdc9d4dae36889fb9!2sTatvaSoft!5e0!3m2!1sen!2sin!4v1640187081460!5m2!1sen!2sin">
-                                </iframe>
-                            </div>
-
-                        </div>
                     </div>
                 </div>
             </div>
@@ -628,32 +573,111 @@
         </div>
     </div>
     
-    <script src="./spDash.js"></script>
+    
+    <script>
+    	
+	    $(document).ready(function(){
+	    
+	    	<c:if test="${user.date_of_birth != null}">
+		    	var dt = new Date(`${user.date_of_birth}`);
+		    	console.log(dt);
+		    	var dtDate = dt.getDate();
+		    	var dtMonth = dt.getMonth() + 1;
+		    	var dtYear = dt.getFullYear();
+		    	$("#date_of_birth").val(dt);
+		    	
+		    	$("#birthdate option[value = '" + dtDate + "']").attr('selected' , true);
+		    	$("#birthmonth option[value = '" + dtMonth + "']").attr('selected' , true);
+		    	$("#birthyear option[value = '" + dtYear + "']").attr('selected' , true);
+		    	
+		    	$("#birthdate").on('change' , function(){
+					dt.setDate($("#birthdate").val());
+					$("#date_of_birth").val(dt);
+				})
+				$("#birthmonth").on('change' , function(){
+					dt.setMonth($("#birthmonth").val() - 1);
+					$("#date_of_birth").val(dt);
+				})
+				$("#birthyear").on('change' , function(){
+					dt.setYear($("#birthyear").val());
+					$("#date_of_birth").val(dt);
+				})
+	    	</c:if>
+	    	<c:if test="${user.date_of_birth == null}">
+	    		var date1;
+	    		var date2;
+	    		var date3;
+		    	$("#birthdate").on('change' , function(){
+					date1 = $("#birthdate").val();
+				})
+				$("#birthmonth").on('change' , function(){
+					date2 = $("#birthmonth").val();
+				})
+				$("#birthyear").on('change' , function(){
+					date3 = $("#birthyear").val();
+				})
+				
+				$("#myDetailsSaveBtn").on('click' , function(){
+					var dt = new Date();
+			    	dt.setDate(date1);
+			    	dt.setMonth(date2 - 1);
+			    	dt.setYear(date3);
+			    	$("#date_of_birth").val(dt);
+				})
+				
+	    	</c:if>
+	    	
+		    	/* $("input:radio[name=gender][value='"+${user.gender}+"']").attr('checked',true); */
+		    	
+		    	
+	    })
+
+    
+    </script>
     
     <script>
 
 	    $('#password, #confirmpassword').on('keyup', function () {
 	        if ($('#password').val() == $('#confirmpassword').val()) {
 	            $('#confirmPasswordMessage').html('Looks Good!').css('color', 'green');
-	            $('#registerButton').removeAttr('disabled');
+	            $('#changePasswordBtn').removeAttr('disabled');
 	        } 
 	        else {
 	            $('#confirmPasswordMessage').html('Enter same password again').css('color', 'red');
 	        }
 	        if ($('#password').val() != $('#confirmpassword').val()) {
-	            $('#registerButton').attr('disabled' , true);
+	            $('#changePasswordBtn').attr('disabled' , true);
 	        }
 	        if($('#password').val().length == 0){
-	        	$('#registerButton').attr('disabled' , true);	
+	        	$('#changePasswordBtn').attr('disabled' , true);	
 	        }
 	    });
-        
-        
-        
-        var dt = new Date();
-		
-        var t = moment(new Date()).format("YYYY/MM/DD HH:mm:ss");
-		$('#modified_date').val(t);
+	    
+	    $("#passwordChangeForm").submit(function (e){
+			e.preventDefault();
+			$.ajax({
+				url : $(this).attr('action'),
+				type : $(this).attr('method'),
+				data : $(this).serialize(),
+				success : function(data) {
+					
+					if(data == 'different'){
+						$("#differentPassword").html("Please enter same passwords!")
+					}
+					if(data == "changed"){
+						$("#confirmpassword").val(null);
+						$("#password").val(null);
+						$("#oldPassword").val(null);
+					}
+				},
+				error : function(data) {
+					$("#wrongPassword").html("Please enter correct password!")
+					$("#confirmpassword").val(null);
+					$("#password").val(null);
+				}
+			})	
+		})
+
     </script>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

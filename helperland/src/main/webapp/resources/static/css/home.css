@@ -19,9 +19,7 @@ body{
     background-repeat: no-repeat;
     overflow-x: hidden !important;
 }
-.container-fluid{
-    overflow-x: hidden;
-}
+
 .navbar{
     background-color: transparent;
 }

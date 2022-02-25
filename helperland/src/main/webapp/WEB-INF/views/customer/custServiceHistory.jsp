@@ -1,11 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page isELIgnored="false"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
+	<c:set var="sr" value="${service_requests }" />
+	<c:set var="u" value="${users }" />
+	<%-- <c:set var="srAddress" value="${srAddress }" /> --%>
+	<c:set var="spRating" value="${spRating }" />
 	<link href='<c:url value="/resources/css/navbar-2.css" />' rel="stylesheet" />
 	<link href='<c:url value="/resources/css/custDash.css" />' rel="stylesheet" />
 	<link href='<c:url value="/resources/css/footer.css" />' rel="stylesheet" />
@@ -47,12 +55,12 @@
                                     <a class="nav-link" href="mysettings">My Settings</a>
                                 </div>
                                 <div class="nav-item nav_select1" id="logOut">
-                                    <a class="nav-link" href="#">Logout</a>
+                                    <a class="nav-link" href="/helperland/logout">Logout</a>
                                 </div>
                             </div>
                             <div class="navcol_third navcol position-relative">
                                 <div class="nav-item rounded-pill nav_select5">
-                                    <a class="nav-link" href="/helperland/service-bookin" id="pricesServices">Book Now</a>
+                                    <a class="nav-link" href="/helperland/service-booking" id="pricesServices">Book Now</a>
                                 </div>
                                <div class="nav-item rounded-pill nav_select1">
                                     <a class="nav-link" href="/helperland/prices" id="pricesServices">Prices & services</a>
@@ -100,7 +108,7 @@
                             </li>
                             <li><a class="dropdown-item px-0" type="button" href="dash">My Dashboard</a></li>
                             <li><a class="dropdown-item px-0" type="button" href="mysettings" >My Settings</a></li>
-                            <li><a class="dropdown-item px-0" type="button">Logout</a></li>
+                            <li><a class="dropdown-item px-0" type="button" href="/helperland/logout">Logout</a></li>
                         </ul>
                     </div>
                     <div>
@@ -184,110 +192,129 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td scope="row">323436</td>
-                                <td class="service_date cursorPointer" href="#serviceDetails" data-bs-toggle="modal">
-                                    <a class="d-flex text-decoration-none align-items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16">
-                                            <path fill-rule="evenodd" fill="#646464" d="M.365 16.9V1.715H3.32V.9h1.478v.815h2.463V.9h1.477v.815h2.463V.9h1.477v.815h2.955V16.9H.365zM14.156 5.165H1.843v9.365h12.313V5.165zM5.783 9.108H4.305V7.63h1.478v1.478zm0 3.542H4.305v-2.063h1.478v2.063zm2.955-3.542H7.261V7.63h1.477v1.478zm0 3.542H7.261v-2.063h1.477v2.063zm2.955-3.542h-1.477V7.63h1.477v1.478zm0 3.542h-1.477v-2.063h1.477v2.063z"/>
-                                        </svg>
-                                        <p class="mb-0 ms-1">09/04/2018</p>
-                                    </a>
-                                    <a class="d-flex text-decoration-none">
-                                        <p class="m-0">12:00 - 18:00</p>
-                                    </a>
-                                </td>
-                                <td>
-                                    <div class="d-flex">
-                                        <div class="sp_icon me-2 rounded-circle d-flex align-items-center justify-content-center">
-                                            <img src="<c:url value = "/resources/assets/custDash/cap.png" />" alt="" height="20" width="30">
-                                        </div>
-                                        <div class="d-flex flex-column">
-                                            <p class="mb-0">Lyum Watson</p>
-                                            <div class="d-flex align-items-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                                    <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                                </svg>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                                    <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                                </svg>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                                    <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                                </svg>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                                    <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                                </svg>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                                    <path fill-rule="evenodd" fill="#d4d4d4" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                                </svg>
-                                                <p class="mb-0">4</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="text-center">
-                                    <p class="m-0">40.50 $</p>
-                                </td>
-                                <td class="serviceStatus">
-                                    <p class="m-auto cust_statusCompleted text-light px-2 ">Completed</p>
-                                </td>
-                                <td class="button_main text-center">
-                                    <a class="rateSP_button rounded-pill text-light text-decoration-none" href="#rateSpModal" data-bs-toggle="modal">Rate SP</a>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td scope="row">323436</td>
-                                <td class="service_date cursorPointer" href="#serviceDetails" data-bs-toggle="modal">
-                                    <a class="d-flex text-decoration-none align-items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16">
-                                            <path fill-rule="evenodd" fill="#646464" d="M.365 16.9V1.715H3.32V.9h1.478v.815h2.463V.9h1.477v.815h2.463V.9h1.477v.815h2.955V16.9H.365zM14.156 5.165H1.843v9.365h12.313V5.165zM5.783 9.108H4.305V7.63h1.478v1.478zm0 3.542H4.305v-2.063h1.478v2.063zm2.955-3.542H7.261V7.63h1.477v1.478zm0 3.542H7.261v-2.063h1.477v2.063zm2.955-3.542h-1.477V7.63h1.477v1.478zm0 3.542h-1.477v-2.063h1.477v2.063z"/>
-                                        </svg>
-                                        <p class="mb-0 ms-1">09/04/2018</p>
-                                    </a>
-                                    <a class="d-flex text-decoration-none">
-                                        <p class="m-0">12:00 - 18:00</p>
-                                    </a>
-                                </td>
-                                <td>
-                                    <div class="d-flex">
-                                        <div class="sp_icon me-2 rounded-circle d-flex align-items-center justify-content-center">
-                                            <img src="<c:url value = "/resources/assets/custDash/cap.png" />" alt="" height="20" width="30">
-                                        </div>
-                                        <div class="d-flex flex-column">
-                                            <p class="mb-0">Lyum Watson</p>
-                                            <div class="d-flex align-items-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                                    <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                                </svg>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                                    <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                                </svg>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                                    <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                                </svg>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                                    <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                                </svg>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                                    <path fill-rule="evenodd" fill="#d4d4d4" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                                </svg>
-                                                <p class="mb-0">4</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="text-center">
-                                    <p class="m-0">40.50 $</p>
-                                </td>
-                                <td class="serviceStatus">
-                                    <p class="m-auto cust_statusCancelled text-light px-2">Cancelled</p>
-                                </td>
-                                <td class="button_main text-center">
-                                    <a class="rateSP_button rounded-pill text-light text-decoration-none" href="#rateSpModal" data-bs-toggle="modal">Rate SP</a>
-                                </td>
-                            </tr>
-
+							<c:forEach var="sr" items="${sr }" varStatus = "i">
+							
+								<tr>
+	                                <td scope="row">${sr.service_req_id }</td>
+									<td class="service_date cursorPointer" href="#serviceDetails" data-bs-toggle="modal" id="${sr.service_req_id }" onclick="myFunction($(this).attr('id'))">
+	                                    <a class="d-flex text-decoration-none align-items-center">
+	                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16">
+	                                            <path fill-rule="evenodd" fill="#646464" d="M.365 16.9V1.715H3.32V.9h1.478v.815h2.463V.9h1.477v.815h2.463V.9h1.477v.815h2.955V16.9H.365zM14.156 5.165H1.843v9.365h12.313V5.165zM5.783 9.108H4.305V7.63h1.478v1.478zm0 3.542H4.305v-2.063h1.478v2.063zm2.955-3.542H7.261V7.63h1.477v1.478zm0 3.542H7.261v-2.063h1.477v2.063zm2.955-3.542h-1.477V7.63h1.477v1.478zm0 3.542h-1.477v-2.063h1.477v2.063z"/>
+	                                        </svg>
+	                                        <p class="mb-0 ms-1">
+	                                        	<fmt:formatDate type = "date" value = "${sr.service_start_date}" pattern="dd/MM/yyyy"/>
+	                                        </p>
+	                                    </a>
+	                                    <a class="d-flex text-decoration-none">
+	                                        <p class="m-0">
+	                                        	<fmt:formatDate type = "time" value = "${sr.service_start_date}" pattern="hh:mm"/>-<span id="endTime${i.index }"></span>
+	                                        </p>
+	                                    </a>
+	                                </td>
+	                                <c:if test="${sr.user_id != sr.service_provider_id }">
+		                                <td>
+		                                    <div class="d-flex">
+		                                        <div class="sp_icon me-2 rounded-circle d-flex align-items-center justify-content-center">
+		                                            <c:forEach var="u" items="${users }">
+		                                        		<c:if test="${u.user_id == sr.service_provider_id}"> 
+		                                        			<img src="<c:url value = "/resources/assets/custDash/${u.user_profile_picture }.png" />" alt="" height="48" width="48">
+		                                        		</c:if>
+		                                        	</c:forEach>
+		                                        </div>
+		                                        
+		                                        <div class="d-flex flex-column">
+		                                            <p class="mb-0">
+		                                            	<c:forEach var="u" items="${users }">
+		                                        			<c:if test="${u.user_id == sr.service_provider_id}"> ${u.first_name } ${u.last_name }</c:if>
+		                                        		</c:forEach>
+		                                            </p>		                                            
+		                                            
+		                                            
+		                                            <div class="d-flex align-items-center">
+		                                                
+		                   								<c:forEach items="${spRating}" var="spRating">
+													        
+													        <c:if test="${spRating.key == sr.service_provider_id }">
+													        	<c:if test="${spRating.value == 0}">
+													        		<span class="icon" id="icon1" style="color: #e1e1e1">★</span>
+													        		<span class="icon" id="icon2" style="color: #e1e1e1">★</span>
+							                                    	<span class="icon" id="icon3" style="color: #e1e1e1">★</span>
+							                                    	<span class="icon" id="icon4" style="color: #e1e1e1">★</span>
+				                                    				<span class="icon" id="icon5" style="color: #e1e1e1">★</span>	
+													        	</c:if>	
+													        	<c:if test="${spRating.value == 1}">
+													        		<span class="icon" id="icon1" style="color: #ECB91C">★</span>
+													        		<span class="icon" id="icon2" style="color: #e1e1e1">★</span>
+							                                    	<span class="icon" id="icon3" style="color: #e1e1e1">★</span>
+							                                    	<span class="icon" id="icon4" style="color: #e1e1e1">★</span>
+				                                    				<span class="icon" id="icon5" style="color: #e1e1e1">★</span>	
+													        	</c:if>	
+													        	<c:if test="${spRating.value == 2}">
+													        		<span class="icon" id="icon1" style="color: #ECB91C">★</span>
+													        		<span class="icon" id="icon2" style="color: #ECB91C">★</span>
+							                                    	<span class="icon" id="icon3" style="color: #e1e1e1">★</span>
+							                                    	<span class="icon" id="icon4" style="color: #e1e1e1">★</span>
+				                                    				<span class="icon" id="icon5" style="color: #e1e1e1">★</span>	
+													        	</c:if>	
+													        	<c:if test="${spRating.value == 3}">
+													        		<span class="icon" id="icon1" style="color: #ECB91C">★</span>
+													        		<span class="icon" id="icon2" style="color: #ECB91C">★</span>
+							                                    	<span class="icon" id="icon3" style="color: #ECB91C">★</span>
+							                                    	<span class="icon" id="icon4" style="color: #e1e1e1">★</span>
+				                                    				<span class="icon" id="icon5" style="color: #e1e1e1">★</span>	
+													        	</c:if>	
+													        	<c:if test="${spRating.value == 4}">
+													        		<span class="icon" id="icon1" style="color: #ECB91C">★</span>
+													        		<span class="icon" id="icon2" style="color: #ECB91C">★</span>
+							                                    	<span class="icon" id="icon3" style="color: #ECB91C">★</span>
+							                                    	<span class="icon" id="icon4" style="color: #ECB91C">★</span>
+				                                    				<span class="icon" id="icon5" style="color: #e1e1e1">★</span>	
+													        	</c:if>	
+													        	<c:if test="${spRating.value == 5}">
+													        		<span class="icon" id="icon1" style="color: #ECB91C">★</span>
+													        		<span class="icon" id="icon2" style="color: #ECB91C">★</span>
+							                                    	<span class="icon" id="icon3" style="color: #ECB91C">★</span>
+							                                    	<span class="icon" id="icon4" style="color: #ECB91C">★</span>
+				                                    				<span class="icon" id="icon5" style="color: #ECB91C">★</span>	
+													        	</c:if>	
+			                                                	<p class="mb-0">${spRating.value }</p>
+													        </c:if>
+													        
+													    </c:forEach>                          	
+		                                            </div>
+		                                        </div>
+		                                    </div>
+		                                </td>
+	                                </c:if>
+	                                <c:if test="${sr.user_id == sr.service_provider_id }">
+	                                	<td></td>
+	                                </c:if>
+	                                <td class="text-center">
+	                                    <p class="m-0"> ${sr.total_cost } $</p>
+	                                </td>
+	                                
+		                            <td class="serviceStatus">
+		                                <c:if test="${sr.status == 0}">
+		                                    <p class="m-auto cust_statusCancelled text-light px-2 ">Cancelled</p>
+		                                </c:if>
+		                                <c:if test="${sr.status == 3}">
+		                                    <p class="m-auto cust_statusCompleted text-light px-2 ">Completed</p>
+		                                </c:if>
+		                                
+		                            </td>
+	                                <td class="button_main text-center">
+	                                    <a class="rateSP_button rounded-pill cursor-pointer text-light text-decoration-none<c:if test="${sr.status == 0 or sr.status == 1 }"> disabledButton</c:if>" 
+		                                   role="button" data-spID = "${sr.service_provider_id }" data-srID = "${sr.service_req_id }" onclick="ratingModelFunction($(this).attr('data-spID') , $(this).attr('data-srID'))" 
+	                                    	<c:if test="${sr.status == 0 or sr.status == 1 }">
+	                                    		style="pointer-events: none;"
+	                                    	</c:if>
+	                                    >
+	                                    	Rate SP
+	                                    </a>
+	                                </td>
+	                            </tr>
+							
+							</c:forEach> 
 
 
                         </tbody>
@@ -303,74 +330,81 @@
             <div class="modal fade" id="serviceDetails" aria-hidden="true" aria-labelledby="serviceDetailsLabel" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered vertical-align-center">
                     <div class="modal-content">
-                        <!-- <div class="modal-body"> -->
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="serviceDetailsLabel">Service Details</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="serviceDetailsLabel">Service Details</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
                         <div class="modal-body d-flex serviceDetailsModal p-2">
                             <div class="serviceModalLeft">
-                                <h4>22/12/2021 09:00 -14:30</h4>
-                                <p><b>Duration:</b>5.5 Hrs</p>
+                                <h4 id="sdDate"></h4>
+                                <p><b>Duration:</b>&nbsp<span id="sdDuration"></span></p>
 
                                 <hr>
 
-                                <p><b>Service Id:</b>8502</p>
-                                <p><b>Extras:</b>Inside cabinets, Inside fridge, Inside oven, Laundry wash & dry, Interior windows</p>
-                                <p><b>Net Amount:</b> <spna class="table_payment fw-bolder">99,00 €</spna> </p>
+                                <p><b>Service Id:</b>&nbsp<span id="sdId"></span></p>
+                                <p><b>Extras:</b><span id="sdExtra"></span></p>
+                                <p><b>Net Amount:</b> <span class="table_payment fw-bolder" id="sdAmount"></span> </p>
                                 
                                 <hr>
                                 
-                                <p><b>Service Address:</b>Test 65, 53225 Bonn</p>
+                                <p><b>Service Address:</b><span id="sdAddress"></span></p>
                                 <p><b>Billing Address:</b>Same as cleaning Address</p>
-                                <p><b>Phone:</b>+49 9988556644</p>
-                                <p><b>Email:</b>cust001@yopmail.com</p>
+                                <p><b>Phone:</b> +91 <span id="sdPhone"></span></p>
+                                <p><b>Email:</b><span id="sdEmail"></span></p>
                                 
                                 <hr>
                                 
                                 <p><b>Comments</b></p>
                                 <div>
-                                    <p>Hello</p>
+                                    <p id="sdComments"></p>
                                 </div>
-                                <p>I don't have pets at home</p>
+                                <p id="sdPets"></p>
                                 
                                 <hr>
                                 
                             </div>
                             <div class="serviceModalRight">
                                 <h4>Service Provider Details</h4>
-                                <div class="sp_block d-flex justify-content-around align-items-center">
-                                    <div style="height: 64px; width: 64px;" class="sp_icon p-0 d-flex align-items-center justify-content-center rounded-circle">
-                                        <img src="<c:url value = "/resources/assets/custDash/cap.png" />" class="" height="20" width="30">
+                                <div class="sp_block justify-content-around align-items-center" id="spDetailsRight">
+                                    <div style="height: 64px; width: 64px;" class="sp_icon p-0 d-flex align-items-center justify-content-center rounded-circle" id="spDetailsIcon">
+                                        <img id="serviceModalIcon" height="64" width="64">
                                     </div>
                                     <div>
-                                        <p class="sp_name mb-0">Kavan Patel</p>
-                                        <div>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                                <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                            </svg>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                                <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                            </svg>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                                <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                            </svg>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                                <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                            </svg>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                                <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                            </svg>
-                                        </div>
+                                        <p class="sp_name mb-0" id="sdServiceProvider"></p>
+                                        <div id="sdModelAvgStars">
+	                                    	<span class="icon" id="icon1d">★</span>
+	                                    	<span class="icon" id="icon2d">★</span>
+	                                    	<span class="icon" id="icon3d">★</span>
+	                                    	<span class="icon" id="icon4d">★</span>
+	                                    	<span class="icon" id="icon5d">★</span>
+	                                    </div>
                                     </div>
                                 </div>
-                                <p class="mb-0">1 cleaning</p>
+                                <p class="mb-0" id="sdTotalCleanings"></p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+		</div>
+
+		<div class="modal fade" id="alreadyRatedModal" aria-hidden="true"
+			aria-labelledby="alreadyRatedModalLabel2" tabindex="-1">
+			<div class="modal-dialog modal-dialog-centered modal-md">
+				<div class="modal-content">
+					<div class="modal-header border-0">
+						<!-- <h4 class="modal-title me-3 color646464" id="deleteAdressModalLabel2">Delete Address</h4> -->
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<div class="text-center">
+							<h4 class="mb-2 pb-4">You already Rated This Service Provider. <br> Thank You!</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
         <div class="rateSpPopUp">
             <div class="modal fade" id="rateSpModal" aria-hidden="true" aria-labelledby="rateSpModalLabel2" tabindex="-1">
@@ -379,61 +413,19 @@
                         <div class="modal-header border-0">
                             <!-- <h4 class="modal-title me-3" id="rateSpModalLabel2"></h4> -->
                             <div class="d-flex modal-title me-3" id="rateSpModalLabel2">
-                                <div class="sp_icon me-2 rounded-circle d-flex align-items-center justify-content-center">
-                                    <img src="<c:url value = "/resources/assets/custDash/cap.png" />" alt="" height="20" width="30">
+                                <div class="sp_icon me-2 rounded-circle d-flex align-items-center justify-content-center" >
+                                    <img alt="" height="48" width="48" id="ratingModalIcon">
                                 </div>
                                 <div class="d-flex flex-column">
-                                    <p class="mb-0">Lyum Watson</p>
-                                    <form class="rating">
-                                        <label>
-                                          <input type="radio" checked name="stars0" value="1" />
-                                          <span class="icon">★</span>
-                                        </label>
-                                        <label>
-                                          <input type="radio" name="stars0" value="2" />
-                                          <span class="icon">★</span>
-                                          <span class="icon">★</span>
-                                        </label>
-                                        <label>
-                                          <input type="radio" name="stars0" value="3" />
-                                          <span class="icon">★</span>
-                                          <span class="icon">★</span>
-                                          <span class="icon">★</span>   
-                                        </label>
-                                        <label>
-                                          <input type="radio" name="stars0" value="4" />
-                                          <span class="icon">★</span>
-                                          <span class="icon">★</span>
-                                          <span class="icon">★</span>
-                                          <span class="icon">★</span>
-                                        </label>
-                                        <label>
-                                          <input type="radio" name="stars0" value="5" />
-                                          <span class="icon">★</span>
-                                          <span class="icon">★</span>
-                                          <span class="icon">★</span>
-                                          <span class="icon">★</span>
-                                          <span class="icon">★</span>
-                                        </label>
-                                    </form>
-                                    <!-- <div class="d-flex align-items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                            <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                            <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                            <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                            <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                            <path fill-rule="evenodd" fill="#d4d4d4" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                        </svg>
-                                        <p class="mb-0">4</p>
-                                    </div> -->
+                                    <p class="mb-0" id="ratingSpName"></p>
+                                    <div id="ratingModelAvgStars">
+                                    	<span class="icon" id="icon1">★</span>
+                                    	<span class="icon" id="icon2">★</span>
+                                    	<span class="icon" id="icon3">★</span>
+                                    	<span class="icon" id="icon4">★</span>
+                                    	<span class="icon" id="icon5">★</span>
+                                    </div>
+                                    
                                 </div>
                             </div>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -445,29 +437,29 @@
                                 <p class="mb-0 me-3" style="min-width: 150px;">On time arrival</p>
                                 <form class="rating" id="onTimeForm">
                                     <label>
-                                    <input type="radio" name="stars" value="1" checked/>
+                                    <input type="radio" name="on_time_arrival" value="1" checked form="mainRatingForm"/>
                                     <span class="icon">★</span>
                                     </label>
                                     <label>
-                                    <input type="radio" name="stars" value="2" />
+                                    <input type="radio" name="on_time_arrival" value="2" form="mainRatingForm"/>
                                     <span class="icon">★</span>
                                     <span class="icon">★</span>
                                     </label>
                                     <label>
-                                    <input type="radio" name="stars" value="3" />
+                                    <input type="radio" name="on_time_arrival" value="3" form="mainRatingForm"/>
                                     <span class="icon">★</span>
                                     <span class="icon">★</span>
                                     <span class="icon">★</span>   
                                     </label>
                                     <label>
-                                    <input type="radio" name="stars" value="4" />
+                                    <input type="radio" name="on_time_arrival" value="4" form="mainRatingForm"/>
                                     <span class="icon">★</span>
                                     <span class="icon">★</span>
                                     <span class="icon">★</span>
                                     <span class="icon">★</span>
                                     </label>
                                     <label>
-                                    <input type="radio" name="stars" value="5" />
+                                    <input type="radio" name="on_time_arrival" value="5" form="mainRatingForm"/>
                                     <span class="icon">★</span>
                                     <span class="icon">★</span>
                                     <span class="icon">★</span>
@@ -480,29 +472,29 @@
                                 <p class="mb-0 me-3" style="min-width: 150px;">Friendly</p>
                                 <form class="rating" id="friendlyForm">
                                     <label>
-                                    <input type="radio" name="stars1" value="1" checked/>
+                                    <input type="radio" name="friendly" value="1" checked form="mainRatingForm"/>
                                     <span class="icon">★</span>
                                     </label>
                                     <label>
-                                    <input type="radio" name="stars1" value="2" />
+                                    <input type="radio" name="friendly" value="2" form="mainRatingForm"/>
                                     <span class="icon">★</span>
                                     <span class="icon">★</span>
                                     </label>
                                     <label>
-                                    <input type="radio" name="stars1" value="3" />
+                                    <input type="radio" name="friendly" value="3" form="mainRatingForm"/>
                                     <span class="icon">★</span>
                                     <span class="icon">★</span>
                                     <span class="icon">★</span>   
                                     </label>
                                     <label>
-                                    <input type="radio" name="stars1" value="4" />
+                                    <input type="radio" name="friendly" value="4" form="mainRatingForm"/>
                                     <span class="icon">★</span>
                                     <span class="icon">★</span>
                                     <span class="icon">★</span>
                                     <span class="icon">★</span>
                                     </label>
                                     <label>
-                                    <input type="radio" name="stars1" value="5" />
+                                    <input type="radio" name="friendly" value="5" form="mainRatingForm"/>
                                     <span class="icon">★</span>
                                     <span class="icon">★</span>
                                     <span class="icon">★</span>
@@ -515,29 +507,29 @@
                                 <p class="mb-0 me-3" style="min-width: 150px;">Quality of service</p>
                                 <form class="rating" id="qosForm" >
                                     <label>
-                                    <input type="radio" checked name="stars2" value="1" />
+                                    <input type="radio" checked name="quality_of_service" value="1" form="mainRatingForm"/>
                                     <span class="icon">★</span>
                                     </label>
                                     <label>
-                                    <input type="radio" name="stars2" value="2" />
+                                    <input type="radio" name="quality_of_service" value="2" form="mainRatingForm"/>
                                     <span class="icon">★</span>
                                     <span class="icon">★</span>
                                     </label>
                                     <label>
-                                    <input type="radio" name="stars2" value="3" />
+                                    <input type="radio" name="quality_of_service" value="3" form="mainRatingForm"/>
                                     <span class="icon">★</span>
                                     <span class="icon">★</span>
                                     <span class="icon">★</span>   
                                     </label>
                                     <label>
-                                    <input type="radio" name="stars2" value="4" />
+                                    <input type="radio" name="quality_of_service" value="4" form="mainRatingForm"/>
                                     <span class="icon">★</span>
                                     <span class="icon">★</span>
                                     <span class="icon">★</span>
                                     <span class="icon">★</span>
                                     </label>
                                     <label>
-                                    <input type="radio" name="stars2" value="5" />
+                                    <input type="radio" name="quality_of_service" value="5" form="mainRatingForm"/>
                                     <span class="icon">★</span>
                                     <span class="icon">★</span>
                                     <span class="icon">★</span>
@@ -546,12 +538,13 @@
                                     </label>
                                 </form>
                             </div>
-                            <form action="" method="get">
+                            <form action="rate-sp" method="post" name="mainRatingForm" id="mainRatingForm">
                                 <div class="d-flex flex-column">
                                     <label for="feedbackComment" class="mb-2">Feedback on service provider</label>
-                                    <textarea name="" id="aa" maxlength="500" rows="3" name="feedbackComment"></textarea>
+                                    <textarea name="comments" maxlength="500" rows="3" form="mainRatingForm" class="p-2"></textarea>
+                                	<input type="hidden" name="rating_to" form="mainRatingForm" id="ratingTo"/>
+                                	<input type="hidden" name="service_request_id" form="mainRatingForm" id="ratingServiceReqId"/>
                                 </div>
-                                <input type="hidden" id="ratingHiddenValue">
                                 <button id="submitFeedback" type="submit" class="submitFeedback rounded-pill text-light text-decoration-none border-0 mt-3">Submit</button>
                             </form>
                             
@@ -613,108 +606,278 @@
         </div>
     </div>
 
-    <!-- <script src="./custDash.js"></script> -->
-    <!-- <script>
-        $(function () {
-            $("#footer").load("../footer.html");
-        });
-    </script> -->
-
+    <script>
+    
+    	$(document).ready(function() {
+    		
+    		<c:forEach var="sr" items="${service_requests }" varStatus="i">
+    			
+	    		var d = new Date("${sr.service_start_date}");
+	    		console.log(d);
+				
+				var t1 = d.getHours()+"."+d.getMinutes();
+				var a = parseFloat("${sr.service_hours}") ;  
+				var b = parseFloat("${sr.extra_hours}");
+				var totalTime = a+b ; 
+				
+				var dt1 = ((d.getHours() * 60) + d.getMinutes()) / 60;
+				var dt2 = (dt1 + totalTime) * 60;
+				
+				var h1 = Math.floor(dt2 / 60);
+				var m1 = dt2 % 60;
+				
+				if(m1==0){
+					var time2 = h1 + ":00	";	
+					$("#endTime${i.index}").html(time2);
+				}
+				else{
+					var time2 = h1 + ":" + m1;
+					$("#endTime${i.index}").html(time2);
+				}
+    			
+    		</c:forEach>
+    		
+    		
+    	})
+    
+    </script>
+    
     <script>
 
-        $("input[name= stars] , input[name= stars1] , input[name= stars2]").change(function(){
-            var rating1 = parseInt($("input[name= stars]:checked").val());
-            var rating2 = parseInt($("input[name= stars1]:checked").val());
-            var rating3 = parseInt($("input[name= stars2]:checked").val());
+        $("input[name= on_time_arrival] , input[name= friendly] , input[name= quality_of_service]").change(function(){
+            var rating1 = parseInt($("input[name= on_time_arrival]:checked").val());
+            var rating2 = parseInt($("input[name= friendly]:checked").val());
+            var rating3 = parseInt($("input[name= quality_of_service]:checked").val());
 
             var ratingAvg = Math.ceil((rating1 + rating2 + rating3) / 3 );
-            $(`input[name= stars0][value= ${ratingAvg}]`).prop('checked' , true);
-
+            console.log(ratingAvg);
+            let k = ratingAvg;
+            console.log(k);
+            <c:set var="avg" value="ratingAvg" />
+            console.log(${avg});
+            $('input[name= stars0][value= ${avg}]').prop('checked' , true);
+            
             $("#ratingHiddenValue").val(ratingAvg);
-            console.log($("#ratingHiddenValue").val());
         });
-        // $("#submitFeedback").click(function(){
-        //     // $("#onTimeForm , #friendlyForm , #qosForm ").submit();
-        //     var rating1 = parseInt($("input[name= stars]:checked").val());
-        //     var rating2 = parseInt($("input[name= stars1]:checked").val());
-        //     var rating3 = parseInt($("input[name= stars2]:checked").val());
-
-        //     var ratingAvg = Math.ceil((rating1 + rating2 + rating3) / 3 );
-        //     // console.log(ratingAvg);
-        //     // var totalAverageSend = $("input[name= ratingHiddenValue]").val();
-        //     $(`input[name= stars0][value= ${ratingAvg}]`).prop('checked' , true);
-        //     // $(`input[name= ratingHiddenValue][value= ${ratingAvg}]`);
-        //     $("#ratingHiddenValue").val(ratingAvg);
-        //     console.log($("#ratingHiddenValue").val());
-        //     // console.log($("input[name= ratingHiddenValue]").val());
-        // });
-        // let tr = $('tbody tr td.serviceStatus');
-
-        // if(tr.contents('.cust_statusCancelled')){
-        //     let tx = tr.siblings();
-        //     console.log(tx);
-        // }
-
-        // $(document).ready(function(){
-        //     disableBtn(y);
-        // });
-
-        // function disableBtn(y){
-        //     console.log(y);
-        //     if(y.length > 0){
-        //         let z = y.contents('');
-        //     }
-        // }
-
-        let x = $('.cust_statusCancelled').parent();
-        console.log(x.siblings()); 
-        // x.siblings('.button-main.rateSP_button').css('pointer-events' , 'none');
-        console.log(x.next().contents().css('pointer-events' , 'none').addClass('disabledButton'));
-
         
-        // $('tbody tr').contents().find(".cust_statusCancelled").nextAll('.rateSP_button').css('pointer-events' , 'none');
-        // console.log(tr);
-        // let x = tr.contents('.cust_statusCancelled');
+        function ratingModelFunction(spID , srID){
+        	$('#ratingTo').val(spID); 
+        	$('#ratingServiceReqId').val(srID);
+        	
+        	$.ajax({
+				url : 'service-rating-data',
+				type : 'POST',
+				data : srID,
+				contentType : "application/json",
+				success : function(data , xhr) {
+					console.log(data);
+					if(data == "You already Rated ServiceProvider For This Service."){
+						$("#alreadyRatedModal").modal('show');
+					}
+					else{
+						$("#ratingSpName").html(data[0].first_name + " " + data[0].last_name);
+						
+						if(data[1] == 0){
+							$("#icon1 ,#icon2 , #icon3 , #icon4 , #icon5").css("color" , "#e1e1e1");
+						}
+						if(data[1] == 1){
+							$("#icon2 , #icon3 , #icon4 , #icon5").css("color" , "#e1e1e1");
+						}
+						if(data[1] == 2){
+							$("#icon3 , #icon4 , #icon5").css("color" , "#e1e1e1");
+						}
+						if(data[1] == 3){
+							$("#icon4 , #icon5").css("color" , "#e1e1e1");
+						}
+						if(data[1] == 4){
+							$("#icon5").css("color" , "#e1e1e1");
+						}
+						$("#rateSpModal").modal('show');
+					}
+					
+					$("#ratingModalIcon").attr("src" ,  "/helperland/resources/assets/custDash/"  + data[0].user_profile_picture+ ".png "   )
+				},
+				error : function(xhr, textStatus, xml) {
+					console.log("error");
+					console.log(xhr.status);
+					console.log(xhr);
+					console.log(xml);
+					console.log(textStatus);
+					
 
-        // if(x.length > 0){
-        //     let y = tr.siblings('.button_main');
-
-        //     console.log(y.contents('.rateSP_button'));
-        //     disableBtn(x);
-        // }
-
-        // $(document).ready(function(){
-        //     disableBtn(y);
-        // });
-
-        // function disableBtn(y){
-        //     console.log(y);
-        //     if(y.length > 0){
-        //         let z = y.contents('');
-        //     }
-        // }
-        // x.next('.rateSP_button').css('pointer-events' , 'none');
-
-        // console.log($('tbody tr').contents().find(".cust_statusCancelled"));
-        // console.log(tr);
-
-        // $(document).ready(function(){
-        //     disableBtn(tr);
-        // });
-
-        // function disableBtn(tr1){
-        //     let x = tr1.contents().find(".cust_statusCancelled");
-        //     // console.log(x.nextAll('.rateSP_button'));
-
-        //     if(tr1.contents().find(".cust_statusCancelled")){
-        //         // console.log(tr1.contents().find(".cust_statusCancelled"));
-        //         tr1.contents().find(".rateSP_button").css('pointer-events' , 'none');
-        //     }
-        // };
-
+				}
+			}) 
+        	
+        }
         
-
     </script>
+    
+    <script>
+    
+    	function myFunction(id){
+    		console.log(id);
+    		$.ajax({
+				url : "service-details-data",
+				type : "POST",
+				data : id,
+				contentType : "application/json",
+				success : function(data) {
+						console.log(data);
+						
+						var d = new Date(data[0].service_start_date);
+						
+						var date1 = d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear();
+						if(d.getMinutes() == 0){
+							var time1 = d.getHours() + ":00" ;
+						}
+						else{
+							var time1 = d.getHours() + ":" + d.getMinutes();	
+						}
+						var t1 = d.getHours()+"."+d.getMinutes();
+						var totalTime = data[0].service_hours + data[0].extra_hours;
+						
+						var dt1 = ((d.getHours() * 60) + d.getMinutes()) / 60;
+						var dt2 = (dt1 + totalTime) * 60;
+						
+						var h1 = Math.floor(dt2 / 60);
+						var m1 = dt2 % 60;
+						
+						if(m1==0){
+							var time2 = h1 + ":00	";		
+						}
+						else{
+							var time2 = h1 + ":" + m1;
+						}
+						
+						
+						$("#sdDate").html(date1 +" "+ time1 + "-" + time2); 
+						$("#sdDuration").html(data[0].service_hours + data[0].extra_hours + " hours");
+						$("#sdId").html(data[0].service_req_id);
+						$("#sdAmount").html(data[0].total_cost + ",00 $");
+						$("#sdComments").html(data[0].comments);
+						
+						if(data[0].has_pets == 0){
+							$("#sdPets").html("I don't have pets at home.");
+						}
+						else{
+							$("#sdPets").html("I have pets at home.");	
+						}
+						
+						var extraServices = " ";
+						
+						console.log(data[2].cabinet);
+						
+						if(data[2].cabinet == 1){
+							extraServices = extraServices + " Inside Cabinets, ";
+						}
+						if(data[2].windows == 1){
+							extraServices = extraServices + " Interior Windows, ";
+						}
+						if(data[2].laundry == 1){
+							extraServices = extraServices + " Inside Wash, ";
+						}
+						if(data[2].refrigerator == 1){
+							extraServices = extraServices + " Inside Fridge, ";
+						}
+						if(data[2].oven == 1){
+							extraServices = extraServices + " Inside Oven, ";
+						}
+						console.log(extraServices);
+						$("#sdExtra").html(extraServices);
+						
+						if(data[1].state != null){
+							$("#sdAddress").html(" "+data[1].address_line1 + " " + data[1].address_line2 + ", "+data[1].postal_code +" "+data[1].city+" "+data[1].state);
+						}
+						if(data[1].state == null){
+							$("#sdAddress").html(" "+data[1].address_line1 + " " + data[1].address_line2 + ", "+data[1].postal_code +" "+data[1].city);
+						}
+						if(data[1].mobile != null){
+							$("#sdPhone").html(" "+data[1].mobile);
+						}
+						if(data[1].email != null){
+							$("#sdEmail").html(" "+data[1].email);
+						}
+						
+						if(data[0].user_id == data[0].service_provider_id){
+							$("#spDetailsRight").hide();
+							$("#sdTotalCleanings").hide();
+						}	
+						else{
+							$("#sdTotalCleanings").show();
+							$("#spDetailsRight").show();
+							$("#sdServiceProvider").html(data[3].first_name + " " + data[3].last_name);
+							$("#serviceModalIcon").attr("src" , "/helperland/resources/assets/custDash/"  + data[3].user_profile_picture+ ".png "   );
+						}
+						
+						if(data[4] == 0){
+							$("#icon1d ,#icon2d , #icon3d , #icon4d , #icon5d").css("color" , "#e1e1e1");
+						}
+						if(data[4] == 1){
+							$("#icon2d , #icon3d , #icon4d , #icon5d").css("color" , "#e1e1e1");
+							$("#icon1d").css("color" , "#ECB91C");
+							
+						}
+						if(data[4] == 2){
+							$("#icon3d , #icon4d , #icon5d").css("color" , "#e1e1e1");
+							$("#icon1d , #icon2d").css("color" , "#ECB91C");
+						}
+						if(data[4] == 3){
+							$("#icon4d , #icon5d").css("color" , "#e1e1e1");
+							$("#icon1d , #icon2d , #icon3d").css("color" , "#ECB91C");
+						}
+						if(data[4] == 4){
+							$("#icon5d").css("color" , "#e1e1e1");
+							$("#icon1d , #icon2d , #icon3d , #icon4d").css("color" , "#ECB91C");
+						}
+						
+						$("#sdTotalCleanings").html(data[5] + " cleanings");
+						
+						$("#rescheduleBtnModel").attr('data-spID' , data[0].service_req_id);
+						$("#cancelBtnModel").attr('data-spID' , data[0].service_req_id);
+						
+						console.log("fdsfd" + $("#rescheduleBtnModel").attr('data-spID'));
+				},
+				error : function(xhr, textStatus, xml) {
+					console.log("error");
+					console.log(xhr);
+					console.log(textStatus);
+					console.log(xml);
+				}
+			})
+    		
+    	}
+    </script>
+    
+    <script>
+		
+		
+		
+		$("#mainRatingForm").on("submit", function(e) {
+
+			console.log($("#mainRatingForm").serialize());
+
+			e.preventDefault();
+			$.ajax({
+				url : $("#mainRatingForm").attr('action'),
+				type : $("#mainRatingForm").attr('method'),
+				data : $("#mainRatingForm").serialize(),
+				success : function(data , xhr) {
+					console.log(xhr);
+					location.reload();
+					
+				},
+				error : function(xhr, textStatus, xml) {
+					console.log("error");
+					console.log(xhr.status);
+					console.log(xhr);
+					console.log(xml);
+					console.log(textStatus);
+					
+
+				}
+			}) 
+		})
+	</script>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 

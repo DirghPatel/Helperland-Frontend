@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+
 
 <!DOCTYPE html>
 <html>
@@ -61,7 +63,7 @@
                                     <a class="nav-link" href="mysettings">My Settings</a>
                                 </div>
                                 <div class="nav-item nav_select1">
-                                    <a class="nav-link" href="#">Logout</a>
+                                    <a class="nav-link" href="/helperland/logout">Logout</a>
                                 </div>
                             </div>
                             <div class="navcol_third navcol position-relative">
@@ -115,7 +117,7 @@
                             </li>
                             <li><a class="dropdown-item px-1" type="button" href="dash">My Dashboard</a></li>
                             <li><a class="dropdown-item px-1" type="button" href="mysettings" >My Settings</a></li>
-                            <li><a class="dropdown-item px-1" type="button">Logout</a></li>
+                            <li><a class="dropdown-item px-1" type="button" href="/helperland/logout">Logout</a></li>
                         </ul>
                     </div>
                     <div>
@@ -177,34 +179,57 @@
                 <!-- --------- Block Customer ----------  -->
                 <div id="blockCustomerTable">
                     <div class="blockCustList">
-                        <div class="blockCustListItem col-sm-4 w-100 d-flex align-items-center justify-content-center flex-column">
-                            <div class="spProfile mb-3 rounded-circle d-flex align-items-center justify-content-center">
-                                <img src="<c:url value = "/resources/assets/spDash/cap.png" />" >
-                            </div>
-                            <p class="mb-3">Cust1 Cust1</p>
-                            <div class="btn block_button text-white rounded-pill">Block</div>
-                        </div>
-                        <div class="blockCustListItem col-sm-4 w-100 d-flex align-items-center justify-content-center flex-column">
-                            <div class="spProfile mb-3 rounded-circle d-flex align-items-center justify-content-center">
-                                <img src="<c:url value = "/resources/assets/spDash/cap.png" />" >
-                            </div>
-                            <p class="mb-3">Cust1 Cust1</p>
-                            <div class="btn block_button text-white rounded-pill">Block</div>
-                        </div>
-                        <div class="blockCustListItem col-sm-4 w-100 d-flex align-items-center justify-content-center flex-column">
-                            <div class="spProfile mb-3 rounded-circle d-flex align-items-center justify-content-center">
-                                <img src="<c:url value = "/resources/assets/spDash/cap.png" />" >
-                            </div>
-                            <p class="mb-3">Cust1 Cust1</p>
-                            <div class="btn block_button text-white rounded-pill" >Block</div>
-                        </div>
-                        <div class="blockCustListItem col-sm-4 w-100 d-flex align-items-center justify-content-center flex-column">
-                            <div class="spProfile mb-3 rounded-circle d-flex align-items-center justify-content-center">
-                                <img src="<c:url value = "/resources/assets/spDash/cap.png" />" >
-                            </div>
-                            <p class="mb-3">Cust1 Cust1</p>
-                            <div class="btn block_button text-white rounded-pill">Block</div>
-                        </div>
+                        <c:forEach var="u" items="${users }">
+                        	<div class="blockCustListItem col-sm-4 w-100 d-flex align-items-center justify-content-center flex-column">
+	                            <div class="spProfile mb-3 rounded-circle d-flex align-items-center justify-content-center">
+	                                <img src="<c:url value = "/resources/assets/spDash/${u.user_profile_picture }.png" />" >
+	                            </div>
+	                            <p class="mb-3">${u.first_name } ${u.last_name }</p>
+	                            
+	                           	<%-- <c:forEach var="blocked" items="${blocked }"> --%>
+	                            	
+		                            <%-- <c:choose>
+		                            	<c:when test="${blocked.target_user_id == u.user_id }">
+		                            		<c:if test="${blocked.is_blocked == 1 }">
+		                            			<div class="btn block_button text-white rounded-pill" data-favblockId = "${blocked.target_user_id }" onclick="unblockFunction($(this).attr('data-favblockId'))">Unblock</div>		
+		                            		</c:if>
+		                            		<c:if test="${blocked.is_blocked == 0 }">
+		                            			<div class="btn block_button text-white rounded-pill" data-favblockId = "${blocked.target_user_id }" onclick="blockFunction($(this).attr('data-favblockId'))">Block</div>		
+		                            		</c:if>		
+		                            	</c:when>
+		                            	
+		                            	<c:otherwise>
+	                            			<div class="btn block_button text-white rounded-pill" data-favblockId = "${u.user_id }" onclick="blockFunction($(this).attr('data-favblockId'))">Block</div>
+	                            		</c:otherwise>
+	                            	</c:choose>  --%>
+	                            	
+		                            	<%-- <c:if test="${blocked.target_user_id == u.user_id }">
+		                            		<c:if test="${blocked.is_blocked == 1 }">
+		                            			<div class="btn block_button text-white rounded-pill" data-favblockId = "${blocked.target_user_id }" onclick="unblockFunction($(this).attr('data-favblockId'))">Unblock</div>		
+		                            		</c:if>
+		                            		<c:if test="${blocked.is_blocked == 0 }">
+		                            			<div class="btn block_button text-white rounded-pill" data-favblockId = "${blocked.target_user_id }" onclick="blockFunction($(this).attr('data-favblockId'))">Block</div>		
+		                            		</c:if>		
+		                            	</c:if> --%>
+		                            	<c:if test = "${fn:contains(blockedId, usersId)}">
+			                            	<c:forEach var="blocked" items="${blocked }">
+			                            		<c:if test="${blocked.target_user_id == u.user_id }">
+			                            			<c:if test="${blocked.is_blocked == 1 }">
+				                            			<div class="btn block_button text-white rounded-pill" data-favblockId = "${blocked.target_user_id }" onclick="unblockFunction($(this).attr('data-favblockId'))">Unblock</div>		
+				                            		</c:if>
+				                            		<c:if test="${blocked.is_blocked == 0 }">
+				                            			<div class="btn block_button text-white rounded-pill" data-favblockId = "${blocked.target_user_id }" onclick="blockFunction($(this).attr('data-favblockId'))">Block</div>		
+				                            		</c:if>	
+			                            		</c:if>
+			                            	</c:forEach>	
+	                            		</c:if>
+		                            	<c:if test = "${!fn:contains(blockedId, usersId)}">
+	                            			<div class="btn block_button text-white rounded-pill" data-favblockId = "${u.user_id }" onclick="blockFunction($(this).attr('data-favblockId'))">lock</div>
+	                            		</c:if>
+	                            	
+	                            <%-- </c:forEach>  --%>
+	                        </div>
+                        </c:forEach>
 
                     </div>
                 </div>
@@ -322,6 +347,56 @@
             $("#footer").load("../footer.html");
         });
     </script> -->
+    
+    <script>
+    
+	    function blockFunction(id){
+	    	console.log("block called");
+			
+			$.ajax({
+				url : 'favblock-block',
+				type : 'POST',
+				data : id,
+				contentType : "application/json",
+				success : function(data) {
+					console.log("accept");
+					location.reload();
+				},
+				error : function(xhr, textStatus, xml) {
+					console.log("error");
+					console.log(xhr);
+					console.log(textStatus);
+					console.log(xml);
+				}
+			})
+			
+		}
+    
+    	function unblockFunction(target_id){
+    		
+    		console.log(target_id);
+    		console.log("unblock called");
+
+   			$.ajax({
+   				url : 'favblock-unblock',
+   				type : 'POST',
+   				data : target_id,
+   				contentType : "application/json",
+   				success : function(data) {
+   					console.log("asa");
+   					location.reload(); 
+   				},
+   				error : function(xhr, textStatus, xml) {
+   					console.log("error");
+   					console.log(xhr);
+   					console.log(textStatus);
+   					console.log(xml);
+   				}
+   			})
+    		
+    	}
+    
+    </script>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>

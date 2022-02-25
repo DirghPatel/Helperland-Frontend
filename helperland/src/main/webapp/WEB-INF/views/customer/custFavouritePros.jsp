@@ -7,6 +7,10 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
+	<c:set var="fav" value="${fav }" />
+	<c:set var="users" value="${users }" />
+	<c:set var="avgSpRating" value="${avgSpRating }" />
+	<c:set var="spTotalCleaning" value="${spTotalCleaning }" />
 	<link href='<c:url value="/resources/css/navbar-2.css" />' rel="stylesheet" />
 	<link href='<c:url value="/resources/css/custDash.css" />' rel="stylesheet" />
 	<link href='<c:url value="/resources/css/footer.css" />' rel="stylesheet" />
@@ -160,125 +164,97 @@
                 <!-- --------- Favourite Pros ----------  -->
                 <div id="favouriteProsTable">
                     <div class="favouriteProsList">
-                        <div class="favouriteProsListItem col-sm-4 w-100 d-flex align-items-center justify-content-center flex-column">
-                            <div class="custProfile mb-3 rounded-circle d-flex align-items-center justify-content-center">
-                                <img src="<c:url value = "/resources/assets/custDash/cap.png" />" >
-                            </div>
-                            <p class="mb-3">Cust1 Cust1</p>
-                            <div class="d-flex align-items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                    <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                    <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                    <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                    <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                    <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                </svg>
-                                <span>3.02</span>
-                            </div>
-                            <p>1 Cleanings</p>
-                            <div>
-                                <div class="btn remove_button text-white rounded-pill">Remove</div>
-                                <div class="btn block_button text-white rounded-pill">Block</div>
-                            </div>
-                        </div>
-
-                        <div class="favouriteProsListItem col-sm-4 w-100 d-flex align-items-center justify-content-center flex-column">
-                            <div class="custProfile mb-3 rounded-circle d-flex align-items-center justify-content-center">
-                                <img src="<c:url value = "/resources/assets/custDash/cap.png" />" >
-                            </div>
-                            <p class="mb-3">Cust1 Cust1</p>
-                            <div class="d-flex align-items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                    <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                    <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                    <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                    <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                    <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                </svg>
-                                <span>3.02</span>
-                            </div>
-                            <p>1 Cleanings</p>
-                            <div>
-                                <div class="btn remove_button text-white rounded-pill">Remove</div>
-                                <div class="btn block_button text-white rounded-pill">Block</div>
-                            </div>
-                        </div>
-
-                        <div class="favouriteProsListItem col-sm-4 w-100 d-flex align-items-center justify-content-center flex-column">
-                            <div class="custProfile mb-3 rounded-circle d-flex align-items-center justify-content-center">
-                                <img src="<c:url value = "/resources/assets/custDash/cap.png" />" >
-                            </div>
-                            <p class="mb-3">Cust1 Cust1</p>
-                            <div class="d-flex align-items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                    <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                    <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                    <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                    <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                    <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                </svg>
-                                <span>3.02</span>
-                            </div>
-                            <p>1 Cleanings</p>
-                            <div>
-                                <div class="btn remove_button text-white rounded-pill">Remove</div>
-                                <div class="btn block_button text-white rounded-pill">Block</div>
-                            </div>
-                        </div>
-
-                        <div class="favouriteProsListItem col-sm-4 w-100 d-flex align-items-center justify-content-center flex-column">
-                            <div class="custProfile mb-3 rounded-circle d-flex align-items-center justify-content-center">
-                                <img src="<c:url value = "/resources/assets/custDash/cap.png" />" >
-                            </div>
-                            <p class="mb-3">Cust1 Cust1</p>
-                            <div class="d-flex align-items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                    <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                    <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                    <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                    <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                    <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                </svg>
-                                <span>3.02</span>
-                            </div>
-                            <p>1 Cleanings</p>
-                            <div>
-                                <div class="btn remove_button text-white rounded-pill">Remove</div>
-                                <div class="btn block_button text-white rounded-pill">Block</div>
-                            </div>
-                        </div>
+                        
+                        
+                        <c:forEach var="fav" items="${fav }">
+                        	
+                        	<div class="favouriteProsListItem col-sm-4 w-100 d-flex align-items-center justify-content-center flex-column">
+	                        	<c:forEach var="u" items="${users }">  
+	                        		<c:if test="${u.user_id == fav.target_user_id }">  
+			                            <div class="custProfile mb-3 rounded-circle d-flex align-items-center justify-content-center">
+			                                <img src="<c:url value = "/resources/assets/custDash/${u.user_profile_picture }.png" />" >
+			                            </div>
+		                            
+	                            		<p class="mb-3"> ${u.first_name } ${u.last_name }</p>
+	                            	</c:if>
+								</c:forEach>
+	                            <div class="d-flex align-items-center">
+	                                <c:forEach items="${avgSpRating}" var="spRating">		        
+								        <c:if test="${spRating.key == fav.target_user_id }">
+								        	<c:if test="${spRating.value == 0}">
+								        		<span class="icon" id="icon1" style="color: #e1e1e1">★</span>
+								        		<span class="icon" id="icon2" style="color: #e1e1e1">★</span>
+		                                    	<span class="icon" id="icon3" style="color: #e1e1e1">★</span>
+		                                    	<span class="icon" id="icon4" style="color: #e1e1e1">★</span>
+                                   				<span class="icon" id="icon5" style="color: #e1e1e1">★</span>	
+								        	</c:if>	
+								        	<c:if test="${spRating.value == 1}">
+								        		<span class="icon" id="icon1" style="color: #ECB91C">★</span>
+								        		<span class="icon" id="icon2" style="color: #e1e1e1">★</span>
+		                                    	<span class="icon" id="icon3" style="color: #e1e1e1">★</span>
+		                                    	<span class="icon" id="icon4" style="color: #e1e1e1">★</span>
+                                   				<span class="icon" id="icon5" style="color: #e1e1e1">★</span>	
+								        	</c:if>	
+								        	<c:if test="${spRating.value == 2}">
+								        		<span class="icon" id="icon1" style="color: #ECB91C">★</span>
+								        		<span class="icon" id="icon2" style="color: #ECB91C">★</span>
+		                                    	<span class="icon" id="icon3" style="color: #e1e1e1">★</span>
+		                                    	<span class="icon" id="icon4" style="color: #e1e1e1">★</span>
+                                   				<span class="icon" id="icon5" style="color: #e1e1e1">★</span>	
+								        	</c:if>	
+								        	<c:if test="${spRating.value == 3}">
+								        		<span class="icon" id="icon1" style="color: #ECB91C">★</span>
+								        		<span class="icon" id="icon2" style="color: #ECB91C">★</span>
+		                                    	<span class="icon" id="icon3" style="color: #ECB91C">★</span>
+		                                    	<span class="icon" id="icon4" style="color: #e1e1e1">★</span>
+                                   				<span class="icon" id="icon5" style="color: #e1e1e1">★</span>	
+								        	</c:if>	
+								        	<c:if test="${spRating.value == 4}">
+								        		<span class="icon" id="icon1" style="color: #ECB91C">★</span>
+								        		<span class="icon" id="icon2" style="color: #ECB91C">★</span>
+		                                    	<span class="icon" id="icon3" style="color: #ECB91C">★</span>
+		                                    	<span class="icon" id="icon4" style="color: #ECB91C">★</span>
+                                   				<span class="icon" id="icon5" style="color: #e1e1e1">★</span>	
+								        	</c:if>	
+								        	<c:if test="${spRating.value == 5}">
+								        		<span class="icon" id="icon1" style="color: #ECB91C">★</span>
+								        		<span class="icon" id="icon2" style="color: #ECB91C">★</span>
+		                                    	<span class="icon" id="icon3" style="color: #ECB91C">★</span>
+		                                    	<span class="icon" id="icon4" style="color: #ECB91C">★</span>
+                                   				<span class="icon" id="icon5" style="color: #ECB91C">★</span>	
+								        	</c:if>	
+                                              	<p class="mb-0">${spRating.value }</p>
+								        </c:if>
+								    </c:forEach>  
+	                            </div>
+	                            <c:forEach var="total" items="${spTotalCleaning }">
+	                            	<c:if test="${total.key == fav.target_user_id}">
+	                            		<p>${total.value } Cleanings</p>	
+	                            	</c:if>
+	                            </c:forEach>
+	                            <div>
+		                            <c:forEach var="u" items="${users }">  
+		                            	<c:if test="${u.user_id == fav.target_user_id and fav.is_favourite == 1}">
+		                            		<div class="btn remove_button text-white rounded-pill" data-favId="${fav.id }" onclick="removeFunction($(this).attr('data-favId'))">Remove</div>
+		                            	</c:if>
+		                            	<c:if test="${u.user_id == fav.target_user_id and fav.is_favourite == 0}">
+		                            		<div class="btn remove_button text-white rounded-pill" data-favId="${fav.id }" onclick="favouriteFunction($(this).attr('data-favId'))">Favourite</div>
+		                            	</c:if>
+			                            <c:if test="${u.user_id == fav.target_user_id and fav.is_blocked == 0}">
+			                                <div class="btn block_button text-white rounded-pill" data-favId="${fav.id }" onclick="blockFunction($(this).attr('data-favId'))">Block</div>
+										</c:if>
+										<c:if test="${u.user_id == fav.target_user_id and fav.is_blocked == 1}">
+			                                <div class="btn block_button text-white rounded-pill" data-favId="${fav.id }" onclick="unblockFunction($(this).attr('data-favId'))">Unblock</div>
+										</c:if>
+										
+		                            </c:forEach>
+		                        </div>
+	                        </div>
+                        	
+                        </c:forEach>
+                        
+                        
+                        
                     </div>
                 </div>
             </div>
@@ -342,6 +318,90 @@
             $("#footer").load("../footer.html");
         });
     </script> -->
+    
+    <script>
+    
+    	function removeFunction(id){
+    		
+    		$.ajax({
+				url : 'favblock-remove',
+				type : 'POST',
+				data : id,
+				contentType : "application/json",
+				success : function(data) {
+					location.reload();
+				},
+				error : function(xhr, textStatus, xml) {
+					console.log("error");
+					console.log(xhr);
+					console.log(textStatus);
+					console.log(xml);
+				}
+			})
+    		
+    	}
+    	
+		function favouriteFunction(id){
+    		
+    		$.ajax({
+				url : 'favblock-favourite',
+				type : 'POST',
+				data : id,
+				contentType : "application/json",
+				success : function(data) {
+					location.reload();
+				},
+				error : function(xhr, textStatus, xml) {
+					console.log("error");
+					console.log(xhr);
+					console.log(textStatus);
+					console.log(xml);
+				}
+			})
+    		
+    	}
+    	
+		function blockFunction(id){
+			
+			$.ajax({
+				url : 'favblock-block',
+				type : 'POST',
+				data : id,
+				contentType : "application/json",
+				success : function(data) {
+					location.reload();
+				},
+				error : function(xhr, textStatus, xml) {
+					console.log("error");
+					console.log(xhr);
+					console.log(textStatus);
+					console.log(xml);
+				}
+			})
+			
+		}
+		
+		function unblockFunction(id){
+			
+			$.ajax({
+				url : 'favblock-unblock',
+				type : 'POST',
+				data : id,
+				contentType : "application/json",
+				success : function(data) {
+					location.reload();
+				},
+				error : function(xhr, textStatus, xml) {
+					console.log("error");
+					console.log(xhr);
+					console.log(textStatus);
+					console.log(xml);
+				}
+			})
+			
+		}
+    
+    </script>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 

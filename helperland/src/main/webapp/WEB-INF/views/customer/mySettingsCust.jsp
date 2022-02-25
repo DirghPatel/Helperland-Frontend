@@ -6,13 +6,14 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
+	<c:set var="user" value="${user }"/>
 	<link href='<c:url value="/resources/css/navbar-2.css" />' rel="stylesheet" />
 	<link href='<c:url value="/resources/css/custDash.css" />' rel="stylesheet" />
 	<link href='<c:url value="/resources/css/mySettingsCust.css" />' rel="stylesheet" />
 	<link href='<c:url value="/resources/css/footer.css" />' rel="stylesheet" />
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
-    </script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 </head>
 <body>
     <div style="min-height: 100vh; padding-bottom: 170px;">
@@ -102,7 +103,7 @@
                             </li>
                             <li><a class="dropdown-item px-0" type="button" href="dash">My Dashboard</a></li>
                             <li><a class="dropdown-item px-0" type="button" href="mysettings" >My Settings</a></li>
-                            <li><a class="dropdown-item px-0" type="button">Logout</a></li>
+                            <li><a class="dropdown-item px-0" type="button" href="/helperland/logout">Logout</a></li>
                         </ul>
                     </div>
                     <div>
@@ -187,51 +188,53 @@
 
                     <!-- ------- my details ---------  -->
                     <div class="tab-pane fade show active" id="myDetailsTab" role="tabpanel" aria-labelledby="myDetails">
-                        <form class="row">
+                        <form class="row" method="post" action="update-mydetails">
                             <div class="col-sm-4 mb-4">
                                 <div class="form-group d-flex flex-column">
                                     <label for="firstname">First Name</label>
-                                    <input type="text" name="firstname" placeholder="First name" id="firstname" value="${user.first_name }" class="minheight46 borderlight paddinginside form-control">
+                                    <input type="text" name="first_name" required placeholder="First name" id="firstname" value="${user.first_name }" class="minheight46 borderlight paddinginside form-control">
                                 </div>
                             </div>
                             <div class="col-sm-4 mb-4">
                                 <div class="form-group d-flex flex-column">
                                     <label for="lastname">Last Name</label>
-                                    <input type="text" name="lastname" placeholder="Last name" id="lastname" value="${user.last_name }" class="minheight46 borderlight paddinginside form-control">
+                                    <input type="text" name="last_name" required placeholder="Last name" id="lastname" value="${user.last_name }" class="minheight46 borderlight paddinginside form-control">
                                 </div>
                             </div>
                             <div class="col-sm-4 mb-4">
                                 <div class="form-group d-flex flex-column">
                                     <label for="emailaddress">Email Address</label>
-                                    <input type="email" name="address" placeholder="Email Address" id="emailaddress" value="${user.email }" disabled class="minheight46 borderlight paddinginside form-control">
+                                    <input type="email" name="email" required placeholder="Email Address" id="emailaddress" value="${user.email }" disabled class="minheight46 borderlight paddinginside form-control">
                                 </div>
                             </div>
                             <div class="col-sm-4 mb-4">
                                 <div class="form-group d-flex flex-column">
                                     <label for="mobilenumber">Mobile Number</label>
                                     <div class="d-flex">
-                                        <input type="text" value="+49" disabled style="max-width: 52px;" class="minheight46 borderlight paddinginside form-control">
-                                        <input type="text" name="mobilenumber" placeholder="Mobile number" id="mobilenumber" value="${user.mobile }" class="minheight46 borderlight paddinginside form-control">
+                                        <input type="text" value="+91" disabled style="max-width: 52px;" class="minheight46 borderlight paddinginside form-control">
+                                        <input type="text" name="mobile" required placeholder="Mobile number" id="mobilenumber" value="${user.mobile }" class="minheight46 borderlight paddinginside form-control">
                                     </div>
                                 </div>
                             </div>
+                            
+                            
                             <div class="col-sm-4 mb-4">
                                 <div class="form-group">
                                     <div class="d-flex flex-column">
                                         <label>Date Of Birth</label>
                                         <div class="d-flex">
                                             <div class="d-inline-block">
-                                                <select name="birthdate" id="" class="minheight46 borderlight paddinginside mx-2 ms-0">
+                                                <select name="birthdate" id="birthdate" required class="minheight46 borderlight paddinginside mx-2 ms-0">
                                                     <option value="" >Day</option>
-                                                    <option value="01">01</option>
-                                                    <option value="02">02</option>
-                                                    <option value="03">03</option>
-                                                    <option value="04">04</option>
-                                                    <option value="05">05</option>
-                                                    <option value="06">06</option>
-                                                    <option value="07">07</option>
-                                                    <option value="08">08</option>
-                                                    <option value="09">09</option>
+                                                    <option value="1">01</option>
+                                                    <option value="2">02</option>
+                                                    <option value="3">03</option>
+                                                    <option value="4">04</option>
+                                                    <option value="5">05</option>
+                                                    <option value="6">06</option>
+                                                    <option value="7">07</option>
+                                                    <option value="8">08</option>
+                                                    <option value="9">09</option>
                                                     <option value="10">10</option>
                                                     <option value="11">11</option>
                                                     <option value="12">12</option>
@@ -258,24 +261,24 @@
                                                 </select>
                                             </div>
                                             <div class="d-inline-block">
-                                                <select name="birthmonth" id="" class="minheight46 borderlight paddinginside mx-2" >
+                                                <select name="birthmonth" id="birthmonth" required class="minheight46 borderlight paddinginside mx-2" >
                                                     <option value="" >Month</option>
-                                                    <option value="january">January</option>
-                                                    <option value="february">February</option>
-                                                    <option value="march">March</option>
-                                                    <option value="april">April</option>
-                                                    <option value="may">May</option>
-                                                    <option value="june">June</option>
-                                                    <option value="july">July</option>
-                                                    <option value="august">August</option>
-                                                    <option value="september">September</option>
-                                                    <option value="october">October</option>
-                                                    <option value="november">November</option>
-                                                    <option value="december">December</option>
+                                                    <option value="1">January</option>
+                                                    <option value="2">February</option>
+                                                    <option value="3">March</option>
+                                                    <option value="4">April</option>
+                                                    <option value="5">May</option>
+                                                    <option value="6">June</option>
+                                                    <option value="7">July</option>
+                                                    <option value="8">August</option>
+                                                    <option value="9">September</option>
+                                                    <option value="10">October</option>
+                                                    <option value="11">November</option>
+                                                    <option value="12">December</option>
                                                 </select>
                                             </div>
                                             <div class="d-inline-block">
-                                                <select name="birthyear" id="" class="minheight46 borderlight paddinginside mx-2">
+                                                <select name="birthyear" id="birthyear" required class="minheight46 borderlight paddinginside mx-2">
                                                     <option value="" >Year</option>
                                                     <option value="2012">2012</option>
                                                     <option value="2011">2011</option>
@@ -383,19 +386,20 @@
                                     </div>
                                 </div>
                             </div>
+                            <input type="hidden" name="date_of_birth" id="date_of_birth" value="${user.date_of_birth }"/>
+                        
+	                        <hr>
+	                        <div class="d-flex flex-column">
+	                            <label for="preferedLanguage">My Prefered Language</label>
+	                            <select name="preferedLanguage" class="minheight46 paddinginside borderlight" style="max-width: 120px;">
+	                                <option value="english"> English</option>
+	                                <option value="german"> German</option>
+	                            </select>
+	                        </div>
+	                        <button type="submit" disabled class="btn reschedule_button text-light rounded-pill px-4 mt-3" id="myDetailsSaveBtn">
+	                            Save
+	                        </button>
                         </form>
-                        <hr>
-                        <div class="d-flex flex-column">
-                            <label for="preferedLanguage">My Prefered Language</label>
-                            <select name="preferedLanguage" id="" class="minheight46 paddinginside borderlight" style="max-width: 120px;">
-                                <option value="english"> English</option>
-                                <option value="german"> German</option>
-                            </select>
-                        </div>
-                        <input type="hidden" name="modified_date" id="modified_date" value="">
-                        <button type="submit" class="btn reschedule_button text-light rounded-pill px-4 mt-3">
-                            Save
-                        </button>
                     </div>
                     <!-- ------------- my addresses ----------- -->
                     <div class="tab-pane fade" role="tabpanel" id="myAddressesTab" aria-labelledby="myAddresses">
@@ -411,22 +415,29 @@
                                         </th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <p class="mb-1"><b>Address:</b> Street 54, 53844 Troisdorf </p>
-                                            <p class="mb-1"><b>Phone Number:</b>9988556644</p>
-                                        </td>
-                                        <td>
-                                            <a href="#editAddressModal" data-bs-toggle="modal" role="button">
-                                                <img src="<c:url value = "/resources/assets/custDash/edit-icon.png" />" alt="" height="22" width="22">
-                                            </a>
-                                            <a href="#deleteAdressModal" data-bs-toggle="modal" role="button">
-                                                <img src="<c:url value = "/resources/assets/custDash/delete-icon.png" />" alt="" height="22" width="22">
-                                            </a>                                            
-                                            
-                                        </td>
-                                    </tr>
+                                <tbody id="address_list">
+                                	<c:forEach var="address" items="${addresses }">
+                                		<tr>
+	                                        <td>
+	                                            <p class="mb-1"><b>Address:</b> ${address.address_line1 } ${address.address_line2 } , ${address.postal_code } ${address.city } </p>
+	                                            <c:if test="${address.mobile != null }" >
+	                                            	<p class="mb-1"><b>Phone Number:</b> ${address.mobile }</p>
+	                                            </c:if>
+	                                            <c:if test="${address.mobile == null }" >
+	                                            	<p class="mb-1"><b>Phone Number:</b></p>
+	                                            </c:if>
+	                                        </td>
+	                                        <td>
+	                                            <a href="#editAddressModal" data-bs-toggle="modal" role="button" data-addressId = "${address.address_id }" onclick="editAddressFunction($(this).attr('data-addressId'))">
+	                                                <img src="<c:url value = "/resources/assets/custDash/edit-icon.png" />" alt="" height="22" width="22">
+	                                            </a>
+	                                            <a href="#deleteAdressModal" data-bs-toggle="modal" role="button" data-addressId = "${address.address_id }" onclick="deleteAddressFunction($(this).attr('data-addressId'))">
+	                                                <img src="<c:url value = "/resources/assets/custDash/delete-icon.png" />" alt="" height="22" width="22">
+	                                            </a>                                            
+	                                            
+	                                        </td>
+	                                    </tr>
+                                	</c:forEach>
                                 </tbody>
                             </table>
                             <a href="#addNewAddressModal" data-bs-toggle="modal" role="button" class="btn reschedule_button text-light rounded-pill">Add New address </a>
@@ -439,33 +450,33 @@
                                     <div class="modal-header">
                                         <h4 class="modal-title me-3 color646464" id="addNewAddressModalLabel2">Add New Address</h4>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
+                                    </div>	
                                     <div class="modal-body ">
-                                        <form action="" onsubmit="">
+                                        <form action="/helperland/add-address" method="POST" id="addNewAddressForm">
                                             <div class="row newAddress_form">
                                                 <div class="col-sm-6 mb-4">
                                                     <div class="form-group d-flex flex-column">
                                                         <label for="streetname">Street Name</label>
-                                                        <input type="text" placeholder="Street Name" name="streetname" class="borderlight minheight46 paddinginside w-100">
+                                                        <input type="text" placeholder="Street Name" required name="address_line1" class="borderlight minheight46 paddinginside w-100">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 mb-4">
                                                     <div class="form-group d-flex flex-column">
                                                         <label for="housenumber">House number</label>
-                                                        <input type="text" placeholder="House Number" name="housenumber" class="borderlight minheight46 paddinginside w-100">
+                                                        <input type="text" placeholder="House Number" required name="address_line2" class="borderlight minheight46 paddinginside w-100">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 mb-4">
                                                     <div class="form-group d-flex flex-column">
                                                         <label for="postalcode">Postal Code</label>
-                                                        <input type="text" placeholder="Postal Code" name="postalcode" class="borderlight minheight46 paddinginside w-100">
+                                                        <input type="text" placeholder="Postal Code" required name="postal_code" class="borderlight minheight46 paddinginside w-100">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <div class="form-group d-flex flex-column">
                                                         <label for="city">City</label>
                                                         <div class="d-inline-block">
-                                                            <input name="city" id="" placeholder="City" class="minheight46 borderlight paddinginside w-100" />
+                                                            <input name="city" placeholder="City" required class="minheight46 borderlight paddinginside w-100" />
                                                                 <!-- <option value="troisdorf" >Troisdorf</option> -->
                                                             <!-- </select> -->
                                                         </div>
@@ -475,11 +486,12 @@
                                                     <div class="form-group d-flex flex-column">
                                                         <label for="phonenumber">Phone Number</label>
                                                         <div class="d-flex">
-                                                            <input type="text" name="phonecode" class="borderlight minheight46 paddinginside" value="+49" disabled style="max-width: 55px;">
-                                                            <input type="text" placeholder="Phone Number" name="phonenumber" class="borderlight minheight46 paddinginside">
+                                                            <input type="text" name="phonecode" class="borderlight minheight46 paddinginside" value="+91" disabled style="max-width: 55px;">
+                                                            <input type="text" placeholder="Phone Number" required name="mobile" class="borderlight minheight46 paddinginside">
                                                         </div>
                                                     </div>
                                                 </div>
+                                            <small id="addAddressError" class="text-danger mb-2"></small> 
                                             </div>
                                             <button type="submit" class="greenButton rounded-pill borderlight text-light px-3 paddinginside">
                                                 Add
@@ -498,31 +510,31 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body ">
-                                        <form action="" onsubmit="">
+                                        <form action="/helperland/edit-address" method="POST" id="editAddressForm">
                                             <div class="row newAddress_form">
                                                 <div class="col-sm-6 mb-4">
                                                     <div class="form-group d-flex flex-column">
                                                         <label for="streetname">Street Name</label>
-                                                        <input type="text" value="" placeholder="Street Name" name="streetname" class="borderlight minheight46 paddinginside w-100">
+                                                        <input type="text" id="editAddress1" placeholder="Street Name" name="address_line1" class="borderlight minheight46 paddinginside w-100">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 mb-4">
                                                     <div class="form-group d-flex flex-column">
                                                         <label for="housenumber">House number</label>
-                                                        <input type="text" value="" placeholder="House Number" name="housenumber" class="borderlight minheight46 paddinginside w-100">
+                                                        <input type="text" id="editAddress2" placeholder="House Number" name="address_line2" class="borderlight minheight46 paddinginside w-100">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 mb-4">
                                                     <div class="form-group d-flex flex-column">
                                                         <label for="postalcode">Postal Code</label>
-                                                        <input type="text" value="" placeholder="Postal Code" name="postalcode" class="borderlight minheight46 paddinginside w-100">
+                                                        <input type="text" id="editAddressPC" placeholder="Postal Code" name="postal_code" class="borderlight minheight46 paddinginside w-100">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <div class="form-group d-flex flex-column">
                                                         <label for="city">City</label>
                                                         <div class="d-inline-block">
-                                                            <input name="city" value="" id="" placeholder="City" class="minheight46 borderlight paddinginside w-100" />
+                                                            <input name="city" id="editAddressCity" placeholder="City" class="minheight46 borderlight paddinginside w-100" />
                                                                 <!-- <option value="troisdorf" >Troisdorf</option> -->
                                                             <!-- </select> -->
                                                         </div>
@@ -532,12 +544,15 @@
                                                     <div class="form-group d-flex flex-column">
                                                         <label for="phonenumber">Phone Number</label>
                                                         <div class="d-flex">
-                                                            <input type="text" name="phonecode" class="borderlight minheight46 paddinginside" value="+49" disabled style="max-width: 55px;">
-                                                            <input type="text" placeholder="Phone Number" name="phonenumber" class="borderlight minheight46 paddinginside" value="3423423423">
+                                                            <input type="text" name="phonecode" class="borderlight minheight46 paddinginside" value="+91" disabled style="max-width: 55px;">
+                                                            <input type="text" placeholder="Phone Number" id="editAddressMobile" name="mobile" class="borderlight minheight46 paddinginside">
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <small id="editAddressError" class="text-danger mb-2"></small>
                                             </div>
+                                            <input type="hidden" name="address_id" id="editAddressFormId" >
+                                            
                                             <button type="submit" class="greenButton rounded-pill borderlight text-light px-3 paddinginside">
                                                 Add
                                             </button>
@@ -555,12 +570,14 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body ">
-                                        <form action="" onsubmit="">
+                                        <!-- <form action="" onsubmit=""> -->
+                                        <div>
                                             <p class="mb-3 color646464">Are You sure you want to delete this address?</p>
-                                            <button type="submit" class="mt-2 greenButton rounded-pill borderlight text-light px-3 paddinginside">
-                                                Delete
+                                            <button class="mt-2 greenButton rounded-pill borderlight text-light px-3 paddinginside" id="confirmDeleteBtn">
+                                                Delete	
                                             </button>
-                                        </form>
+                                        </div>
+                                        <!-- </form> -->
                                     </div>
                                 </div>
                             </div>
@@ -570,10 +587,11 @@
 
                     <!-- ----------- change password ----------- -->
                     <div class="tab-pane fade" role="tabpanel" id="changePasswordTab" aria-labelledby="changePassword">
-                        <form action="">
+                        <form action="/helperland/change-password" method="POST" id="passwordChangeForm">
                             <div class="form-group mb-2 col-sm-4">
                                 <label for="oldPassword">Old Password</label>
                                 <input type="password" name="oldPassword" placeholder="Current Password" class="form-control minheight46" required >
+                            	<small class="text-danger" id="wrongPassword"></small>
                             </div>
                             <div class="form-group mb-2 col-sm-4">
                                 <label for="newPassword">New Password</label>
@@ -582,9 +600,10 @@
                             <div class="form-group mb-2 col-sm-4">
                                 <label for="confirmPassword">Confirm Password</label>
                                 <input type="password" name="confirmPassword" id="confirmpassword" class="form-control minheight46 " placeholder="New Password" maxlength="14" required>
+                            	<small class="text-danger" id="differentPassword"></small>
                             </div>
-                            <input type="hidden" name="modified_date" id="modified_date2" value="">
-                            <button type="submit" class="btn reschedule_button px-4 mt-3 text-light rounded-pill">
+                            
+                            <button type="submit" disabled class="btn reschedule_button px-4 mt-3 text-light rounded-pill" id="changePasswordBtn">
                                 Save
                             </button>
                         </form>
@@ -647,14 +666,101 @@
         </div>
     </div>
 
-<!--     <script src="./custDash.js"></script> -->
-    <!-- <script>
-        $(function () {
-            $("#footer").load("../footer.html");
-        });
-    </script> -->
-    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+	<script>
+	
+	
+	    $(document).ready(function(){
+	    	
+	    	$("#firstname , #lastname , #emailaddress , #mobilenumber , #birthdate , #birthmonth , #birthyear").on("change" , function(){
+	    		
+	    		$("#myDetailsSaveBtn").removeAttr('disabled');
+	    		
+	    	})
+	    	
+	    	<c:if test="${user.date_of_birth != null}">
+		    	var dt = new Date(`${user.date_of_birth}`);
+		    	console.log(dt);
+		    	var dtDate = dt.getDate();
+		    	var dtMonth = dt.getMonth() + 1;
+		    	var dtYear = dt.getFullYear();
+		    	$("#date_of_birth").val(dt);
+		    	
+		    	$("#birthdate option[value = '" + dtDate + "']").attr('selected' , true);
+		    	$("#birthmonth option[value = '" + dtMonth + "']").attr('selected' , true);
+		    	$("#birthyear option[value = '" + dtYear + "']").attr('selected' , true);
+		    	
+		    	$("#birthdate").on('change' , function(){
+					dt.setDate($("#birthdate").val());
+					$("#date_of_birth").val(dt);
+					console.log(dt);
+				})
+				$("#birthmonth").on('change' , function(){
+					dt.setMonth($("#birthmonth").val() - 1);
+					$("#date_of_birth").val(dt);
+					console.log(dt);
+				})
+				$("#birthyear").on('change' , function(){
+					dt.setYear($("#birthyear").val());
+					$("#date_of_birth").val(dt);
+					console.log(dt);
+				})
+	    	</c:if>
+	    	<c:if test="${user.date_of_birth == null}">
+	    		var date1;
+	    		var date2;
+	    		var date3;
+		    	$("#birthdate").on('change' , function(){
+					date1 = $("#birthdate").val();
+					
+				})
+				$("#birthmonth").on('change' , function(){
+					date2 = $("#birthmonth").val();
+				})
+				$("#birthyear").on('change' , function(){
+					date3 = $("#birthyear").val();
+				})
+				
+				$("#myDetailsSaveBtn").on('click' , function(){
+					var dt = new Date();
+			    	console.log(dt);
+			    	dt.setDate(date1);
+			    	dt.setMonth(date2 - 1);
+			    	dt.setYear(date3);
+			    	$("#date_of_birth").val(dt);
+			    	console.log(dt);	
+				})
+				
+	    	</c:if>
+	    	/* var dt = new Date(`${user.date_of_birth}`);
+	    	console.log(dt);
+	    	var dtDate = dt.getDate();
+	    	var dtMonth = dt.getMonth() + 1;
+	    	var dtYear = dt.getFullYear();
+	    	$("#date_of_birth").val(dt);
+	    	
+	    	$("#birthdate option[value = '" + dtDate + "']").attr('selected' , true);
+	    	$("#birthmonth option[value = '" + dtMonth + "']").attr('selected' , true);
+	    	$("#birthyear option[value = '" + dtYear + "']").attr('selected' , true); 
+	    
+			$("#birthdate").on('change' , function(){
+				dt.setDate($("#birthdate").val());
+				$("#date_of_birth").val(dt);
+				console.log(dt);
+			})
+			$("#birthmonth").on('change' , function(){
+				dt.setMonth($("#birthmonth").val() - 1);
+				$("#date_of_birth").val(dt);
+				console.log(dt);
+			})
+			$("#birthyear").on('change' , function(){
+				dt.setYear($("#birthyear").val());
+				$("#date_of_birth").val(dt);
+				console.log(dt);
+			}) */
+	    })
+		
+	</script>
 	<script>
 		
 
@@ -682,6 +788,181 @@
 		$('#modified_date , #modified_date2').val(t);
 	
 	</script>
+	<script>
+	
+		$('#password, #confirmpassword').on('keyup', function () {
+	        if ($('#password').val() == $('#confirmpassword').val() && $('#password').val().length >= 8) {
+	            $('#confirmPasswordMessage').html('Looks Good!').css('color', 'green');
+	            $('#changePasswordBtn').removeAttr('disabled');
+	        } 
+	        else {
+	            $('#confirmPasswordMessage').html('Enter same password again').css('color', 'red');
+	        }
+	        if ($('#password').val() != $('#confirmpassword').val()) {
+	            $('#changePasswordBtn').attr('disabled' , true);
+	        }
+	        if($('#password').val().length == 0){
+	        	$('#changePasswordBtn').attr('disabled' , true);	
+	        }
+	    });
+	
+	</script>
+	<script>
+	
+		function editAddressFunction(id){
+			
+			/* console.log(id);
+			
+			<c:forEach var="address" items="${addresses }">
+				if(${address.address_id} == id){
+					$("#editAddress1").val("${address.address_line1}");
+					$("#editAddress2").val("${address.address_line2}");
+					$("#editAddressPC").val("${address.postal_code}");
+					$("#editAddressMobile").val("${address.mobile}");
+					$("#editAddressCity").val("${address.city}");
+					$("#editAddressFormId").val("${address.address_id}");
+				}
+			</c:forEach> */
+	
+				$.ajax({
+					type : "POST",
+					contentType : "application/json",
+					url : "/helperland/address-details",
+					data : id,
+					crossDomain : true,
+					success : function(data) {
+						console.log(data);
+						$("#editAddress1").val(data.address_line1);
+						$("#editAddress2").val(data.address_line2);
+						$("#editAddressPC").val(data.postal_code);
+						$("#editAddressMobile").val(data.mobile);
+						$("#editAddressCity").val(data.city);
+						$("#editAddressFormId").val(data.address_id);
+					},
+					error : function(xml, textStatus, xhr) {
+						console.log("error");
+					}
+				});
+			
+		}
+		
+		
+		function deleteAddressFunction(id){
+			$("#confirmDeleteBtn").attr('data-addressId' , id);
+			console.log($("#confirmDeleteBtn").attr('data-addressId'));
+		}
+		
+		$("#confirmDeleteBtn").on("click" , function(){
+			
+			var id = $("#confirmDeleteBtn").attr('data-addressId');  
+			console.log(id);
+	
+			$.ajax({
+				type : "POST",
+				contentType : "application/json",
+				url : "/helperland/address-delete",
+				data : id,
+				crossDomain : true,
+				success : function() {
+					$("#deleteAdressModal").modal('hide');
+					/* $("#myAddressesTab").load(location.href+" #myAddressesTab>*",""); */
+					
+					$("#myAddressesTable").load(location.href+" #myAddressesTable>*",""); 
+				},
+				error : function(xml, textStatus, xhr) {
+					console.log("error");
+				}
+			});
+			
+		}) 
+		
+	
+		$("#addNewAddressForm").submit(function addnewAddressFun(e) {
+	
+			$(this).find('input[type=checkbox]:checked').val(1);
+			
+	
+			console.log($(this).serialize());
+			e.preventDefault();
+			$.ajax({
+				url : $(this).attr('action'),
+				type : $(this).attr('method'),
+				data : $(this).serialize(),
+				success : function(data , xhr) {
+					
+					$("#addNewAddressModal").modal('hide');
+					/* $("#myAddressesTab").load(location.href+" #myAddressesTab>*",""); */
+					/* location.reload(); */
+					$("#myAddressesTable").load(location.href+" #myAddressesTable>*",""); 
+					 
+				},
+				error : function(xhr, textStatus, xml) {
+					console.log("error");
+					$("#addAddressError").html("Please enter all fields to add."); 
+					
+				}
+			})
+		})
+		
+		$("#editAddressForm").submit(function editAddressFun(e) {
+	
+			$(this).find('input[type=checkbox]:checked').val(1);
+			
+	
+			console.log($(this).serialize());
+			e.preventDefault();
+			$.ajax({
+				url : $(this).attr('action'),
+				type : $(this).attr('method'),
+				data : $(this).serialize(),
+				success : function(data , xhr) {
+					
+					$("#editAddressModal").modal('hide');
+					$("#myAddressesTable").load(location.href+" #myAddressesTable>*",""); 
+					/* location.reload(); */
+					/* $("#myAddressesTabController").click(); */
+					/* document.getElementById("myAddressesTabController").click(); */
+					 
+				},
+				error : function(xhr, textStatus, xml) {
+					console.log("error");
+					$("#editAddressError").html("Please enter all fields to update."); 
+				}
+			})
+		})
+		
+		$("#passwordChangeForm").submit(function (e){
+			e.preventDefault();
+			$.ajax({
+				url : $(this).attr('action'),
+				type : $(this).attr('method'),
+				data : $(this).serialize(),
+				success : function(data , xhr) {
+					if(data == 'different'){
+						$("#differentPassword").html("Please enter same passwords!")
+					}
+					if(data == "changed"){
+						$("#confirmpassword").val(null);
+						$("#password").val(null);
+						$("#oldPassword").val(null);
+					}
+				},
+				error : function(xhr, data, xml) {
+					console.log(data);
+					$("#wrongPassword").html("Please enter correct password!")
+					$("#confirmpassword").val(null);
+					$("#password").val(null);
+				}
+			})	
+		})
+		
+	</script>
+	
+	<script>
+		
+	</script>
+	
+	
 
 </body>
 </html>

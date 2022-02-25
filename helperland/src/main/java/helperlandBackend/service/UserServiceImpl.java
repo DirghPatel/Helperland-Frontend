@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import helperlandBackend.dao.UserDao;
+import helperlandBackend.models.FavouriteBlockedModel;
 import helperlandBackend.models.ServiceRequestAddress;
 import helperlandBackend.models.UserAddress;
 import helperlandBackend.models.UserModel;
@@ -36,6 +37,10 @@ public class UserServiceImpl implements UserService  {
 		return userDao.getUserByEmail(email);
 	}
 	
+	public UserModel getUserByUserId(int user_id) {
+		return userDao.getUserByUserId(user_id);
+	}
+	
 	public List<UserModel> getAllUser() {
 		return this.userDao.getAllUser();
 	}
@@ -59,6 +64,33 @@ public class UserServiceImpl implements UserService  {
 	
 	public UserAddress getAllAddressByAddressId(int id) {
 		return this.userDao.getAllAddressByAddressId(id);
+	}
+	
+	public int addFavBlock(FavouriteBlockedModel favBlockedModel) {
+		
+		return this.userDao.addFavBlock(favBlockedModel);
+	}
+
+
+	public List<FavouriteBlockedModel> getFavBlockByUserId(int user_id) {
+		return this.userDao.getFavBlockByUserId(user_id);
+	}
+	
+	public FavouriteBlockedModel getFavBlockByUserIdAndTargetUserId(int user_id , int targer_user_id) {
+		return this.userDao.getFavBlockByUserIdAndTargetUserId(user_id , targer_user_id);
+	}
+
+	public FavouriteBlockedModel getFavBlockById(int id) {
+		return this.userDao.getFavBlockById(id);
+	}
+
+	public void updateFavBlock(FavouriteBlockedModel favBlock) {
+		this.userDao.updateFavBlock(favBlock);		
+	}
+
+	public void updateUserAddress(UserAddress userAddress) {
+		this.userDao.updateUserAddress(userAddress);	
+		
 	}
 
 	

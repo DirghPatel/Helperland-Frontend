@@ -332,12 +332,32 @@
                 <div class="modal-dialog modal-dialog-centered vertical-align-center">
                     <div class="modal-content">
                         <!-- <div class="modal-body"> -->
-                            <div class="modal-header">
+                            <div class="modal-header px-4">
                                 <h5 class="modal-title" id="serviceAcceptLabel">Service Accept</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                        <div class="modal-body serviceAcceptModal p-2">
+                        <div class="modal-body serviceAcceptModal p-2 px-4">
 							<p>Accepted the service!</p>
+							<button type="button" data-bs-dismiss="modal" aria-label="Close" class="accept_button rounded-pill text-light text-decoration-none">Ok</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="conflictErrorPopUp">
+
+            <div class="modal fade" id="conflictError" aria-hidden="true" aria-labelledby="conflictErrorLabel" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered vertical-align-center">
+                    <div class="modal-content">
+                        <!-- <div class="modal-body"> -->
+                            <div class="modal-header px-4">
+                                <h5 class="modal-title text-danger" id="conflictErrorLabel">Error!!</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                        <div class="modal-body conflictErrorModal p-2 px-4">
+							<!-- <p>Another service request #<b id="conflictErrorReqId"></b> has already been assigned which has time overlap with this service request. You can’t pick this one!</p> -->
+							<p id="conflictErrorReqId"></p>
 							<button type="button" data-bs-dismiss="modal" aria-label="Close" class="accept_button rounded-pill text-light text-decoration-none">Ok</button>
                         </div>
                     </div>
@@ -448,7 +468,7 @@
 						
 						var d = new Date(data[0].service_start_date);
 						
-						var date1 = d.getDate() + "/" + d.getMonth() + "/" + d.getFullYear();
+						var date1 = d.getDate() + "/" + (d.getMonth()+1) + "/" + d.getFullYear();
 						if(d.getMinutes() == 0){
 							var time1 = d.getHours() + ":00" ;
 						}
@@ -473,7 +493,7 @@
 						
 						
 						$("#sdDate").html(date1 +" "+ time1 + "-" + time2); 
-						$("#sdDuration").html(data[0].service_hours + data[0].extra_hours);
+						$("#sdDuration").html(data[0].service_hours + data[0].extra_hours + " hours");
 						$("#sdId").html(data[0].service_req_id);
 						$("#sdAmount").html(data[0].total_cost + ",00 $");
 						$("#sdComments").html(data[0].comments);
@@ -540,16 +560,27 @@
 				success : function(data) {
 					
 					$("#serviceAccept").modal('show');
-					/* $("#req_refresh").load(" #req_refresh > *"); */
-					
-					location.reload();
+					location.reload(); 
 					
 				},
-				error : function(xhr, textStatus, xml) {
-					console.log("error");
-					console.log(xhr);
-					console.log(textStatus);
-					console.log(xml);
+				error : function(data) {
+					var d = data.responseText;
+					console.log(d);
+					console.log(d.length);
+					console.log(d.substring(8 , d.length));
+					if(d.substring(0 , 8) == "conflict"){
+						$("#conflictError").modal('show');
+						/* $("#conflictErrorReqId").html(d.substring(8 , d.length)); */
+						$("#conflictErrorReqId").html("Another service request # <b>" + d.substring(8 , d.length) + " </b> has already been assigned which has time overlap with this service request. You can’t pick this one!");
+					}
+					if(d == "expired"){
+						$("#conflictError").modal('show');
+						$("#conflictErrorReqId").html("This service request is expired");
+					}
+					if(d == "already accepted"){
+						$("#conflictError").modal('show');
+						$("#conflictErrorReqId").html("Sorry, This ServiceRequest is already accepted by another Service Provicer.");	
+					}
 				}
 			})
     		

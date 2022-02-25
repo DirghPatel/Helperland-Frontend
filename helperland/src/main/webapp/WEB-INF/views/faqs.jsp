@@ -316,7 +316,7 @@
 	                        <a href="#logInModal" class="text-decoration-none text-light nav-link" data-bs-target="#logInModal" data-bs-toggle="modal" data-bs-dismiss="modal" id="logInButton">Login</a>
 	                    </div>
 	                    <div class="nav-item navbar_helper rounded-pill">
-	                        <a href="become-a-helper" class="text-decoration-none text-light nav-link">Become a Helper</a>
+	                        <a href="become-a-pro" class="text-decoration-none text-light nav-link">Become a Helper</a>
 	                    </div>
 	                </div>
 	            </div>
@@ -566,14 +566,14 @@
                     <div class="modal-body logInModal p-2">
                         <form action="login" method="post">
                             <div class="form-group position-relative my-3">
-                                <input type="email" placeholder="Email Address" name="email" class="modalInputEmail inputHeightBorder">
+                                <input type="email" required placeholder="Email Address" name="email" class="modalInputEmail inputHeightBorder">
                                 <img
 									src=" <c:url value = "/resources/assets/homepage/first/user.png" />" alt="" height="21"
 									width="20">
                             </div>
                             
                             <div class="form-group position-relative my-3">
-                                <input type="password" placeholder="Password" name="password" class="modalInputEmail inputHeightBorder">
+                                <input type="password" required placeholder="Password" name="password" class="modalInputEmail inputHeightBorder">
                                 <img
 									src="<c:url value = "/resources/assets/homepage/first/lock.png" />" alt="" height="21"
 									width="20">
@@ -610,7 +610,7 @@
                     <div class="modal-body ">
                         <form action="forgot" method="post">
                             <div class="d-flex mb-3">
-                                <input type="email" placeholder="Email Address" name="email" class="modalInputEmail inputHeightBorder">
+                                <input type="email" required placeholder="Email Address" name="email" class="modalInputEmail inputHeightBorder">
                             </div>
                             <button type="submit" class="my-3 btn submitButton text-light w-100 rounded-pill" >
                                 Send

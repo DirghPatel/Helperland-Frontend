@@ -500,14 +500,14 @@
                     <div class="modal-body logInModal p-2">
                         <form action="login" method="post">
                             <div class="form-group position-relative my-3">
-                                <input type="email" placeholder="Email Address" name="email" class="modalInputEmail inputHeightBorder">
+                                <input type="email" required placeholder="Email Address" name="email" class="modalInputEmail inputHeightBorder">
                                 <img
 									src=" <c:url value = "/resources/assets/homepage/first/user.png" />" alt="" height="21"
 									width="20">
                             </div>
                             
                             <div class="form-group position-relative my-3">
-                                <input type="password" placeholder="Password" name="password" class="modalInputEmail inputHeightBorder">
+                                <input type="password" required placeholder="Password" name="password" class="modalInputEmail inputHeightBorder">
                                 <img
 									src="<c:url value = "/resources/assets/homepage/first/lock.png" />" alt="" height="21"
 									width="20">
@@ -544,7 +544,7 @@
                     <div class="modal-body ">
                         <form action="forgot" method="post">
                             <div class="d-flex mb-3">
-                                <input type="email" placeholder="Email Address" name="email" class="modalInputEmail inputHeightBorder">
+                                <input type="email" required placeholder="Email Address" name="email" class="modalInputEmail inputHeightBorder">
                             </div>
                             <button type="submit" class="my-3 btn submitButton text-light w-100 rounded-pill" >
                                 Send

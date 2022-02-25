@@ -81,6 +81,7 @@ public class ServiceBookingController {
 		serviceRequest.setPayment_due(0);
 		serviceRequest.setService_provider_id(currentUser.getUser_id());
 		serviceRequest.setModified_by(currentUser.getUser_id());
+		serviceRequest.setStatus(1);
 		
 		System.out.println(serviceRequest);
 		

@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -21,20 +22,20 @@ public class UserAddress {
 	@GeneratedValue(strategy = GenerationType.AUTO )
 	private int address_id;
 	
-//	@NotBlank
+	@NotNull
 	private int user_id;
 	
-//	@NotBlank
+	@NotBlank
 	private String address_line1;
 	
 	private String address_line2;
 	
-//	@NotBlank
+	@NotBlank
 	private String city;
 	
 	private String state;
 	
-//	@NotBlank
+	@NotBlank
 	private String postal_code;
 	
 //	@NotBlank

@@ -315,7 +315,7 @@
     <script>
 
 	    $('#password, #confirmpassword').on('keyup', function () {
-	        if ($('#password').val() == $('#confirmpassword').val()) {
+	        if ($('#password').val() == $('#confirmpassword').val() && $('#password').val().length >= 8) {
 	            $('#confirmPasswordMessage').html('Looks Good!').css('color', 'green');
 	            $('#registerButton').removeAttr('disabled');
 	        } 

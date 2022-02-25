@@ -1,6 +1,7 @@
 package helperlandBackend.controller;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,6 +11,8 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,8 +21,10 @@ import org.springframework.ui.Model;
 
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import helperlandBackend.models.ContactUs;
 import helperlandBackend.models.UserAddress;
@@ -205,20 +210,6 @@ public class MainController {
 				}
 			}
 			else {
-				
-//				this.userService.createUser(user);
-//				System.out.println("-------------------------");
-//				if(user.getUser_type_id() == 1) {
-//					session.setAttribute("user" , user);
-//					return "redirect:/customer/dash";
-//				}
-//				else if(user.getUser_type_id() == 2) {
-//					session.setAttribute("user" , user);
-//					return "redirect:/service-provider/dash";
-//				}
-//				else {
-//					return "home";
-//				}
 				try {
 					request.login(user.getEmail(), user.getPassword());
 					if(user.getUser_type_id() == 1) {
@@ -254,7 +245,42 @@ public class MainController {
 		return "403accessDenied";
 	}
 	
-	
+	@SuppressWarnings("rawtypes")
+	@RequestMapping(value = "/change-password" , method=RequestMethod.POST)
+	public ResponseEntity changePassword(@RequestParam("oldPassword") String oldPassword , @RequestParam("newPassword") String newPassword , @RequestParam("confirmPassword") String confirmPassword ){
+		
+		User loggedInUserDetails = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		UserModel currentUser = userService.getUserByEmail(loggedInUserDetails.getUsername());
+		
+		System.out.println(currentUser.getPassword());
+		System.out.println(oldPassword);
+		
+		if(oldPassword.equals(currentUser.getPassword())) {
+			
+			System.out.println(newPassword + "-------" + confirmPassword);
+			
+			if(newPassword.equals(confirmPassword)) {
+				Date dateToday = new Date();
+				currentUser.setPassword(newPassword);
+				currentUser.setModified_date(dateToday);
+				currentUser.setModified_by(currentUser.getUser_id());
+				this.userService.updateUser(currentUser);
+				return ResponseEntity.status(HttpStatus.OK).body("changed");
+			}
+			else {
+				System.out.println("no same password");
+				return ResponseEntity.status(HttpStatus.OK).body("different");
+			}
+			
+			
+		}
+		else {
+			System.out.println("error");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("error");
+		}
+		
+		
+	}
 	
 	
 

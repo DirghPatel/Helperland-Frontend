@@ -7,7 +7,7 @@ html{
 	overflow-x: hidden;
     padding: 0 !important;
 }
-.modal-open{
+.modal{
 	padding: 0 !important;
 }
 body{
@@ -77,8 +77,9 @@ body{
 }
 
 .sp_icon{
-  padding: 12px 7px; 
+  /* padding: 12px 7px;  */
   border: 1px solid #aaaaaa;
+  height: fit-content;
 }
 .table_1{
   color: #646464;
@@ -109,6 +110,10 @@ td {
 }
 .cust_statusCancelled{
     background-color: #ff6b6b !important;
+    width: fit-content !important;
+}
+.cust_statusPending{
+	background-color: #ffaa0f !important;
     width: fit-content !important;
 }
 .tableHead h3{
@@ -144,11 +149,16 @@ td {
 .serviceModalLeft p{
   margin-bottom: 0;
 }
+.sp_block{
+	max-width: 200px;
+	display: flex;
+}
 .sp_icon{
   border: 1px solid #aaa;
 }
 .serviceModalLeft{
   padding: 15px;
+  width: 70%;
 }
 .serviceModalRight{
   border-left: 1px solid #e1e1e1;
@@ -267,6 +277,13 @@ button:focus , input:focus , textarea:focus , select:focus{
   opacity: 0;
 }
 
+#ratingModelAvgStars .icon{
+	color: #ECB91C;
+}
+
+#sdModelAvgStars .icon{
+	color: #ECB91C;
+}
 .rating label .icon {
   float: left;
   color: transparent;
@@ -352,12 +369,14 @@ button:focus , input:focus , textarea:focus , select:focus{
   }
   .sp_block{
     justify-content: flex-start !important;
+    max-width: 200px;
   }
   .serviceModalRight{
     border: none;
   }
   .serviceModalLeft{
     padding-bottom: 0;
+    width: 100%;
   }
   hr{
     margin: 13px 0;

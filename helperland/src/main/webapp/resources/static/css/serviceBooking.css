@@ -140,7 +140,7 @@ button:focus , input:focus , textarea:focus , select:focus{
     color: #1d7a8c;
 }
 .nav-item:hover{
-    border: none;
+    border: none !important;
 }
 .bookService_Left .dash_contents .nav{
     flex-wrap: nowrap;

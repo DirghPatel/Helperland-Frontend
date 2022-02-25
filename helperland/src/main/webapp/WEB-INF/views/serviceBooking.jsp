@@ -9,9 +9,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<%-- <link href='<c:url value="/resources/css/navbar.css" />'
-	rel="stylesheet" /> --%>
-
 <c:set var="user_type_id" value="${user.user_type_id }" />
 
 <link href='<c:url value="/resources/css/navbar-2.css" />' rel="stylesheet" />
@@ -360,7 +357,8 @@
 											<div>
 												<input type="date" name="servicedate" required
 													class="height46 paddinginner borderlight color646464 mb-1"
-													id="servicedate"> <select name="servicetime"
+													id="servicedate"> 
+												<select name="servicetime"
 													id="servicetime"
 													class="height46 paddinginner borderlight mb-1 color646464">
 													<option value="08:00:00">8:00</option>
@@ -370,7 +368,8 @@
 													<option value="10:00:00">10:00</option>
 													<option value="10:30:00">10:30</option>
 
-												</select> <input type="hidden" form="mainServiceForm"
+												</select> 
+												<input type="hidden" form="mainServiceForm"
 													id="service_start_date" name="service_start_date">
 											</div>
 										</div>
@@ -562,7 +561,7 @@
 											<div class="col-sm-6 mb-4">
 												<div class="form-group d-flex flex-column">
 													<label for="housenumber">House number</label> <input
-														type="text" required placeholder="House Number"
+														type="text"  placeholder="House Number"
 														name="address_line1"
 														class="borderlight height46 paddinginner w-100 needed_in_address2">
 												</div>
@@ -602,13 +601,15 @@
 													</div>
 												</div>
 											</div>
+											<small id="addAddressError" class="text-danger mb-2"></small>
 										</div>
 										<input type="hidden" value="${user.user_id }" name="user_id">
 										<input type="hidden" name="is_default" value="0"> <input
 											type="hidden" name="is_deleted" value="0"> <input
 											type="hidden" name="email" value="${user.email }">
-										<button type="submit" disabled id="addressSubmitBtn"
-											class="greenButton rounded-pill borderlight text-light px-3 paddinginner">
+										
+										<button type="submit" id="addressSubmitBtn"
+											class="greenButton disabledBtn rounded-pill borderlight text-light px-3 paddinginner">
 											Save</button>
 										<a role="button"
 											class="btn border height46 paddinginner rounded-pill"
@@ -892,22 +893,42 @@
 		</div>
 	</div>
 
+	
+    <script>
+	    $(document).ready(function(){
+	        var dtToday = new Date();
+	        
+	        var month = dtToday.getMonth() + 1;
+	        var day = dtToday.getDate() + 1;
+	        var year = dtToday.getFullYear();
+	        if(month < 10)
+	            month = '0' + month.toString();
+	        if(day < 10)
+	            day = '0' + day.toString();
+	        
+	        var maxDate = year + '-' + month + '-' + day;
+	        $('#servicedate').attr('min', maxDate);
+	    });
+    </script>
 
 	<script>
-	
+		
 		$(".needed_in_address1 , .needed_in_address2 , .needed_in_address3").on("keyup" , function(){
 			if($(".needed_in_address1").val().length > 0 && $(".needed_in_address2").val().length > 0 && $(".needed_in_address3").val().length > 0){
 				$("#addressSubmitBtn").removeAttr('disabled');
+				$("#addressSubmitBtn").removeClass('disabledBtn');
 			}
 			else{
+				$("#addressSubmitBtn").addClass('disabledBtn');
 				$("#addressSubmitBtn").attr('disabled' , true);	
 			}
 			
-			if($(".needed_in_address1").val().length == 0 && $(".needed_in_address2").val().length > 0 && $(".needed_in_address3").val().length > 0){
+			if($(".needed_in_address1").val().length == 0 || $(".needed_in_address2").val().length == 0 || $(".needed_in_address3").val().length == 0){
 				$("#addressSubmitBtn").attr('disabled' , true);
+				$("#addressSubmitBtn").addClass('disabledBtn');
 			}
 			
-		});
+		}); 
 		
 		$("#postal_code").on("keyup" , function(){
 			if($("#postal_code").val().length > 4){
@@ -1058,12 +1079,9 @@
 								console.log("good");
 								$("#makePaymentTabController").prop("disabled" , false);
 			                    document.getElementById("makePaymentTabController").click();
-								
 							} else {
-
 								console.log(xhr.status);
 								console.log("bad");
-								
 							}
 						},
 						error : function(xml, textStatus, xhr) {
@@ -1094,55 +1112,39 @@
 				},
 				error : function(xhr, textStatus, xml) {
 					console.log("error");
-					$("#address_list").load(document.URL + " #address_list");
+					$("#addAddressError").html("Please enter all fields to add."); 
 				}
 			})
 		})
 	</script>
 
 	<script>
-		$("#postalCodeForm")
-				.submit(
-						function checkPostalCode(e) {
+		$("#postalCodeForm").submit(function checkPostalCode(e) {
+			e.preventDefault();
+			$("#address_pincode").val($("#postal_code").val());
 
-							e.preventDefault();
-							$("#address_pincode").val($("#postal_code").val());
+			$.ajax({
+				type : "POST",
+				contentType : "application/json",
+				url : $("#postalCodeForm").attr(
+						"action"),
 
-							$
-									.ajax({
-										type : "POST",
-										contentType : "application/json",
-										url : $("#postalCodeForm").attr(
-												"action"),
-
-										data : $("#postal_code").val(),
-										crossDomain : true,
-										success : function(xml, textStatus, xhr) {
-											if (xhr.status === 200) {
-												console.log("good");
-												$("#schedulePlanTabController")
-														.prop("disabled", false);
-												document
-														.getElementById(
-																"schedulePlanTabController")
-														.click();
-											} else {
-
-												console.log(xhr.status);
-												console.log("bad");
-												$("#errPostalCode")
-														.html(
-																"sorry no service provider available in your area.");
-											}
-										},
-										error : function(xml, textStatus, xhr) {
-											console.log(xhr.status);
-											$("#errPostalCode")
-													.html(
-															"sorry no service provider available in your area.");
-										}
-									});
-						});
+				data : $("#postal_code").val(),
+				crossDomain : true,
+				success : function(xml, textStatus, xhr) {
+					if (xhr.status === 200) {
+						$("#schedulePlanTabController").prop("disabled", false);
+						document.getElementById("schedulePlanTabController").click();
+					} else {
+						$("#errPostalCode").html("sorry no service provider available in your area.");
+					}
+				},
+				error : function(xml, textStatus, xhr) {
+					console.log(xhr.status);
+					$("#errPostalCode").html("sorry no service provider available in your area.");
+				}
+			});
+		});
 	</script>
 
 	<script>

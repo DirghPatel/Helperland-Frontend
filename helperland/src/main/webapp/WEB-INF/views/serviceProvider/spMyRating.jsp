@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -61,7 +62,7 @@
                                     <a class="nav-link" href="mysettings">My Settings</a>
                                 </div>
                                 <div class="nav-item nav_select1">
-                                    <a class="nav-link" href="#">Logout</a>
+                                    <a class="nav-link" href="/helperland/logout">Logout</a>
                                 </div>
                             </div>
                             <div class="navcol_third navcol position-relative">
@@ -114,7 +115,7 @@
                             </li>
                             <li><a class="dropdown-item px-1" type="button" href="dash">My Dashboard</a></li>
                             <li><a class="dropdown-item px-1" type="button" href="mysettings" >My Settings</a></li>
-                            <li><a class="dropdown-item px-1" type="button">Logout</a></li>
+                            <li><a class="dropdown-item px-1" type="button" href="/helperland/logout">Logout</a></li>
                         </ul>
                     </div>
                     <div>
@@ -188,53 +189,107 @@
                         </select>
                     </form>
                     <div class="myRatingTable_main">
-                        <div class="myRatingTable_body d-flex flex-column">
-                            <div class="ratingTable_innerRow1 d-flex p-2">
-                                <div class="d-flex ratingTable_innerRow2 ">
-                                    <div class="d-flex flex-column me-5">
-                                        <p class="text-decoration-none mb-0" >323436</p>
-                                        <p class="text-decoration-none fw-bold mb-0">Gaurang patel</p>
-                                    </div>
-                                    <div class="service_date cursorPointer" href="#serviceDetails" data-bs-toggle="modal">
-                                        <a class="d-flex text-decoration-none ">
-                                            <img src="<c:url value = "/resources/assets/spDash/calender.png" />" alt="" height="19" width="16">
-                                            <p class="m-0">09/04/2018</p>
-                                        </a>
-                                        <a class="d-flex text-decoration-none">
-                                            <img src="<c:url value = "/resources/assets/spDash/clock.png" />" alt="" height="19" width="16">
-                                            <p class="m-0">12:00 - 18:00</p>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div>
-                                    <p class="mb-0">ratings</p>
-                                    <div class="d-flex align-items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                            <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                            <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                            <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                            <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                            <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                        </svg>
-                                        <span class="ms-2">
-                                            Very Good
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="p-2">
-                                <p class="mb-0 fw-bold">Customer Comment</p>
-                                <p class="mb-0">Lorem ipsum dolor sit.</p>
-                            </div>   
-                        </div>
+                        <c:forEach var="rating" items="${ratings }">
+							<div class="myRatingTable_body d-flex flex-column">
+	                            <div class="ratingTable_innerRow1 d-flex p-2">
+	                                <div class="d-flex ratingTable_innerRow2 ">
+	                                    <div class="d-flex flex-column" style="width: 170px; max-width: 170px;">
+	                                        <p class="text-decoration-none mb-0" >${rating.service_request_id }</p>
+	                                        <c:forEach var="u" items="${users }">
+	                                        	<c:if test="${u.user_id == rating.rating_from }">
+	                                        		<p class="text-decoration-none fw-bold mb-0">${u.first_name } ${u.last_name }</p>		
+	                                        	</c:if>
+	                                        </c:forEach>
+	                                        
+	                                    </div>
+	                                    <div class="service_date cursorPointer" href="#serviceDetails" data-bs-toggle="modal" id="${rating.service_request_id }" onclick="myFunction($(this).attr('id'))" style="width: 150px; max-width: 150px;">
+	                                        <c:forEach var="sr" items="${service_requests }" varStatus="i">
+	                                        	<c:if test="${sr.service_req_id == rating.service_request_id }">
+			                                        <a class="d-flex text-decoration-none ">
+			                                            <img src="<c:url value = "/resources/assets/spDash/calender.png" />" alt="" height="19" width="16">
+			                                            <p class="m-0"><fmt:formatDate type="date" value="${sr.service_start_date }" pattern="dd/MM/yyyy"></fmt:formatDate></p>
+			                                        </a>
+			                                        <a class="d-flex text-decoration-none">
+			                                            <img src="<c:url value = "/resources/assets/spDash/clock.png" />" alt="" height="19" width="16">
+			                                            <p class="m-0">
+			                                            	<fmt:formatDate type = "time" value = "${sr.service_start_date}" pattern="hh:mm"/>-<span id="endTime${i.index }"></span>
+			                                            </p>
+			                                        </a>
+			                                	</c:if>
+	                                        </c:forEach>
+	                                    </div>
+	                                </div>
+	                                <div style="width: 180px; max-width: 180px;">
+	                                    <p class="mb-0">ratings</p>
+	                                    <div class="d-flex align-items-center">
+	                                        <c:if test="${rating.ratings == 0}">
+								        		<span class="icon" id="icon1" style="color: #e1e1e1">★</span>
+								        		<span class="icon" id="icon2" style="color: #e1e1e1">★</span>
+		                                    	<span class="icon" id="icon3" style="color: #e1e1e1">★</span>
+		                                    	<span class="icon" id="icon4" style="color: #e1e1e1">★</span>
+                                   				<span class="icon" id="icon5" style="color: #e1e1e1">★</span>	
+								        	</c:if>	
+								        	<c:if test="${rating.ratings == 1}">
+								        		<span class="icon" id="icon1" style="color: #ECB91C">★</span>
+								        		<span class="icon" id="icon2" style="color: #e1e1e1">★</span>
+		                                    	<span class="icon" id="icon3" style="color: #e1e1e1">★</span>
+		                                    	<span class="icon" id="icon4" style="color: #e1e1e1">★</span>
+                                   				<span class="icon" id="icon5" style="color: #e1e1e1">★</span>	
+								        	</c:if>	
+								        	<c:if test="${rating.ratings == 2}">
+								        		<span class="icon" id="icon1" style="color: #ECB91C">★</span>
+								        		<span class="icon" id="icon2" style="color: #ECB91C">★</span>
+		                                    	<span class="icon" id="icon3" style="color: #e1e1e1">★</span>
+		                                    	<span class="icon" id="icon4" style="color: #e1e1e1">★</span>
+                                   				<span class="icon" id="icon5" style="color: #e1e1e1">★</span>	
+								        	</c:if>	
+								        	<c:if test="${rating.ratings == 3}">
+								        		<span class="icon" id="icon1" style="color: #ECB91C">★</span>
+								        		<span class="icon" id="icon2" style="color: #ECB91C">★</span>
+		                                    	<span class="icon" id="icon3" style="color: #ECB91C">★</span>
+		                                    	<span class="icon" id="icon4" style="color: #e1e1e1">★</span>
+                                   				<span class="icon" id="icon5" style="color: #e1e1e1">★</span>	
+								        	</c:if>	
+								        	<c:if test="${rating.ratings == 4}">
+								        		<span class="icon" id="icon1" style="color: #ECB91C">★</span>
+								        		<span class="icon" id="icon2" style="color: #ECB91C">★</span>
+		                                    	<span class="icon" id="icon3" style="color: #ECB91C">★</span>
+		                                    	<span class="icon" id="icon4" style="color: #ECB91C">★</span>
+                                   				<span class="icon" id="icon5" style="color: #e1e1e1">★</span>	
+								        	</c:if>	
+								        	<c:if test="${rating.ratings == 5}">
+								        		<span class="icon" id="icon1" style="color: #ECB91C">★</span>
+								        		<span class="icon" id="icon2" style="color: #ECB91C">★</span>
+		                                    	<span class="icon" id="icon3" style="color: #ECB91C">★</span>
+		                                    	<span class="icon" id="icon4" style="color: #ECB91C">★</span>
+                                   				<span class="icon" id="icon5" style="color: #ECB91C">★</span>	
+								        	</c:if>	
+	                                        <span class="ms-2">
+	                                            <c:if test="${rating.ratings == 5}">
+	                                            	Very Good
+	                                            </c:if>
+	                                            <c:if test="${rating.ratings == 4}">
+	                                            	Good
+	                                            </c:if>
+	                                            <c:if test="${rating.ratings == 3}">
+	                                            	Very Good
+	                                            </c:if>
+	                                            <c:if test="${rating.ratings == 2}">
+	                                            	Poor
+	                                            </c:if>
+	                                            <c:if test="${rating.ratings == 1}">
+	                                            	Very Poor
+	                                            </c:if>
+	                                        </span>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                            <div class="p-2">
+	                                <p class="mb-0 fw-bold">Customer Comment</p>
+	                                <p class="mb-0">${rating.comments }</p>
+	                            </div>   
+	                        </div>
+                        </c:forEach>	
                     </div>
                 </div>
             </div>
@@ -253,29 +308,29 @@
                             </div>
                         <div class="modal-body d-flex serviceDetailsModal p-2">
                             <div class="serviceModalLeft">
-                                <h4>22/12/2021 09:00 -14:30</h4>
-                                <p><b>Duration:</b>5.5 Hrs</p>
+                                <h4 id="sdDate"> </h4>
+                                <p><b>Duration : </b>&nbsp<span id="sdDuration"></span></p>
 
                                 <hr>
 
-                                <p><b>Service Id:</b>8502</p>
-                                <p><b>Extras:</b>Inside cabinets, Inside fridge, Inside oven, Laundry wash & dry, Interior windows</p>
-                                <p><b>Net Amount:</b> <span class="table_payment fw-bolder">99,00 €</span> </p>
+                                <p><b>Service Id:</b>&nbsp<span id="sdId"></span></p>
+                                <p><b>Extras:</b><span id="sdExtra"></span></p>
+                                <p><b>Net Amount:</b> <span class="table_payment fw-bolder" id="sdAmount"></span> </p>
                                 
                                 <hr>
                                 
-                                <p><b>Service Address:</b>Test 65, 53225 Bonn</p>
-                                <p><b>Billing Address:</b>Same as cleaning Address</p>
-                                <p><b>Phone:</b>+49 9988556644</p>
-                                <p><b>Email:</b>cust001@yopmail.com</p>
+                                <p><b>Service Address:</b><span id="sdAddress"></span></p>
+                                <p><b>Billing Address: </b>Same as cleaning Address</p>
+                                <p><b>Phone:</b> +91 <span id="sdPhone"></span></p>
+                                <p><b>Email:</b><span id="sdEmail"></span></p>
                                 
                                 <hr>
                                 
                                 <p><b>Comments</b></p>
                                 <div>
-                                    <p>Hello</p>
+                                    <p id="sdComments"></p>
                                 </div>
-                                <p>I don't have pets at home</p>
+                                <p id="sdPets"></p>
                                 
                                 <hr>
                                 
@@ -344,6 +399,140 @@
             </div>
         </div>
     </div>
+    
+    <script>
+    
+	    $(document).ready(function() {
+			
+			<c:forEach var="sr" items="${service_requests }" varStatus="i">
+				
+	    		var d = new Date("${sr.service_start_date}");
+	    		console.log(d);
+				
+				var t1 = d.getHours()+"."+d.getMinutes();
+				var a = parseFloat("${sr.service_hours}") ;  
+				var b = parseFloat("${sr.extra_hours}");
+				var totalTime = a+b ; 
+				
+				var dt1 = ((d.getHours() * 60) + d.getMinutes()) / 60;
+				var dt2 = (dt1 + totalTime) * 60;
+				
+				var h1 = Math.floor(dt2 / 60);
+				var m1 = dt2 % 60;
+				
+				if(m1==0){
+					var time2 = h1 + ":00	";	
+					$("#endTime${i.index}").html(time2);
+				}
+				else{
+					var time2 = h1 + ":" + m1;
+					$("#endTime${i.index}").html(time2);
+				}
+				
+			</c:forEach>
+			
+			
+		})	
+    
+    </script>
+    
+    <script>
+    
+	    function myFunction(id){
+			console.log(id);
+			$.ajax({
+				url : "service-details-data",
+				type : "POST",
+				data : id,
+				contentType : "application/json",
+				success : function(data) {
+						console.log(data);
+						
+						var d = new Date(data[0].service_start_date);
+						
+						var date1 = d.getDate() + "/" + (d.getMonth()+1) + "/" + d.getFullYear();
+						if(d.getMinutes() == 0){
+							var time1 = d.getHours() + ":00" ;
+						}
+						else{
+							var time1 = d.getHours() + ":" + d.getMinutes();	
+						}
+						var t1 = d.getHours()+"."+d.getMinutes();
+						var totalTime = data[0].service_hours + data[0].extra_hours;
+						
+						var dt1 = ((d.getHours() * 60) + d.getMinutes()) / 60;
+						var dt2 = (dt1 + totalTime) * 60;
+						
+						var h1 = Math.floor(dt2 / 60);
+						var m1 = dt2 % 60;
+						
+						if(m1==0){
+							var time2 = h1 + ":00	";		
+						}
+						else{
+							var time2 = h1 + ":" + m1;
+						}
+						
+						
+						$("#sdDate").html(date1 +" "+ time1 + "-" + time2); 
+						$("#sdDuration").html(data[0].service_hours + data[0].extra_hours + " hours");
+						$("#sdId").html(data[0].service_req_id);
+						$("#sdAmount").html(data[0].total_cost + ",00 $");
+						$("#sdComments").html(data[0].comments);
+						
+						if(data[0].has_pets == 0){
+							$("#sdPets").html("I don't have pets at home.");
+						}
+						else{
+							$("#sdPets").html("I have pets at home.");	
+						}
+						
+						var extraServices = " ";
+						
+						console.log(data[2].cabinet);
+						
+						if(data[2].cabinet == 1){
+							extraServices = extraServices + " Inside Cabinets, ";
+						}
+						if(data[2].windows == 1){
+							extraServices = extraServices + " Interior Windows, ";
+						}
+						if(data[2].laundry == 1){
+							extraServices = extraServices + " Inside Wash, ";
+						}
+						if(data[2].refrigerator == 1){
+							extraServices = extraServices + " Inside Fridge, ";
+						}
+						if(data[2].oven == 1){
+							extraServices = extraServices + " Inside Oven, ";
+						}
+						console.log(extraServices);
+						$("#sdExtra").html(extraServices);
+						
+						if(data[1].state != null){
+							$("#sdAddress").html(" "+data[1].address_line1 + " " + data[1].address_line2 + ", "+data[1].postal_code +" "+data[1].city+" "+data[1].state);
+						}
+						if(data[1].state == null){
+							$("#sdAddress").html(" "+data[1].address_line1 + " " + data[1].address_line2 + ", "+data[1].postal_code +" "+data[1].city);
+						}
+						if(data[1].mobile != null){
+							$("#sdPhone").html(" "+data[1].mobile);
+						}
+						if(data[1].email != null){
+							$("#sdEmail").html(" "+data[1].email);
+						}
+				},
+				error : function(xhr, textStatus, xml) {
+					console.log("error");
+					console.log(xhr);
+					console.log(textStatus);
+					console.log(xml);
+				}
+			})
+			
+		}	
+    
+    </script>
     
     <!-- <script src="./spDash.js"></script> -->
     <!-- <script>

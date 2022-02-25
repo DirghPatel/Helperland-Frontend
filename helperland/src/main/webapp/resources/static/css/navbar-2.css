@@ -1,7 +1,7 @@
 .navbar {
 	background-color: #525252;
 	font-size: 17px;
-	padding: 4px 0px;
+	padding: 4px 0px !important;
 	animation: none !important;
 	z-index: 100;
 }

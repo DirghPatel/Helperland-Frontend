@@ -47,7 +47,7 @@
                                     <a class="nav-link" href="mysettings">My Settings</a>
                                 </div>
                                 <div class="nav-item nav_select1" id="logOut">
-                                    <a class="nav-link" href="#">Logout</a>
+                                    <a class="nav-link" href="/helperland/logout">Logout</a>
                                 </div>
                             </div>
                             <div class="navcol_third navcol position-relative">
@@ -100,7 +100,7 @@
                             </li>
                             <li><a class="dropdown-item px-0" type="button" href="dash">My Dashboard</a></li>
                             <li><a class="dropdown-item px-0" type="button" href="mysettings" >My Settings</a></li>
-                            <li><a class="dropdown-item px-0" type="button">Logout</a></li>
+                            <li><a class="dropdown-item px-0" type="button" href="/helperland/logout">Logout</a></li>
                         </ul>
                     </div>
                     <div>

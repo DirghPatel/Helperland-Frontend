@@ -199,6 +199,7 @@ td {
 .blockCustListItem{
   border: 1px solid #e1e1e1;
   /* margin: 5px; */
+  max-width: 275px;
   padding: 20px 0px !important;
 }
 .cursorPointer{

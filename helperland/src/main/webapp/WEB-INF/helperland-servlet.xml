@@ -82,6 +82,15 @@
 				<value>
 					helperlandBackend.models.ServiceRequestExtra
 				</value>
+				<value>
+					helperlandBackend.models.CancelRequestModel
+				</value>
+				<value>
+					helperlandBackend.models.RatingModel
+				</value>
+				<value>
+					helperlandBackend.models.FavouriteBlockedModel
+				</value>
 			</list>
 		</property>
 	</bean>

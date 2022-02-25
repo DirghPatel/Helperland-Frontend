@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page isELIgnored="false"%>
 
 <!DOCTYPE html>
@@ -10,13 +10,15 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<c:set var="user" value="${user }" />
 	<c:set var="sr" value="${service_requests }" />
+	<c:set var="u" value="${users }" />
+	<c:set var="spRating" value="${spRating }" />
 	<link href='<c:url value="/resources/css/navbar-2.css" />' rel="stylesheet" />
 	<link href='<c:url value="/resources/css/custDash.css" />' rel="stylesheet" />
 	<link href='<c:url value="/resources/css/footer.css" />' rel="stylesheet" />
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 </head>
 <body>
     <div style="min-height: 100vh; padding-bottom: 170px;">
@@ -187,156 +189,109 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td scope="row">323436</td>
-                                <td class="service_date cursorPointer" href="#serviceDetails" data-bs-toggle="modal" >
-                                    <a class="d-flex text-decoration-none align-items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16">
-                                            <path fill-rule="evenodd" fill="#646464" d="M.365 16.9V1.715H3.32V.9h1.478v.815h2.463V.9h1.477v.815h2.463V.9h1.477v.815h2.955V16.9H.365zM14.156 5.165H1.843v9.365h12.313V5.165zM5.783 9.108H4.305V7.63h1.478v1.478zm0 3.542H4.305v-2.063h1.478v2.063zm2.955-3.542H7.261V7.63h1.477v1.478zm0 3.542H7.261v-2.063h1.477v2.063zm2.955-3.542h-1.477V7.63h1.477v1.478zm0 3.542h-1.477v-2.063h1.477v2.063z"/>
-                                        </svg>
-                                        <p class="mb-0 ms-1">09/04/2018</p>
-                                    </a>
-                                    <a class="d-flex text-decoration-none">
-                                        <p class="m-0">12:00 - 18:00</p>
-                                    </a>
-                                </td>
-                                <td>
-                                    <div class="d-flex">
-                                        <div class="sp_icon me-2 rounded-circle d-flex align-items-center justify-content-center">
-                                            <img src="<c:url value = "/resources/assets/custDash/cap.png" />" alt="" height="20" width="30">
-                                        </div>
-                                        <div class="d-flex flex-column">
-                                            <p class="mb-0">Lyum Watson</p>
-                                            <div class="d-flex align-items-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                                    <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                                </svg>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                                    <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                                </svg>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                                    <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                                </svg>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                                    <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                                </svg>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                                    <path fill-rule="evenodd" fill="#d4d4d4" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                                </svg>
-                                                <p class="mb-0">4</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <p class="m-0 text-center table_payment fw-bold">$40,50</p>
-                                </td>
-                                <td class="button_main text-center">
-                                    <a href="#scheduleServiceRequest" data-bs-toggle="modal" role="button" class="reschedule_button rounded-pill text-light text-decoration-none">Reschedule</a>
-                                    <a href="#cancelServiceRequest" data-bs-toggle="modal" role="button" class="cancel_button rounded-pill text-light text-decoration-none">Cancel</a>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td scope="row">323436</td>
-                                <td class="service_date cursorPointer" href="#serviceDetails" data-bs-toggle="modal" >
-                                    <a class="d-flex text-decoration-none align-items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16">
-                                            <path fill-rule="evenodd" fill="#646464" d="M.365 16.9V1.715H3.32V.9h1.478v.815h2.463V.9h1.477v.815h2.463V.9h1.477v.815h2.955V16.9H.365zM14.156 5.165H1.843v9.365h12.313V5.165zM5.783 9.108H4.305V7.63h1.478v1.478zm0 3.542H4.305v-2.063h1.478v2.063zm2.955-3.542H7.261V7.63h1.477v1.478zm0 3.542H7.261v-2.063h1.477v2.063zm2.955-3.542h-1.477V7.63h1.477v1.478zm0 3.542h-1.477v-2.063h1.477v2.063z"/>
-                                        </svg>
-                                        <p class="mb-0 ms-1">09/04/2018</p>
-                                    </a>
-                                    <a class="d-flex text-decoration-none">
-                                        <p class="m-0">12:00 - 18:00</p>
-                                    </a>
-                                </td>
-                                <td>
-                                    <div class="d-flex">
-                                        <div class="sp_icon me-2 rounded-circle d-flex align-items-center justify-content-center">
-                                            <img src="<c:url value = "/resources/assets/custDash/cap.png" />" alt="" height="20" width="30">
-                                        </div>
-                                        <div class="d-flex flex-column">
-                                            <p class="mb-0">Lyum Watson</p>
-                                            <div class="d-flex align-items-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                                    <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                                </svg>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                                    <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                                </svg>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                                    <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                                </svg>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                                    <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                                </svg>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                                    <path fill-rule="evenodd" fill="#d4d4d4" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                                </svg>
-                                                <p class="mb-0">4</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <p class="m-0 text-center  table_payment fw-bold">$40,50</p>
-                                </td>
-                                <td class="button_main text-center">
-                                    <a href="#scheduleServiceRequest" data-bs-toggle="modal" role="button" class="reschedule_button rounded-pill text-light text-decoration-none">Reschedule</a>
-                                    <a href="#cancelServiceRequest" data-bs-toggle="modal" role="button" class="cancel_button rounded-pill text-light text-decoration-none">Cancel</a>
-                                </td>
-                            </tr>
-                            
-                            <c:forEach var="sr" items="${sr }">
+                        <tbody>	
+                            <c:forEach var="sr" items="${service_requests }" varStatus = "i">
                             	
                             	<tr>
 	                                <td scope="row">${sr.service_req_id }</td>
-	                                <td class="service_date cursorPointer" href="#serviceDetails" data-bs-toggle="modal" >
+	                                <td class="service_date cursorPointer" href="#serviceDetails" data-bs-toggle="modal" id="${sr.service_req_id }" onclick="myFunction($(this).attr('id'))">
 	                                    <a class="d-flex text-decoration-none align-items-center">
 	                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16">
 	                                            <path fill-rule="evenodd" fill="#646464" d="M.365 16.9V1.715H3.32V.9h1.478v.815h2.463V.9h1.477v.815h2.463V.9h1.477v.815h2.955V16.9H.365zM14.156 5.165H1.843v9.365h12.313V5.165zM5.783 9.108H4.305V7.63h1.478v1.478zm0 3.542H4.305v-2.063h1.478v2.063zm2.955-3.542H7.261V7.63h1.477v1.478zm0 3.542H7.261v-2.063h1.477v2.063zm2.955-3.542h-1.477V7.63h1.477v1.478zm0 3.542h-1.477v-2.063h1.477v2.063z"/>
 	                                        </svg>
-	                                        <p class="mb-0 ms-1">${sr.service_start_date }</p>
+	                                        <p class="mb-0 ms-1">
+	                                        	<fmt:formatDate type = "date" value = "${sr.service_start_date}" pattern="dd/MM/yyyy"/>
+	                                        </p>
 	                                    </a>
 	                                    <a class="d-flex text-decoration-none">
-	                                        <p class="m-0">${sr.service_start_date }</p>
+	                                        <p class="m-0">
+	                                        	<fmt:formatDate type = "time" value = "${sr.service_start_date}" pattern="hh:mm"/>-<span id="endTime${i.index }"></span>
+	                                        </p>
 	                                    </a>
 	                                </td>
+	                                <c:if test="${sr.user_id != sr.service_provider_id }">
+		                                <td>
+		                                    <div class="d-flex">
+		                                        <div class="sp_icon me-2 rounded-circle d-flex align-items-center justify-content-center">
+		                                            <c:forEach var="u" items="${users }">
+		                                        		<c:if test="${u.user_id == sr.service_provider_id}"> 
+															<img src="<c:url value = "/resources/assets/custDash/${u.user_profile_picture }.png" />" alt="" height="48" width="48">
+		                                        		</c:if>
+		                                        	</c:forEach>
+		                                            
+		                                        </div>
+		                                        
+		                                        <div class="d-flex flex-column">
+		                                            <p class="mb-0">
+		                                            	<c:forEach var="u" items="${users }">
+		                                        			<c:if test="${u.user_id == sr.service_provider_id}"> ${u.first_name } ${u.last_name }</c:if>
+		                                        		</c:forEach>
+		                                            </p>
+		                                            <div class="d-flex align-items-center">
+		                                                
+		                   								<c:forEach items="${spRating}" var="spRating">
+													        
+													        <c:if test="${spRating.key == sr.service_provider_id }">
+													        	<c:if test="${spRating.value == 0}">
+													        		<span class="icon" id="icon1" style="color: #e1e1e1">★</span>
+													        		<span class="icon" id="icon2" style="color: #e1e1e1">★</span>
+							                                    	<span class="icon" id="icon3" style="color: #e1e1e1">★</span>
+							                                    	<span class="icon" id="icon4" style="color: #e1e1e1">★</span>
+				                                    				<span class="icon" id="icon5" style="color: #e1e1e1">★</span>	
+													        	</c:if>	
+													        	<c:if test="${spRating.value == 1}">
+													        		<span class="icon" id="icon1" style="color: #ECB91C">★</span>
+													        		<span class="icon" id="icon2" style="color: #e1e1e1">★</span>
+							                                    	<span class="icon" id="icon3" style="color: #e1e1e1">★</span>
+							                                    	<span class="icon" id="icon4" style="color: #e1e1e1">★</span>
+				                                    				<span class="icon" id="icon5" style="color: #e1e1e1">★</span>	
+													        	</c:if>	
+													        	<c:if test="${spRating.value == 2}">
+													        		<span class="icon" id="icon1" style="color: #ECB91C">★</span>
+													        		<span class="icon" id="icon2" style="color: #ECB91C">★</span>
+							                                    	<span class="icon" id="icon3" style="color: #e1e1e1">★</span>
+							                                    	<span class="icon" id="icon4" style="color: #e1e1e1">★</span>
+				                                    				<span class="icon" id="icon5" style="color: #e1e1e1">★</span>	
+													        	</c:if>	
+													        	<c:if test="${spRating.value == 3}">
+													        		<span class="icon" id="icon1" style="color: #ECB91C">★</span>
+													        		<span class="icon" id="icon2" style="color: #ECB91C">★</span>
+							                                    	<span class="icon" id="icon3" style="color: #ECB91C">★</span>
+							                                    	<span class="icon" id="icon4" style="color: #e1e1e1">★</span>
+				                                    				<span class="icon" id="icon5" style="color: #e1e1e1">★</span>	
+													        	</c:if>	
+													        	<c:if test="${spRating.value == 4}">
+													        		<span class="icon" id="icon1" style="color: #ECB91C">★</span>
+													        		<span class="icon" id="icon2" style="color: #ECB91C">★</span>
+							                                    	<span class="icon" id="icon3" style="color: #ECB91C">★</span>
+							                                    	<span class="icon" id="icon4" style="color: #ECB91C">★</span>
+				                                    				<span class="icon" id="icon5" style="color: #e1e1e1">★</span>	
+													        	</c:if>	
+													        	<c:if test="${spRating.value == 5}">
+													        		<span class="icon" id="icon1" style="color: #ECB91C">★</span>
+													        		<span class="icon" id="icon2" style="color: #ECB91C">★</span>
+							                                    	<span class="icon" id="icon3" style="color: #ECB91C">★</span>
+							                                    	<span class="icon" id="icon4" style="color: #ECB91C">★</span>
+				                                    				<span class="icon" id="icon5" style="color: #ECB91C">★</span>	
+													        	</c:if>	
+			                                                	<p class="mb-0">${spRating.value }</p>
+													        </c:if>
+													        
+													    </c:forEach>                          	
+		                                            </div>
+		                                        </div>
+		                                    </div>
+		                                </td>
+	                                </c:if>
+	                                <c:if test="${sr.user_id == sr.service_provider_id }">
+	                                	<td></td>
+	                                </c:if>
 	                                <td>
-	                                    <div class="d-flex">
-	                                        <div class="sp_icon me-2 rounded-circle d-flex align-items-center justify-content-center">
-	                                            <img src="<c:url value = "/resources/assets/custDash/cap.png" />" alt="" height="20" width="30">
-	                                        </div>
-	                                        <div class="d-flex flex-column">
-	                                            <p class="mb-0">Lyum Watson</p>
-	                                            <div class="d-flex align-items-center">
-	                                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-	                                                    <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-	                                                </svg>
-	                                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-	                                                    <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-	                                                </svg>
-	                                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-	                                                    <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-	                                                </svg>
-	                                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-	                                                    <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-	                                                </svg>
-	                                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-	                                                    <path fill-rule="evenodd" fill="#d4d4d4" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-	                                                </svg>
-	                                                <p class="mb-0">4</p>
-	                                            </div>
-	                                        </div>
-	                                    </div>
-	                                </td>
-	                                <td>
-	                                    <p class="m-0 text-center  table_payment fw-bold">$ ${sr.total_cost } ,00</p>
+	                                    <p class="m-0 text-center  table_payment fw-bold">$ ${sr.total_cost }</p>
 	                                </td>
 	                                <td class="button_main text-center">
-	                                    <a href="#scheduleServiceRequest" data-bs-toggle="modal" role="button" class="reschedule_button rounded-pill text-light text-decoration-none">Reschedule</a>
-	                                    <a href="#cancelServiceRequest" data-bs-toggle="modal" role="button" class="cancel_button rounded-pill text-light text-decoration-none">Cancel</a>
+	                                    <a href="#scheduleServiceRequest" data-bs-toggle="modal" role="button" class="reschedule_button rounded-pill text-light text-decoration-none" data-spID ="${sr.service_req_id }" onclick="$('#rescheduleServiceReqId').val($(this).attr('data-spID'))">Reschedule</a>
+	                                    <a href="#cancelServiceRequest" data-bs-toggle="modal" role="button" class="cancel_button rounded-pill text-light text-decoration-none" data-spID ="${sr.service_req_id }" onclick="$('#cancelServiceReqId').val($(this).attr('data-spID'))">Cancel</a>
 	                                </td>
 	                            </tr>
                             
@@ -354,79 +309,68 @@
             <div class="modal fade" id="serviceDetails" aria-hidden="true" aria-labelledby="serviceDetailsLabel" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered vertical-align-center">
                     <div class="modal-content">
-                        <!-- <div class="modal-body"> -->
                             <div class="modal-header">
                                 <h5 class="modal-title" id="serviceDetailsLabel">Service Details</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                         <div class="modal-body d-flex serviceDetailsModal p-2">
                             <div class="serviceModalLeft">
-                                <h4>22/12/2021 09:00 -14:30</h4>
-                                <p><b>Duration:</b>5.5 Hrs</p>
+                                <h4 id="sdDate"></h4>
+                                <p><b>Duration:</b>&nbsp<span id="sdDuration"></span></p>
 
                                 <hr>
 
-                                <p><b>Service Id:</b>8502</p>
-                                <p><b>Extras:</b>Inside cabinets, Inside fridge, Inside oven, Laundry wash & dry, Interior windows</p>
-                                <p><b>Net Amount:</b> <span class="table_payment fw-bolder">99,00 €</span> </p>
+                                <p><b>Service Id:</b>&nbsp<span id="sdId"></span></p>
+                                <p><b>Extras:</b><span id="sdExtra"></span></p>
+                                <p><b>Net Amount:</b> <span class="table_payment fw-bolder" id="sdAmount"></span> </p>
                                 
                                 <hr>
                                 
-                                <p><b>Service Address:</b>Test 65, 53225 Bonn</p>
+                                <p><b>Service Address:</b><span id="sdAddress"></span></p>
                                 <p><b>Billing Address:</b>Same as cleaning Address</p>
-                                <p><b>Phone:</b>+49 9988556644</p>
-                                <p><b>Email:</b>cust001@yopmail.com</p>
+                                <p><b>Phone:</b> +91 <span id="sdPhone"></span></p>
+                                <p><b>Email:</b><span id="sdEmail"></span></p>
                                 
                                 <hr>
                                 
                                 <p><b>Comments</b></p>
                                 <div>
-                                    <p>Hello</p>
+                                    <p id="sdComments"></p>
                                 </div>
-                                <p>I don't have pets at home</p>
+                                <p id="sdPets"></p>
                                 
                                 <hr>
                                 
                             </div>
                             <div class="serviceModalRight">
                                 <h4>Service Provider Details</h4>
-                                <div class="sp_block d-flex justify-content-around align-items-center">
+                                <div class="sp_block justify-content-between align-items-center" id="spDetailsRight">
                                     <div style="height: 64px; width: 64px;" class="sp_icon p-0 d-flex align-items-center justify-content-center rounded-circle">
-                                        <img src="<c:url value = "/resources/assets/custDash/cap.png" />" class="" height="20" width="30">
+                                        <img id="serviceModalIcon" height="64" width="64">
                                     </div>
                                     <div>
-                                        <p class="sp_name mb-0">Kavan Patel</p>
-                                        <div>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                                <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                            </svg>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                                <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                            </svg>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                                <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                            </svg>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                                <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                            </svg>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                                <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                            </svg>
-                                        </div>
+                                        <p class="sp_name mb-0" id="sdServiceProvider"></p>
+                                        <div id="ratingModelAvgStars">
+	                                    	<span class="icon" id="icon1d">★</span>
+	                                    	<span class="icon" id="icon2d">★</span>
+	                                    	<span class="icon" id="icon3d">★</span>
+	                                    	<span class="icon" id="icon4d">★</span>
+	                                    	<span class="icon" id="icon5d">★</span>
+	                                    </div>
                                     </div>
                                 </div>
-                                <p class="mb-0">1 cleaning</p>
+                                <p class="mb-0" id="sdTotalCleanings"></p>
                             </div>
 
                         </div>
 
                         <div class="modal-footer justify-content-start">
-                            <button class="btn text-white rounded-pill reschedule_button" data-bs-target="#scheduleServiceRequest" data-bs-toggle="modal" data-bs-dismiss="modal">Reschedule</button>
-                            <button class="btn text-white cancel_button rounded-pill" data-bs-target="#cancelServiceRequest" data-bs-toggle="modal" data-bs-dismiss="modal">Cancel</button>
+                            <button class="btn text-white rounded-pill reschedule_button" data-bs-target="#scheduleServiceRequest" data-bs-toggle="modal" data-bs-dismiss="modal" id="rescheduleBtnModel" onclick="$('#rescheduleServiceReqId').val($(this).attr('data-spID'))">Reschedule</button>
+                            <button class="btn text-white cancel_button rounded-pill" data-bs-target="#cancelServiceRequest" data-bs-toggle="modal" data-bs-dismiss="modal" id="cancelBtnModel" onclick="$('#cancelServiceReqId').val($(this).attr('data-spID'))">Cancel</button>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> 
 
             <div class="modal fade" id="scheduleServiceRequest" aria-hidden="true" aria-labelledby="serviceDetailsLabel2" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered modal-sm">
@@ -437,19 +381,21 @@
                         </div>
                         <div class="modal-body ">
                             <p class="m-1">Select New Date & Time</p>
-                            <form action="">
+                            <form method="post" action="service-reschedule" id="rescheduleReqForm">
                                 <div class="d-flex mb-3">
-                                    <input type="date" class="datePicker">
-                                    <select class="timeSelect">
-                                        <option value="8:00">8:00</option>
-                                        <option value="8:00">8:30</option>
-                                        <option value="8:00">9:00</option>
-                                        <option value="8:00">9:30</option>
-                                        <option value="8:00">10:00</option>
-                                        <option value="8:00">10:30</option>
+                                	<input type="hidden" name="service_req_id" id="rescheduleServiceReqId"/>
+                                    <input type="date" class="datePicker" name="servicedate" id="servicedate" >
+                                    <select class="timeSelect" name="servicetime" id="servicetime">
+                                        <option value="08:00:00">8:00</option>
+                                        <option value="08:30:00">8:30</option>
+                                        <option value="09:00:00">9:00</option>
+                                        <option value="09:30:00">9:30</option>
+                                        <option value="10:00:00">10:00</option>
+                                        <option value="10:30:00">10:30</option>
                                     </select>
+                                    <input type="hidden" id="service_start_date" name="service_start_date">
                                 </div>
-                                <button type="submit" class=" updateServiceButtton text-light rounded-pill border-0">Update </button>
+                                <button class=" updateServiceButtton text-light rounded-pill border-0" onclick="$('#rescheduleReqForm').submit()">Update </button>
                             </form>
                         </div>
                     </div>
@@ -465,9 +411,10 @@
                         </div>
                         <div class="modal-body ">
                             <p class="mb-1">Why you want to cancel the service request?</p>
-                            <form action="" class="d-flex flex-column">
-                                <textarea type="text" class="whyToCancel mb-2" name="whyToCancel" maxlength="500" rows="3"></textarea>
-                                <button type="submit" class="cancelServiceButton text-light rounded-pill border-0">Cancel Now</button>
+                            <form action="service-cancel" class="d-flex flex-column" id="cancelReqForm" method="post">
+                            	<input type="hidden" name="service_req_id" id="cancelServiceReqId"/>
+                                <textarea type="text" class="whyToCancel mb-2" name="cancel_comment" maxlength="500" rows="3"></textarea>
+                                <button class="cancelServiceButton text-light rounded-pill border-0" onclick="$('#cancelReqForm').submit()">Cancel Now</button>
                             </form>
                         </div>
                     </div>
@@ -526,13 +473,246 @@
             </div>
         </div>
     </div>
+    
+    <script>
+	    $(document).ready(function(){
+	        var dtToday = new Date();
+	        
+	        var month = dtToday.getMonth() + 1;
+	        var day = dtToday.getDate() + 1;
+	        var year = dtToday.getFullYear();
+	        if(month < 10)
+	            month = '0' + month.toString();
+	        if(day < 10)
+	            day = '0' + day.toString();
+	        
+	        var maxDate = year + '-' + month + '-' + day;
+	        $('#servicedate').attr('min', maxDate);
+	    });
+    </script>
  
-    <!-- <script src="./custDash.js"></script> -->
-    <!-- <script>
-        $(function () {
-            $("#footer").load("../footer.html");
-        });
-    </script> -->
+ 
+ 	<script>
+    
+    	$(document).ready(function() {
+    		
+    		<c:forEach var="sr" items="${service_requests }" varStatus="i">
+    			
+	    		var d = new Date("${sr.service_start_date}");
+	    		console.log(d);
+				
+				var t1 = d.getHours()+"."+d.getMinutes();
+				var a = parseFloat("${sr.service_hours}") ;  
+				var b = parseFloat("${sr.extra_hours}");
+				var totalTime = a+b ; 
+				
+				var dt1 = ((d.getHours() * 60) + d.getMinutes()) / 60;
+				var dt2 = (dt1 + totalTime) * 60;
+				
+				var h1 = Math.floor(dt2 / 60);
+				var m1 = dt2 % 60;
+				
+				if(m1==0){
+					var time2 = h1 + ":00	";	
+					$("#endTime${i.index}").html(time2);
+				}
+				else{
+					var time2 = h1 + ":" + m1;
+					$("#endTime${i.index}").html(time2);
+				}
+    			
+    		</c:forEach>
+    		
+    		
+    	})
+    
+    </script>
+    
+    <script>
+    
+    	function myFunction(id){
+    		console.log(id);
+    		$.ajax({
+				url : "service-details-data",
+				type : "POST",
+				data : id,
+				contentType : "application/json",
+				success : function(data) {
+						console.log(data);
+						
+						var d = new Date(data[0].service_start_date);
+						
+						var date1 = d.getDate() + "/" + (d.getMonth() + 1 ) + "/" + d.getFullYear();
+						if(d.getMinutes() == 0){
+							var time1 = d.getHours() + ":00" ;
+						}
+						else{
+							var time1 = d.getHours() + ":" + d.getMinutes();	
+						}
+						var t1 = d.getHours()+"."+d.getMinutes();
+						var totalTime = data[0].service_hours + data[0].extra_hours;
+						
+						var dt1 = ((d.getHours() * 60) + d.getMinutes()) / 60;
+						var dt2 = (dt1 + totalTime) * 60;
+						
+						var h1 = Math.floor(dt2 / 60);
+						var m1 = dt2 % 60;
+						
+						if(m1==0){
+							var time2 = h1 + ":00	";		
+						}
+						else{
+							var time2 = h1 + ":" + m1;
+						}
+						
+						
+						$("#sdDate").html(date1 +" "+ time1 + "-" + time2); 
+						$("#sdDuration").html(data[0].service_hours + data[0].extra_hours + " hours");
+						$("#sdId").html(data[0].service_req_id);
+						$("#sdAmount").html(data[0].total_cost + ",00 $");
+						$("#sdComments").html(data[0].comments);
+						
+						if(data[0].has_pets == 0){
+							$("#sdPets").html("I don't have pets at home.");
+						}
+						else{
+							$("#sdPets").html("I have pets at home.");	
+						}
+						
+						var extraServices = " ";
+						
+						console.log(data[2].cabinet);
+						
+						if(data[2].cabinet == 1){
+							extraServices = extraServices + " Inside Cabinets, ";
+						}
+						if(data[2].windows == 1){
+							extraServices = extraServices + " Interior Windows, ";
+						}
+						if(data[2].laundry == 1){
+							extraServices = extraServices + " Inside Wash, ";
+						}
+						if(data[2].refrigerator == 1){
+							extraServices = extraServices + " Inside Fridge, ";
+						}
+						if(data[2].oven == 1){
+							extraServices = extraServices + " Inside Oven, ";
+						}
+						console.log(extraServices);
+						$("#sdExtra").html(extraServices);
+						
+						if(data[1].state != null){
+							$("#sdAddress").html(" "+data[1].address_line1 + " " + data[1].address_line2 + ", "+data[1].postal_code +" "+data[1].city+" "+data[1].state);
+						}
+						if(data[1].state == null){
+							$("#sdAddress").html(" "+data[1].address_line1 + " " + data[1].address_line2 + ", "+data[1].postal_code +" "+data[1].city);
+						}
+						if(data[1].mobile != null){
+							$("#sdPhone").html(" "+data[1].mobile);
+						}
+						if(data[1].email != null){
+							$("#sdEmail").html(" "+data[1].email);
+						}
+						
+						if(data[0].user_id == data[0].service_provider_id){
+							$("#spDetailsRight").hide();
+							$("#sdTotalCleanings").hide();
+						}
+						else{
+							$("#sdTotalCleanings").show();
+							$("#spDetailsRight").show();
+							$("#sdServiceProvider").html(data[3].first_name + " " + data[3].last_name);
+							$("#serviceModalIcon").attr("src" , "/helperland/resources/assets/custDash/"  + data[3].user_profile_picture+ ".png "   );
+						}
+						
+						if(data[4] == 0){
+							$("#icon1d ,#icon2d , #icon3d , #icon4d , #icon5d").css("color" , "#e1e1e1");
+						}
+						if(data[4] == 1){
+							$("#icon2d , #icon3d , #icon4d , #icon5d").css("color" , "#e1e1e1");
+							$("#icon1d").css("color" , "#ECB91C");
+							
+						}
+						if(data[4] == 2){
+							$("#icon3d , #icon4d , #icon5d").css("color" , "#e1e1e1");
+							$("#icon1d , #icon2d").css("color" , "#ECB91C");
+						}
+						if(data[4] == 3){
+							$("#icon4d , #icon5d").css("color" , "#e1e1e1");
+							$("#icon1d , #icon2d , #icon3d").css("color" , "#ECB91C");
+						}
+						if(data[4] == 4){
+							$("#icon5d").css("color" , "#e1e1e1");
+							$("#icon1d , #icon2d , #icon3d , #icon4d").css("color" , "#ECB91C");
+						}
+						
+						$("#sdTotalCleanings").html(data[5] + " cleanings");
+						
+						$("#rescheduleBtnModel").attr('data-spID' , data[0].service_req_id);
+						$("#cancelBtnModel").attr('data-spID' , data[0].service_req_id);
+						
+						console.log("fdsfd" + $("#rescheduleBtnModel").attr('data-spID'));
+				},
+				error : function(xhr, textStatus, xml) {
+					console.log("error");
+					console.log(xhr);
+					console.log(textStatus);
+					console.log(xml);
+				}
+			})
+    		
+    	}
+    	
+    	
+    	$("#cancelReqForm").on("submit" , function(){
+    		$.ajax({
+				url : $(this).attr("action"),
+				type : $(this).attr('method'),
+				data : $(this).serialize(),
+				success : function() {
+					console.log('success');
+					location.reload();
+				},
+				error : function(xhr, textStatus, xml) {
+					console.log("error");
+					console.log(xhr);
+					console.log(textStatus);
+					console.log(xml);
+				}
+			})
+    	})
+    	
+    	
+    	$("#servicedate , #servicetime").on("change",function() {
+
+			var serviceDate = $("#servicedate").val();
+			var serviceTime = $("#servicetime").val();
+			var date = moment(serviceDate + ' ' + serviceTime).format("YYYY-MM-DD HH:mm:ss.SSS");
+
+			var sdate = new Date(date);
+			console.log(date);
+			$("#service_start_date").val(sdate);
+
+		});
+    	
+    	$("#rescheduleReqForm").on("submit" , function(){
+    		$.ajax({
+				url : $(this).attr("action"),
+				type : $(this).attr('method'),
+				data : $(this).serialize(), 
+				success : function(data) {
+					location.reload();
+				},
+				error : function(xhr, textStatus, xml) {
+					console.log("error");
+					console.log(xhr);
+					console.log(textStatus);
+					console.log(xml);
+				}
+			})
+    	})
+    	
+    </script>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 

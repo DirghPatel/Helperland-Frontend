@@ -17,6 +17,7 @@
 	<link href='<c:url value="/resources/css/navbar-2.css" />' rel="stylesheet" />
 	<link href='<c:url value="/resources/css/custDash.css" />' rel="stylesheet" />
 	<link href='<c:url value="/resources/css/footer.css" />' rel="stylesheet" />
+	<link href='<c:url value="/resources/css/pagination.css" />' rel="stylesheet" />
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
     </script>
@@ -192,7 +193,7 @@
                             </tr>
                         </thead>
                         <tbody>
-							<c:forEach var="sr" items="${sr }" varStatus = "i">
+							<c:forEach var="sr" items="${service_requests.pageList }" varStatus = "i">
 							
 								<tr>
 	                                <td scope="row">${sr.service_req_id }</td>
@@ -319,6 +320,51 @@
 
                         </tbody>
                     </table>
+                    <div class="pagination p12 d-flex align-items-center justify-content-between">
+                    	
+                    	<div class="d-flex pg-768">
+                    		<div class="d-flex">
+	                    		<p class="mb-0">Show &nbsp</p>
+		                    	<select id="count_select" name="count">
+		                    		<option value="10" selected>10</option>
+		                    		<option value="50">50</option>
+		                    		<option value="100">100</option>
+		                    	</select>
+	                    	</div>
+	                    	<p class="mb-0"> &nbsp Entries total record: ${service_requests.nrOfElements }</p>
+                    	</div>		
+                    
+                    	<% 
+				        	String c = request.getParameter("count");
+                    	 	if(c == null){
+                    	 		c = "10";
+                    	 	}
+							pageContext.setAttribute("c", c);					        
+					    %>
+                    
+				        <ul>
+					        <li class="rounded-circle"><a id="firstPrev" href="/helperland/customer/service-history?page=1&count=${c }" class="rounded-circle"> « </a></li>
+					        
+					        <li class="rounded-circle">
+					        	<a id="prevIcon" href="/helperland/customer/service-history?page=<c:if test="${service_requests.page == 1 or service_requests.page == 0 }">1</c:if><c:if test="${service_requests.page > 1 }">${service_requests.page }</c:if>&count=${c }" class="rounded-circle" <c:if test = "${service_requests.page ==  0}">style = "pointer-events: none"</c:if>>  ‹ </a>
+					        </li>
+					        <li class="rounded-circle">
+						        <c:forEach begin="1" end="${service_requests.pageCount}" step="1"  varStatus="tagStatus">
+									  <c:choose>
+										    <c:when test="${(service_requests.page + 1) == tagStatus.index}">
+										      	<span class="is-active rounded-circle">${tagStatus.index}</span>
+										    </c:when>
+										    <c:otherwise>                
+										     	<a class="pageNoTag rounded-circle" href="/helperland/customer/service-history?page=${tagStatus.index}&count=${c }">${tagStatus.index}</a>
+										    </c:otherwise>
+									  </c:choose>
+								</c:forEach>
+							</li>
+					        <li class="rounded-circle"><a id="nextIcon" href="/helperland/customer/service-history?page=${service_requests.page + 2 }&count=${c }" class="rounded-circle" <c:if test = "${service_requests.page + 1 ==  service_requests.pageCount}">style = "pointer-events: none"</c:if>> › </a></li>
+					        <li class="rounded-circle"><a id="lastNext" href="/helperland/customer/service-history?page=${service_requests.pageCount }&count=${c }" class="rounded-circle"> » </a></li>
+				        	
+				        </ul>
+				    </div>
                 </div>
 
             </div>
@@ -610,11 +656,9 @@
     
     	$(document).ready(function() {
     		
-    		<c:forEach var="sr" items="${service_requests }" varStatus="i">
+    		<c:forEach var="sr" items="${service_requests.pageList }" varStatus="i">
     			
 	    		var d = new Date("${sr.service_start_date}");
-	    		console.log(d);
-				
 				var t1 = d.getHours()+"."+d.getMinutes();
 				var a = parseFloat("${sr.service_hours}") ;  
 				var b = parseFloat("${sr.extra_hours}");
@@ -637,7 +681,18 @@
     			
     		</c:forEach>
     		
-    		
+    		let searchParams = new URLSearchParams(window.location.search);
+			let param = searchParams.get('count');
+			$("#count_select option[value = '" + param + "']").attr("selected" , true);
+			
+			console.log($("#count_select").val());
+			
+    	})
+    	
+   		$("#count_select").on("change" , function(){
+   			$("#firstPrev").attr("href" , '/helperland/customer/service-history?page=1&count=' + $("#count_select").val());
+       	
+    		document.getElementById("firstPrev").click();
     	})
     
     </script>
@@ -650,11 +705,8 @@
             var rating3 = parseInt($("input[name= quality_of_service]:checked").val());
 
             var ratingAvg = Math.ceil((rating1 + rating2 + rating3) / 3 );
-            console.log(ratingAvg);
             let k = ratingAvg;
-            console.log(k);
             <c:set var="avg" value="ratingAvg" />
-            console.log(${avg});
             $('input[name= stars0][value= ${avg}]').prop('checked' , true);
             
             $("#ratingHiddenValue").val(ratingAvg);
@@ -670,7 +722,6 @@
 				data : srID,
 				contentType : "application/json",
 				success : function(data , xhr) {
-					console.log(data);
 					if(data == "You already Rated ServiceProvider For This Service."){
 						$("#alreadyRatedModal").modal('show');
 					}
@@ -698,12 +749,6 @@
 					$("#ratingModalIcon").attr("src" ,  "/helperland/resources/assets/custDash/"  + data[0].user_profile_picture+ ".png "   )
 				},
 				error : function(xhr, textStatus, xml) {
-					console.log("error");
-					console.log(xhr.status);
-					console.log(xhr);
-					console.log(xml);
-					console.log(textStatus);
-					
 
 				}
 			}) 
@@ -715,14 +760,12 @@
     <script>
     
     	function myFunction(id){
-    		console.log(id);
     		$.ajax({
 				url : "service-details-data",
 				type : "POST",
 				data : id,
 				contentType : "application/json",
 				success : function(data) {
-						console.log(data);
 						
 						var d = new Date(data[0].service_start_date);
 						
@@ -765,8 +808,6 @@
 						
 						var extraServices = " ";
 						
-						console.log(data[2].cabinet);
-						
 						if(data[2].cabinet == 1){
 							extraServices = extraServices + " Inside Cabinets, ";
 						}
@@ -782,7 +823,7 @@
 						if(data[2].oven == 1){
 							extraServices = extraServices + " Inside Oven, ";
 						}
-						console.log(extraServices);
+					
 						$("#sdExtra").html(extraServices);
 						
 						if(data[1].state != null){
@@ -835,13 +876,9 @@
 						$("#rescheduleBtnModel").attr('data-spID' , data[0].service_req_id);
 						$("#cancelBtnModel").attr('data-spID' , data[0].service_req_id);
 						
-						console.log("fdsfd" + $("#rescheduleBtnModel").attr('data-spID'));
 				},
 				error : function(xhr, textStatus, xml) {
-					console.log("error");
-					console.log(xhr);
-					console.log(textStatus);
-					console.log(xml);
+					
 				}
 			})
     		
@@ -854,7 +891,6 @@
 		
 		$("#mainRatingForm").on("submit", function(e) {
 
-			console.log($("#mainRatingForm").serialize());
 
 			e.preventDefault();
 			$.ajax({
@@ -862,16 +898,12 @@
 				type : $("#mainRatingForm").attr('method'),
 				data : $("#mainRatingForm").serialize(),
 				success : function(data , xhr) {
-					console.log(xhr);
+				
 					location.reload();
 					
 				},
 				error : function(xhr, textStatus, xml) {
-					console.log("error");
-					console.log(xhr.status);
-					console.log(xhr);
-					console.log(xml);
-					console.log(textStatus);
+					
 					
 
 				}

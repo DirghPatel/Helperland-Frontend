@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.support.PagedListHolder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,6 +16,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -44,6 +46,599 @@ public class ServiceProviderController {
 	
 	@Autowired
 	private ServiceRatingServiceImpl serviceRating;
+	
+	@Autowired
+	private MainController mainController;
+	
+//	@RequestMapping(value = "/dash" , method = RequestMethod.GET)
+//	public String spDash(Model model , @RequestParam(value="pet" , defaultValue = "1") int pet) {
+//		
+//		User loggedInUserDetails = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//		UserModel currentUser = userService.getUserByEmail(loggedInUserDetails.getUsername());	
+//
+//		List<ServiceRequest> sr = this.serviceRequests.getServiceRequestByPostalCode(currentUser.getPostal_code());
+//		List<ServiceRequest> ls = new ArrayList<ServiceRequest>();
+//		for(ServiceRequest s: sr) {
+//			FavouriteBlockedModel fb = this.userService.getFavBlockByUserIdAndTargetUserId(currentUser.getUser_id() , s.getUser_id());
+//			if(fb==null) {
+//				continue;
+//			}
+//			else {	
+//				if(fb.getIs_blocked() == 1) {
+//					ls.add(s);
+//				}
+//			}
+//			FavouriteBlockedModel fb1 = this.userService.getFavBlockByUserIdAndTargetUserId(s.getUser_id(),currentUser.getUser_id());
+//			if(fb1==null) {
+//				continue;
+//			}
+//			else {	
+//				if(fb1.getIs_blocked() == 1) {
+//					ls.add(s);
+//				}
+//			}
+//			
+//		}
+//		
+//		for(ServiceRequest i:ls) {
+//			sr.remove(i);
+//		}
+//		Set<UserModel> users = new HashSet<UserModel>();
+//		List<ServiceRequestAddress> srAddress = new ArrayList<ServiceRequestAddress>();
+//		
+//		
+//		users.add(currentUser);
+//		
+//		for(ServiceRequest i : sr) {
+//			ServiceRequestAddress a = this.serviceRequests.getServiceRequestAddressById(i.getService_req_id());
+//			srAddress.add(a);
+//			
+//			UserModel userCust = this.userService.getUserByUserId(i.getUser_id());
+//			users.add(userCust);
+//		}
+//		
+//		
+//		
+//		model.addAttribute("users" , users);
+//		model.addAttribute("srAddress" , srAddress);
+//		
+//		
+//		List<ServiceRequest> srFilter = new ArrayList<ServiceRequest>();
+//		for(ServiceRequest i : sr) {
+//			if(i.getHas_pets() == 0) {
+//				srFilter.add(i);
+//			}
+//		}
+//		
+//		if(pet == 1) {
+//			model.addAttribute("service_requests" , sr);
+//			model.addAttribute("sr_type" , 1);
+//			System.out.println("added");
+//		}
+//		else {
+//			model.addAttribute("service_requests",srFilter);
+//			model.addAttribute("sr_type" , 0);
+//			System.out.println("added32");
+//		}
+//		
+//		
+//		return "serviceProvider/spDash";
+//	}
+	
+	
+	@RequestMapping(value = "/dash" , method = RequestMethod.GET)
+	public String spDash(Model model , @RequestParam(value="pets" , defaultValue = "1") int pet , @RequestParam(required=false, name="page") String page, @RequestParam(required=false, name="count") String count ) {
+		
+		User loggedInUserDetails = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		UserModel currentUser = userService.getUserByEmail(loggedInUserDetails.getUsername());	
+
+		List<ServiceRequest> sr = this.serviceRequests.getServiceRequestByPostalCode(currentUser.getPostal_code());
+		List<ServiceRequest> ls = new ArrayList<ServiceRequest>();
+		for(ServiceRequest s: sr) {
+			FavouriteBlockedModel fb = this.userService.getFavBlockByUserIdAndTargetUserId(currentUser.getUser_id() , s.getUser_id());
+			if(fb==null) {
+				continue;
+			}
+			else {	
+				if(fb.getIs_blocked() == 1) {
+					ls.add(s);
+				}
+			}
+			FavouriteBlockedModel fb1 = this.userService.getFavBlockByUserIdAndTargetUserId(s.getUser_id(),currentUser.getUser_id());
+			if(fb1==null) {
+				continue;
+			}
+			else {	
+				if(fb1.getIs_blocked() == 1) {
+					ls.add(s);
+				}
+			}
+			
+		}
+		
+		for(ServiceRequest i:ls) {
+			sr.remove(i);
+		}
+		Set<UserModel> users = new HashSet<UserModel>();
+		List<ServiceRequestAddress> srAddress = new ArrayList<ServiceRequestAddress>();
+		
+		
+		users.add(currentUser);
+		
+		for(ServiceRequest i : sr) {
+			ServiceRequestAddress a = this.serviceRequests.getServiceRequestAddressById(i.getService_req_id());
+			srAddress.add(a);
+			
+			UserModel userCust = this.userService.getUserByUserId(i.getUser_id());
+			users.add(userCust);
+		}
+		
+		model.addAttribute("users" , users);
+		model.addAttribute("srAddress" , srAddress);
+		
+		PagedListHolder<ServiceRequest> srPaged = new PagedListHolder<ServiceRequest>();
+		PagedListHolder<ServiceRequest> srFilterPaged = new PagedListHolder<ServiceRequest>();
+		srPaged.setSource(sr);
+		
+		
+		List<ServiceRequest> srFilter = new ArrayList<ServiceRequest>();
+		srFilterPaged.setSource(srFilter);
+		
+		for(ServiceRequest i : srPaged.getPageList()) {
+			if(i.getHas_pets() == 0) {
+				srFilter.add(i);
+			}
+		}
+		
+		if(count == null) {
+			srPaged.setPageSize(10);
+			srFilterPaged.setPageSize(10);
+		}
+		else {
+			srPaged.setPageSize(Integer.parseInt(count));
+			srFilterPaged.setPageSize(Integer.parseInt(count));
+		}
+		
+		if(page == null) {
+			if(pet == 1) {
+				model.addAttribute("service_requests" , srPaged);
+				model.addAttribute("sr_type" , 1);
+				System.out.println("addednull");
+			}
+			else {
+				model.addAttribute("service_requests",srFilterPaged);
+				model.addAttribute("sr_type" , 0);
+				System.out.println("added32");
+			}
+		}
+		else {
+			int pageNum = Integer.parseInt(page);
+	    	srPaged.setPage(pageNum - 1);
+			if(pet == 1) {
+				model.addAttribute("service_requests" , srPaged);
+				model.addAttribute("sr_type" , 1);
+				System.out.println("added");
+			}
+			else {
+				model.addAttribute("service_requests",srFilterPaged);
+				model.addAttribute("sr_type" , 0);
+				System.out.println("added32111");
+			}
+	    }		
+		return "serviceProvider/spDash";
+	}
+	
+
+	@RequestMapping("/upcoming-services")
+	public String spUpcomingServices(@RequestParam(required=false, name="page") String page, @RequestParam(required=false, name="count") String count ,Model model) {
+		
+		User loggedInUserDetails = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		UserModel currentUser = userService.getUserByEmail(loggedInUserDetails.getUsername());
+
+		List<ServiceRequest> sr = this.serviceRequests.getServiceRequestBySPIdAndStatus(currentUser.getUser_id() , 2);
+		List<ServiceRequest> sr1 = this.serviceRequests.getServiceRequestBySPIdAndStatus(currentUser.getUser_id() , 4);
+		
+		for(ServiceRequest i: sr1) {
+			sr.add(i);
+		}
+		
+		Set<UserModel> users = new HashSet<UserModel>();
+		List<ServiceRequestAddress> srAddress = new ArrayList<ServiceRequestAddress>();
+		
+		users.add(currentUser);
+		
+		for(ServiceRequest i : sr) {
+			ServiceRequestAddress a = this.serviceRequests.getServiceRequestAddressById(i.getService_req_id());
+			srAddress.add(a);
+			UserModel userCust = this.userService.getUserByUserId(i.getUser_id());
+			users.add(userCust);
+		}
+		
+		List<Integer> completeId = new ArrayList<Integer>();
+		
+		Date dtToday = new Date();
+		
+		for(ServiceRequest i : sr) {
+			Date sdate = i.getService_start_date();
+			float totalTime = i.getService_hours() + i.getExtra_hours();
+			System.out.println(sdate.getTime());
+			System.out.println("-----" + totalTime*3600*1000);
+			long k = (long) (sdate.getTime() + (totalTime*3600*1000));
+			
+			Date dcomplete = new Date(k);
+			if(dcomplete.before(dtToday)) {
+				completeId.add(i.getService_req_id());
+			}
+			
+		}
+		
+		PagedListHolder<ServiceRequest> srPaged = new PagedListHolder<ServiceRequest>();
+		srPaged.setSource(sr);
+		
+		System.out.println(count);
+		if(count == null) {
+			srPaged.setPageSize(10);
+		}
+		else {
+			srPaged.setPageSize(Integer.parseInt(count));
+		}
+		
+		if(page == null) {
+			model.addAttribute("service_requests" , srPaged);
+		}
+		else {
+	    	int pageNum = Integer.parseInt(page);
+	    	srPaged.setPage(pageNum - 1);
+	      	System.out.println(srPaged.getPageList());
+	      	model.addAttribute("service_requests" , srPaged);
+	    }
+		
+//		model.addAttribute("service_requests" , sr);
+		model.addAttribute("users" , users);
+		model.addAttribute("srAddress" , srAddress);
+		
+		model.addAttribute("completeId" , completeId);
+		
+		return "serviceProvider/spUpcomingServices";
+	}
+	
+	@RequestMapping("/service-history")
+	public String spServiceHistory(@RequestParam(required=false, name="page") String page, @RequestParam(required=false, name="count") String count  , Model model) {
+		
+		User loggedInUserDetails = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		UserModel currentUser = this.userService.getUserByEmail(loggedInUserDetails.getUsername());
+		
+		List<ServiceRequest> sr = this.serviceRequests.getServiceRequestBySPIdAndStatus(currentUser.getUser_id(), 3);
+		Set<UserModel> users = new HashSet<UserModel>();
+		List<ServiceRequestAddress> srAddress = new ArrayList<ServiceRequestAddress>();
+		
+		users.add(currentUser);
+		
+		for(ServiceRequest i: sr) {
+			ServiceRequestAddress a = this.serviceRequests.getServiceRequestAddressById(i.getService_req_id());
+			srAddress.add(a);
+			
+			UserModel userCust = this.userService.getUserByUserId(i.getUser_id());
+			users.add(userCust);
+		}
+		
+		PagedListHolder<ServiceRequest> srPaged = new PagedListHolder<ServiceRequest>();
+		srPaged.setSource(sr);
+		
+		System.out.println(count);
+		if(count == null) {
+			srPaged.setPageSize(10);
+		}
+		else {
+			srPaged.setPageSize(Integer.parseInt(count));
+		}
+		
+		if(page == null) {
+			model.addAttribute("service_requests" , srPaged);
+		}
+		else {
+	    	int pageNum = Integer.parseInt(page);
+	    	srPaged.setPage(pageNum - 1);
+	      	System.out.println(srPaged.getPageList());
+	      	model.addAttribute("service_requests" , srPaged);
+	    }
+		
+		model.addAttribute("users" , users);
+		model.addAttribute("srAddress" , srAddress);
+		
+		return "serviceProvider/spServiceHistory";
+	}
+	
+//	@RequestMapping("/my-ratings")
+//	public String spMyRating(Model model , @RequestParam(value="ratingType" , defaultValue = "all") String ratingType) {
+//		
+//		User loggedInUserDetails = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//		UserModel currentUser = this.userService.getUserByEmail(loggedInUserDetails.getUsername());
+//		
+//		List<RatingModel> ratings = this.serviceRating.getRatingsByRatingTo(currentUser.getUser_id());
+//		Set<UserModel> users = new HashSet<UserModel>();
+//		List<ServiceRequest> sr = new ArrayList<ServiceRequest>();
+//		
+//		users.add(currentUser);
+//		
+//		for(RatingModel r : ratings) {
+//			UserModel userFrom = this.userService.getUserByUserId(r.getRating_from());
+//			users.add(userFrom);
+//			
+//			ServiceRequest s = this.serviceRequests.getServiceRequestById(r.getservice_request_id());
+//			sr.add(s);
+//		}
+//		
+//		model.addAttribute("service_requests" , sr);
+//		model.addAttribute("users" , users);
+//		
+//		List<RatingModel> ratingsFilteredVeryGood = new ArrayList<RatingModel>();
+//		List<RatingModel> ratingsFilteredGood = new ArrayList<RatingModel>();
+//		List<RatingModel> ratingsFilteredAverage = new ArrayList<RatingModel>();
+//		List<RatingModel> ratingsFilteredPoor = new ArrayList<RatingModel>();
+//		
+//		for(RatingModel r : ratings) {
+//			if(r.getRatings() == 5) {
+//				ratingsFilteredVeryGood.add(r);
+//			}
+//			if(r.getRatings() == 4) {
+//				ratingsFilteredGood.add(r);
+//			}
+//			if(r.getRatings() == 3) {
+//				ratingsFilteredAverage.add(r);
+//			}
+//			if(r.getRatings() == 2) {
+//				ratingsFilteredPoor.add(r);
+//			}
+//		}
+//
+//		if(ratingType.equals("all")) {
+//			model.addAttribute("ratings",ratings);
+//			model.addAttribute("typeSelect" , 0);
+//		}
+//		if(ratingType.equals("verygood")) {
+//			model.addAttribute("ratings",ratingsFilteredVeryGood);
+//			model.addAttribute("typeSelect" , 1);
+//		}
+//		if(ratingType.equals("good")) {
+//			model.addAttribute("ratings",ratingsFilteredGood);
+//			model.addAttribute("typeSelect" , 2);
+//		}
+//		if(ratingType.equals("average")) {
+//			model.addAttribute("ratings",ratingsFilteredAverage);
+//			model.addAttribute("typeSelect" , 3);
+//		}
+//		if(ratingType.equals("poor")) {
+//			model.addAttribute("ratings",ratingsFilteredPoor);
+//			model.addAttribute("typeSelect" , 4);
+//		}
+//		
+//		return "serviceProvider/spMyRating";
+//	}
+	
+	@RequestMapping("/my-ratings")
+	public String spMyRating(Model model , @RequestParam(required=false, name="page") String page, @RequestParam(required=false, name="count") String count  , @RequestParam(value="ratingType" , defaultValue = "all") String ratingType) {
+		
+		User loggedInUserDetails = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		UserModel currentUser = this.userService.getUserByEmail(loggedInUserDetails.getUsername());
+		
+		List<RatingModel> ratings = this.serviceRating.getRatingsByRatingTo(currentUser.getUser_id());
+		PagedListHolder<RatingModel> ratingsPaged = new PagedListHolder<RatingModel>();
+		Set<UserModel> users = new HashSet<UserModel>();
+		List<ServiceRequest> sr = new ArrayList<ServiceRequest>();
+		
+		users.add(currentUser);
+		
+		for(RatingModel r : ratings) {
+			UserModel userFrom = this.userService.getUserByUserId(r.getRating_from());
+			users.add(userFrom);
+			
+			ServiceRequest s = this.serviceRequests.getServiceRequestById(r.getservice_request_id());
+			sr.add(s);
+		}
+		
+		model.addAttribute("service_requests" , sr);
+		model.addAttribute("users" , users);
+		
+		List<RatingModel> ratingsFilteredVeryGood = new ArrayList<RatingModel>();
+		PagedListHolder<RatingModel> ratingsFilteredVeryGoodPaged = new PagedListHolder<RatingModel>();
+		
+		List<RatingModel> ratingsFilteredGood = new ArrayList<RatingModel>();
+		PagedListHolder<RatingModel> ratingsFilteredGoodPaged = new PagedListHolder<RatingModel>();
+		
+		List<RatingModel> ratingsFilteredAverage = new ArrayList<RatingModel>();
+		PagedListHolder<RatingModel> ratingsFilteredAveragePaged = new PagedListHolder<RatingModel>();
+		
+		List<RatingModel> ratingsFilteredPoor = new ArrayList<RatingModel>();
+		PagedListHolder<RatingModel> ratingsFilteredPoorPaged = new PagedListHolder<RatingModel>();
+		
+		for(RatingModel r : ratings) {
+			if(r.getRatings() == 5) {
+				ratingsFilteredVeryGood.add(r);
+			}
+			if(r.getRatings() == 4) {
+				ratingsFilteredGood.add(r);
+			}
+			if(r.getRatings() == 3) {
+				ratingsFilteredAverage.add(r);
+			}
+			if(r.getRatings() == 2) {
+				ratingsFilteredPoor.add(r);
+			}
+		}
+		
+		ratingsPaged.setSource(ratings);
+		ratingsFilteredVeryGoodPaged.setSource(ratingsFilteredVeryGood);
+		ratingsFilteredGoodPaged.setSource(ratingsFilteredGood);
+		ratingsFilteredAveragePaged.setSource(ratingsFilteredAverage);
+		ratingsFilteredPoorPaged.setSource(ratingsFilteredPoor);
+		
+		if(count == null) {
+			ratingsPaged.setPageSize(10);
+			ratingsFilteredVeryGoodPaged.setPageSize(10);
+			ratingsFilteredGoodPaged.setPageSize(10);
+			ratingsFilteredAveragePaged.setPageSize(10);
+			ratingsFilteredPoorPaged.setPageSize(10);
+		}
+		else {
+			ratingsPaged.setPageSize(Integer.parseInt(count));
+			ratingsFilteredVeryGoodPaged.setPageSize(Integer.parseInt(count));
+			ratingsFilteredGoodPaged.setPageSize(Integer.parseInt(count));
+			ratingsFilteredAveragePaged.setPageSize(Integer.parseInt(count));
+			ratingsFilteredPoorPaged.setPageSize(Integer.parseInt(count));
+		}
+		
+		
+		
+		if(ratingType.equals("all")) {
+			if(page == null) {
+				model.addAttribute("ratings",ratingsPaged);
+			}
+			else {
+		    	int pageNum = Integer.parseInt(page);
+		    	ratingsPaged.setPage(pageNum - 1);
+		      	model.addAttribute("ratings",ratingsPaged);
+		    }
+			model.addAttribute("typeSelect" , "all");
+		}
+		if(ratingType.equals("verygood")) {
+			if(page == null) {
+				model.addAttribute("ratings",ratingsFilteredVeryGoodPaged);
+			}
+			else {
+		    	int pageNum = Integer.parseInt(page);
+		    	ratingsFilteredVeryGoodPaged.setPage(pageNum - 1);
+		      	model.addAttribute("ratings",ratingsFilteredVeryGoodPaged);
+		    }
+			model.addAttribute("typeSelect" , "verygood");
+		}
+		if(ratingType.equals("good")) {
+			if(page == null) {
+				model.addAttribute("ratings",ratingsFilteredGoodPaged);
+			}
+			else {
+		    	int pageNum = Integer.parseInt(page);
+		    	ratingsFilteredGoodPaged.setPage(pageNum - 1);
+		      	model.addAttribute("ratings",ratingsFilteredGoodPaged);
+		    }
+			model.addAttribute("typeSelect" , "good");
+		}
+		if(ratingType.equals("average")) {
+			if(page == null) {
+				model.addAttribute("ratings",ratingsFilteredAveragePaged);
+			}
+			else {
+		    	int pageNum = Integer.parseInt(page);
+		    	ratingsFilteredAveragePaged.setPage(pageNum - 1);
+		      	model.addAttribute("ratings",ratingsFilteredAveragePaged);
+		    }
+			model.addAttribute("typeSelect" , "average");
+		}
+		if(ratingType.equals("poor")) {
+			if(page == null) {
+				model.addAttribute("ratings",ratingsFilteredPoorPaged);
+			}
+			else {
+		    	int pageNum = Integer.parseInt(page);
+		    	ratingsFilteredPoorPaged.setPage(pageNum - 1);
+		      	model.addAttribute("ratings",ratingsFilteredPoorPaged);
+		    }
+			model.addAttribute("typeSelect" , "poor");
+		}
+		
+		
+		
+		
+		return "serviceProvider/spMyRating";
+	}
+	
+
+	@RequestMapping("/block-customer")
+	public String spBlockCustomer(@RequestParam(required=false, name="page") String page, @RequestParam(required=false, name="count") String count ,Model model) {
+		
+		User loggedInUserDetails = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		UserModel currentUser = this.userService.getUserByEmail(loggedInUserDetails.getUsername());
+		
+		List<ServiceRequest> sr = this.serviceRequests.getServiceRequestBySPId(currentUser.getUser_id());
+		Set<UserModel> users = new HashSet<UserModel>();
+		List<FavouriteBlockedModel> favBlocked = this.userService.getFavBlockByUserId(currentUser.getUser_id()); 
+		List<Integer> blockedId = new ArrayList<Integer>();
+		Set<Integer> usersId = new HashSet<Integer>();
+		for(ServiceRequest i: sr) {
+			UserModel u = this.userService.getUserByUserId(i.getUser_id());
+			users.add(u);
+		}
+		for(FavouriteBlockedModel i: favBlocked) {
+			blockedId.add(i.getTarget_user_id());
+		}
+		for(UserModel i: users) {
+			usersId.add(i.getUser_id());
+		}
+		
+		List<UserModel> usersList = new ArrayList<UserModel>();
+		PagedListHolder<UserModel> userPaged = new PagedListHolder<UserModel>();
+		
+		for(UserModel i: users) {
+			usersList.add(i);
+		}
+		userPaged.setSource(usersList);
+		
+		System.out.println(count);
+		if(count == null) {
+			userPaged.setPageSize(10);
+		}
+		else {
+			userPaged.setPageSize(Integer.parseInt(count));
+		}
+		
+		if(page == null) {
+			model.addAttribute("users" , userPaged);
+		}
+		else {
+	    	int pageNum = Integer.parseInt(page);
+	    	userPaged.setPage(pageNum - 1);
+	      	System.out.println(userPaged.getPageList());
+	      	model.addAttribute("users" , userPaged);
+	    }
+
+		model.addAttribute("blocked",favBlocked);
+		model.addAttribute("usersId",usersId);
+		model.addAttribute("blockedId",blockedId);
+		
+		return "serviceProvider/spBlockCustomer";
+	}
+	
+	@RequestMapping("/notification")
+	public String spNotification(Model model) {
+		
+		return "serviceProvider/spNotification";
+	}
+	
+	@RequestMapping("/service-schedule")
+	public String spServiceSchedule(Model model) {
+		
+		return "serviceProvider/spServiceSchedule";
+	}
+	
+	@RequestMapping("/mysettings")
+	public String mySettingsSP(Model model) {
+		
+		User loggedInUserDetails = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		UserModel currentUser = userService.getUserByEmail(loggedInUserDetails.getUsername());	
+		
+		List<UserAddress> addresses = this.userService.getAllAddressByUserId(currentUser.getUser_id());
+		UserAddress address = new UserAddress();
+		
+		for(UserAddress i: addresses) {
+			address = i;
+		}
+		
+		model.addAttribute("user" , currentUser);
+		model.addAttribute("address" , address);
+		
+		
+		return "serviceProvider/mySettingsSP";
+	}
 	
 	@SuppressWarnings("rawtypes")
 	@RequestMapping(value = "/service-details-data" , method = RequestMethod.POST)
@@ -75,14 +670,12 @@ public class ServiceProviderController {
 		UserModel currentUser = userService.getUserByEmail(loggedInUserDetails.getUsername());	
 		
 		System.out.println("-----------------------------------------------------------------");
+		ServiceRequest sr = this.serviceRequests.getServiceRequestById(serviceReqId);
 		
 		List<ServiceRequest> allRequestsOfSp = this.serviceRequests.getServiceRequestBySPIdAndStatus(currentUser.getUser_id() , 2);
+		Date todayDate = new Date();
 		for(ServiceRequest i: allRequestsOfSp) {
-	
-//			if(i.getStatus() == 2) {
-				
-				Date todayDate = new Date();
-				
+
 				long a = i.getService_start_date().getTime();
 
 				Date startDate = new Date(a);
@@ -102,25 +695,26 @@ public class ServiceProviderController {
 					startDate.setHours(startDate.getHours() - 2);
 				}	
 				
-				ServiceRequest sr = this.serviceRequests.getServiceRequestById(serviceReqId);
+				
 				if(sr.getService_start_date().after(startDate) && sr.getService_start_date().before(endDate)) {
 					return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("conflict" + i.getService_req_id());
 				}
-				if(sr.getService_start_date().before(todayDate)) {
-					return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("expired");
-				}
-//			}	
 		}
 		
-		ServiceRequest currentSR = this.serviceRequests.getServiceRequestById(serviceReqId);
+		System.out.println(sr.getService_start_date());
+		System.out.println(todayDate);
+		if(sr.getService_start_date().before(todayDate)) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("expired");
+		}
 		
-		if(currentSR.getStatus() == 2) {
+//		ServiceRequest currentSR = this.serviceRequests.getServiceRequestById(serviceReqId);
+		
+		if(sr.getStatus() == 2) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("already accepted");
 		}
 		else {
 			Date dateToday = new Date();
 			
-			ServiceRequest sr = this.serviceRequests.getServiceRequestById(serviceReqId);
 			sr.setService_provider_id(currentUser.getUser_id());
 			sr.setSp_accepted_date(dateToday);
 			sr.setModified_by(currentUser.getUser_id());
@@ -128,209 +722,15 @@ public class ServiceProviderController {
 			sr.setStatus(2);
 			
 			this.serviceRequests.updateServiceRequestStatus(sr);
+			
+			UserModel user = this.userService.getUserByUserId(sr.getUser_id());
+			
+//			this.mainController.sendMail(user.getEmail() , "Your Service Request #"+sr.getService_req_id()+" is accepted by " + currentUser.getFirst_name() + " " + currentUser.getLast_name() + " ." );
+			
 			return ResponseEntity.status(HttpStatus.OK).body("updated");
 		}
 	}
 	
-	@RequestMapping("/dash")
-	public String spDash(Model model) {
-		User loggedInUserDetails = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		UserModel currentUser = userService.getUserByEmail(loggedInUserDetails.getUsername());	
-		
-		List<ServiceRequest> sr = this.serviceRequests.getServiceRequestByPostalCode(currentUser.getPostal_code());
-//		List<FavouriteBlockedModel> fb = this.userService.getFavBlockByUserId(currentUser.getUser_id());
-		List<ServiceRequest> ls = new ArrayList<ServiceRequest>();
-		for(ServiceRequest s: sr) {
-			FavouriteBlockedModel fb = this.userService.getFavBlockByUserIdAndTargetUserId(currentUser.getUser_id() , s.getUser_id());
-			if(fb==null) {
-				continue;
-			}
-			else {	
-				if(fb.getIs_blocked() == 1) {
-					ls.add(s);
-				}
-			}
-			FavouriteBlockedModel fb1 = this.userService.getFavBlockByUserIdAndTargetUserId(s.getUser_id(),currentUser.getUser_id());
-			if(fb1==null) {
-				continue;
-			}
-			else {	
-				if(fb1.getIs_blocked() == 1) {
-					ls.add(s);
-				}
-			}
-			
-		}
-		
-		for(ServiceRequest i:ls) {
-			sr.remove(i);
-		}
-		Set<UserModel> users = new HashSet<UserModel>();
-		List<ServiceRequestAddress> srAddress = new ArrayList<ServiceRequestAddress>();
-		
-		users.add(currentUser);
-		
-		for(ServiceRequest i : sr) {
-			ServiceRequestAddress a = this.serviceRequests.getServiceRequestAddressById(i.getService_req_id());
-			srAddress.add(a);
-			
-			UserModel userCust = this.userService.getUserByUserId(i.getUser_id());
-			users.add(userCust);
-		}
-		
-		model.addAttribute("service_requests" , sr);
-		model.addAttribute("users" , users);
-		model.addAttribute("srAddress" , srAddress);
-		return "serviceProvider/spDash";
-	}
-	
-	@RequestMapping("/upcoming-services")
-	public String spUpcomingServices(Model model) {
-		
-		User loggedInUserDetails = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		UserModel currentUser = userService.getUserByEmail(loggedInUserDetails.getUsername());
-		
-		List<ServiceRequest> sr = this.serviceRequests.getServiceRequestBySPIdAndStatus(currentUser.getUser_id() , 2);
-		Set<UserModel> users = new HashSet<UserModel>();
-		List<ServiceRequestAddress> srAddress = new ArrayList<ServiceRequestAddress>();
-		
-		users.add(currentUser);
-		
-		for(ServiceRequest i : sr) {
-			ServiceRequestAddress a = this.serviceRequests.getServiceRequestAddressById(i.getService_req_id());
-			srAddress.add(a);
-			UserModel userCust = this.userService.getUserByUserId(i.getUser_id());
-			users.add(userCust);
-		}
-		
-		
-		model.addAttribute("service_requests" , sr);
-		model.addAttribute("users" , users);
-		model.addAttribute("srAddress" , srAddress);
-		
-		return "serviceProvider/spUpcomingServices";
-	}
-	
-	@RequestMapping("/service-history")
-	public String spServiceHistory(Model model) {
-		
-		User loggedInUserDetails = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		UserModel currentUser = this.userService.getUserByEmail(loggedInUserDetails.getUsername());
-		
-		List<ServiceRequest> sr = this.serviceRequests.getServiceRequestBySPIdAndStatus(currentUser.getUser_id(), 3);
-		Set<UserModel> users = new HashSet<UserModel>();
-		List<ServiceRequestAddress> srAddress = new ArrayList<ServiceRequestAddress>();
-		
-		users.add(currentUser);
-		
-		for(ServiceRequest i: sr) {
-			ServiceRequestAddress a = this.serviceRequests.getServiceRequestAddressById(i.getService_req_id());
-			srAddress.add(a);
-			
-			UserModel userCust = this.userService.getUserByUserId(i.getUser_id());
-			users.add(userCust);
-		}
-		
-		model.addAttribute("service_requests" , sr);
-		model.addAttribute("users" , users);
-		model.addAttribute("srAddress" , srAddress);
-		
-		return "serviceProvider/spServiceHistory";
-	}
-	
-	@RequestMapping("/my-ratings")
-	public String spMyRating(Model model) {
-		
-		User loggedInUserDetails = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		UserModel currentUser = this.userService.getUserByEmail(loggedInUserDetails.getUsername());
-		
-		List<RatingModel> ratings = this.serviceRating.getRatingsByRatingTo(currentUser.getUser_id());
-		Set<UserModel> users = new HashSet<UserModel>();
-		List<ServiceRequest> sr = new ArrayList<ServiceRequest>();
-		
-		users.add(currentUser);
-		
-		for(RatingModel r : ratings) {
-			UserModel userFrom = this.userService.getUserByUserId(r.getRating_from());
-			users.add(userFrom);
-			
-			ServiceRequest s = this.serviceRequests.getServiceRequestById(r.getservice_request_id());
-			sr.add(s);
-		}
-		
-		model.addAttribute("ratings",ratings);
-		model.addAttribute("service_requests" , sr);
-		model.addAttribute("users" , users);
-				
-		
-		return "serviceProvider/spMyRating";
-	}
-	
-	@RequestMapping("/block-customer")
-	public String spBlockCustomer(Model model) {
-		
-		User loggedInUserDetails = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		UserModel currentUser = this.userService.getUserByEmail(loggedInUserDetails.getUsername());
-		
-		List<ServiceRequest> sr = this.serviceRequests.getServiceRequestBySPId(currentUser.getUser_id());
-		Set<UserModel> users = new HashSet<UserModel>();
-		List<FavouriteBlockedModel> favBlocked = this.userService.getFavBlockByUserId(currentUser.getUser_id()); 
-		List<Integer> blockedId = new ArrayList<Integer>();
-		Set<Integer> usersId = new HashSet<Integer>();
-		for(ServiceRequest i: sr) {
-			UserModel u = this.userService.getUserByUserId(i.getUser_id());
-			users.add(u);
-		}
-		for(FavouriteBlockedModel i: favBlocked) {
-			blockedId.add(i.getTarget_user_id());
-			
-		}
-		for(UserModel i: users) {
-			usersId.add(i.getUser_id());
-		}
-		
-		System.out.println(blockedId);
-		System.out.println(usersId);
-		
-		model.addAttribute("users",users);
-		model.addAttribute("blocked",favBlocked);
-		model.addAttribute("usersId",usersId);
-		model.addAttribute("blockedId",blockedId);
-		
-		return "serviceProvider/spBlockCustomer";
-	}
-	
-	@RequestMapping("/notification")
-	public String spNotification(Model model) {
-		
-		return "serviceProvider/spNotification";
-	}
-	
-	@RequestMapping("/service-schedule")
-	public String spServiceSchedule(Model model) {
-		
-		return "serviceProvider/spServiceSchedule";
-	}
-	
-	@RequestMapping("/mysettings")
-	public String mySettingsSP(Model model) {
-		
-		User loggedInUserDetails = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		UserModel currentUser = userService.getUserByEmail(loggedInUserDetails.getUsername());	
-		
-		List<UserAddress> addresses = this.userService.getAllAddress(currentUser.getUser_id());
-		UserAddress address = new UserAddress();
-		
-		for(UserAddress i: addresses) {
-			address = i;
-		}
-		
-		model.addAttribute("user" , currentUser);
-		model.addAttribute("address" , address);
-		
-		
-		return "serviceProvider/mySettingsSP";
-	}
 	
 	
 	@RequestMapping(value = "/service-cancel" , method=RequestMethod.POST)
@@ -348,6 +748,24 @@ public class ServiceProviderController {
 		sr.setModified_date(dt);
 		sr.setModified_by(currentUser.getUser_id());
 		sr.setStatus(0);
+		
+		this.serviceRequests.updateServiceRequestStatus(sr);
+		
+		return new ResponseEntity<HttpStatus>(HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/service-complete" , method=RequestMethod.POST)
+	public ResponseEntity<HttpStatus> serviceComplete(@RequestBody int sr_id) {
+		
+		User loggedInUserDetails = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		UserModel currentUser = userService.getUserByEmail(loggedInUserDetails.getUsername());	
+		
+		Date dt = new Date();
+		
+		ServiceRequest sr = this.serviceRequests.getServiceRequestById(sr_id);
+		sr.setModified_date(dt);
+		sr.setModified_by(currentUser.getUser_id());
+		sr.setStatus(3);
 		
 		this.serviceRequests.updateServiceRequestStatus(sr);
 		
@@ -423,7 +841,7 @@ public class ServiceProviderController {
 		
 		this.userService.updateUser(currentUser);
 		
-		List<UserAddress> addresses = this.userService.getAllAddress(currentUser.getUser_id());
+		List<UserAddress> addresses = this.userService.getAllAddressByUserId(currentUser.getUser_id());
 //		UserAddress address = new UserAddress();
 		
 		if(addresses.isEmpty()) {

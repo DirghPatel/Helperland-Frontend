@@ -34,8 +34,16 @@ public class ServiceRequestsDaoImpl implements ServiceRequestsDao{
 	
 	@SuppressWarnings("unchecked")
 	@Transactional
+	public List<ServiceRequest> getAllServiceRequestByUserId(int user_id) {
+		return factory.getCurrentSession().createQuery("from service_request where user_id =: uid")
+				.setParameter("uid", user_id)
+                .list();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Transactional
 	public List<ServiceRequest> getNewPendingServiceRequestByUserId(int user_id) {
-		return factory.getCurrentSession().createQuery("from service_request where (user_id = :id and status = 1) or (user_id = :id and status = 2)")
+		return factory.getCurrentSession().createQuery("from service_request where (user_id = :id and status = 1) or (user_id = :id and status = 2) or (user_id = :id and status = 4)")
                 .setParameter("id", user_id)
                 .list();
 	}
@@ -58,21 +66,21 @@ public class ServiceRequestsDaoImpl implements ServiceRequestsDao{
 	}
 
 	
-	
-	@SuppressWarnings("unchecked")
-	@Transactional
-	public List<ServiceRequest> getAllServiceRequestsByUserIdAndStatus(int user_id , int status) {
-		return factory.getCurrentSession().createQuery("from service_request where user_id = :id and status = : status")
-                .setParameter("id", user_id)
-                .setParameter("status", status)
-                .list();
-	}
-	
+//	
+//	@SuppressWarnings("unchecked")
+//	@Transactional
+//	public List<ServiceRequest> getAllServiceRequestsByUserIdAndStatus(int user_id , int status) {
+//		return factory.getCurrentSession().createQuery("from service_request where user_id = :id and status = : status")
+//                .setParameter("id", user_id)
+//                .setParameter("status", status)
+//                .list();
+//	}
+//	
 	
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<ServiceRequest> getServiceRequestByPostalCode(String postal_code) {
-		return factory.getCurrentSession().createQuery("from service_request where postal_code = :pc and user_id = service_provider_id and status = 1")
+		return factory.getCurrentSession().createQuery("from service_request where postal_code = :pc and user_id = service_provider_id and (status = 1 or status = 4)")
                 .setParameter("pc", postal_code)
                 .list();
 	}
@@ -134,6 +142,11 @@ public class ServiceRequestsDaoImpl implements ServiceRequestsDao{
 	@Transactional
 	public void updateServiceRequestStatus(ServiceRequest service_req_id) {
 		this.hibernateTemplate.update(service_req_id);
+	}
+	
+	@Transactional
+	public void updateServiceRequestAddress(ServiceRequestAddress service_req_address) {
+		this.hibernateTemplate.update(service_req_address);
 	}
 	
 	@SuppressWarnings("unchecked")

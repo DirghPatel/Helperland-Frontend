@@ -334,15 +334,39 @@ button:focus , input:focus , textarea:focus , select:focus{
 .select_button{
     border: 1px solid #646464 !important;
     padding: 5px 20px !important;
+    color: #646464 !important;
   }
+ 
+.btn-check:active+.btn-outline-primary:focus, .btn-check:checked+.btn-outline-primary:focus, .btn-outline-primary.active:focus, .btn-outline-primary.dropdown-toggle.show:focus, .btn-outline-primary:active:focus{
+	box-shadow: none !important;
+}
+.btn-check:checked+.btn-outline-primary{
+    background-color: #1d7a8c !important;
+    border-color: #1d7a8c !important;
+    transition: none !important;
+    box-shadow: none !important;
+    color: white !important;
+}
+
+
+
   
-.favouriteList{
+/* .favouriteList{
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: 1fr 1fr 1fr;
     grid-column-gap: 10px;
     grid-row-gap: 10px;
+} */
+
+.favouriteList{
+	display: flex;
+	overflow-x: scroll;
+	border-left: 1px solid #e1e1e1;
+	border-right: 1px solid #e1e1e1;
 }
 .favouriteListItem{
+	max-width: 250px;
+	min-width: 250px;
     border: 1px solid #e1e1e1;
     /* margin: 5px; */
     padding: 20px 0px !important;

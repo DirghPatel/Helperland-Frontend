@@ -11,6 +11,7 @@
 	<link href='<c:url value="/resources/css/spDash.css" />' rel="stylesheet" />
 	<link href='<c:url value="/resources/css/navbar-2.css" />' rel="stylesheet" />
 	<link href='<c:url value="/resources/css/footer.css" />' rel="stylesheet" />
+	<link href='<c:url value="/resources/css/pagination.css" />' rel="stylesheet" />
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
     </script>
@@ -176,20 +177,20 @@
             <div class="dash_content">
                 <!-- ------- My rating --------- -->
                 <div id="myRatingTable">
-                    <form class="myRatingHead">
+                    <form class="myRatingHead" method="get" action="my-ratings" id="myRatingForm">
                         <label for="paymentStatus">
                             Rating
                         </label>
-                        <select name="ratingType" id="">
-                            <option value="all">All</option>
-                            <option value="verygood">Very Good</option>
-                            <option value="good">Good</option>
-                            <option value="average">Average</option>
-                            <option value="poor">Poor</option>
+                        <select name="ratingType" id="ratingType">
+                            <option value="all" <c:if test="${typeSelect == 'all' }">selected</c:if> >All</option>
+                            <option value="verygood" <c:if test="${typeSelect == 'verygood' }">selected</c:if> >Very Good</option>
+                            <option value="good" <c:if test="${typeSelect == 'good' }">selected</c:if> >Good</option>
+                            <option value="average" <c:if test="${typeSelect == 'average' }">selected</c:if> >Average</option>
+                            <option value="poor" <c:if test="${typeSelect == 'poor' }">selected</c:if> >Poor</option>
                         </select>
                     </form>
                     <div class="myRatingTable_main">
-                        <c:forEach var="rating" items="${ratings }">
+                        <c:forEach var="rating" items="${ratings.pageList }">
 							<div class="myRatingTable_body d-flex flex-column">
 	                            <div class="ratingTable_innerRow1 d-flex p-2">
 	                                <div class="d-flex ratingTable_innerRow2 ">
@@ -272,7 +273,7 @@
 	                                            	Good
 	                                            </c:if>
 	                                            <c:if test="${rating.ratings == 3}">
-	                                            	Very Good
+	                                            	Average
 	                                            </c:if>
 	                                            <c:if test="${rating.ratings == 2}">
 	                                            	Poor
@@ -291,6 +292,51 @@
 	                        </div>
                         </c:forEach>	
                     </div>
+                    <div class="pagination p12 d-flex align-items-center justify-content-between">
+                    	
+                    	<div class="d-flex pg-768">
+                    		<div class="d-flex">
+	                    		<p class="mb-0">Show &nbsp</p>
+		                    	<select id="count_select" name="count">
+		                    		<option value="10" selected>10</option>
+		                    		<option value="50">50</option>
+		                    		<option value="100">100</option>
+		                    	</select>
+	                    	</div>
+	                    	<p class="mb-0"> &nbsp Entries total record:${ratings.nrOfElements }</p>
+                    	</div>
+                    	
+                    	<% 
+				        	String c = request.getParameter("count");
+                    	 	if(c == null){
+                    	 		c = "10";
+                    	 	}
+							pageContext.setAttribute("c", c);					        
+					    %>		
+                    
+				        <ul>
+					        <li class="rounded-circle"><a id="firstPrev" href="/helperland/service-provider/my-ratings?page=1&count=${c }&ratingType=${typeSelect}" class="rounded-circle"> « </a></li>
+					        
+					        <li class="rounded-circle">
+					        	<a id="prevIcon" href="/helperland/service-provider/my-ratings?page=<c:if test="${ratings.page == 1 or ratings.page == 0 }">1</c:if><c:if test="${ratings.page > 1 }">${ratings.page }</c:if>&count=${c }&ratingType=${typeSelect}" class="rounded-circle" <c:if test = "${ratings.page ==  0}">style = "pointer-events: none"</c:if>>  ‹ </a>
+					        </li>
+					        <li class="rounded-circle">
+						        <c:forEach begin="1" end="${ratings.pageCount}" step="1"  varStatus="tagStatus">
+									  <c:choose>
+										    <c:when test="${(ratings.page + 1) == tagStatus.index}">
+										      	<span class="is-active rounded-circle">${tagStatus.index}</span>
+										    </c:when>
+										    <c:otherwise>                
+										     	<a class="pageNoTag rounded-circle" href="/helperland/service-provider/my-ratings?page=${tagStatus.index}&count=${c }&ratingType=${typeSelect}">${tagStatus.index}</a>
+										    </c:otherwise>
+									  </c:choose>
+								</c:forEach>
+							</li>
+					        <li class="rounded-circle"><a id="nextIcon" href="/helperland/service-provider/my-ratings?page=${ratings.page + 2 }&count=${c }&ratingType=${typeSelect}" class="rounded-circle" <c:if test = "${ratings.page + 1 ==  ratings.pageCount}">style = "pointer-events: none"</c:if>> › </a></li>
+					        <li class="rounded-circle"><a id="lastNext" href="/helperland/service-provider/my-ratings?page=${ratings.pageCount }&count=${c }&ratingType=${typeSelect}" class="rounded-circle"> » </a></li>
+				        	
+				        </ul>
+				    </div>
                 </div>
             </div>
         </div>
@@ -431,8 +477,24 @@
 				
 			</c:forEach>
 			
+			let searchParams = new URLSearchParams(window.location.search);
+			let param = searchParams.get('count');
+			$("#count_select option[value = '" + param + "']").attr("selected" , true);
+			
 			
 		})	
+		
+		$("#count_select").on("change" , function(){
+	    	
+			let searchParams = new URLSearchParams(window.location.search);
+			let rt = new URLSearchParams(window.location.search).get('ratingType');
+			if(rt == null){
+				rt = "all";
+			}
+   			$("#firstPrev").attr("href" , '/helperland/service-provider/my-ratings?page=1&count=' + $("#count_select").val() + '&ratingType=' + rt);
+       	
+    		document.getElementById("firstPrev").click();
+    	})
     
     </script>
     
@@ -532,6 +594,13 @@
 			
 		}	
     
+    </script>
+    <script>
+    
+    	$("#ratingType").on("change" , function(){
+    		$("#myRatingForm").submit();
+    	})
+    	    
     </script>
     
     <!-- <script src="./spDash.js"></script> -->

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import helperlandBackend.models.ServiceRequest;
 import helperlandBackend.models.ServiceRequestAddress;
@@ -68,7 +69,7 @@ public class ServiceBookingController {
 	
 	@SuppressWarnings("rawtypes")
 	@RequestMapping(value = "/service-request" , method = RequestMethod.POST)
-	public ResponseEntity addNewService(@ModelAttribute ServiceRequest serviceRequest , Model model){
+	public ResponseEntity addNewService(@ModelAttribute ServiceRequest serviceRequest , @RequestParam(value = "fav-sp-id" , defaultValue = "0000") int fav_sp_id , Model model){
 	
 		System.out.println(serviceRequest);
 		
@@ -82,6 +83,10 @@ public class ServiceBookingController {
 		serviceRequest.setService_provider_id(currentUser.getUser_id());
 		serviceRequest.setModified_by(currentUser.getUser_id());
 		serviceRequest.setStatus(1);
+		if(fav_sp_id != 0) {
+			serviceRequest.setStatus(2);
+			serviceRequest.setService_provider_id(fav_sp_id);
+		}
 		
 		System.out.println(serviceRequest);
 		

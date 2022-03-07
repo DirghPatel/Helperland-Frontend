@@ -26,7 +26,9 @@ public interface UserDao{
 	
 	public int addUserAddress(UserAddress userAddress);
 	
-	public List<UserAddress> getAllAddress(int id);
+	public List<UserAddress> getAllUserAddress();
+	
+	public List<UserAddress> getAllAddressByUserId(int id);
 	
 	public UserAddress getAllAddressByAddressId(int id);
 	

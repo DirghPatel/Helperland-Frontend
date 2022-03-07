@@ -20,10 +20,13 @@ public class ServiceRequestsServiceImpl implements ServiceRequestsService{
 		return this.serviceRequestsDao.getAllServiceRequests();
 	}
 	
+	public List<ServiceRequest> getAllServiceRequestByUserId(int user_id) {
+		return this.serviceRequestsDao.getAllServiceRequestByUserId(user_id);
+	}
+	
 	public List<ServiceRequest> getNewPendingServiceRequestByUserId(int user_id) {
 		return this.serviceRequestsDao.getNewPendingServiceRequestByUserId(user_id);
 	}
-
 	public List<ServiceRequest> getServiceRequestBySPId(int service_provider_id) {
 		return this.serviceRequestsDao.getServiceRequestBySPId(service_provider_id);
 	}
@@ -32,9 +35,9 @@ public class ServiceRequestsServiceImpl implements ServiceRequestsService{
 		return this.serviceRequestsDao.getServiceRequestBySPIdAndStatus(service_provider_id , status);
 	}
 	
-	public List<ServiceRequest> getAllServiceRequestsByUserIdAndStatus(int user_id, int status) {
-		return this.serviceRequestsDao.getAllServiceRequestsByUserIdAndStatus(user_id , status);
-	}
+//	public List<ServiceRequest> getAllServiceRequestsByUserIdAndStatus(int user_id, int status) {
+//		return this.serviceRequestsDao.getAllServiceRequestsByUserIdAndStatus(user_id , status);
+//	}
 	
 	public List<ServiceRequest> getServiceRequestByPostalCode(String postal_code) {
 		return this.serviceRequestsDao.getServiceRequestByPostalCode(postal_code);
@@ -58,6 +61,10 @@ public class ServiceRequestsServiceImpl implements ServiceRequestsService{
 
 	public void updateServiceRequestStatus(ServiceRequest service_req_id) {
 		this.serviceRequestsDao.updateServiceRequestStatus(service_req_id);
+	}
+	
+	public void updateServiceRequestAddress(ServiceRequestAddress service_req_address) {
+		this.serviceRequestsDao.updateServiceRequestAddress(service_req_address);
 	}
 	
 	public List<ServiceRequest> getAllServiceRequestsHistoryByUserId(int user_id) {

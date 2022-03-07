@@ -24,7 +24,9 @@ public interface UserService{
 	
 	public int saveUserAddress(UserAddress userAddress);
 	
-	public List<UserAddress> getAllAddress(int id);
+	public List<UserAddress> getAllUserAddress();
+	
+	public List<UserAddress> getAllAddressByUserId(int id);
 	
 	public UserAddress getAllAddressByAddressId(int id);
 	

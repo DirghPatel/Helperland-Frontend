@@ -44,7 +44,7 @@ public class AddressController {
 			User loggedInUserDetails = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			UserModel currentUser = userService.getUserByEmail(loggedInUserDetails.getUsername());
 			
-			List<UserAddress> checkAddress = this.userService.getAllAddress(currentUser.getUser_id());
+			List<UserAddress> checkAddress = this.userService.getAllAddressByUserId(currentUser.getUser_id());
 			
 			if(checkAddress.isEmpty()) {
 				Date dt = new Date();

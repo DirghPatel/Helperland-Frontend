@@ -97,10 +97,18 @@ public class UserDaoImpl implements UserDao {
 		int id = (Integer) this.hibernateTemplate.save(userAddress);
 		return id;
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<UserAddress> getAllUserAddress() {
+
+		return factory.getCurrentSession().createQuery("from user_address ")
+                .list();
+	}
 
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public List<UserAddress> getAllAddress(int id) {
+	public List<UserAddress> getAllAddressByUserId(int id) {
 		
 		return factory.getCurrentSession().createQuery("from user_address E where E.user_id = :id and E.is_deleted = 0")
                 .setParameter("id", id)

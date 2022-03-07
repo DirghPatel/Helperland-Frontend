@@ -27,7 +27,9 @@
             <div class="d-flex align-items-center adminDetailContainer">
                 <img src="<c:url value = "/resources/assets/adminScreen/user.png" />" alt="" height="36" width="36">
                 <p class="mb-0 mx-3 text-white">${user.first_name } ${user.last_name }</p>
-                <img src="<c:url value = "/resources/assets/adminScreen/logout.png" />" alt="" height="29" width="26">
+                <a href="/helperland/logout">
+                    <img src="<c:url value = "/resources/assets/adminScreen/logout.png" />" alt="" height="29" width="26">
+                </a>
             </div>
         </div>
     </nav>
@@ -54,7 +56,7 @@
             </a>
         </div>
         <div class="formWrapper position-relative">
-            <form action="">
+            <form action="user-management" method="post">
                 <ul class="formMain">
                     <li class="h-100">
                         <input type="text" name="username" placeholder="User name" class="width215 h-100 marginInput mb-3">
@@ -62,20 +64,20 @@
                     <li class="h-100">
                         <select name="userrole" id="userrole" class="width215 marginInput h-100 mb-3">
                             <option value="" disabled selected>User Role</option>
-                            <option value="admin">Admin</option>
-                            <option value="callcenter">Call Center</option>
-                            <option value="customer">Customer</option>
-                            <option value="serviceprovider">Service Provicer</option>
+                            <option value="3">Admin</option>
+                            <option value="4">Call Center</option>
+                            <option value="1">Customer</option>
+                            <option value="2">Service Provicer</option>
                         </select>
                     </li>
                     <li class="h-100">
                         <div class="marginInput d-flex h-100 mb-3">
-                            <input type="text" name="phonecode" class="phonecodeForm" placeholder="+49" value="+49" disabled>
-                            <input type="text" name="phonenumber" placeholder="Phone Number">
+                            <input type="text" name="phonecode" class="phonecodeForm" placeholder="+49" value="+91" disabled>
+                            <input type="text" name="mobile" placeholder="Phone Number">
                         </div>
                     </li>
                     <li class="h-100">
-                        <input type="text" name="zipcode" placeholder="Zip Code" class="mb-3 h-100 marginInput">
+                        <input type="text" name="postalcode" placeholder="Zip Code" class="mb-3 h-100 marginInput">
                     </li>
                     <li class="h-100">
                         <button type="submit" class="text-white marginInput searchButton h-100 mb-3"> Submit </button>
@@ -138,133 +140,101 @@
                     </tr>
                 </thead>
                 <tbody>
-
-                    <!-- ---------- call center ------------  -->
-                    <tr>
-                        <td scope="row">Lyum Watson</td>
-                        <td scope="row">Call Center</td>
-                        <td scope="row">Inquiry Manager</td>
-                        <td scope="row">113143</td>
-                        <td scope="row" >Berlin</td>
-                        <td scope="row" class="text-center">10 km</td>
-                        <td scope="row" class="text-center">
-                            <span class="statusActive">Active</span>
-                        </td>
-                        <td class="text-center">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-secondary text-dark dropDownBtn" data-bs-toggle="dropdown" aria-expanded="false">
-                                    &#8942
-                                </button>
-                                <ul class="dropdown-menu dropdown-menu-end">
-                                  <li><button class="dropdown-item" type="button" href="#editReschedule" data-bs-toggle="modal">Edit</button></li>
-                                  <li><button class="dropdown-item" type="button">Deactivate</button></li>
-                                </ul>
-                              </div>
-                        </td>
-                    </tr>
-
-                    <!-- ------------ customer & Service Provider ------------  -->
-                    <tr>
-                        <td scope="row">Lyum Watson</td>
-                        <td scope="row">Customer</td>
-                        <td scope="row">Inquiry Manager</td>
-                        <td scope="row">113143</td>
-                        <td scope="row" >Berlin</td>
-                        <td scope="row" class="text-center">10 km</td>
-                        <td scope="row" class="text-center">
-                            <span class="statusInActive">Inactive</span>
-                        </td>
-                        <td class="text-center">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-secondary text-dark dropDownBtn" data-bs-toggle="dropdown" aria-expanded="false">
-                                    &#8942
-                                </button>
-                                <ul class="dropdown-menu dropdown-menu-end">
-                                  <li><button class="dropdown-item" type="button" href="#editReschedule" data-bs-toggle="modal">Edit</button></li>
-                                  <li><button class="dropdown-item" type="button">Deactivate</button></li>
-                                  <li><button class="dropdown-item" type="button">Service History</button></li>
-                                </ul>
-                              </div>
-                        </td>
-                    </tr>
+                    <c:forEach var="user" items="${users }">
+                    
+                    	<tr>
+	                        <td scope="row">${user.first_name } ${user.last_name }</td>
+	                        <td scope="row">
+	                        	<c:if test="${user.user_type_id == 1 }">
+	                        		Customer
+	                        	</c:if>
+	                        	<c:if test="${user.user_type_id == 2 }">
+	                        		Service Provider
+	                        	</c:if>
+	                        </td>
+	                        <td scope="row">Inquiry Manager</td>
+	                        <td scope="row">${user.postal_code }</td>
+	                        <td scope="row" >
+	                        	
+	                        	<c:forEach var="address" items="${addresses }">
+	                        	
+	                        		<c:if test="${address.user_id == user.user_id  && address.is_default == 1}">
+	                        			${address.city }
+	                        		</c:if>
+	                        	
+	                        	</c:forEach>
+	                        
+	                        </td>
+	                        <td scope="row" class="text-center">10 km</td>
+	                        <td scope="row" class="text-center">
+	                            <c:if test="${user.status == 1 }">
+		                            <span class="statusActive">
+		                            	Active
+		                            </span>
+	                            </c:if>
+	                            <c:if test="${user.status == 0 }">
+		                            <span class="statusInActive">
+		                            	Inactive
+		                            </span>
+	                            </c:if>
+	                        </td>
+	                        <td class="text-center">
+	                            <div class="btn-group">
+	                                <button type="button" class="btn btn-secondary text-dark dropDownBtn" data-bs-toggle="dropdown" aria-expanded="false">
+	                                    &#8942
+	                                </button>
+	                                <ul class="dropdown-menu dropdown-menu-end">
+	                                  <!-- <li><a class="dropdown-item" type="button" href="#editReschedule" data-bs-toggle="modal">Edit</a></li> -->
+	                                  <li>
+	                                  	<button class="dropdown-item" type="button" id="${user.user_id }" onclick="editUserFunction($(this).attr('id'))">
+	                                  		<c:if test="${user.status == 0 }">
+	                                  			Activate
+	                                  		</c:if>
+	                                  		<c:if test="${user.status == 1 }">
+	                                  			Deactivate
+	                                  		</c:if>
+	                                  	</button>
+	                                  </li>
+	                                  <!-- <li><button class="dropdown-item" type="button">Service History</button></li> -->
+	                                </ul>
+	                              </div>
+	                        </td>
+	                    </tr>
+                    
+                    </c:forEach>
                 </tbody>
             </table>
         </div>
-    	<!-- <div class="editReschedulePopUp">
-
-            <div class="modal fade" id="editReschedule" aria-hidden="true" aria-labelledby="editRescheduleLabel" tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered vertical-align-center">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="editRescheduleLabel">Edit Service Request</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body d-flex editRescheduleModal p-4">
-                            <form action="">
-                                <div class="row mb-3">
-                                    <div class="col-sm-6">
-                                        <div class="form-group d-flex flex-column">
-                                            <label for="editDateModal" class="control-label fw-bold">Date</label>
-                                            <input type="date" value="23/12/2021" name="editDateModal" class="minheight46 borderlight">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group d-flex flex-column">
-                                            <label for="editDateTime" class="control-label fw-bold">Time</label>
-                                            <select name="editDateTime" id="" class="minheight46 borderlight">
-                                                <option value="8:00">8:00</option>
-                                                <option value="8:30">8:30</option>
-                                                <option value="9:00">9:00</option>
-                                                <option value="9:30">9:30</option>
-                                                <option value="10:00">10:00</option>
-                                                <option value="10:30">10:30</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <label for="" class="control-label fw-bold mb-2">Service Address</label>
-                                <div class="row mb-3">
-                                    <div class="col-sm-6 my-2">
-                                        <div class="form-group d-flex flex-column">
-                                            <label for="streetNameModal" class="control-label">Street</label>
-                                            <input type="text" name="streetNameModal" value="Street" class="minheight46 borderlight">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 my-2">
-                                        <div class="form-group d-flex flex-column">
-                                            <label for="houseNumberEdit" class="control-label">House No.</label>
-                                            <input type="text" name="houseNumberEdit" value="54" class="minheight46 borderlight">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 my-2">
-                                        <div class="form-group d-flex flex-column">
-                                            <label for="postalCodeEdit" class="control-label">Postal Code</label>
-                                            <input type="text" name="postalCodeEdit" value="534233" class="minheight46 borderlight">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 my-2">
-                                        <div class="form-group d-flex flex-column">
-                                            <label for="cityEdit" class="control-label">Time</label>
-                                            <input type="text" name="cityEdit" value="Troisdorf" class="minheight46 borderlight">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group d-flex flex-column mb-3">
-                                    <label for="reasonScheduleEdit" class="fw-bold">Why do you want to reschedule service request?</label>
-                                    <textarea name="reasonScheduleEdit" id="" rows="3" maxlength="500" placeholder="Why do you want to reschedule service request?" class="borderlight p-2"></textarea>
-                                </div>
-                                <button type="submit" class="btn blueBtn w-100" >Update</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
     
     </section>
     <footer class="text-center" style="color: #646464; font-size: 14px;">
         ©2018 Helperland. All rights reserved.
     </footer>
+    
+    <script>
+    
+    	function editUserFunction(id){
+    		
+    		console.log("in");
+    		
+    		$.ajax({
+				url : "update-user",
+				type : "POST",
+				data : id,
+				contentType : "application/json",
+				success : function(data) {
+					
+					location.reload();
+					console.log("ok");
+					
+				},
+				error : function(data) {
+					console.log("not");
+				}
+			})
+    	}
+    
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>

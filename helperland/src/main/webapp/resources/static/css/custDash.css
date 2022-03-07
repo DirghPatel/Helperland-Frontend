@@ -103,6 +103,7 @@ td {
   background-color: #1d7a8c !important;
   padding: 8px 16px !important;
   border: none !important;
+  white-space: nowrap;
 }
 .cust_statusCompleted{
   background-color: #67b644 !important;

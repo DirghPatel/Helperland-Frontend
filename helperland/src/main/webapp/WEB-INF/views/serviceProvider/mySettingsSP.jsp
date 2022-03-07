@@ -431,7 +431,7 @@
                                 <div class="col-md-12 my-3 ">
                                     <label for="" class="mb-2">Select Avatar</label>
                                     <div class="btn-group d-table-row  avatarGroup" role="group" aria-label="Basic radio toggle button group">
-                                        <input type="radio" <c:if test="${user.user_profile_picture == 'avatar-car' }">checked</c:if> class="btn-check" value="car" name="user_profile_picture" id="btnradio1" autocomplete="off" >
+                                        <input type="radio" <c:if test="${user.user_profile_picture == 'avatar-car' }">checked</c:if> class="btn-check" value="avatar-car" name="user_profile_picture" id="btnradio1" autocomplete="off" >
                                         <label class="btn btn-outline-primary itemAvatar rounded-circle mt-2" for="btnradio1">
                                             <img class="avatar" src="<c:url value = "/resources/assets/spDash/avatar-car.png" />" alt="" height="85">
                                         </label>

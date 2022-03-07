@@ -10,19 +10,19 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<c:set var="sr" value="${service_requests }" />
+	<%-- <c:set var="sr" value="${service_requests }" /> --%>
 	<c:set var="u" value="${users }" />
 	<c:set var="srAddress" value="${srAddress }" />
 	<link href='<c:url value="/resources/css/spDash.css" />' rel="stylesheet" />
 	<link href='<c:url value="/resources/css/navbar-2.css" />' rel="stylesheet" />
 	<link href='<c:url value="/resources/css/footer.css" />' rel="stylesheet" />
+	<link href='<c:url value="/resources/css/pagination.css" />' rel="stylesheet" />
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
     </script>
 </head>
 <body>
     <div style="min-height: 100vh; padding-bottom: 80px;">
-	
         <nav class="navbar navbar-expand-lg w-100 sticky-top" id="navbar">
             <div class="container-fluid navbar_main">
                 <a class="navbar-brand py-0" href="/helperland/home">
@@ -181,10 +181,10 @@
             <div class="dash_content">
                 <!-- ----------- New Service Request Table ----------- -->
                 <div id="newServiceRequestTable">
-                    <form class="serviceReqHead d-flex">
+                    <form class="serviceReqHead d-flex" id="include_pets_form" method="get" action="dash">
                         <div class="d-flex align-items-center justify-content-center me-3">
                             <label for="distance" class="me-1">Service Area</label>
-                            <select name="distance" id="">
+                            <select id="">
                                 <option value="25km">25km</option>
                                 <option value="25km">35km</option>
                                 <option value="25km">50km</option>
@@ -192,8 +192,9 @@
                             </select>
                         </div>
                         <div class="d-flex align-items-center justify-content-center">
-                            <input type="checkbox" class="me-2" name="pet">
-                            <label for="pet" style="font-size: 14px;">Include Pet at home</label>
+                            <input type="checkbox" class="me-2" name="pets" id = "include_pets" <c:if test="${sr_type == 1}">checked</c:if> value="1">
+                            <input type="checkbox" class="me-2 d-none" name="pets" id = "include_pets_hidden" value="0">
+                            <label for="pets" style="font-size: 14px;">Include Pet at home</label>
                         </div>
                     </form>
                     <table class="table table_1">
@@ -220,8 +221,9 @@
                                 <th scope="col" class="text-center">Actions</th>
                             </tr>
                         </thead>
-                        <tbody id="req_refresh">
-							<c:forEach var="sr" items="${service_requests }" varStatus = "i">
+                        <tbody id="serviceReq_all">
+							<c:forEach var="sr" items="${service_requests.pageList }" varStatus = "i">
+								
 								<tr>
 	                                <th scope="row" id="serviceRequestId">${sr.service_req_id }</th>
 	                                <td class="service_date cursorPointer" href="#serviceDetails" data-bs-toggle="modal" id="${sr.service_req_id }" onclick="myFunction($(this).attr('id'))">
@@ -263,13 +265,58 @@
 	                                    <p class="m-0 text-center">${sr.distance }km</p>
 	                                </td>
 	                                <td class="text-center button_main">
-	                                    <a class="accept_button rounded-pill text-light text-decoration-none" data-spID ="${sr.service_req_id }" onclick="acceptFunction($(this).attr('data-spID'))" style="cursor: pointer">Accept</a>
+	                                    <a class="accept_button rounded-pill text-light text-decoration-none" data-srID ="${sr.service_req_id }" onclick="acceptFunction($(this).attr('data-srID'))" style="cursor: pointer">Accept</a>
 	                                </td>
 	                            </tr>
 							</c:forEach>
 
-                        </tbody>
+                        </tbody> 
                     </table>
+                    <div class="pagination p12 d-flex align-items-center justify-content-between">
+                    	
+                    	<div class="d-flex pg-768">
+                    		<div class="d-flex">
+	                    		<p class="mb-0">Show &nbsp</p>
+		                    	<select id="count_select" name="count">
+		                    		<option value="10" selected>10</option>
+		                    		<option value="50">50</option>
+		                    		<option value="100">100</option>
+		                    	</select>
+	                    	</div>
+	                    	<p class="mb-0"> &nbsp Entries total record:${service_requests.nrOfElements }</p>
+                    	</div>		
+                    
+                    	<% 
+				        	String c = request.getParameter("count");
+                    	 	if(c == null){
+                    	 		c = "10";
+                    	 	}
+							pageContext.setAttribute("c", c);					        
+					    %>
+                    
+				        <ul>
+					        <li class="rounded-circle"><a id="firstPrev" href="/helperland/service-provider/dash?page=1&count=${c }&pets=${sr_type}" class="rounded-circle"> « </a></li>
+					        
+					        <li class="rounded-circle">
+					        	<a id="prevIcon" href="/helperland/service-provider/dash?page=<c:if test="${service_requests.page == 1 or service_requests.page == 0 }">1</c:if><c:if test="${service_requests.page > 1 }">${service_requests.page }</c:if>&count=${c }&pets=${sr_type}" class="rounded-circle" <c:if test = "${service_requests.page ==  0}">style = "pointer-events: none"</c:if>>  ‹ </a>
+					        </li>
+					        <li class="rounded-circle">
+						        <c:forEach begin="1" end="${service_requests.pageCount}" step="1"  varStatus="tagStatus">
+									  <c:choose>
+										    <c:when test="${(service_requests.page + 1) == tagStatus.index}">
+										      	<span class="is-active rounded-circle">${tagStatus.index}</span>
+										    </c:when>
+										    <c:otherwise>                
+										     	<a class="pageNoTag rounded-circle" href="/helperland/service-provider/dash?page=${tagStatus.index}&count=${c }&pets=${sr_type}">${tagStatus.index}</a>
+										    </c:otherwise>
+									  </c:choose>
+								</c:forEach>
+							</li>
+					        <li class="rounded-circle"><a id="nextIcon" href="/helperland/service-provider/dash?page=${service_requests.page + 2 }&count=${c }&pets=${sr_type}" class="rounded-circle" <c:if test = "${service_requests.page + 1 ==  service_requests.pageCount}">style = "pointer-events: none"</c:if>> › </a></li>
+					        <li class="rounded-circle"><a id="lastNext" href="/helperland/service-provider/dash?page=${service_requests.pageCount }&count=${c }&pets=${sr_type}" class="rounded-circle"> » </a></li>
+				        	
+				        </ul>
+				    </div>
                 </div>
             </div>
         </div>
@@ -312,6 +359,7 @@
                                 <p id="sdPets"></p>
                                 
                                 <hr>
+                                <a class="accept_button rounded-pill text-light text-decoration-none" id="sdAcceptBtn" onclick="acceptFunction($(this).attr('data-srID'))" style="cursor: pointer">Accept</a>
                                 
                             </div>
                             <div class="serviceModalRight">
@@ -422,7 +470,29 @@
     
     	$(document).ready(function() {
     		
-    		<c:forEach var="sr" items="${service_requests }" varStatus="i">
+    		$("#include_pets").val(1);
+
+    		<c:if test="${sr_type == all} ">
+	    		$("#include_pets").attr('checked' , true);	
+				console.log("aaaaaaa");
+    		</c:if>
+    		<c:if test="${sr_type == filtered} ">
+	    		$("#include_pets").attr('checked' , false);	
+				console.log("aaaaaaasss");
+			</c:if>
+    		
+    		/* var k = ${sr_type};
+    		
+    		if(k == "all"){
+    			$("#include_pets").attr('checked' , true);	
+    			console.log("aaaaaaa");
+    		}
+    		if(k == "filtered"){
+    			$("#include_pets").attr('checked' , false);
+    			console.log("aaaaaaaass");
+    		} */
+    		
+    		<c:forEach var="sr" items="${service_requests.pageList }" varStatus="i">
     			
 	    		var d = new Date("${sr.service_start_date}");
 	    		console.log(d);
@@ -449,8 +519,23 @@
     			
     		</c:forEach>
     		
+    		let searchParams = new URLSearchParams(window.location.search);
+			let param = searchParams.get('count');
+			$("#count_select option[value = '" + param + "']").attr("selected" , true);
+			
     		
     	})
+    	
+    	$("#count_select").on("change" , function(){
+    		
+    		let pets = ${sr_type};
+    		
+    		$("#firstPrev").attr("href" , '/helperland/service-provider/dash?page=1&count=' + $("#count_select").val()+'&pets='+pets);
+    	
+    		console.log($("#firstPrev").attr('href'));
+    		
+    		document.getElementById("firstPrev").click();
+    })
     
     </script>
     
@@ -497,6 +582,7 @@
 						$("#sdId").html(data[0].service_req_id);
 						$("#sdAmount").html(data[0].total_cost + ",00 $");
 						$("#sdComments").html(data[0].comments);
+						$("#sdAcceptBtn").attr('data-srId' , data[0].service_req_id);
 						
 						if(data[0].has_pets == 0){
 							$("#sdPets").html("I don't have pets at home.");
@@ -539,6 +625,7 @@
 						if(data[1].email != null){
 							$("#sdEmail").html(" "+data[1].email);
 						}
+						
 				},
 				error : function(xhr, textStatus, xml) {
 					console.log("error");
@@ -586,6 +673,21 @@
     		
     	}
     
+    	$("#include_pets").on("change" , function(){
+   			if (this.checked == true)
+   				{
+   	            	$(this).val("1");
+   	            	$("#include_pets_hidden").attr('checked' , false);	
+   				} 
+   	        else{
+   	        	$("#include_pets_hidden").attr('checked' , true);
+   	        }
+   			
+   			console.log($(this).val());
+
+   			$("#include_pets_form").submit();     			
+    	})
+    	
     </script>
 
 

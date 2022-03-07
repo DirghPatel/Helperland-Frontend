@@ -139,6 +139,12 @@ th {
   background-color: #ff6b6b;
   padding: 5px 10px;
 }
+.statusRescheduled {
+  color: white;
+  background-color: #922ced;
+  padding: 5px 10px;
+}
+
 table {
   border: 1px solid #e1e1e1;
   background-color: #fff;
@@ -174,15 +180,19 @@ label {
 .refundPopUp .modal-dialog {
   max-width: 700px;
 }
-
+.sp_block{
+	max-width: 200px;
+	display: flex;
+}
 .serviceDetailsModal {
   max-width: 900px;
 }
 .serviceModalLeft p {
   margin-bottom: 0;
 }
-.serviceModalLeft {
+.serviceModalLeft{
   padding: 15px;
+  width: 70%;
 }
 .serviceModalRight {
   border-left: 1px solid #e1e1e1;

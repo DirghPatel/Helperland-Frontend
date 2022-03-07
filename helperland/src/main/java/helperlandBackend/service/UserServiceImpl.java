@@ -57,9 +57,13 @@ public class UserServiceImpl implements UserService  {
 		
 		return this.userDao.addUserAddress(userAddress);
 	}
+	
+	public List<UserAddress> getAllUserAddress() {
+		return this.userDao.getAllUserAddress();
+	}
 
-	public List<UserAddress> getAllAddress(int id) {
-		return this.userDao.getAllAddress(id);
+	public List<UserAddress> getAllAddressByUserId(int id) {
+		return this.userDao.getAllAddressByUserId(id);
 	}
 	
 	public UserAddress getAllAddressByAddressId(int id) {

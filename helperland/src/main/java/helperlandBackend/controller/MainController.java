@@ -1,8 +1,11 @@
 package helperlandBackend.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -27,6 +32,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import helperlandBackend.models.ContactUs;
+import helperlandBackend.models.FavouriteBlockedModel;
 import helperlandBackend.models.UserAddress;
 import helperlandBackend.models.UserModel;
 import helperlandBackend.service.ContactUsServiceImpl;
@@ -160,9 +166,29 @@ public class MainController {
 		UserModel currentUser = userService.getUserByEmail(loggedInUserDetails.getUsername());
 		
 		
-		List<UserAddress> allAddresses = this.userService.getAllAddress(currentUser.getUser_id());
+		List<UserAddress> allAddresses = this.userService.getAllAddressByUserId(currentUser.getUser_id());
+		
+		List<FavouriteBlockedModel> favBlockList = this.userService.getFavBlockByUserId(currentUser.getUser_id());
+		List<FavouriteBlockedModel> favSp = new ArrayList<FavouriteBlockedModel>();
+		Set<UserModel> favUsers = new HashSet<UserModel>();
+		
+		for(FavouriteBlockedModel i: favBlockList) {
+			if(i.getIs_favourite() == 1) {
+				favSp.add(i);
+			}
+		}
+		
+		for(FavouriteBlockedModel i : favSp) {
+			
+			UserModel u = this.userService.getUserByUserId(i.getTarget_user_id());
+			favUsers.add(u);
+		}
+//		List<UserModel> favUsers = this.userService.getAllUser();
+		
 		model.addAttribute("addresses",allAddresses);
 		model.addAttribute("user" , currentUser);
+		model.addAttribute("favSp" , favSp);
+		model.addAttribute("favUsers" , favUsers);
 		
 		return "serviceBooking";
 	}
@@ -173,6 +199,8 @@ public class MainController {
 
 	@RequestMapping(value = "/user-register" , method = RequestMethod.POST)
 	public String regUser(@Valid @ModelAttribute ("userreg") UserModel user , BindingResult br, Model model , HttpSession session , HttpServletRequest request) throws IOException {
+		
+		user.setUser_profile_picture("avatar-hat");
 		
         System.out.println(user.getFirst_name() + user.getPassword());
 		if(br.hasErrors()) {
@@ -282,9 +310,17 @@ public class MainController {
 		
 	}
 	
+	@Autowired
+	JavaMailSender emailService;
 	
-
-	
-	
+	public void sendMail(String email , String message) {
+		SimpleMailMessage emailToSend = new SimpleMailMessage();
+		emailToSend.setFrom("coding.tricks.8801@gmail.com");
+		emailToSend.setTo(email);
+		emailToSend.setSubject("Password Reset Request");
+		emailToSend.setText(message);
+		
+		emailService.send(emailToSend);
+	}
 }
 

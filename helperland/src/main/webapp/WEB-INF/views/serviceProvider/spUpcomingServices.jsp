@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
 <!DOCTYPE html>
 <html>
@@ -14,6 +15,7 @@
 	<link href='<c:url value="/resources/css/spDash.css" />' rel="stylesheet" />
 	<link href='<c:url value="/resources/css/navbar-2.css" />' rel="stylesheet" />
 	<link href='<c:url value="/resources/css/footer.css" />' rel="stylesheet" />
+	<link href='<c:url value="/resources/css/pagination.css" />' rel="stylesheet" />
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
     </script>
@@ -193,13 +195,13 @@
                                 </th>
                                 <th scope="col" class="text-center">Payment</th >
                                 <th scope="col" class="text-center">
-                                    Distance
+                                    Complete
                                 </th>
                                 <th scope="col" class="text-center">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach var="sr" items="${service_requests }" varStatus = "i">
+                            <c:forEach var="sr" items="${service_requests.pageList }" varStatus = "i">
                             	<tr>
 	                                <th scope="row">${ sr.service_req_id }</th>
 	                                <td class="service_date cursorPointer" href="#serviceDetails" data-bs-toggle="modal" id="${sr.service_req_id }" onclick="myFunction($(this).attr('id'))">
@@ -237,7 +239,9 @@
 	                                    <p class="m-0 text-center">${sr.total_cost } $</p>
 	                                </td>
 	                                <td>
-	                                    <p class="m-0 text-center">${sr.distance }km</p>
+	                                    <c:if test = "${fn:contains(completeId, sr.service_req_id)}">
+	                                		<a class="accept_button rounded-pill text-light text-decoration-none" data-srId = "${sr.service_req_id }" onclick="completeFunction($(this).attr('data-srID'))" style="cursor: pointer;">Complete</a>
+	                                	</c:if>
 	                                </td>
 	                                <td class="text-center button_main" >
 	                                    <a class="cancel_button rounded-pill text-light text-decoration-none" href="#cancelServiceRequest" data-bs-toggle="modal" data-srId = "${sr.service_req_id }" onclick="$('#cancelServiceReqId').val($(this).attr('data-srID'))">Cancel</a>
@@ -247,6 +251,52 @@
                             
                         </tbody>
                     </table>
+                    <div class="pagination p12 d-flex align-items-center justify-content-between">
+                    	
+                    	<div class="d-flex pg-768">
+                    		<div class="d-flex">
+	                    		<p class="mb-0">Show &nbsp</p>
+		                    	<select id="count_select" name="count">
+		                    		<option value="10" selected>10</option>
+		                    		<option value="50">50</option>
+		                    		<option value="100">100</option>
+		                    	</select>
+	                    	</div>
+	                    	<p class="mb-0"> &nbsp Entries total record:${service_requests.nrOfElements }</p>
+                    	</div>		
+                    
+                    	<% 
+				        	String c = request.getParameter("count");
+                    	 	if(c == null){
+                    	 		c = "10";
+                    	 	}
+							pageContext.setAttribute("c", c);					        
+					    %>
+                    
+				        <ul>
+					        <li class="rounded-circle"><a id="firstPrev" href="/helperland/service-provider/upcoming-services?page=1&count=${c }" class="rounded-circle"> « </a></li>
+					        
+					        <li class="rounded-circle">
+					        	<a id="prevIcon" href="/helperland/service-provider/upcoming-services?page=<c:if test="${service_requests.page == 1 or service_requests.page == 0 }">1</c:if><c:if test="${service_requests.page > 1 }">${service_requests.page }</c:if>&count=${c }" class="rounded-circle" <c:if test = "${service_requests.page ==  0}">style = "pointer-events: none"</c:if>>  ‹ </a>
+					        </li>
+					        <li class="rounded-circle">
+						        <c:forEach begin="1" end="${service_requests.pageCount}" step="1"  varStatus="tagStatus">
+									  <c:choose>
+										    <c:when test="${(service_requests.page + 1) == tagStatus.index}">
+										      	<span class="is-active rounded-circle">${tagStatus.index}</span>
+										    </c:when>
+										    <c:otherwise>                
+										     	<a class="pageNoTag rounded-circle" href="/helperland/service-provider/upcoming-services?page=${tagStatus.index}&count=${c }">${tagStatus.index}</a>
+										    </c:otherwise>
+									  </c:choose>
+								</c:forEach>
+							</li>
+					        <li class="rounded-circle"><a id="nextIcon" href="/helperland/service-provider/upcoming-services?page=${service_requests.page + 2 }&count=${c }" class="rounded-circle" <c:if test = "${service_requests.page + 1 ==  service_requests.pageCount}">style = "pointer-events: none"</c:if>> › </a></li>
+					        <li class="rounded-circle"><a id="lastNext" href="/helperland/service-provider/upcoming-services?page=${service_requests.pageCount }&count=${c }" class="rounded-circle"> » </a></li>
+				        	
+				        </ul>
+				    </div>
+                </div>
                 </div>
             </div>
         </div>
@@ -377,7 +427,7 @@
     
     	$(document).ready(function() {
     		
-    		<c:forEach var="sr" items="${service_requests }" varStatus="i">
+    		<c:forEach var="sr" items="${service_requests.pageList }" varStatus="i">
     			
 	    		var d = new Date("${sr.service_start_date}");
 	    		console.log(d);
@@ -404,9 +454,19 @@
     			
     		</c:forEach>
     		
-    		
+    		let searchParams = new URLSearchParams(window.location.search);
+			let param = searchParams.get('count');
+			$("#count_select option[value = '" + param + "']").attr("selected" , true);
+			
+			
     	})
     
+    	$("#count_select").on("change" , function(){
+    		$("#firstPrev").attr("href" , '/helperland/service-provider/upcoming-services?page=1&count=' + $("#count_select").val());
+    	
+    		document.getElementById("firstPrev").click();
+	    })
+	    	
     </script>
     
     <script>
@@ -428,6 +488,24 @@
 			})
 		});
 		
+	    function completeFunction(id){
+	    	$.ajax({
+				url : "service-complete",
+				type : "POST",
+				data : id,
+				contentType : "application/json",
+				success : function() {
+					console.log('success');
+					location.reload();
+				},
+				error : function(xhr, textStatus, xml) {
+					console.log("error");
+					console.log(xhr);
+					console.log(textStatus);
+					console.log(xml);
+				}
+			})
+	    }
 		
 	    function myFunction(id){
     		console.log(id);

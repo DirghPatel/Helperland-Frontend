@@ -531,13 +531,14 @@
 										</c:forEach>
 	
 									</ul>
+									
 									<a
 										class="btn addNewAddressBtn px-4 mt-3 rounded-pill fw-bolder"
 										value="+ Add New Address" data-bs-toggle="collapse"
 										href="#newAddressCollapse" role="button" aria-expanded="false"
 										aria-controls="newAddressCollapse">+ Add New Address</a>
 	
-	
+									<p><small class="text-danger mb-0 fs-small" id="selectAddressError"></small></p>
 									<hr class="mt-5 mb-3">
 									<!-- <div class="d-flex justify-content-end">
 	                                        <button type="submit" class="btn greenButton my-2 text-light rounded-pill" >
@@ -545,6 +546,7 @@
 	                                        </button>
 	                                    </div> -->
 								</form> 
+								
 								<div class="my-3 collapse multi-collapse newAddress_collapse"
 									id="newAddressCollapse">
 									<form action="add-address" id="addNewAddressForm" method="post">
@@ -593,11 +595,12 @@
 													<div class="d-flex">
 														<input type="text" name="phonecode"
 															class="borderlight height46 paddinginner" value="+91"
-															disabled style="max-width: 55px;"> <input
+															disabled style="max-width: 55px;"> 
+														<input
 															type="text" required placeholder="Phone Number"
-															name="mobile"
+															name="mobile" id="addNewAddressMobile"
 															class="borderlight minheight46 paddinginner"
-															value="3423423423">
+															>
 													</div>
 												</div>
 											</div>
@@ -625,28 +628,23 @@
 									<p>you can choose your favourite service provider from
 										below list.</p>
 									<div class="favouriteList">
-										<div
-											class="favouriteListItem col-sm-4 w-100 d-flex align-items-center justify-content-center flex-column">
-											<div
-												class="spProfile mb-3 rounded-circle d-flex align-items-center justify-content-center">
-												<img
-													src=" <c:url value = "/resources/assets/serviceBooking/avatar-car.png" />">
+										<c:forEach var="u" items="${favUsers }">
+											<div class="favouriteListItem col-sm-4 w-100 d-flex align-items-center justify-content-center flex-column">
+												<div
+													class="spProfile mb-3 rounded-circle d-flex align-items-center justify-content-center">
+													<img
+														src="<c:url value = "/resources/assets/serviceBooking/${u.user_profile_picture }.png" />">
+												</div>
+												<p class="mb-3">${u.first_name } ${u.last_name }</p>
+												<div>
+													<input type="radio" id="spid${u.user_id }" name="fav-sp-id" class="btn-check" value="${u.user_id }" form="mainServiceForm">
+													<label for="spid${u.user_id }" class="btn btn-outline-primary  select_button rounded-pill">Select</label>
+												</div>
 											</div>
-											<p class="mb-3">Cust1 Cust1</p>
-											<button class="btn select_button rounded-pill">Select</button>
-										</div>
-										<div
-											class="favouriteListItem col-sm-4 w-100 d-flex align-items-center justify-content-center flex-column">
-											<div
-												class="spProfile mb-3 rounded-circle d-flex align-items-center justify-content-center">
-												<img
-													src="<c:url value = "/resources/assets/serviceBooking/avatar-car.png" />">
-											</div>
-											<p class="mb-3">Cust1 Cust1</p>
-											<button class="btn select_button rounded-pill">Select</button>
-										</div>
+										</c:forEach>
 									</div>
 								</div>
+
 
 								<div class="d-flex justify-content-end">
 									<button type="submit"
@@ -817,11 +815,7 @@
 			aria-labelledby="successModalLabel2" tabindex="-1">
 			<div class="modal-dialog modal-dialog-centered modal-md">
 				<div class="modal-content">
-					<div class="modal-header border-0">
-						<!-- <h4 class="modal-title me-3 color646464" id="deleteAdressModalLabel2">Delete Address</h4> -->
-						<button type="button" class="btn-close" data-bs-dismiss="modal"
-							aria-label="Close"></button>
-					</div>
+					
 					<div class="modal-body">
 						<div class="successBG rounded-circle mb-3">
 							<img
@@ -908,6 +902,8 @@
 	        
 	        var maxDate = year + '-' + month + '-' + day;
 	        $('#servicedate').attr('min', maxDate);
+	        
+	        $('#successModal').modal({backdrop: 'static', keyboard: false})
 	    });
     </script>
 
@@ -942,6 +938,7 @@
 		$("#successModelOk").on("click",function(){
 			location.reload(true);
 		})
+		
 	
 	</script>
 	<script>
@@ -1086,7 +1083,7 @@
 						},
 						error : function(xml, textStatus, xhr) {
 							console.log(xhr.status);
-							
+							$("#selectAddressError").html("Please select service address or add new address.")
 						}
 					});
 				});
@@ -1109,7 +1106,12 @@
 					/* $("#address_list").load(document.URL + " #refresh_div"); */
 					console.log("success");
 					$("#address_list").load(document.URL + " #address_list");
+					$(".needed_in_address1").val(null);
+					$(".needed_in_address2").val(null);				
+					$(".needed_in_address3").val(null);
+					$("#addNewAddressMobile").val(null);
 				},
+					
 				error : function(xhr, textStatus, xml) {
 					console.log("error");
 					$("#addAddressError").html("Please enter all fields to add."); 

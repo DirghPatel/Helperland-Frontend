@@ -45,7 +45,7 @@
 		<property name="driverClassName"
 			value="com.mysql.jdbc.Driver" />
 		<property name="url"
-			value="jdbc:mysql://localhost:3306/helperland" />
+			value="jdbc:mysql://localhost:3306/helperland2" />
 		<property name="username" value="root" />
 		<property name="password" value="dirghpatel" />
 	</bean>

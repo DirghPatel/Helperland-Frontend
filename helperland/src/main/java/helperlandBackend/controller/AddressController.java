@@ -1,6 +1,5 @@
 package helperlandBackend.controller;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -18,11 +17,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import helperlandBackend.models.RatingModel;
-import helperlandBackend.models.ServiceRequest;
-import helperlandBackend.models.ServiceRequestAddress;
-import helperlandBackend.models.ServiceRequestExtra;
 import helperlandBackend.models.UserAddress;
 import helperlandBackend.models.UserModel;
 import helperlandBackend.service.UserServiceImpl;
@@ -34,7 +28,8 @@ public class AddressController {
 	private UserServiceImpl userService;
 	
 	@RequestMapping(value = "/add-address" , method = RequestMethod.POST)
-	public ResponseEntity<HttpStatus> addAddress(@Valid @ModelAttribute UserAddress userAddress , BindingResult br) {
+	public ResponseEntity<HttpStatus> addAddress(@Valid @ModelAttribute UserAddress userAddress , BindingResult br , Model model) {
+		
 		
 		
 		if(br.hasErrors()) {
@@ -54,12 +49,15 @@ public class AddressController {
 				userAddress.setUser_id(currentUser.getUser_id());
 				userAddress.setEmail(currentUser.getEmail());
 				userAddress.setIs_default(1);
+				userAddress.setIs_deleted(0);
 				this.userService.saveUserAddress(userAddress);
 				this.userService.updateUser(currentUser);
 			}
 			else {
 				userAddress.setUser_id(currentUser.getUser_id());
 				userAddress.setEmail(currentUser.getEmail());
+				userAddress.setIs_default(0);
+				userAddress.setIs_deleted(0);
 				this.userService.saveUserAddress(userAddress);
 			}
 			

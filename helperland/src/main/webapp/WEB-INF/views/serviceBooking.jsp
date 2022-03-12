@@ -556,7 +556,7 @@
 													<label for="streetname">Street Name</label> 
 													<input
 														type="text" required placeholder="Street Name"
-														name="address_line2"
+														name="address_line1"
 														class="borderlight height46 paddinginner w-100 needed_in_address1">
 												</div>
 											</div>
@@ -564,7 +564,7 @@
 												<div class="form-group d-flex flex-column">
 													<label for="housenumber">House number</label> <input
 														type="text"  placeholder="House Number"
-														name="address_line1"
+														name="address_line2"
 														class="borderlight height46 paddinginner w-100 needed_in_address2">
 												</div>
 											</div>
@@ -606,10 +606,10 @@
 											</div>
 											<small id="addAddressError" class="text-danger mb-2"></small>
 										</div>
-										<input type="hidden" value="${user.user_id }" name="user_id">
+										<%-- <input type="hidden" value="${user.user_id }" name="user_id">
 										<input type="hidden" name="is_default" value="0"> <input
 											type="hidden" name="is_deleted" value="0"> <input
-											type="hidden" name="email" value="${user.email }">
+											type="hidden" name="email" value="${user.email }"> --%>
 										
 										<button type="submit" id="addressSubmitBtn"
 											class="greenButton disabledBtn rounded-pill borderlight text-light px-3 paddinginner">
@@ -1114,7 +1114,7 @@
 					
 				error : function(xhr, textStatus, xml) {
 					console.log("error");
-					$("#addAddressError").html("Please enter all fields to add."); 
+					$("#addAddressError").html("Please enter all fields properly to add."); 
 				}
 			})
 		})

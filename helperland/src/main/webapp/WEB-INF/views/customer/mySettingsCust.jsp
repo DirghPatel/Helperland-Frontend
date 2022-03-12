@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +16,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 </head>
 <body>
+	
     <div style="min-height: 100vh; padding-bottom: 170px;">
         
         <nav class="navbar navbar-expand-lg w-100 sticky-top" id="navbar">
@@ -194,12 +195,14 @@
                                     <label for="firstname">First Name</label>
                                     <input type="text" name="first_name" required placeholder="First name" id="firstname" value="${user.first_name }" class="minheight46 borderlight paddinginside form-control">
                                 </div>
+                                <small class="text-danger">${errorInFirstName }</small>
                             </div>
                             <div class="col-sm-4 mb-4">
                                 <div class="form-group d-flex flex-column">
                                     <label for="lastname">Last Name</label>
                                     <input type="text" name="last_name" required placeholder="Last name" id="lastname" value="${user.last_name }" class="minheight46 borderlight paddinginside form-control">
                                 </div>
+                                <small class="text-danger">${errorInLastName }</small>
                             </div>
                             <div class="col-sm-4 mb-4">
                                 <div class="form-group d-flex flex-column">
@@ -215,6 +218,7 @@
                                         <input type="text" name="mobile" required placeholder="Mobile number" id="mobilenumber" value="${user.mobile }" class="minheight46 borderlight paddinginside form-control">
                                     </div>
                                 </div>
+                                <small class="text-danger">${errorInMobile }</small>
                             </div>
                             
                             
@@ -396,6 +400,7 @@
 	                                <option value="german"> German</option>
 	                            </select>
 	                        </div>
+	                        
 	                        <button type="submit" disabled class="btn reschedule_button text-light rounded-pill px-4 mt-3" id="myDetailsSaveBtn">
 	                            Save
 	                        </button>
@@ -547,6 +552,7 @@
                                                             <input type="text" name="phonecode" class="borderlight minheight46 paddinginside" value="+91" disabled style="max-width: 55px;">
                                                             <input type="text" placeholder="Phone Number" id="editAddressMobile" name="mobile" class="borderlight minheight46 paddinginside">
                                                         </div>
+                                                        <form:errors path="mobile" />
                                                     </div>
                                                 </div>
                                                 <small id="editAddressError" class="text-danger mb-2"></small>
@@ -595,12 +601,13 @@
                             </div>
                             <div class="form-group mb-2 col-sm-4">
                                 <label for="newPassword">New Password</label>
-                                <input type="password" id="password" name="newPassword" class="form-control minheight46" placeholder="Password" maxlength="14" required title="Password must include uppercase letter , lowercase letter , number , special character and length should be between 6 to 14" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{6,14}$">
+                                <input type="password" id="password" name="newPassword" class="form-control minheight46" placeholder="New Password" maxlength="14" required title="Password must include uppercase letter , lowercase letter , number , special character and length should be between 6 to 14" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{6,14}$">
                             </div>
                             <div class="form-group mb-2 col-sm-4">
                                 <label for="confirmPassword">Confirm Password</label>
-                                <input type="password" name="confirmPassword" id="confirmpassword" class="form-control minheight46 " placeholder="New Password" maxlength="14" required>
+                                <input type="password" name="confirmPassword" id="confirmpassword" class="form-control minheight46 " placeholder="Confirm Password" maxlength="14" required>
                             	<small class="text-danger" id="differentPassword"></small>
+                            	<small id="confirmPasswordMessage"></small>
                             </div>
                             
                             <button type="submit" disabled class="btn reschedule_button px-4 mt-3 text-light rounded-pill" id="changePasswordBtn">
@@ -766,33 +773,7 @@
 
 	    $('#password, #confirmpassword').on('keyup', function () {
 	        if ($('#password').val() == $('#confirmpassword').val()) {
-	            $('#confirmPasswordMessage').html('Looks Good!').css('color', 'green');
-	            $('#registerButton').removeAttr('disabled');
-	        } 
-	        else {
-	            $('#confirmPasswordMessage').html('Enter same password again').css('color', 'red');
-	        }
-	        if ($('#password').val() != $('#confirmpassword').val()) {
-	            $('#registerButton').attr('disabled' , true);
-	        }
-	        if($('#password').val().length == 0){
-	        	$('#registerButton').attr('disabled' , true);	
-	        }
-	    });
-	    
-	    
-	    
-	    var dt = new Date();
-		
-	    var t = moment(new Date()).format("YYYY/MM/DD HH:mm:ss");
-		$('#modified_date , #modified_date2').val(t);
-	
-	</script>
-	<script>
-	
-		$('#password, #confirmpassword').on('keyup', function () {
-	        if ($('#password').val() == $('#confirmpassword').val() && $('#password').val().length >= 8) {
-	            $('#confirmPasswordMessage').html('Looks Good!').css('color', 'green');
+	            $('#confirmPasswordMessage').html('Matched!').css('color', 'green');
 	            $('#changePasswordBtn').removeAttr('disabled');
 	        } 
 	        else {
@@ -805,6 +786,13 @@
 	        	$('#changePasswordBtn').attr('disabled' , true);	
 	        }
 	    });
+	    
+	    
+	    
+	    var dt = new Date();
+		
+	    var t = moment(new Date()).format("YYYY/MM/DD HH:mm:ss");
+		$('#modified_date , #modified_date2').val(t);
 	
 	</script>
 	<script>
@@ -938,18 +926,22 @@
 				type : $(this).attr('method'),
 				data : $(this).serialize(),
 				success : function(data , xhr) {
+					
+					console.log("changed");
 					if(data == 'different'){
-						$("#differentPassword").html("Please enter same passwords!")
+						$("#differentPassword").html("Please enter same passwords!");
 					}
 					if(data == "changed"){
 						$("#confirmpassword").val(null);
 						$("#password").val(null);
 						$("#oldPassword").val(null);
+						$("#differentPassword").html("")
+						$("#wrongPassword").html("");
+						$('#confirmPasswordMessage').html("Password Changed Successfully.").css("color" , "green");
 					}
 				},
 				error : function(xhr, data, xml) {
-					console.log(data);
-					$("#wrongPassword").html("Please enter correct password!")
+					$("#wrongPassword").html("Please enter correct password!");
 					$("#confirmpassword").val(null);
 					$("#password").val(null);
 				}

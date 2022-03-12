@@ -38,10 +38,10 @@ public class UserModel{
 	private String email;
 	
 	@NotBlank
+	@Size(min = 10 , max=12 , message = "Mobile number must be in between 10 to 12 digits")
 	private String mobile;
 	
 	@ValidPassword
-	@Size(min = 6 , max=14)
 	private String password;
 	
 	private int is_registered_user;
@@ -210,26 +210,11 @@ public class UserModel{
 		this.status = status;
 	}
 
+	
+
 	@Override
 	public String toString() {
-		return "UserModel [user_id=" + user_id + ", user_type_id=" + user_type_id + ", first_name=" + first_name
-				+ ", last_name=" + last_name + ", email=" + email + ", mobile=" + mobile + ", password=" + password
-				+ ", is_registered_user=" + is_registered_user + ", works_with_pet=" + works_with_pet + ", modified_by="
-				+ modified_by + ", is_approved=" + is_approved + ", is_active=" + is_active + ", is_deleted="
-				+ is_deleted + ", is_online=" + is_online + ", status=" + status + ", created_date=" + created_date
-				+ ", modified_date=" + modified_date + ", reset_token=" + reset_token + ", postal_code=" + postal_code
-				+ ", user_profile_picture=" + user_profile_picture + ", date_of_birth=" + date_of_birth + ", gender="
-				+ gender + ", getModified_date()=" + getModified_date() + ", getCreated_date()=" + getCreated_date()
-				+ ", getUser_id()=" + getUser_id() + ", getUser_type_id()=" + getUser_type_id() + ", getFirst_name()="
-				+ getFirst_name() + ", getLast_name()=" + getLast_name() + ", getEmail()=" + getEmail()
-				+ ", getMobile()=" + getMobile() + ", getPassword()=" + getPassword() + ", getIs_registered_user()="
-				+ getIs_registered_user() + ", getWorks_with_pet()=" + getWorks_with_pet() + ", getModified_by()="
-				+ getModified_by() + ", getIs_approved()=" + getIs_approved() + ", getIs_active()=" + getIs_active()
-				+ ", getIs_deleted()=" + getIs_deleted() + ", getIs_online()=" + getIs_online() + ", getReset_token()="
-				+ getReset_token() + ", getPostal_code()=" + getPostal_code() + ", getUser_profile_picture()="
-				+ getUser_profile_picture() + ", getDate_of_birth()=" + getDate_of_birth() + ", getGender()="
-				+ getGender() + ", getStatus()=" + getStatus() + ", getClass()=" + getClass() + ", hashCode()="
-				+ hashCode() + ", toString()=" + super.toString() + "]";
+		return "UserModel [user_id=" + user_id + "]";
 	}
 
 	public UserModel(int user_id, int user_type_id, String first_name, String last_name, String email, String mobile,

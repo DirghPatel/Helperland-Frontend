@@ -34,8 +34,6 @@ public class SuccessHandler implements AuthenticationSuccessHandler {
 		UserModel loggedInUser = userService.getUserByEmail(loggedInUserDetails.getUsername());
 		session.setAttribute("user", loggedInUser);
 		
-		System.out.println("----------"+loggedInUser);
-		
 		Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
         if (roles.contains("ROLE_CUSTOMER")) {
             response.sendRedirect("customer/dash");

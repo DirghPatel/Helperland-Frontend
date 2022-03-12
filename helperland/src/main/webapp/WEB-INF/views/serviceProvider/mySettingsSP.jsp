@@ -216,12 +216,14 @@
                                         <label for="firstname">First Name</label>
                                         <input type="text" name="first_name" value="${user.first_name }" class="minheight46 borderlight paddinginside form-control">
                                     </div>
+                                    <small class="text-danger">${errorInFirstName }</small>
                                 </div>
                                 <div class="col-md-4 mb-4">
                                     <div class="form-group d-flex flex-column">
                                         <label for="firstname">Last Name</label>
                                         <input type="text" name="last_name" value="${user.last_name }" class="minheight46 borderlight paddinginside form-control">
                                     </div>
+                                    <small class="text-danger">${errorInLastName }</small>
                                 </div>
                                 <div class="col-md-4 mb-4">
                                     <div class="form-group d-flex flex-column">
@@ -237,6 +239,7 @@
                                             <input type="text" name="mobile" value="${user.mobile }" class="minheight46 borderlight paddinginside form-control">
                                         </div>
                                     </div>
+                                    <small class="text-danger">${errorInMobile }</small>
                                 </div>
                                 <div class="col-md-4 mb-4">
                                     <div class="form-group">
@@ -469,6 +472,7 @@
                                         <label for="streetname">Street Name</label>
                                         <input type="text" value="${address.address_line1 }" placeholder="Street Name" name="address_line1" class="borderlight minheight46 paddinginside w-100">
                                     </div>
+                                    <small class="text-danger">${errorInAddressLine1 }</small>
                                 </div>
                                 <div class="col-md-4 mb-4">
                                     <div class="form-group d-flex flex-column">
@@ -481,12 +485,14 @@
                                         <label for="postalcode">Postal Code</label>
                                         <input type="text" value="${address.postal_code }" placeholder="Postal Code" name="postal_code" class="borderlight minheight46 paddinginside w-100">
                                     </div>
+                                    <small class="text-danger">${errorInPostalCode }</small>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group d-flex flex-column">
                                         <label for="city">City</label>
                                          <input type="text" value="${address.city }" placeholder="City" name="city" class="borderlight minheight46 paddinginside w-100">
                                     </div>
+                                    <small class="text-danger">${errorInCity }</small>
                                 </div>
                             </div>  
                             <button type="submit" class="btn save_button text-light rounded-pill m-3 ms-0" id="myDetailsSaveBtn">
@@ -504,12 +510,13 @@
                             </div>
                             <div class="form-group mb-2 col-md-4">
                                 <label for="newPassword">New Password</label>
-                                <input type="password" name="newPassword" id="password" class="form-control minheight46" placeholder="Password" maxlength="14" required>
+                                <input type="password" name="newPassword" id="password" class="form-control minheight46" placeholder="New Password" maxlength="14" required title="Password must include uppercase letter , lowercase letter , number , special character and length should be between 6 to 14" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{6,14}$">
                             </div>
                             <div class="form-group mb-2 col-md-4">
                                 <label for="confirmPassword">Confirm Password</label>
-                                <input type="password" name="confirmPassword" id="confirmpassword" class="form-control minheight46 " placeholder="New Password" maxlength="14" required>
+                                <input type="password" name="confirmPassword" id="confirmpassword" class="form-control minheight46 " placeholder="Confirm Password" maxlength="14" required>
                             	<small class="text-danger" id="differentPassword"></small>
+                            	<small id="confirmPasswordMessage"></small>
                             </div>
                             <button type="submit" class="btn save_button px-4 mt-3 text-light rounded-pill" id="changePasswordBtn" disabled>
                                 Save
@@ -639,7 +646,7 @@
 
 	    $('#password, #confirmpassword').on('keyup', function () {
 	        if ($('#password').val() == $('#confirmpassword').val()) {
-	            $('#confirmPasswordMessage').html('Looks Good!').css('color', 'green');
+	            $('#confirmPasswordMessage').html('Matched!').css('color', 'green');
 	            $('#changePasswordBtn').removeAttr('disabled');
 	        } 
 	        else {
@@ -662,16 +669,23 @@
 				success : function(data) {
 					
 					if(data == 'different'){
-						$("#differentPassword").html("Please enter same passwords!")
+						$("#differentPassword").html("Please enter same passwords!");
+						$("#wrongPassword").html("");
+						$('#confirmPasswordMessage').html("");
 					}
 					if(data == "changed"){
 						$("#confirmpassword").val(null);
 						$("#password").val(null);
 						$("#oldPassword").val(null);
-					}
+						$("#differentPassword").html("")
+						$("#wrongPassword").html("");
+						$('#confirmPasswordMessage').html("Password Changed Successfully.").css("color" , "green");
+					} 
 				},
 				error : function(data) {
-					$("#wrongPassword").html("Please enter correct password!")
+					$("#wrongPassword").html("Please enter correct password!");
+					$("#differentPassword").html("")
+					$('#confirmPasswordMessage').html("");
 					$("#confirmpassword").val(null);
 					$("#password").val(null);
 				}

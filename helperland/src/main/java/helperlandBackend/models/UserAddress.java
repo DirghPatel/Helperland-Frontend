@@ -11,8 +11,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.lang.Nullable;
 
 @Entity(name = "user_address")
 @Table(name="user_address")
@@ -44,6 +46,8 @@ public class UserAddress {
 //	@NotBlank
 	private int is_deleted;
 	
+	@Nullable
+	@Size(min = 10 , max=12 , message = "Mobile number must be in between 10 to 12 digits")
 	private String mobile;
 	private String email;
 

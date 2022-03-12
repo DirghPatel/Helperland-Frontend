@@ -289,7 +289,7 @@
 	<div class="container-fluid p-0">
 		<!-- <div id="navbar"></div> -->
 		<div class="main_image">
-			<img src="<c:url value = "/resources/assets/prices/first/faq-top.jpg" />" alt="" height="370px" width="auto">
+			<img src="<c:url value = "/resources/assets/prices/first/prices-top.jpg" />" alt="" height="370px" width="auto">
 		</div>
 	</div>
 	<div class="container-fluid prices p-0">

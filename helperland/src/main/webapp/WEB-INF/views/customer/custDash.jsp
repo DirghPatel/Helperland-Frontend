@@ -373,7 +373,7 @@
                                 <hr>
                                 
                                 <p><b>Service Address:</b><span id="sdAddress"></span></p>
-                                <p><b>Billing Address:</b>Same as cleaning Address</p>
+                                <p><b>Billing Address:</b>&nbspSame as cleaning Address</p>
                                 <p><b>Phone:</b> +91 <span id="sdPhone"></span></p>
                                 <p><b>Email:</b><span id="sdEmail"></span></p>
                                 
@@ -636,10 +636,10 @@
 						$("#sdComments").html(data[0].comments);
 						
 						if(data[0].has_pets == 0){
-							$("#sdPets").html("I don't have pets at home.");
+							$("#sdPets").html( "<img src='<c:url value = '/resources/assets/custDash/no-pets.png' />' height=25px width=25px> I don't have pets at home.");
 						}
 						else{
-							$("#sdPets").html("I have pets at home.");	
+							$("#sdPets").html("<img src='<c:url value = '/resources/assets/custDash/have-pets.png' />' height=25px width=25px> I have pets at home.");	
 						}
 						
 						var extraServices = " ";
@@ -771,11 +771,15 @@
 					location.reload();
 				},
 				error : function(data) {
-					var d = data.responseText; 	
-					if(d == "conflict"){
-						$("#conflictError").html("Another service request has already been assigned to this service provider which has time overlap with this service request. You can’t pick this one!");
+					/* var d = data.responseText; 	 */
+					console.log(data.responseJSON[0]);
+					var date = new Date(data.responseJSON[1]);
+					var date2 = new Date(data.responseJSON[2]);
+					console.log(date);
+					if(data.responseJSON[0] == "conflict"){
+						/* $("#conflictError").html("Another service request has already been assigned to this service provider which has time overlap with this service request. You can’t pick this one!"); */
+						$("#conflictError").html("Another service request has been assigned to the service provider on " + date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear() + " from " + date.toLocaleTimeString('pt-BR')  +" to " + date2.toLocaleTimeString('pt-BR') + ". Either choose another date or pick up a different time slot.");
 					}
-					console.log("error");
 				}
 			})
     	})

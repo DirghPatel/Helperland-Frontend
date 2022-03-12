@@ -360,7 +360,7 @@
                         <div class="modal-body ">
                             <p class="mb-1">Why you want to cancel the service request?</p>
                             <form action="service-cancel" class="d-flex flex-column" id="cancelReqForm" method="post">
-                                <textarea type="text" class="whyToCancel mb-2" name="cancel_comment" maxlength="500" rows="3"></textarea>
+                                <textarea type="text" class="whyToCancel mb-2 p-1" name="cancel_comment" maxlength="500" rows="3"></textarea>
                                 <input type="hidden" name="service_req_id" id="cancelServiceReqId"/>
                                 <button type="submit" class="cancel_button text-light rounded-pill border-0">Cancel Now</button>
                             </form>

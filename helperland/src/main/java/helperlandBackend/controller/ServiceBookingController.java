@@ -1,5 +1,6 @@
 package helperlandBackend.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import helperlandBackend.models.FavouriteBlockedModel;
 import helperlandBackend.models.ServiceRequest;
 import helperlandBackend.models.ServiceRequestAddress;
 import helperlandBackend.models.ServiceRequestExtra;
@@ -30,20 +32,19 @@ public class ServiceBookingController {
 	@Autowired
 	private ServiceBookingServiceImpl serviceBookingService;
 	
+	@Autowired
+	private MainController mainController;
 
 	@RequestMapping(value = "/check-availability" , method =RequestMethod.POST)
 	public ResponseEntity<HttpStatus> checkAvailability(@RequestBody String postal_code ) {
 
-		System.out.println(postal_code);
 		List<Object []> users = this.serviceBookingService.getUserByPostalCode(postal_code);
 		HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json");
 		if(users.isEmpty() ) {
-			System.out.println("empty called");
 			return new ResponseEntity<HttpStatus>(HttpStatus.BAD_REQUEST);
 		}
 		else {
-			System.out.println("ok called");
 			return new ResponseEntity<HttpStatus>(HttpStatus.OK);
 		}
 	}
@@ -54,9 +55,7 @@ public class ServiceBookingController {
 	@RequestMapping(value = "/service-address" , method =RequestMethod.POST)
 	public ResponseEntity<HttpStatus> serviceAddress(@RequestBody int address_id ) {
 
-		System.out.println(address_id);
 		UserAddress userAddresses = this.userService.getAllAddressByAddressId(address_id);
-		System.out.println(userAddresses);
 		if(userAddresses == null) {
 			return new ResponseEntity<HttpStatus>(HttpStatus.BAD_REQUEST);
 		}
@@ -71,8 +70,6 @@ public class ServiceBookingController {
 	@RequestMapping(value = "/service-request" , method = RequestMethod.POST)
 	public ResponseEntity addNewService(@ModelAttribute ServiceRequest serviceRequest , @RequestParam(value = "fav-sp-id" , defaultValue = "0000") int fav_sp_id , Model model){
 	
-		System.out.println(serviceRequest);
-		
 		User loggedInUserDetails = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		UserModel currentUser = userService.getUserByEmail(loggedInUserDetails.getUsername());
 
@@ -88,14 +85,9 @@ public class ServiceBookingController {
 			serviceRequest.setService_provider_id(fav_sp_id);
 		}
 		
-		System.out.println(serviceRequest);
-		
 		UserAddress userAddress = this.userService.getAllAddressByAddressId(serviceRequest.getAddress_id());
-		System.out.println(userAddress);
-		
 		int k = this.serviceBookingService.saveServiceRequest(serviceRequest);
 		
-
 		ServiceRequestAddress serviceReqAddress = new ServiceRequestAddress();
 		serviceReqAddress.setAddress_line1(userAddress.getAddress_line1());
 		serviceReqAddress.setAddress_line2(userAddress.getAddress_line2());
@@ -106,7 +98,6 @@ public class ServiceBookingController {
 		serviceReqAddress.setState(userAddress.getState());
 		serviceReqAddress.setService_req_id(k);
 		int l = this.serviceBookingService.saveServiceRequestAddress(serviceReqAddress);
-		System.out.println(serviceReqAddress);
 		
 		ServiceRequestExtra serviceRequestExtra = new ServiceRequestExtra();
 		serviceRequestExtra.setService_req_id(k);
@@ -115,17 +106,50 @@ public class ServiceBookingController {
 		serviceRequestExtra.setOven(serviceRequest.getOven());
 		serviceRequestExtra.setRefrigerator(serviceRequest.getRefrigerator());
 		serviceRequestExtra.setWindows(serviceRequest.getWindows());
-		
 		int m = this.serviceBookingService.saveServiceRequestExtra(serviceRequestExtra);
 				
 		if(k != (int)k || l != (int)l || m != (int)m){
-			System.out.println("first error");
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("String or obj");
 		}
 		else {
+			List<UserModel> userSp = this.userService.getAllUser();
+			List<UserModel> userEmails = new ArrayList<UserModel>();
+			for(UserModel i: userSp) {
+				if(i.getPostal_code() != null) {
+					if(i.getPostal_code().equals(serviceRequest.getPostal_code())&& i.getUser_type_id() == 2){
+						FavouriteBlockedModel fb = this.userService.getFavBlockByUserIdAndTargetUserId(serviceRequest.getUser_id(), i.getUser_id());
+						FavouriteBlockedModel fb1 = this.userService.getFavBlockByUserIdAndTargetUserId(i.getUser_id() ,serviceRequest.getUser_id());
+						if(fb == null && fb1 == null) {
+							userEmails.add(i);
+						}
+						else {
+							if(fb != null && fb1 != null) {
+								if(fb.getIs_blocked() == 0 && fb1.getIs_blocked() == 0) {
+									userEmails.add(i);
+								}
+							}
+							else if( fb != null) {
+								if(fb.getIs_blocked() == 0) {
+									userEmails.add(i);
+								}
+							}
+							else if( fb1 != null) {
+								if(fb1.getIs_blocked() == 0) {
+									userEmails.add(i);
+								}
+							}
+						}
+					}	
+				}
+			}
+			for(UserModel i : userEmails) {
+//				this.mainController.sendMail(i.getEmail() , "A new Service Request #" + serviceRequest.getService_req_id() + " is available in your postal code " + i.getPostal_code() + " area.");
+			}
+			if(serviceRequest.getService_provider_id() != serviceRequest.getUser_id()) {
+				UserModel userSpDirect = this.userService.getUserByUserId(serviceRequest.getService_provider_id());
+//				this.mainController.sendMail(userSpDirect.getEmail() , "A new Service Request #" + serviceRequest.getService_req_id() + " is directly assigned to you.");
+			}
 			return ResponseEntity.status(HttpStatus.OK).body(serviceRequest.getService_req_id());
 		}
 	}
-	
-	
 }

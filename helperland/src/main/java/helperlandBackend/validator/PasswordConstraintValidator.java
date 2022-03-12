@@ -23,7 +23,7 @@ public class PasswordConstraintValidator implements ConstraintValidator<ValidPas
         PasswordValidator validator = new PasswordValidator(Arrays.asList(
 
                 // at least 8 characters
-                new LengthRule(6 , 14),
+//                new LengthRule(6 , 14),
 
                 // at least one upper-case character
                 new CharacterRule(EnglishCharacterData.UpperCase, 1),

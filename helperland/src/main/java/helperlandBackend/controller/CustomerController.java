@@ -8,29 +8,24 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.lang.Nullable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import helperlandBackend.models.CancelRequestModel;
 import helperlandBackend.models.FavouriteBlockedModel;
 import helperlandBackend.models.RatingModel;
-import helperlandBackend.models.RescheduleRequestModel;
 import helperlandBackend.models.ServiceRequest;
 import helperlandBackend.models.ServiceRequestAddress;
 import helperlandBackend.models.ServiceRequestExtra;
@@ -53,6 +48,9 @@ public class CustomerController {
 	@Autowired
 	private ServiceRatingServiceImpl serviceRating;
 	
+	@Autowired
+	private MainController mainController;
+
 //	SERVICE STATUS CANCELLED 0
 //	SERVICE STATUS NEW 1
 //	SERVICE STATUS PENDING 2
@@ -80,60 +78,17 @@ public class CustomerController {
 			return avgRating;
 	}
 
-//	@RequestMapping("/dash")
-//	public String customerDash(Model model) {
-//		
-//		
-//		User loggedInUserDetails = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//		UserModel currentUser = userService.getUserByEmail(loggedInUserDetails.getUsername());	
-//		
-//		interceptAllMethod(currentUser.getUser_id() , 2);
-//		interceptAllMethod(currentUser.getUser_id() , 4);
-//		
-//		List<ServiceRequest> sr = this.serviceRequests.getNewPendingServiceRequestByUserId(currentUser.getUser_id());
-//		Set<UserModel> users = new HashSet<UserModel>();
-//		List<ServiceRequestAddress> srAddress = new ArrayList<ServiceRequestAddress>();
-//		Map<Integer, Integer> spRating = new HashMap<Integer, Integer>();
-//		
-//		users.add(currentUser);
-//		
-//		for(ServiceRequest i : sr) {
-//			ServiceRequestAddress a = this.serviceRequests.getServiceRequestAddressById(i.getService_req_id());
-//			srAddress.add(a);
-//			if(i.getUser_id() != i.getService_provider_id()) {
-//				UserModel userSP = this.userService.getUserByUserId(i.getService_provider_id());
-//				users.add(userSP);
-//				
-//				int avgRating = avgRatingCount(i.getService_provider_id());
-//
-//				spRating.put(i.getService_provider_id(), avgRating);
-//				
-//			}
-//		}
-//		
-//		model.addAttribute("service_requests" , sr);
-//		model.addAttribute("users" , users);
-//		model.addAttribute("srAddress" , srAddress);
-//		model.addAttribute("spRating" , spRating);
-//	
-//		return "customer/custDash";
-//	}
-	
 	@RequestMapping(value = "/dash")
 	public String customerDash(@RequestParam(required=false, name="page") String page, @RequestParam(required=false, name="count") String count , Model model ) {
 		
 		User loggedInUserDetails = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		UserModel currentUser = userService.getUserByEmail(loggedInUserDetails.getUsername());	
 		
-		
-		
 		List<ServiceRequest> sr = this.serviceRequests.getNewPendingServiceRequestByUserId(currentUser.getUser_id());
 		Set<UserModel> users = new HashSet<UserModel>();
 		List<ServiceRequestAddress> srAddress = new ArrayList<ServiceRequestAddress>();
 		Map<Integer, Integer> spRating = new HashMap<Integer, Integer>();
-		
 		users.add(currentUser);
-		
 		for(ServiceRequest i : sr) {
 			ServiceRequestAddress a = this.serviceRequests.getServiceRequestAddressById(i.getService_req_id());
 			srAddress.add(a);
@@ -147,8 +102,6 @@ public class CustomerController {
 		
 		PagedListHolder<ServiceRequest> srPaged = new PagedListHolder<ServiceRequest>();
 		srPaged.setSource(sr);
-		
-		System.out.println(count);
 		if(count == null) {
 			srPaged.setPageSize(10);
 		}
@@ -161,7 +114,6 @@ public class CustomerController {
 		else {
 	    	int pageNum = Integer.parseInt(page);
 	    	srPaged.setPage(pageNum - 1);
-	      	System.out.println(srPaged.getPageList());
 	      	model.addAttribute("service_requests" , srPaged);
 	    }
 		model.addAttribute("users" , users);
@@ -192,18 +144,15 @@ public class CustomerController {
 			if(i.getUser_id() != i.getService_provider_id()) {
 				UserModel userSP = this.userService.getUserByUserId(i.getService_provider_id());
 				users.add(userSP);
-				
-				
+					
 				int avgRating = avgRatingCount(i.getService_provider_id());
 				spRating.put(i.getService_provider_id(), avgRating);
-				
 			}
 		}
 		
 		PagedListHolder<ServiceRequest> srPaged = new PagedListHolder<ServiceRequest>();
 		srPaged.setSource(sr);
 		
-		System.out.println(count);
 		if(count == null) {
 			srPaged.setPageSize(10);
 		}
@@ -217,11 +166,9 @@ public class CustomerController {
 		else {
 	    	int pageNum = Integer.parseInt(page);
 	    	srPaged.setPage(pageNum - 1);
-	      	System.out.println(srPaged.getPageList());
 	      	model.addAttribute("service_requests" , srPaged);
 	    }
 		
-//		model.addAttribute("service_requests" , sr);
 		model.addAttribute("users" , users);
 		model.addAttribute("srAddress" , srAddress);
 		model.addAttribute("spRating" , spRating);
@@ -257,7 +204,6 @@ public class CustomerController {
 		
 		for(FavouriteBlockedModel i: favBlocked) {
 			blockedId.add(i.getTarget_user_id());
-			
 		}
 		
 		List<UserModel> usersList = new ArrayList<UserModel>();
@@ -268,7 +214,6 @@ public class CustomerController {
 		}
 		userPaged.setSource(usersList);
 		
-		System.out.println(count);
 		if(count == null) {
 			userPaged.setPageSize(10);
 		}
@@ -282,12 +227,10 @@ public class CustomerController {
 		else {
 	    	int pageNum = Integer.parseInt(page);
 	    	userPaged.setPage(pageNum - 1);
-	      	System.out.println(userPaged.getPageList());
 	      	model.addAttribute("users" , userPaged);
 	    }
 		
 		model.addAttribute("fav" , favBlocked);
-//		model.addAttribute("users" , users);
 		model.addAttribute("avgSpRating" , spRating);
 		model.addAttribute("spTotalCleaning" , spTotalCleaning);
 		model.addAttribute("blockedId" , blockedId);
@@ -296,13 +239,11 @@ public class CustomerController {
 	
 	@RequestMapping("/notification")
 	public String custNotification(Model model) {
-		
 		return "customer/custNotification";
 	}
 	
 	@RequestMapping("/service-schedule")
 	public String custSeviceSchedule(Model model) {
-		
 		return "customer/custSeviceSchedule";
 	}
 	@RequestMapping("/mysettings")
@@ -315,7 +256,6 @@ public class CustomerController {
 		
 		model.addAttribute("user" , currentUser);
 		model.addAttribute("addresses",addresses);
-		
 		
 		return "customer/mySettingsCust";
 	}
@@ -354,74 +294,51 @@ public class CustomerController {
 		srList.add(avgRating);
 		srList.add(totalCleanings.size());
 		return ResponseEntity.status(HttpStatus.OK).body(srList);
-		
 	}
 
 	@RequestMapping(value = "/service-cancel" , method=RequestMethod.POST)
-	public ResponseEntity<HttpStatus> serviceCancel(@ModelAttribute CancelRequestModel cancelReq) {
+	public ResponseEntity<HttpStatus> serviceCancel(@RequestParam("service_req_id") int service_req_id , @RequestParam("cancel_comment") String cancel_comment) {
 		
 		User loggedInUserDetails = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		UserModel currentUser = userService.getUserByEmail(loggedInUserDetails.getUsername());	
 		
-		System.out.println("---"+cancelReq);
-		
 		Date dt = new Date();
 		
-		ServiceRequest sr = this.serviceRequests.getServiceRequestById(cancelReq.getService_req_id());
-		sr.setCancel_comment(cancelReq.getCancel_comment());
+		ServiceRequest sr = this.serviceRequests.getServiceRequestById(service_req_id);
+		sr.setCancel_comment(cancel_comment);
 		sr.setModified_date(dt);
 		sr.setModified_by(currentUser.getUser_id());
 		sr.setStatus(0);
 		
 		this.serviceRequests.updateServiceRequestStatus(sr);
 		
+		UserModel userSp = this.userService.getUserByUserId(sr.getService_provider_id());
+//		this.mainController.sendMail(userSp.getEmail() , "Your Service Request #"+sr.getService_req_id()+" is cancelled by " + currentUser.getFirst_name() + " " + currentUser.getLast_name() + " because of "+ cancelReq.getCancel_comment() +" ." );
+		
 		return new ResponseEntity<HttpStatus>(HttpStatus.OK);
 	}
 	
-	
-//	@RequestMapping(value = "/service-reschedule" , method=RequestMethod.POST)
-//	public ResponseEntity<HttpStatus> serviceReschedule(@ModelAttribute RescheduleRequestModel rescheduleReq) {
-//		
-//		User loggedInUserDetails = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//		UserModel currentUser = userService.getUserByEmail(loggedInUserDetails.getUsername());	
-//		
-//	    Date dateToday = new Date();  
-//	    
-//		ServiceRequest sr = this.serviceRequests.getServiceRequestById(rescheduleReq.getService_req_id());
-//		
-//		sr.setService_start_date(rescheduleReq.getService_start_date());
-//		sr.setModified_date(dateToday);
-//		sr.setModified_by(currentUser.getUser_id());
-//		sr.setStatus(4);	
-//		
-//		this.serviceRequests.updateServiceRequestStatus(sr);
-//		return new ResponseEntity<HttpStatus>(HttpStatus.OK);
-//	}
-	
 	@SuppressWarnings({ "deprecation", "rawtypes" })
 	@RequestMapping(value = "/service-reschedule" , method=RequestMethod.POST)
-	public ResponseEntity serviceReschedule(@ModelAttribute RescheduleRequestModel rescheduleReq) {
+	public ResponseEntity serviceReschedule(@RequestParam("service_start_date") Date service_start_date , @RequestParam("service_req_id") int service_req_id) {
 		
 		User loggedInUserDetails = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		UserModel currentUser = userService.getUserByEmail(loggedInUserDetails.getUsername());	
 		
 	    Date dateToday = new Date();  
 	    
-		ServiceRequest sr = this.serviceRequests.getServiceRequestById(rescheduleReq.getService_req_id());
+	    ServiceRequest sr = this.serviceRequests.getServiceRequestById(service_req_id);
 		
 		if(sr.getService_provider_id() == sr.getUser_id()) {
-			
-			sr.setService_start_date(rescheduleReq.getService_start_date());
+			sr.setService_start_date(service_start_date);
 			sr.setModified_date(dateToday);
 			sr.setModified_by(currentUser.getUser_id());
 			sr.setStatus(4);
 			
-			System.out.println("-----------ok 1-------------");
 			this.serviceRequests.updateServiceRequestStatus(sr);
 			return ResponseEntity.status(HttpStatus.OK).body("ok");
 		}
 		else {
-			
 			List<ServiceRequest> allRequestsOfSp = this.serviceRequests.getServiceRequestBySPIdAndStatus(sr.getService_provider_id() , 2);
 			List<ServiceRequest> srRescheduled = this.serviceRequests.getServiceRequestBySPIdAndStatus(sr.getService_provider_id() , 4);
 			
@@ -430,48 +347,43 @@ public class CustomerController {
 			}
 			for(ServiceRequest i: allRequestsOfSp) {
 				long a = i.getService_start_date().getTime();
-	
 				Date startDate = new Date(a);
 				Date endDate = new Date(a);
 				
 				float totalTime = i.getService_hours() + i.getExtra_hours();
-				
 				if(totalTime == (int)totalTime) {
-					
 					endDate.setHours(endDate.getHours() + (int)totalTime + 2);
 					startDate.setHours(startDate.getHours() - 2);
 				}
 				else {
-					
 					endDate.setHours(endDate.getHours() + (int)totalTime + 2);
 					endDate.setMinutes(endDate.getMinutes() + 30);
 					startDate.setHours(startDate.getHours() - 2);
 				}	
 				
-				System.out.println(startDate);
-				System.out.println(endDate);
-				
-				if(rescheduleReq.getService_start_date().after(startDate) && rescheduleReq.getService_start_date().before(endDate)) {
-	//				this.serviceRequests.updateServiceRequestStatus(sr);
-					if(i.getService_req_id() != rescheduleReq.getService_req_id()){
-						System.out.println("-----------Bad -------------");
-						return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("conflict");
+				if(service_start_date.after(startDate) && service_start_date.before(endDate)) {
+					if(i.getService_req_id() != service_req_id){
+						List<Object> rList = new ArrayList<Object>();
+						rList.add("conflict");
+						rList.add(startDate);
+						rList.add(endDate);
+						
+						return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(rList);
 					}
 				}
 			}
 			
-			System.out.println("-----------ok -------------");
-			sr.setService_start_date(rescheduleReq.getService_start_date());
+			UserModel userSp = this.userService.getUserByUserId(sr.getService_provider_id());
+			
+			sr.setService_start_date(service_start_date);
 			sr.setModified_date(dateToday);
 			sr.setModified_by(currentUser.getUser_id());
 			sr.setStatus(4);
+			
+//			this.mainController.sendMail(userSp.getEmail() , "Your Service Request #"+sr.getService_req_id()+" is rescheduled on " + rescheduleReq.getService_start_date()  + " by " + currentUser.getFirst_name() + " " + currentUser.getLast_name() + " ." );
 			this.serviceRequests.updateServiceRequestStatus(sr);
 			return ResponseEntity.status(HttpStatus.OK).body("ok");
 		}
-			
-		
-//		this.serviceRequests.updateServiceRequestStatus(sr);
-//		return new ResponseEntity<HttpStatus>(HttpStatus.OK);
 	}
 	
 	@SuppressWarnings("rawtypes")
@@ -480,14 +392,11 @@ public class CustomerController {
 	
 		List<RatingModel> existingRatings = this.serviceRating.getRatingsByServiceId(service_id);
 		
-		System.out.println("-------------"+existingRatings);
-		
 		if(existingRatings.size() == 0) {
 			ServiceRequest sr = this.serviceRequests.getServiceRequestById(service_id);
 			List<RatingModel> ratings = this.serviceRating.getRatingsByRatingTo(sr.getService_provider_id());
 			
 			int avgRating = 0; 
-			
 			for(RatingModel i : ratings) {
 				   avgRating = avgRating + i.getRatings();
 			}
@@ -505,7 +414,6 @@ public class CustomerController {
 			
 			srList.add(sp);
 			srList.add(avg);
-			
 			
 			return ResponseEntity.status(HttpStatus.OK).body(srList);
 		}
@@ -525,9 +433,7 @@ public class CustomerController {
 			User loggedInUserDetails = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			UserModel currentUser = userService.getUserByEmail(loggedInUserDetails.getUsername());	
 			
-			
-			int averageRating = (int) Math.ceil((ratings.getFriendly() + ratings.getOn_time_arrival() + ratings.getQuality_of_service()) / 3);
-			  
+			int averageRating = (int) Math.ceil((ratings.getFriendly() + ratings.getOn_time_arrival() + ratings.getQuality_of_service()) / 3);  
 		    Date dateToday = new Date();  
 		    
 		    ratings.setIs_approved(1);
@@ -537,7 +443,6 @@ public class CustomerController {
 		    ratings.setVisible_on_homescreen(1);
 		    
 		    this.serviceRating.addServiceRating(ratings);
-		    
 		    return new ResponseEntity<HttpStatus>(HttpStatus.OK);
 		}
 	}
@@ -549,13 +454,7 @@ public class CustomerController {
 		User loggedInUserDetails = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		UserModel currentUser = userService.getUserByEmail(loggedInUserDetails.getUsername());
 		
-//		FavouriteBlockedModel favBlock = this.userService.getFavBlockById(id);
-//		favBlock.setIs_favourite(0);
-//		
-//		this.userService.updateFavBlock(favBlock);
-		
 		FavouriteBlockedModel favBlock = this.userService.getFavBlockByUserIdAndTargetUserId(currentUser.getUser_id(), id);
-		System.out.println("--------"+favBlock);
 		
 		if(favBlock != null) {
 			favBlock.setIs_favourite(0);
@@ -579,13 +478,7 @@ public class CustomerController {
 		User loggedInUserDetails = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		UserModel currentUser = userService.getUserByEmail(loggedInUserDetails.getUsername());
 		
-//		FavouriteBlockedModel favBlock = this.userService.getFavBlockById(id);
-//		favBlock.setIs_favourite(1);
-//		
-//		this.userService.updateFavBlock(favBlock);
-		
 		FavouriteBlockedModel favBlock = this.userService.getFavBlockByUserIdAndTargetUserId(currentUser.getUser_id(), id);
-		System.out.println("--------"+favBlock);
 		
 		if(favBlock != null) {
 			favBlock.setIs_favourite(1);
@@ -609,11 +502,6 @@ public class CustomerController {
 		User loggedInUserDetails = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		UserModel currentUser = userService.getUserByEmail(loggedInUserDetails.getUsername());
 		
-//		FavouriteBlockedModel favBlock = this.userService.getFavBlockById(id);
-//		favBlock.setIs_blocked(1);
-//		
-//		this.userService.updateFavBlock(favBlock);
-		
 		FavouriteBlockedModel favBlock = this.userService.getFavBlockByUserIdAndTargetUserId(currentUser.getUser_id(), id);
 		
 		if(favBlock != null) {
@@ -629,7 +517,6 @@ public class CustomerController {
 			
 			this.userService.addFavBlock(fb);
 		}
-		
 		return new ResponseEntity<HttpStatus>(HttpStatus.OK);
 	}
 	
@@ -638,11 +525,6 @@ public class CustomerController {
 		
 		User loggedInUserDetails = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		UserModel currentUser = userService.getUserByEmail(loggedInUserDetails.getUsername());
-		
-//		FavouriteBlockedModel favBlock = this.userService.getFavBlockById(id);
-//		favBlock.setIs_blocked(0);
-//		
-//		this.userService.updateFavBlock(favBlock);
 		
 		FavouriteBlockedModel favBlock = this.userService.getFavBlockByUserIdAndTargetUserId(currentUser.getUser_id(), id);
 		
@@ -659,35 +541,44 @@ public class CustomerController {
 			
 			this.userService.addFavBlock(fb);
 		}
-
-		
 		return new ResponseEntity<HttpStatus>(HttpStatus.OK);
 	}
 	
 	@SuppressWarnings("deprecation")
 	@RequestMapping(value = "/update-mydetails" , method=RequestMethod.POST)
-	public String updateMyDetails(@ModelAttribute UserModel changeUser) {
-		
-		User loggedInUserDetails = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		UserModel currentUser = userService.getUserByEmail(loggedInUserDetails.getUsername());
-		
-		Date dtToday = new Date();
-		Date dob = changeUser.getDate_of_birth();
-		dob.setHours(0);
-		dob.setMinutes(0);
-		dob.setSeconds(0);
-		
-		currentUser.setFirst_name(changeUser.getFirst_name());
-		currentUser.setLast_name(changeUser.getLast_name());
-		currentUser.setMobile(changeUser.getMobile());
-		currentUser.setDate_of_birth(dob);
-		currentUser.setModified_date(dtToday);
-		currentUser.setModified_by(currentUser.getUser_id());
-		
-		this.userService.updateUser(currentUser);
-		
-		return "redirect:mysettings";
-		
+	public String updateMyDetails(@ModelAttribute UserModel changeUser , RedirectAttributes redirectAttributes) {
+		if(changeUser.getFirst_name().length() < 1 ) {
+			redirectAttributes.addFlashAttribute("errorInFirstName" , "Firstname can't be empty.");
+			return "redirect:mysettings";
+		}
+		else if(changeUser.getLast_name().length() < 1 ) {
+			redirectAttributes.addFlashAttribute("errorInLastName" , "Lastname can't be empty.");
+			return "redirect:mysettings";
+		}
+		else if(changeUser.getMobile().length() < 10 || changeUser.getMobile().length() > 12 ) {
+			redirectAttributes.addFlashAttribute("errorInMobile" , "Mobile number must be 10 to 12 digits long.");
+			return "redirect:mysettings";
+		}
+		else {
+			User loggedInUserDetails = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			UserModel currentUser = userService.getUserByEmail(loggedInUserDetails.getUsername());
+			
+			Date dtToday = new Date();
+			Date dob = changeUser.getDate_of_birth();
+			dob.setHours(0);
+			dob.setMinutes(0);
+			dob.setSeconds(0);
+			
+			currentUser.setFirst_name(changeUser.getFirst_name());
+			currentUser.setLast_name(changeUser.getLast_name());
+			currentUser.setMobile(changeUser.getMobile());
+			currentUser.setDate_of_birth(dob);
+			currentUser.setModified_date(dtToday);
+			currentUser.setModified_by(currentUser.getUser_id());
+			
+			this.userService.updateUser(currentUser);
+			return "redirect:mysettings";
+		}
 	}
 	
 }

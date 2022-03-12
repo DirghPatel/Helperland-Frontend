@@ -127,6 +127,7 @@
                         <div class="form-group d-flex flex-column">
                             <input type="text" required name="email" id="emailaddress" placeholder="Email Address" class="inputHeightBorderPadding form-control">
                         </div>
+                        <small class="text-danger">${emailError }</small>
                     </div>
                     <div class="col-sm-6 mb-4">
                         <div class="form-group d-flex flex-column">
@@ -135,6 +136,7 @@
                                 <input type="text" name="mobile" required id="mobile" placeholder="Mobile number" class="inputHeightBorderPadding form-control">
                             </div>
                             <small id="mobileNumberMessage"></small>
+                            <small class="text-danger">${mobileError }</small>
                         </div>
                     </div>
                 </div>
@@ -164,7 +166,7 @@
                     <button class="btn submitButton text-light rounded-pill"  disabled id="registerButton">Register</button>
                 </div>
                 
-                <input type="hidden" name="is_registered_user" value="1">
+                <!-- <input type="hidden" name="is_registered_user" value="1">
                 <input type="hidden" name="works_with_pet" value="1">
                 <input type="hidden" name="modified_by" value="1">
                 <input type="hidden" name="is_approved" value="1">
@@ -172,7 +174,7 @@
                 <input type="hidden" name="is_deleted" value="0">
                 <input type="hidden" name="is_online" value="1">
                 <input type="hidden" name="created_date" id="created_date" value="">
-                <input type="hidden" name="modified_date" id="modified_date" value="">
+                <input type="hidden" name="modified_date" id="modified_date" value=""> -->
                 
             </form>
             <div class="text-center mt-3 color646464">

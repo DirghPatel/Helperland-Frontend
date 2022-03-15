@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -20,21 +21,27 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.DisabledException;
+import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
+import org.springframework.util.SystemPropertyUtils;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute; 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import helperlandBackend.models.ContactUs;
@@ -211,7 +218,8 @@ public class MainController {
 		user.setIs_online(1);
 		user.setCreated_date(dateToday);
 		user.setModified_date(dateToday);
-
+		user.setStatus(1);
+		
 		if(br.hasErrors()) {
 			String regexPattern = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
 			if(!patternMatches(user.getEmail() , regexPattern)) {
@@ -250,38 +258,28 @@ public class MainController {
 				}
 			}
 			else {
-//				try {
-					System.out.println(user.getPassword());
-					System.out.println(user.getEmail());
-					
-					UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(user.getEmail(), unEncodedPass);
-			        authToken.setDetails(new WebAuthenticationDetails(request));
-			        Authentication authentication = authenticationManager.authenticate(authToken);
-			        SecurityContextHolder.getContext().setAuthentication(authentication);
-			        
-//					request.login(user.getEmail(), user.getPassword());
-//					loginUserService.loadUserByUsername(user.getEmail());
-					if(user.getUser_type_id() == 1) {
-						session.setAttribute("user" , user);
-						return "redirect:/customer/dash";
-					}
-					else if(user.getUser_type_id() == 2) {
-						session.setAttribute("user" , user);
-						return "redirect:/service-provider/dash";
-					}
-					else {
-						return "home";
-					}
-//				} catch (ServletException e) {
-//					e.printStackTrace();
-//					return "home";
-//				}
+				UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(user.getEmail(), unEncodedPass);
+		        authToken.setDetails(new WebAuthenticationDetails(request));
+		        Authentication authentication = authenticationManager.authenticate(authToken);
+		        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+				if(user.getUser_type_id() == 1) {
+					session.setAttribute("user" , user);
+					return "redirect:/customer/dash";
+				}
+				else if(user.getUser_type_id() == 2) {
+					session.setAttribute("user" , user);
+					return "redirect:/service-provider/dash";
+				}
+				else {
+					return "home";
+				}
 			}
 		}        
 	}
 
 	@RequestMapping(value = "/login")
-	public String login(Model model , RedirectAttributes redirectAttributes) {
+	public String login(RedirectAttributes redirectAttributes) {
 		redirectAttributes.addFlashAttribute("loginErrorMessage" , "invalid username or password");
 		redirectAttributes.addFlashAttribute("displayLoginError" , "style='display: block !important;'");
 		return "redirect:user-register";

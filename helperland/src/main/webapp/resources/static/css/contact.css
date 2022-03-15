@@ -209,3 +209,21 @@ form {
 .nav_select4{
     border: 1px solid #FFFFFF80;
 }
+
+.back_to_top{
+	position: fixed;
+    left: 30px;
+    bottom: 30px;
+    z-index: 5;
+    background: #515151;
+    padding: 12px;
+    border-radius: 48px;
+    cursor: pointer;
+    display: none;
+}
+
+.back_to_top img{
+	display: block;
+    width: 24px;
+    height: 24px;
+}

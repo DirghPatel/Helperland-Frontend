@@ -29,9 +29,6 @@
                                 <p class="nav-link">Welcome,<br>${user.first_name } ${user.last_name }</p>
                             </div>
                             <div class="navcol_second navcol">
-                                <!-- <div class="nav-item nav_select1"  id="dashBoard1">
-                                    <a class="nav-link" href="#dashBoardTable">Dashboard</a>
-                                </div> -->
                                 <div class="nav-item nav_select1">
                                     <a class="nav-link" id="newServiceRequest1" href="dash">New Service Request</a>
                                 </div>
@@ -54,9 +51,6 @@
                                 <div class="nav-item nav_select1">
                                     <a class="nav-link" id="notification1" href="notification">Notification</a>
                                 </div>
-                                <!-- <div class="nav-item nav_select1">
-                                    <a class="nav-link">Invoice</a>
-                                </div> -->
                                 <div class="nav-item nav_select1">
                                     <a class="nav-link" href="mysettings">My Settings</a>
                                 </div>
@@ -119,18 +113,8 @@
                     </div>
                     <div>
                         <button class="navbar-toggler text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" aria-expanded="false" aria-label="Toggle navigation">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="40"
-                                height="40"
-                                fill="#fff"
-                                class="bi bi-list"
-                                viewBox="0 0 16 16"
-                                >
-                                <path
-                                    fill-rule="evenodd"
-                                    d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
-                                />
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="#fff" class="bi bi-list" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
                             </svg>
                         </button>
                     </div>   
@@ -146,9 +130,6 @@
         <div class="spDash_main d-flex justify-content-center h-100 m-3">
             <div class="dash_sidebar position-relative d-none d-lg-block d-xl-block">
                 <ul class="sidebar_inner">
-                    <!-- <li>
-                        <a class="text-light" aria-current="page" id="dashBoard" href="../ServiceProvider-Dash/spDash.html#dashBoardTable">Dashboard</a>
-                    </li> -->
                     <li>
                         <a id="newServiceRequest" class="text-light" href="dash">New Service Requests</a>
                     </li>
@@ -201,58 +182,6 @@
                             </tr>
                         </tbody>
                     </table>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="serviceDetailsPopUp">
-
-            <div class="modal fade" id="serviceDetails" aria-hidden="true" aria-labelledby="serviceDetailsLabel" tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered vertical-align-center">
-                    <div class="modal-content">
-                        <!-- <div class="modal-body"> -->
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="serviceDetailsLabel">Service Details</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                        <div class="modal-body d-flex serviceDetailsModal p-2">
-                            <div class="serviceModalLeft">
-                                <h4>22/12/2021 09:00 -14:30</h4>
-                                <p><b>Duration:</b>5.5 Hrs</p>
-
-                                <hr>
-
-                                <p><b>Service Id:</b>8502</p>
-                                <p><b>Extras:</b>Inside cabinets, Inside fridge, Inside oven, Laundry wash & dry, Interior windows</p>
-                                <p><b>Net Amount:</b> <span class="table_payment fw-bolder">99,00 €</span> </p>
-                                
-                                <hr>
-                                
-                                <p><b>Service Address:</b>Test 65, 53225 Bonn</p>
-                                <p><b>Billing Address:</b>Same as cleaning Address</p>
-                                <p><b>Phone:</b>+49 9988556644</p>
-                                <p><b>Email:</b>cust001@yopmail.com</p>
-                                
-                                <hr>
-                                
-                                <p><b>Comments</b></p>
-                                <div>
-                                    <p>Hello</p>
-                                </div>
-                                <p>I don't have pets at home</p>
-                                
-                                <hr>
-                                
-                            </div>
-                            <div class="serviceModalRight">
-                                <iframe width="350px" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.6979157244114!2d72.49824711445191!3d23.034861321650208!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e8352e403437b%3A0xdc9d4dae36889fb9!2sTatvaSoft!5e0!3m2!1sen!2sin!4v1640187081460!5m2!1sen!2sin">
-                                </iframe>
-                            </div>
-
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -309,14 +238,7 @@
             </div>
         </div>
     </div>
-    
-    <!-- <script src="./spDash.js"></script> -->
-    <!-- <script>
-        $(function () {
-            $("#footer").load("../footer.html");
-        });
-    </script> -->
-    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>

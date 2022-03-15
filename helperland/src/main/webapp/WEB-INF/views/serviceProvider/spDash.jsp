@@ -10,8 +10,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<%-- <c:set var="sr" value="${service_requests }" /> --%>
-	<c:set var="u" value="${users }" />
+	<c:set var="users" value="${users }" />
 	<c:set var="srAddress" value="${srAddress }" />
 	<link href='<c:url value="/resources/css/spDash.css" />' rel="stylesheet" />
 	<link href='<c:url value="/resources/css/navbar-2.css" />' rel="stylesheet" />
@@ -35,13 +34,9 @@
                                 <p class="nav-link">Welcome,<br>${user.first_name } ${user.last_name }</p>
                             </div>
                             <div class="navcol_second navcol">
-                                <!-- <div class="nav-item nav_select1"  id="dashBoard1">
-                                    <a class="nav-link" href="#dashBoardTable">Dashboard</a>
-                                </div> -->
                                 <div class="nav-item nav_select1">
                                     <a class="nav-link" id="newServiceRequest1" href="dash">New Service Request</a>
                                 </div>
-            
                                 <div class="nav-item nav_select1">
                                     <a class="nav-link" id="upcomingServices1" href="upcoming-services">Upcoming Services</a>
                                 </div>
@@ -60,9 +55,6 @@
                                 <div class="nav-item nav_select1">
                                     <a class="nav-link" id="notification1" href="notification">Notification</a>
                                 </div>
-                                <!-- <div class="nav-item nav_select1">
-                                    <a class="nav-link">Invoice</a>
-                                </div> -->
                                 <div class="nav-item nav_select1">
                                     <a class="nav-link" href="mysettings">My Settings</a>
                                 </div>
@@ -125,18 +117,8 @@
                     </div>
                     <div>
                         <button class="navbar-toggler text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" aria-expanded="false" aria-label="Toggle navigation">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="40"
-                                height="40"
-                                fill="#fff"
-                                class="bi bi-list"
-                                viewBox="0 0 16 16"
-                                >
-                                <path
-                                    fill-rule="evenodd"
-                                    d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
-                                />
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="#fff" class="bi bi-list" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
                             </svg>
                         </button>
                     </div>   
@@ -152,9 +134,6 @@
         <div class="spDash_main d-flex justify-content-center h-100 m-3">
             <div class="dash_sidebar position-relative d-none d-lg-block d-xl-block">
                 <ul class="sidebar_inner">
-                    <!-- <li>
-                        <a class="text-light" aria-current="page" id="dashBoard" href="../ServiceProvider-Dash/spDash.html#dashBoardTable">Dashboard</a>
-                    </li> -->
                     <li style="background-color: #146371;">
                         <a id="newServiceRequest" class="text-light" href="dash">New Service Requests</a>
                     </li>
@@ -314,7 +293,6 @@
 							</li>
 					        <li class="rounded-circle"><a id="nextIcon" href="/helperland/service-provider/dash?page=${service_requests.page + 2 }&count=${c }&pets=${sr_type}" class="rounded-circle" <c:if test = "${service_requests.page + 1 ==  service_requests.pageCount}">style = "pointer-events: none"</c:if>> › </a></li>
 					        <li class="rounded-circle"><a id="lastNext" href="/helperland/service-provider/dash?page=${service_requests.pageCount }&count=${c }&pets=${sr_type}" class="rounded-circle"> » </a></li>
-				        	
 				        </ul>
 				    </div>
                 </div>
@@ -327,11 +305,10 @@
             <div class="modal fade" id="serviceDetails" aria-hidden="true" aria-labelledby="serviceDetailsLabel" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered vertical-align-center">
                     <div class="modal-content">
-                        <!-- <div class="modal-body"> -->
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="serviceDetailsLabel">Service Details</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="serviceDetailsLabel">Service Details</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
                         <div class="modal-body d-flex serviceDetailsModal p-2">
                             <div class="serviceModalLeft">
                                 <h4 id="sdDate"> </h4>
@@ -398,13 +375,11 @@
             <div class="modal fade" id="conflictError" aria-hidden="true" aria-labelledby="conflictErrorLabel" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered vertical-align-center">
                     <div class="modal-content">
-                        <!-- <div class="modal-body"> -->
-                            <div class="modal-header px-4">
-                                <h5 class="modal-title text-danger" id="conflictErrorLabel">Error!!</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
+                        <div class="modal-header px-4">
+                            <h5 class="modal-title text-danger" id="conflictErrorLabel">Error!!</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
                         <div class="modal-body conflictErrorModal p-2 px-4">
-							<!-- <p>Another service request #<b id="conflictErrorReqId"></b> has already been assigned which has time overlap with this service request. You can’t pick this one!</p> -->
 							<p id="conflictErrorReqId"></p>
 							<button type="button" data-bs-dismiss="modal" aria-label="Close" class="accept_button rounded-pill text-light text-decoration-none">Ok</button>
                         </div>
@@ -474,29 +449,13 @@
 
     		<c:if test="${sr_type == all} ">
 	    		$("#include_pets").attr('checked' , true);	
-				console.log("aaaaaaa");
     		</c:if>
     		<c:if test="${sr_type == filtered} ">
 	    		$("#include_pets").attr('checked' , false);	
-				console.log("aaaaaaasss");
 			</c:if>
-    		
-    		/* var k = ${sr_type};
-    		
-    		if(k == "all"){
-    			$("#include_pets").attr('checked' , true);	
-    			console.log("aaaaaaa");
-    		}
-    		if(k == "filtered"){
-    			$("#include_pets").attr('checked' , false);
-    			console.log("aaaaaaaass");
-    		} */
-    		
     		<c:forEach var="sr" items="${service_requests.pageList }" varStatus="i">
     			
 	    		var d = new Date("${sr.service_start_date}");
-	    		console.log(d);
-				
 				var t1 = d.getHours()+"."+d.getMinutes();
 				var a = parseFloat("${sr.service_hours}") ;  
 				var b = parseFloat("${sr.extra_hours}");
@@ -522,18 +481,11 @@
     		let searchParams = new URLSearchParams(window.location.search);
 			let param = searchParams.get('count');
 			$("#count_select option[value = '" + param + "']").attr("selected" , true);
-			
-    		
     	})
     	
     	$("#count_select").on("change" , function(){
-    		
     		let pets = ${sr_type};
-    		
     		$("#firstPrev").attr("href" , '/helperland/service-provider/dash?page=1&count=' + $("#count_select").val()+'&pets='+pets);
-    	
-    		console.log($("#firstPrev").attr('href'));
-    		
     		document.getElementById("firstPrev").click();
     })
     
@@ -549,7 +501,6 @@
 				data : id,
 				contentType : "application/json",
 				success : function(data) {
-						console.log(data);
 						
 						var d = new Date(data[0].service_start_date);
 						
@@ -562,7 +513,7 @@
 						}
 						var t1 = d.getHours()+"."+d.getMinutes();
 						var totalTime = data[0].service_hours + data[0].extra_hours;
-						
+
 						var dt1 = ((d.getHours() * 60) + d.getMinutes()) / 60;
 						var dt2 = (dt1 + totalTime) * 60;
 						
@@ -575,7 +526,6 @@
 						else{
 							var time2 = h1 + ":" + m1;
 						}
-						
 						
 						$("#sdDate").html(date1 +" "+ time1 + "-" + time2); 
 						$("#sdDuration").html(data[0].service_hours + data[0].extra_hours + " hours");
@@ -593,8 +543,6 @@
 						
 						var extraServices = " ";
 						
-						console.log(data[2].cabinet);
-						
 						if(data[2].cabinet == 1){
 							extraServices = extraServices + " Inside Cabinets, ";
 						}
@@ -610,7 +558,6 @@
 						if(data[2].oven == 1){
 							extraServices = extraServices + " Inside Oven, ";
 						}
-						console.log(extraServices);
 						$("#sdExtra").html(extraServices);
 						
 						if(data[1].state != null){
@@ -624,40 +571,28 @@
 						}
 						if(data[1].email != null){
 							$("#sdEmail").html(" "+data[1].email);
-						}
-						
+						}		
 				},
 				error : function(xhr, textStatus, xml) {
-					console.log("error");
-					console.log(xhr);
-					console.log(textStatus);
-					console.log(xml);
+					alert("Some error occured");
 				}
-			})
-    		
+			})	
     	}
     	
     	function acceptFunction(id){
-    		console.log(id);
     		$.ajax({
 				url : "service-accept",
 				type : "POST",
 				data : id,
 				contentType : "application/json",
 				success : function(data) {
-					
 					$("#serviceAccept").modal('show');
-					location.reload(); 
-					
+					location.reload(); 	
 				},
 				error : function(data) {
 					var d = data.responseText;
-					console.log(d);
-					console.log(d.length);
-					console.log(d.substring(8 , d.length));
 					if(d.substring(0 , 8) == "conflict"){
 						$("#conflictError").modal('show');
-						/* $("#conflictErrorReqId").html(d.substring(8 , d.length)); */
 						$("#conflictErrorReqId").html("Another service request # <b>" + d.substring(8 , d.length) + " </b> has already been assigned which has time overlap with this service request. You can’t pick this one!");
 					}
 					if(d == "expired"){
@@ -682,9 +617,6 @@
    	        else{
    	        	$("#include_pets_hidden").attr('checked' , true);
    	        }
-   			
-   			console.log($(this).val());
-
    			$("#include_pets_form").submit();     			
     	})
     	

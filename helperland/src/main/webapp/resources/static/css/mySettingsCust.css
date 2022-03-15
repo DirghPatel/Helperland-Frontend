@@ -39,7 +39,10 @@ tbody{
 #myAddressesTable th ,#myAddressesTable td{
     padding: 10px 20px;
 }
-.nav-item{
+.navcol_third .nav-item:hover{
+	border: 1px solid #ffffff80 !important;
+}
+.nav-tabs .nav-item{
     border: none !important;
     margin: 0;
 }

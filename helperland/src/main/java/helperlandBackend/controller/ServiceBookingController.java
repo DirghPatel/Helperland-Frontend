@@ -144,10 +144,14 @@ public class ServiceBookingController {
 			}
 			for(UserModel i : userEmails) {
 //				this.mainController.sendMail(i.getEmail() , "A new Service Request #" + serviceRequest.getService_req_id() + " is available in your postal code " + i.getPostal_code() + " area.");
+//				System.out.println(i.getEmail());
+//				this.mainController.sendMail("dirghpatel8801@gmail.com" , "A new Service Request #" + serviceRequest.getService_req_id() + " is available in your postal code " + i.getPostal_code() + " area.");
 			}
 			if(serviceRequest.getService_provider_id() != serviceRequest.getUser_id()) {
 				UserModel userSpDirect = this.userService.getUserByUserId(serviceRequest.getService_provider_id());
 //				this.mainController.sendMail(userSpDirect.getEmail() , "A new Service Request #" + serviceRequest.getService_req_id() + " is directly assigned to you.");
+//				System.out.println(userSpDirect.getEmail() );
+//				this.mainController.sendMail("dirghpatel8801@gmail.com" , "A new Service Request #" + serviceRequest.getService_req_id() + " is directly assigned to you.");
 			}
 			return ResponseEntity.status(HttpStatus.OK).body(serviceRequest.getService_req_id());
 		}

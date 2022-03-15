@@ -112,34 +112,18 @@
                     </div>
                     <div>
                         <button class="navbar-toggler text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" aria-expanded="false" aria-label="Toggle navigation">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="40"
-                                height="40"
-                                fill="#fff"
-                                class="bi bi-list"
-                                viewBox="0 0 16 16"
-                                >
-                                <path
-                                    fill-rule="evenodd"
-                                    d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
-                                />
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="#fff" class="bi bi-list" viewBox="0 0 16 16" >
+                                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
                             </svg>
                         </button>
                     </div>   
                 </div>
             </div>
         </nav>
-
-
-
         <div class="position-relative custDash_header d-flex align-items-center justify-content-center">
             <p class="m-0">Welcome, <span class="text-bold">${user.first_name }!</span></p>
         </div>
-
-
         <div class="custDash_main d-flex justify-content-between h-100 m-3">
-
             <!-- --------------- Sidebar -------------- -->
             <div class="dash_sidebar position-relative d-none d-lg-block d-xl-block">
                 <ul class="sidebar_inner mb-0">
@@ -166,109 +150,12 @@
                 <!-- --------- Favourite Pros ----------  -->
                 <div id="favouriteProsTable">
                     <div class="favouriteProsList">
-                        
-                        
-                        <%-- <c:forEach var="fav" items="${fav }">
-                        	
-                        	<div class="favouriteProsListItem col-sm-4 w-100 d-flex align-items-center justify-content-center flex-column">
-	                        	<c:forEach var="u" items="${users }">  
-	                        		<c:if test="${u.user_id == fav.target_user_id }">  
-			                            <div class="custProfile mb-3 rounded-circle d-flex align-items-center justify-content-center">
-			                                <img src="<c:url value = "/resources/assets/custDash/${u.user_profile_picture }.png" />" >
-			                            </div>
-		                            
-	                            		<p class="mb-3"> ${u.first_name } ${u.last_name }</p>
-	                            	</c:if>
-								</c:forEach>
-	                            <div class="d-flex align-items-center">
-	                                <c:forEach items="${avgSpRating}" var="spRating">		        
-								        <c:if test="${spRating.key == fav.target_user_id }">
-								        	<c:if test="${spRating.value == 0}">
-								        		<span class="icon" id="icon1" style="color: #e1e1e1">★</span>
-								        		<span class="icon" id="icon2" style="color: #e1e1e1">★</span>
-		                                    	<span class="icon" id="icon3" style="color: #e1e1e1">★</span>
-		                                    	<span class="icon" id="icon4" style="color: #e1e1e1">★</span>
-                                   				<span class="icon" id="icon5" style="color: #e1e1e1">★</span>	
-								        	</c:if>	
-								        	<c:if test="${spRating.value == 1}">
-								        		<span class="icon" id="icon1" style="color: #ECB91C">★</span>
-								        		<span class="icon" id="icon2" style="color: #e1e1e1">★</span>
-		                                    	<span class="icon" id="icon3" style="color: #e1e1e1">★</span>
-		                                    	<span class="icon" id="icon4" style="color: #e1e1e1">★</span>
-                                   				<span class="icon" id="icon5" style="color: #e1e1e1">★</span>	
-								        	</c:if>	
-								        	<c:if test="${spRating.value == 2}">
-								        		<span class="icon" id="icon1" style="color: #ECB91C">★</span>
-								        		<span class="icon" id="icon2" style="color: #ECB91C">★</span>
-		                                    	<span class="icon" id="icon3" style="color: #e1e1e1">★</span>
-		                                    	<span class="icon" id="icon4" style="color: #e1e1e1">★</span>
-                                   				<span class="icon" id="icon5" style="color: #e1e1e1">★</span>	
-								        	</c:if>	
-								        	<c:if test="${spRating.value == 3}">
-								        		<span class="icon" id="icon1" style="color: #ECB91C">★</span>
-								        		<span class="icon" id="icon2" style="color: #ECB91C">★</span>
-		                                    	<span class="icon" id="icon3" style="color: #ECB91C">★</span>
-		                                    	<span class="icon" id="icon4" style="color: #e1e1e1">★</span>
-                                   				<span class="icon" id="icon5" style="color: #e1e1e1">★</span>	
-								        	</c:if>	
-								        	<c:if test="${spRating.value == 4}">
-								        		<span class="icon" id="icon1" style="color: #ECB91C">★</span>
-								        		<span class="icon" id="icon2" style="color: #ECB91C">★</span>
-		                                    	<span class="icon" id="icon3" style="color: #ECB91C">★</span>
-		                                    	<span class="icon" id="icon4" style="color: #ECB91C">★</span>
-                                   				<span class="icon" id="icon5" style="color: #e1e1e1">★</span>	
-								        	</c:if>	
-								        	<c:if test="${spRating.value == 5}">
-								        		<span class="icon" id="icon1" style="color: #ECB91C">★</span>
-								        		<span class="icon" id="icon2" style="color: #ECB91C">★</span>
-		                                    	<span class="icon" id="icon3" style="color: #ECB91C">★</span>
-		                                    	<span class="icon" id="icon4" style="color: #ECB91C">★</span>
-                                   				<span class="icon" id="icon5" style="color: #ECB91C">★</span>	
-								        	</c:if>	
-                                              	<p class="mb-0">${spRating.value }</p>
-								        </c:if>
-								    </c:forEach>  
-	                            </div>
-	                            <c:forEach var="total" items="${spTotalCleaning }">
-	                            	<c:if test="${total.key == fav.target_user_id}">
-	                            		<p>${total.value } Cleanings</p>	
-	                            	</c:if>
-	                            </c:forEach>
-	                            <div>
-		                            <c:forEach var="u" items="${users }">  
-		                            	<c:if test="${u.user_id == fav.target_user_id and fav.is_favourite == 1}">
-		                            		<div class="btn remove_button text-white rounded-pill" data-favId="${fav.id }" onclick="removeFunction($(this).attr('data-favId'))">Remove</div>
-		                            	</c:if>
-		                            	<c:if test="${u.user_id == fav.target_user_id and fav.is_favourite == 0}">
-		                            		<div class="btn remove_button text-white rounded-pill" data-favId="${fav.id }" onclick="favouriteFunction($(this).attr('data-favId'))">Favourite</div>
-		                            	</c:if>
-			                            <c:if test="${u.user_id == fav.target_user_id and fav.is_blocked == 0}">
-			                                <div class="btn block_button text-white rounded-pill" data-favId="${fav.id }" onclick="blockFunction($(this).attr('data-favId'))">Block</div>
-										</c:if>
-										<c:if test="${u.user_id == fav.target_user_id and fav.is_blocked == 1}">
-			                                <div class="btn block_button text-white rounded-pill" data-favId="${fav.id }" onclick="unblockFunction($(this).attr('data-favId'))">Unblock</div>
-										</c:if>
-										
-		                            </c:forEach>
-		                        </div>
-	                        </div>
-                        	
-                        </c:forEach> --%>
-                        
                         <c:forEach var="u" items="${users.pageList }">
-                        
-                        	
-                        	
                         	<div class="favouriteProsListItem col-sm-4 w-100 d-flex align-items-center justify-content-center flex-column">
-	                        	<%-- <c:forEach var="fav" items="${fav }">  
-	                        		<c:if test="${u.user_id == fav.target_user_id }">   --%>
-			                            <div class="custProfile mb-3 rounded-circle d-flex align-items-center justify-content-center">
-			                                <img src="<c:url value = "/resources/assets/custDash/${u.user_profile_picture }.png" />" >
-			                            </div>
-		                            
-	                            		<p class="mb-3"> ${u.first_name } ${u.last_name }</p>
-	                            	<%-- </c:if>
-								</c:forEach> --%>
+	                            <div class="custProfile mb-3 rounded-circle d-flex align-items-center justify-content-center">
+	                                <img src="<c:url value = "/resources/assets/custDash/${u.user_profile_picture }.png" />" >
+	                            </div>
+                           		<p class="mb-3"> ${u.first_name } ${u.last_name }</p>
 	                            <div class="d-flex align-items-center">
 	                                <c:forEach items="${avgSpRating}" var="spRating">		        
 								        <c:if test="${spRating.key == u.user_id }"> 
@@ -324,52 +211,34 @@
 	                            	</c:if>
 	                            </c:forEach>
 	                            <div>
-		                           	<%-- <c:forEach var="fav" items="${fav }">  
-		                            	<c:if test="${u.user_id == fav.target_user_id and fav.is_favourite == 1}">
-		                            		<div class="btn remove_button text-white rounded-pill" data-favId="${fav.id }" onclick="removeFunction($(this).attr('data-favId'))">Remove</div>
-		                            	</c:if>
-		                            	<c:if test="${u.user_id == fav.target_user_id and fav.is_favourite == 0}">
-		                            		 <div class="btn remove_button text-white rounded-pill" data-favId="${fav.id }" onclick="favouriteFunction($(this).attr('data-favId'))">Favourite</div>
-		                            	</c:if>
-			                            <c:if test="${u.user_id == fav.target_user_id and fav.is_blocked == 0}">
-			                                <div class="btn block_button text-white rounded-pill" data-favId="${fav.id }" onclick="blockFunction($(this).attr('data-favId'))">Block</div>
-										</c:if>
-										<c:if test="${u.user_id == fav.target_user_id and fav.is_blocked == 1}">
-			                                <div class="btn block_button text-white rounded-pill" data-favId="${fav.id }" onclick="unblockFunction($(this).attr('data-favId'))">Unblock</div>
-										</c:if> --%>
+									<c:if test = "${fn:contains(blockedId , u.user_id)}">
+										<c:forEach var="fav" items="${fav }"> 
+											<c:if test="${u.user_id == fav.target_user_id }"> 
 										
-										<c:if test = "${fn:contains(blockedId , u.user_id)}">
-											<c:forEach var="fav" items="${fav }"> 
-												<c:if test="${u.user_id == fav.target_user_id }"> 
-											
-													<c:if test="${fav.is_favourite == 1 }">
-														<div class="btn remove_button text-white rounded-pill" data-uId = "${u.user_id }" onclick="removeFunction($(this).attr('data-uId'))">Remove</div>
-													</c:if>
-													<c:if test="${fav.is_favourite == 0 }">
-														<div class="btn remove_button text-white rounded-pill" data-uId = "${u.user_id }" onclick="favouriteFunction($(this).attr('data-uId'))">Favourite</div>
-													</c:if>
-													<c:if test="${fav.is_blocked == 0 }">
-														<div class="btn block_button text-white rounded-pill" data-uId = "${u.user_id }" onclick="blockFunction($(this).attr('data-uId'))">Block</div>
-													</c:if>
-													<c:if test="${fav.is_blocked == 1 }">
-														<div class="btn block_button text-white rounded-pill" data-uId = "${u.user_id }" onclick="unblockFunction($(this).attr('data-uId'))">Unblock</div>
-													</c:if>
+												<c:if test="${fav.is_favourite == 1 }">
+													<div class="btn remove_button text-white rounded-pill" data-uId = "${u.user_id }" onclick="removeFunction($(this).attr('data-uId'))">Remove</div>
 												</c:if>
-											</c:forEach>
-										</c:if>
-										<%-- <c:if test="${u.user_id != fav.target_user_id }"> --%>
-										
-										<c:if test = "${!fn:contains(blockedId, u.user_id)}">
-											<div class="btn remove_button text-white rounded-pill" data-uId = "${u.user_id }" onclick="favouriteFunction($(this).attr('data-uId'))">Favourite</div>
-											<div class="btn block_button text-white rounded-pill" data-uId = "${u.user_id }" onclick="blockFunction($(this).attr('data-uId'))">Block</div>
-										</c:if>
-		                            <%-- </c:forEach> --%> 
+												<c:if test="${fav.is_favourite == 0 }">
+													<div class="btn remove_button text-white rounded-pill" data-uId = "${u.user_id }" onclick="favouriteFunction($(this).attr('data-uId'))">Favourite</div>
+												</c:if>
+												<c:if test="${fav.is_blocked == 0 }">
+													<div class="btn block_button text-white rounded-pill" data-uId = "${u.user_id }" onclick="blockFunction($(this).attr('data-uId'))">Block</div>
+												</c:if>
+												<c:if test="${fav.is_blocked == 1 }">
+													<div class="btn block_button text-white rounded-pill" data-uId = "${u.user_id }" onclick="unblockFunction($(this).attr('data-uId'))">Unblock</div>
+												</c:if>
+											</c:if>
+										</c:forEach>
+									</c:if>
+									<c:if test = "${!fn:contains(blockedId, u.user_id)}">
+										<div class="btn remove_button text-white rounded-pill" data-uId = "${u.user_id }" onclick="favouriteFunction($(this).attr('data-uId'))">Favourite</div>
+										<div class="btn block_button text-white rounded-pill" data-uId = "${u.user_id }" onclick="blockFunction($(this).attr('data-uId'))">Block</div>
+									</c:if> 
 		                        </div>
 	                        </div>            	
                         </c:forEach>      
                     </div>
                     <div class="pagination p12 d-flex align-items-center justify-content-between">
-                    	
                     	<div class="d-flex pg-768">
                     		<div class="d-flex">
 	                    		<p class="mb-0">Show &nbsp</p>
@@ -381,7 +250,6 @@
 	                    	</div>
 	                    	<p class="mb-0"> &nbsp Entries total record: ${users.nrOfElements }</p>
                     	</div>		
-                    
                     	 <% 
 				        	String c = request.getParameter("count");
                     	 	if(c == null){
@@ -389,31 +257,25 @@
                     	 	}
 							pageContext.setAttribute("c", c);					        
 					     %>
-                    	
 				        <ul>
-					        <li class="rounded-circle"><a id="firstPrev" href="/helperland/customer/fav-pros?page=1&count=${c}" class="rounded-circle"> « </a></li>
-					        
+					        <li class="rounded-circle"><a id="firstPrev" href="/helperland/customer/fav-pros?page=1&count=${c}" class="rounded-circle"> « </a></li> 
 					        <li class="rounded-circle">
 					        	<a id="prevIcon" href="/helperland/customer/fav-pros?page=<c:if test="${users.page == 1 or users.page == 0 }">1</c:if><c:if test="${users.page > 1 }">${users.page }</c:if>&count=${c}" class="rounded-circle" <c:if test = "${users.page ==  0}">style = "pointer-events: none"</c:if>>  ‹ </a>
-					        </li>
-					        
-					       
-					        
+					        </li> 
 					        <li class="rounded-circle">
 						        <c:forEach begin="1" end="${users.pageCount}" step="1"  varStatus="tagStatus">
-									  <c:choose>
-										    <c:when test="${(users.page + 1) == tagStatus.index}">
-										      	<span class="is-active rounded-circle">${tagStatus.index}</span>
-										    </c:when>
-										    <c:otherwise>                
-										     	<a class="pageNoTag rounded-circle" href="/helperland/customer/fav-pros?page=${tagStatus.index}&count=${c}" id="${tagStatus.index }">${tagStatus.index}</a>
-										    </c:otherwise>
-									  </c:choose>
+									<c:choose>
+									    <c:when test="${(users.page + 1) == tagStatus.index}">
+									      	<span class="is-active rounded-circle">${tagStatus.index}</span>
+									    </c:when>
+									    <c:otherwise>                
+									     	<a class="pageNoTag rounded-circle" href="/helperland/customer/fav-pros?page=${tagStatus.index}&count=${c}" id="${tagStatus.index }">${tagStatus.index}</a>
+									    </c:otherwise>
+								  	</c:choose>
 								</c:forEach>
 							</li>
 					        <li class="rounded-circle"><a id="nextIcon" href="/helperland/customer/fav-pros?page=${users.page + 2 }&count=${c}" class="rounded-circle" <c:if test = "${users.page + 1 ==  users.pageCount}">style = "pointer-events: none"</c:if>> › </a></li>
 					        <li class="rounded-circle"><a id="lastNext" href="/helperland/customer/fav-pros?page=${users.pageCount }&count=${c}" class="rounded-circle"> » </a></li>
-				        	
 				        </ul>
 				    </div>
                 </div>
@@ -471,41 +333,26 @@
             </div>
         </div>
     </div>
-
-    <!-- <script src="./custDash.js"></script> -->
-    <!-- <script>
-        $(function () {
-            $("#footer").load("../footer.html");
-        });
-    </script> -->
-    
     <script>
     
 		$(document).ready(function() {
-			
 			let searchParams = new URLSearchParams(window.location.search);
 			let param = searchParams.get('count');
 			$("#count_select option[value = '" + param + "']").attr("selected" , true);
-			
-			console.log($("#count_select").val());
-			console.log($(".pageNoTag").attr("id"));
+
 			$("#prevIcon").attr("href" , '/helperland/customer/fav-pros?page='+<c:if test="${users.page ==0 }">1</c:if><c:if test="${users.page >1 }">${users.page }</c:if>+'&count='+$("#count_select").val()); 
 			$("#nextIcon").attr("href" , '/helperland/customer/fav-pros?page=${users.page + 2 }&count=' + $("#count_select").val());
 			$("#lastNext").attr("href" , '/helperland/customer/fav-pros?page=${users.pageCount}&count=' + $("#count_select").val());
-			$("#firstPrev").attr("href" , '/helperland/customer/fav-pros?page=1&count=' + $("#count_select").val());    		
-			
+			$("#firstPrev").attr("href" , '/helperland/customer/fav-pros?page=1&count=' + $("#count_select").val());    					
 		})
 		
 		$("#count_select").on("change" , function(){
        		$("#firstPrev").attr("href" , '/helperland/customer/fav-pros?page=1&count=' + $("#count_select").val());
-       	
     		document.getElementById("firstPrev").click();
     	})
-    
     </script>
     
     <script>
-    
     	function removeFunction(uid){
     		
     		$.ajax({
@@ -517,13 +364,9 @@
 					location.reload();
 				},
 				error : function(xhr, textStatus, xml) {
-					console.log("error");
-					console.log(xhr);
-					console.log(textStatus);
-					console.log(xml);
+					alert("Some error occured");
 				}
 			})
-    		
     	}
     	
 		function favouriteFunction(uid){
@@ -537,17 +380,13 @@
 					location.reload();
 				},
 				error : function(xhr, textStatus, xml) {
-					console.log("error");
-					console.log(xhr);
-					console.log(textStatus);
-					console.log(xml);
+					alert("Some error occured");
 				}
 			})
-    		
     	}
     	
 		function blockFunction(uid){
-			
+	
 			$.ajax({
 				url : 'favblock-block',
 				type : 'POST',
@@ -557,13 +396,9 @@
 					location.reload();
 				},
 				error : function(xhr, textStatus, xml) {
-					console.log("error");
-					console.log(xhr);
-					console.log(textStatus);
-					console.log(xml);
+					alert("Some error occured");
 				}
-			})
-			
+			})	
 		}
 		
 		function unblockFunction(uid){
@@ -577,19 +412,12 @@
 					location.reload();
 				},
 				error : function(xhr, textStatus, xml) {
-					console.log("error");
-					console.log(xhr);
-					console.log(textStatus);
-					console.log(xml);
+					alert("Some error occured");
 				}
-			})
-			
+			})	
 		}
-    
     </script>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
-
 </body>
 </html>

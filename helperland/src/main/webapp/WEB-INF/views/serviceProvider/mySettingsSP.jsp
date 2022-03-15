@@ -18,8 +18,6 @@
 <body>
 
     <div style="min-height: 100vh; padding-bottom: 80px;">
-        <!-- <div id="navbar_load"></div> -->
-
         <nav class="navbar navbar-expand-lg w-100 sticky-top" id="navbar">
             <div class="container-fluid navbar_main">
                 <a class="navbar-brand py-0" href="/helperland/home">
@@ -32,13 +30,9 @@
                                 <p class="nav-link">Welcome,<br>${user.first_name } ${user.last_name }</p>
                             </div>
                             <div class="navcol_second navcol">
-                                <!-- <div class="nav-item nav_select1"  id="dashBoard1">
-                                    <a class="nav-link" href="#dashBoardTable">Dashboard</a>
-                                </div> -->
                                 <div class="nav-item nav_select1">
                                     <a class="nav-link" id="newServiceRequest1" href="dash">New Service Request</a>
                                 </div>
-            
                                 <div class="nav-item nav_select1">
                                     <a class="nav-link" id="upcomingServices1" href="upcoming-services">Upcoming Services</a>
                                 </div>
@@ -57,9 +51,6 @@
                                 <div class="nav-item nav_select1">
                                     <a class="nav-link" id="notification1" href="notification">Notification</a>
                                 </div>
-                                <!-- <div class="nav-item nav_select1">
-                                    <a class="nav-link">Invoice</a>
-                                </div> -->
                                 <div class="nav-item nav_select1">
                                     <a class="nav-link" href="mysettings">My Settings</a>
                                 </div>
@@ -122,18 +113,8 @@
                     </div>
                     <div>
                         <button class="navbar-toggler text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" aria-expanded="false" aria-label="Toggle navigation">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="40"
-                                height="40"
-                                fill="#fff"
-                                class="bi bi-list"
-                                viewBox="0 0 16 16"
-                                >
-                                <path
-                                    fill-rule="evenodd"
-                                    d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
-                                />
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="#fff" class="bi bi-list" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
                             </svg>
                         </button>
                     </div>   
@@ -145,16 +126,10 @@
         <div class="position-relative spDash_header d-flex align-items-center justify-content-center">
             <p class="m-0">Welcome, <span class="text-bold">${user.first_name }!</span></p>
         </div>
-
-
-        
         <div class="spDash_main d-flex justify-content-center h-100 m-3">
             <!-- --------------- Sidebar -----------  -->
             <div class="dash_sidebar position-relative d-none d-lg-block d-xl-block">
                 <ul class="sidebar_inner">
-                    <!-- <li>
-                        <a class="text-light" aria-current="page" id="dashBoard" href="../ServiceProvider-Dash/spDash.html#dashBoardTable">Dashboard</a>
-                    </li> -->
                     <li>
                         <a id="newServiceRequest" class="text-light" href="dash">New Service Requests</a>
                     </li>
@@ -587,7 +562,6 @@
 	    
 	    	<c:if test="${user.date_of_birth != null}">
 		    	var dt = new Date(`${user.date_of_birth}`);
-		    	console.log(dt);
 		    	var dtDate = dt.getDate();
 		    	var dtMonth = dt.getMonth() + 1;
 		    	var dtYear = dt.getFullYear();
@@ -623,7 +597,6 @@
 				$("#birthyear").on('change' , function(){
 					date3 = $("#birthyear").val();
 				})
-				
 				$("#myDetailsSaveBtn").on('click' , function(){
 					var dt = new Date();
 			    	dt.setDate(date1);
@@ -632,14 +605,8 @@
 			    	$("#date_of_birth").val(dt);
 				})
 				
-	    	</c:if>
-	    	
-		    	/* $("input:radio[name=gender][value='"+${user.gender}+"']").attr('checked',true); */
-		    	
-		    	
+	    	</c:if>	
 	    })
-
-    
     </script>
     
     <script>

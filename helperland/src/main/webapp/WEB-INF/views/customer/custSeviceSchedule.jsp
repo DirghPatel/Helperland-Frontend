@@ -106,18 +106,8 @@
                     </div>
                     <div>
                         <button class="navbar-toggler text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" aria-expanded="false" aria-label="Toggle navigation">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="40"
-                                height="40"
-                                fill="#fff"
-                                class="bi bi-list"
-                                viewBox="0 0 16 16"
-                                >
-                                <path
-                                    fill-rule="evenodd"
-                                    d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
-                                />
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="#fff" class="bi bi-list" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
                             </svg>
                         </button>
                     </div>   
@@ -154,141 +144,10 @@
                     </li>
                 </ul>
             </div>
-
             <!-- ------------------- Tables ------------------- -->
             <div class="dash_content">
-
                 <!-- ----------- service schedule --------------  -->
                 <div id="serviceScheduleTable">
-                </div>
-               
-
-            </div>
-        </div>
-
-
-        <div class="serviceDetailsPopUp">
-
-            <div class="modal fade" id="serviceDetails" aria-hidden="true" aria-labelledby="serviceDetailsLabel" tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered vertical-align-center">
-                    <div class="modal-content">
-                        <!-- <div class="modal-body"> -->
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="serviceDetailsLabel">Service Details</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                        <div class="modal-body d-flex serviceDetailsModal p-2">
-                            <div class="serviceModalLeft">
-                                <h4>22/12/2021 09:00 -14:30</h4>
-                                <p><b>Duration:</b>5.5 Hrs</p>
-
-                                <hr>
-
-                                <p><b>Service Id:</b>8502</p>
-                                <p><b>Extras:</b>Inside cabinets, Inside fridge, Inside oven, Laundry wash & dry, Interior windows</p>
-                                <p><b>Net Amount:</b> <spna class="table_payment fw-bolder">99,00 €</spna> </p>
-                                
-                                <hr>
-                                
-                                <p><b>Service Address:</b>Test 65, 53225 Bonn</p>
-                                <p><b>Billing Address:</b>Same as cleaning Address</p>
-                                <p><b>Phone:</b>+49 9988556644</p>
-                                <p><b>Email:</b>cust001@yopmail.com</p>
-                                
-                                <hr>
-                                
-                                <p><b>Comments</b></p>
-                                <div>
-                                    <p>Hello</p>
-                                </div>
-                                <p>I don't have pets at home</p>
-                                
-                                <hr>
-                                
-                            </div>
-                            <div class="serviceModalRight">
-                                <h4>Service Provider Details</h4>
-                                <div class="sp_block d-flex justify-content-around align-items-center">
-                                    <div style="height: 64px; width: 64px;" class="sp_icon p-0 d-flex align-items-center justify-content-center rounded-circle">
-                                        <img src="<c:url value = "/resources/assets/custDash/cap.png" />" class="" height="20" width="30">
-                                    </div>
-                                    <div>
-                                        <p class="sp_name mb-0">Kavan Patel</p>
-                                        <div>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                                <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                            </svg>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                                <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                            </svg>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                                <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                            </svg>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                                <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                            </svg>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16">
-                                                <path fill-rule="evenodd" fill="#ECB91C" d="m8.176 12.865 5.045 3.735-1.334-5.78 4.453-3.84-5.871-1.402L8.176.6 5.882 5.578.11 6.98l4.355 3.84L3.13 16.6l5.046-3.735z"/>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
-                                <p class="mb-0">1 cleaning</p>
-                            </div>
-
-                        </div>
-
-                        <div class="modal-footer justify-content-start">
-                            <button class="btn btn-primary rounded-pill reschedule_button" data-bs-target="#scheduleServiceRequest" data-bs-toggle="modal" data-bs-dismiss="modal">Reschedule</button>
-                            <button class="btn btn-primary cancel_button rounded-pill" data-bs-target="#cancelServiceRequest" data-bs-toggle="modal" data-bs-dismiss="modal">Cancel</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="modal fade" id="scheduleServiceRequest" aria-hidden="true" aria-labelledby="serviceDetailsLabel2" tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered modal-sm">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title me-3" id="serviceDetailsLabel2">Reschedule Service Request</h4>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body ">
-                            <p class="m-1">Select New Date & Time</p>
-                            <form action="">
-                                <div class="d-flex mb-3">
-                                    <input type="date" class="datePicker">
-                                    <select class="timeSelect">
-                                        <option value="8:00">8:00</option>
-                                        <option value="8:00">8:30</option>
-                                        <option value="8:00">9:00</option>
-                                        <option value="8:00">9:30</option>
-                                        <option value="8:00">10:00</option>
-                                        <option value="8:00">10:30</option>
-                                    </select>
-                                </div>
-                                <button type="submit" class=" updateServiceButtton text-light rounded-pill border-0">Update </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="modal fade" id="cancelServiceRequest" aria-hidden="true" aria-labelledby="cancelServiceRequestLabel2" tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered modal-sm">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title me-3" id="cancelServiceRequestLabel2">Cancel Service Request</h4>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body ">
-                            <p class="mb-1">Why you want to cancel the service request?</p>
-                            <form action="" class="d-flex flex-column">
-                                <textarea type="text" class="whyToCancel mb-2" name="whyToCancel" maxlength="500" rows="3"></textarea>
-                                <button type="submit" class="cancelServiceButton text-light rounded-pill border-0">Cancel Now</button>
-                            </form>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -344,14 +203,6 @@
             </div>
         </div>
     </div>
-
-    <!-- <script src="./custDash.js"></script> -->
-    <!-- <script>
-        $(function () {
-            $("#footer").load("../footer.html");
-        });
-    </script> -->
-    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
 

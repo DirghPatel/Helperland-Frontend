@@ -47,7 +47,7 @@
 	<h1 class="police-tape police-tape--1">
 		&nbsp;&nbsp;&nbsp;&nbsp;Error:
 		403&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Error:
-		403&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Login To Continue
+		403&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Can't Enter
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Error:
 		403&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Error:
 		403&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Error:

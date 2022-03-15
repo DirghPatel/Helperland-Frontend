@@ -74,9 +74,7 @@
         </nav>
 
 		<div class="alert alert-danger alert-dismissible fade show d-none mx-4 mt-3"${displayLoginError} role="alert">
-		  
 		  ${loginErrorMessage }
-		  <%-- <% out.println(request.getAttribute("loginError")); %> --%>
 		  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 		</div>
 		
@@ -109,6 +107,7 @@
 				  ${alreadyUser } 
 				  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 				</div>
+				
                 <input type="hidden" id="userType" name="user_type_id" value="1">
                 <div class="row">
                     <div class="col-sm-6 mb-4">

@@ -113,33 +113,19 @@
                     </div>
                     <div>
                         <button class="navbar-toggler text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" aria-expanded="false" aria-label="Toggle navigation">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="40"
-                                height="40"
-                                fill="#fff"
-                                class="bi bi-list"
-                                viewBox="0 0 16 16"
-                                >
-                                <path
-                                    fill-rule="evenodd"
-                                    d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
-                                />
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="#fff" class="bi bi-list" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
                             </svg>
                         </button>
                     </div>   
                 </div>
             </div>
         </nav>
-
 	
         <div class="position-relative custDash_header d-flex align-items-center justify-content-center">
             <p class="m-0">Welcome, <span class="text-bold">${user.first_name }!</span></p>
         </div>
-
-
         <div class="custDash_main d-flex justify-content-between h-100 m-3">
-
             <!-- --------------- Sidebar -------------- -->
             <div class="dash_sidebar position-relative d-none d-lg-block d-xl-block">
                 <ul class="sidebar_inner mb-0">
@@ -160,10 +146,8 @@
                     </li>
                 </ul>
             </div>
-
             <!-- ------------------- Tables ------------------- -->
             <div class="dash_content">
-
                 <!-- ------- Dashboard -------- -->
                 <div id="dashBoardTable">
                     <div class="tableHead d-flex justify-content-between align-items-center mb-2">
@@ -185,7 +169,7 @@
                                 <th scope="col" width="95" class="text-center">
                                     Payment
                                 </th>
-                                <th scope="col" class="text-center" width="200">
+                                <th scope="col" class="text-center" width="220">
                                     Actions
                                 </th>
                             </tr>
@@ -229,9 +213,7 @@
 		                                        		</c:forEach>
 		                                            </p>
 		                                            <div class="d-flex align-items-center">
-		                                                
 		                   								<c:forEach items="${spRating}" var="spRating">
-													        
 													        <c:if test="${spRating.key == sr.service_provider_id }">
 													        	<c:if test="${spRating.value == 0}">
 													        		<span class="icon" id="icon1" style="color: #e1e1e1">★</span>
@@ -277,7 +259,6 @@
 													        	</c:if>	
 			                                                	<p class="mb-0">${spRating.value }</p>
 													        </c:if>
-													        
 													    </c:forEach>                          	
 		                                            </div>
 		                                        </div>
@@ -297,11 +278,9 @@
 	                            </tr>
                             
                             </c:forEach> 
-                            
                         </tbody>
                     </table>
                     <div class="pagination p12 d-flex align-items-center justify-content-between">
-                    	
                     	<div class="d-flex pg-768">
                     		<div class="d-flex">
 	                    		<p class="mb-0">Show &nbsp</p>
@@ -313,7 +292,6 @@
 	                    	</div>
 	                    	<p class="mb-0"> &nbsp Entries total record: ${service_requests.nrOfElements }</p>
                     	</div>		
-                    	
                     	<% 
 				        	String c = request.getParameter("count");
                     	 	if(c == null){
@@ -324,7 +302,6 @@
                     
 				        <ul>
 					        <li class="rounded-circle"><a id="firstPrev" href="/helperland/customer/dash?page=1&count=${c}" class="rounded-circle"> « </a></li>
-					        
 					        <li class="rounded-circle">
 					        	<a id="prevIcon" href="/helperland/customer/dash?page=<c:if test="${service_requests.page == 1 or service_requests.page == 0 }">1</c:if><c:if test="${service_requests.page > 1 }">${service_requests.page }</c:if>&count=${c}" class="rounded-circle" <c:if test = "${service_requests.page ==  0}">style = "pointer-events: none"</c:if>>  ‹ </a>
 					        </li>
@@ -342,30 +319,24 @@
 							</li>
 					        <li class="rounded-circle"><a id="nextIcon" href="/helperland/customer/dash?page=${service_requests.page + 2 }&count=${c}" class="rounded-circle" <c:if test = "${service_requests.page + 1 ==  service_requests.pageCount}">style = "pointer-events: none"</c:if>> › </a></li>
 					        <li class="rounded-circle"><a id="lastNext" href="/helperland/customer/dash?page=${service_requests.pageCount }&count=${c}" class="rounded-circle"> » </a></li>
-				        	
 				        </ul>
 				    </div>
                 </div>
             </div>
         </div>
-
-
         <div class="serviceDetailsPopUp">
-
             <div class="modal fade" id="serviceDetails" aria-hidden="true" aria-labelledby="serviceDetailsLabel" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered vertical-align-center">
                     <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="serviceDetailsLabel">Service Details</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="serviceDetailsLabel">Service Details</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
                         <div class="modal-body d-flex serviceDetailsModal p-2">
                             <div class="serviceModalLeft">
                                 <h4 id="sdDate"></h4>
                                 <p><b>Duration:</b>&nbsp<span id="sdDuration"></span></p>
-
                                 <hr>
-
                                 <p><b>Service Id:</b>&nbsp<span id="sdId"></span></p>
                                 <p><b>Extras:</b><span id="sdExtra"></span></p>
                                 <p><b>Net Amount:</b> <span class="table_payment fw-bolder" id="sdAmount"></span> </p>
@@ -407,9 +378,7 @@
                                 </div>
                                 <p class="mb-0" id="sdTotalCleanings"></p>
                             </div>
-
                         </div>
-
                         <div class="modal-footer justify-content-start">
                             <button class="btn text-white rounded-pill reschedule_button" data-bs-target="#scheduleServiceRequest" data-bs-toggle="modal" data-bs-dismiss="modal" id="rescheduleBtnModel" onclick="$('#rescheduleServiceReqId').val($(this).attr('data-spID'))">Reschedule</button>
                             <button class="btn text-white cancel_button rounded-pill" data-bs-target="#cancelServiceRequest" data-bs-toggle="modal" data-bs-dismiss="modal" id="cancelBtnModel" onclick="$('#cancelServiceReqId').val($(this).attr('data-spID'))">Cancel</button>
@@ -469,9 +438,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-        
-         
+        </div>   
     </div>
     
     <div id="footer" class="position-relative w-100 bottom-0">
@@ -524,15 +491,9 @@
             </div>
         </div>
     </div>
-    
-    
-        
-    
-    
     <script>
 	    $(document).ready(function(){
 	        var dtToday = new Date();
-	        
 	        var month = dtToday.getMonth() + 1;
 	        var day = dtToday.getDate() + 1;
 	        var year = dtToday.getFullYear();
@@ -554,19 +515,14 @@
     		<c:forEach var="sr" items="${service_requests.pageList }" varStatus="i">
     			
 	    		var d = new Date("${sr.service_start_date}");
-	    		console.log(d);
-				
 				var t1 = d.getHours()+"."+d.getMinutes();
 				var a = parseFloat("${sr.service_hours}") ;  
 				var b = parseFloat("${sr.extra_hours}");
 				var totalTime = a+b ; 
-				
 				var dt1 = ((d.getHours() * 60) + d.getMinutes()) / 60;
 				var dt2 = (dt1 + totalTime) * 60;
-				
 				var h1 = Math.floor(dt2 / 60);
 				var m1 = dt2 % 60;
-				
 				if(m1==0){
 					var time2 = h1 + ":00	";	
 					$("#endTime${i.index}").html(time2);
@@ -585,14 +541,12 @@
     
     	$("#count_select").on("change" , function(){
     		$("#firstPrev").attr("href" , '/helperland/customer/dash?page=1&count=' + $("#count_select").val());
-    		
     		document.getElementById("firstPrev").click(); 	
     	})
     	
     </script>
     
     <script>
-    
     	function myFunction(id){
     		console.log(id);
     		$.ajax({
@@ -601,10 +555,7 @@
 				data : id,
 				contentType : "application/json",
 				success : function(data) {
-						console.log(data);
-						
 						var d = new Date(data[0].service_start_date);
-						
 						var date1 = d.getDate() + "/" + (d.getMonth() + 1 ) + "/" + d.getFullYear();
 						if(d.getMinutes() == 0){
 							var time1 = d.getHours() + ":00" ;
@@ -627,8 +578,6 @@
 						else{
 							var time2 = h1 + ":" + m1;
 						}
-						
-						
 						$("#sdDate").html(date1 +" "+ time1 + "-" + time2); 
 						$("#sdDuration").html(data[0].service_hours + data[0].extra_hours + " hours");
 						$("#sdId").html(data[0].service_req_id);
@@ -643,8 +592,6 @@
 						}
 						
 						var extraServices = " ";
-						
-						console.log(data[2].cabinet);
 						
 						if(data[2].cabinet == 1){
 							extraServices = extraServices + " Inside Cabinets, ";
@@ -661,7 +608,6 @@
 						if(data[2].oven == 1){
 							extraServices = extraServices + " Inside Oven, ";
 						}
-						console.log(extraServices);
 						$("#sdExtra").html(extraServices);
 						
 						if(data[1].state != null){
@@ -710,20 +656,13 @@
 						}
 						
 						$("#sdTotalCleanings").html(data[5] + " cleanings");
-						
 						$("#rescheduleBtnModel").attr('data-spID' , data[0].service_req_id);
 						$("#cancelBtnModel").attr('data-spID' , data[0].service_req_id);
-						
-						console.log("fdsfd" + $("#rescheduleBtnModel").attr('data-spID'));
 				},
 				error : function(xhr, textStatus, xml) {
-					console.log("error");
-					console.log(xhr);
-					console.log(textStatus);
-					console.log(xml);
+					alert("Some error occured");
 				}
 			})
-    		
     	}
     	
     	
@@ -733,14 +672,10 @@
 				type : $(this).attr('method'),
 				data : $(this).serialize(),
 				success : function() {
-					console.log('success');
 					location.reload();
 				},
 				error : function(xhr, textStatus, xml) {
-					console.log("error");
-					console.log(xhr);
-					console.log(textStatus);
-					console.log(xml);
+					alert("Some error occured");
 				}
 			})
     	})
@@ -753,44 +688,29 @@
 			var date = moment(serviceDate + ' ' + serviceTime).format("YYYY-MM-DD HH:mm:ss.SSS");
 
 			var sdate = new Date(date);
-			console.log(date);
 			$("#service_start_date").val(sdate);
-
 		});
     	
     	$("#rescheduleReqForm").on("submit" , function(e){
     		
-    		e.preventDefault();
-    		
+    		e.preventDefault();	
     		$.ajax({
 				url : "service-reschedule",
 				type : "POST",
 				data : $(this).serialize(), 
 				success : function(data , xhr) {
-					console.log(data);
 					location.reload();
 				},
 				error : function(data) {
-					/* var d = data.responseText; 	 */
-					console.log(data.responseJSON[0]);
 					var date = new Date(data.responseJSON[1]);
 					var date2 = new Date(data.responseJSON[2]);
-					console.log(date);
 					if(data.responseJSON[0] == "conflict"){
-						/* $("#conflictError").html("Another service request has already been assigned to this service provider which has time overlap with this service request. You can’t pick this one!"); */
 						$("#conflictError").html("Another service request has been assigned to the service provider on " + date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear() + " from " + date.toLocaleTimeString('pt-BR')  +" to " + date2.toLocaleTimeString('pt-BR') + ". Either choose another date or pick up a different time slot.");
 					}
 				}
 			})
     	})
-    	
-    	
     </script>
-    
-    
-    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
-
 </body>
 </html>

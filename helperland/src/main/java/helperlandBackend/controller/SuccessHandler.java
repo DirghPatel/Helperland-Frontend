@@ -14,6 +14,7 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 
 import helperlandBackend.models.UserModel;
 import helperlandBackend.service.UserService;
@@ -23,8 +24,6 @@ public class SuccessHandler implements AuthenticationSuccessHandler {
 	@Autowired
 	UserService userService;
 	
-	
-
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
 		
@@ -33,7 +32,7 @@ public class SuccessHandler implements AuthenticationSuccessHandler {
 		
 		UserModel loggedInUser = userService.getUserByEmail(loggedInUserDetails.getUsername());
 		session.setAttribute("user", loggedInUser);
-		
+
 		Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
         if (roles.contains("ROLE_CUSTOMER")) {
             response.sendRedirect("customer/dash");

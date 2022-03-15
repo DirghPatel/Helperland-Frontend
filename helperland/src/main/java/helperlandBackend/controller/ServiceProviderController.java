@@ -544,7 +544,7 @@ public class ServiceProviderController {
 		this.serviceRequests.updateServiceRequestStatus(sr);
 		
 		UserModel customer = this.userService.getUserByUserId(sr.getUser_id());
-//		this.mainController.sendMail(customer.getEmail() , "Your Service Request #"+sr.getService_req_id()+" is cancelled by " + currentUser.getFirst_name() + " " + currentUser.getLast_name() + " because of " + cancelReq.getCancel_comment()+ " ." );
+//		this.mainController.sendMail(customer.getEmail() , "Your Service Request #"+sr.getService_req_id()+" is cancelled by " + currentUser.getFirst_name() + " " + currentUser.getLast_name() + " because of " + cancel_comment+ " ." );
 		
 		return new ResponseEntity<HttpStatus>(HttpStatus.OK);
 	}
@@ -564,7 +564,6 @@ public class ServiceProviderController {
 		
 		UserModel customer = this.userService.getUserByUserId(sr.getUser_id());
 //		this.mainController.sendMail(customer.getEmail() , "Your Service Request #"+sr.getService_req_id()+" has been completed by " + currentUser.getFirst_name() + " " + currentUser.getLast_name() + " ." );
-
 		return new ResponseEntity<HttpStatus>(HttpStatus.OK);
 	}
 	

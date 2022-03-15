@@ -886,7 +886,27 @@
 			</p>
 		</div>
 	</div>
+	
+	<a class="position-fixed back_to_top" >
+		<img src=" <c:url value = "/resources/assets/homepage/ic-bktop.svg" />" alt="">
+	</a>
 
+	<script>
+	
+		$(".back_to_top").on("click" , function(){
+			$(window).scrollTop(0);	
+		})
+		
+		$(window).on("scroll" , function(){
+			if($(window).scrollTop() > 60){
+				$(".back_to_top").show();
+			}
+			else{
+				$(".back_to_top").hide();	
+			}
+		})
+	
+	</script>
 	
     <script>
 	    $(document).ready(function(){

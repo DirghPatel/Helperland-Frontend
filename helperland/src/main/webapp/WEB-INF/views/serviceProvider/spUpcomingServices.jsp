@@ -9,8 +9,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<c:set var="sr" value="${service_requests }" />
-	<c:set var="u" value="${users }" />
+	<c:set var="service_requests" value="${service_requests }" />
+	<c:set var="users" value="${users }" />
 	<c:set var="srAddress" value="${srAddress }" />
 	<link href='<c:url value="/resources/css/spDash.css" />' rel="stylesheet" />
 	<link href='<c:url value="/resources/css/navbar-2.css" />' rel="stylesheet" />
@@ -35,9 +35,6 @@
                                 <p class="nav-link">Welcome,<br>${user.first_name } ${user.last_name }</p>
                             </div>
                             <div class="navcol_second navcol">
-                                <!-- <div class="nav-item nav_select1"  id="dashBoard1">
-                                    <a class="nav-link" href="#dashBoardTable">Dashboard</a>
-                                </div> -->
                                 <div class="nav-item nav_select1">
                                     <a class="nav-link" id="newServiceRequest1" href="dash">New Service Request</a>
                                 </div>
@@ -60,9 +57,6 @@
                                 <div class="nav-item nav_select1">
                                     <a class="nav-link" id="notification1" href="notification">Notification</a>
                                 </div>
-                                <!-- <div class="nav-item nav_select1">
-                                    <a class="nav-link">Invoice</a>
-                                </div> -->
                                 <div class="nav-item nav_select1">
                                     <a class="nav-link" href="mysettings">My Settings</a>
                                 </div>
@@ -125,18 +119,8 @@
                     </div>
                     <div>
                         <button class="navbar-toggler text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" aria-expanded="false" aria-label="Toggle navigation">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="40"
-                                height="40"
-                                fill="#fff"
-                                class="bi bi-list"
-                                viewBox="0 0 16 16"
-                                >
-                                <path
-                                    fill-rule="evenodd"
-                                    d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
-                                />
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="#fff" class="bi bi-list" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
                             </svg>
                         </button>
                     </div>   
@@ -152,9 +136,6 @@
         <div class="spDash_main d-flex justify-content-center h-100 m-3">
             <div class="dash_sidebar position-relative d-none d-lg-block d-xl-block">
                 <ul class="sidebar_inner">
-                    <!-- <li>
-                        <a class="text-light" aria-current="page" id="dashBoard" href="../ServiceProvider-Dash/spDash.html#dashBoardTable">Dashboard</a>
-                    </li> -->
                     <li>
                         <a id="newServiceRequest" class="text-light" href="dash">New Service Requests</a>
                     </li>
@@ -293,10 +274,8 @@
 							</li>
 					        <li class="rounded-circle"><a id="nextIcon" href="/helperland/service-provider/upcoming-services?page=${service_requests.page + 2 }&count=${c }" class="rounded-circle" <c:if test = "${service_requests.page + 1 ==  service_requests.pageCount}">style = "pointer-events: none"</c:if>> › </a></li>
 					        <li class="rounded-circle"><a id="lastNext" href="/helperland/service-provider/upcoming-services?page=${service_requests.pageCount }&count=${c }" class="rounded-circle"> » </a></li>
-				        	
 				        </ul>
 				    </div>
-                </div>
                 </div>
             </div>
         </div>
@@ -305,11 +284,10 @@
             <div class="modal fade" id="serviceDetails" aria-hidden="true" aria-labelledby="serviceDetailsLabel" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered vertical-align-center">
                     <div class="modal-content">
-                        <!-- <div class="modal-body"> -->
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="serviceDetailsLabel">Service Details</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="serviceDetailsLabel">Service Details</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
                         <div class="modal-body d-flex serviceDetailsModal p-2">
                             <div class="serviceModalLeft">
                                 <h4 id="sdDate"> </h4>
@@ -369,8 +347,7 @@
                 </div>
             </div>
         </div>
-    </div>
-
+	</div>
     <div id="footer" class="position-relative bottom-0 w-100">
 
         <div class="footer_section w-100">
@@ -430,8 +407,6 @@
     		<c:forEach var="sr" items="${service_requests.pageList }" varStatus="i">
     			
 	    		var d = new Date("${sr.service_start_date}");
-	    		console.log(d);
-				
 				var t1 = d.getHours()+"."+d.getMinutes();
 				var a = parseFloat("${sr.service_hours}") ;  
 				var b = parseFloat("${sr.extra_hours}");
@@ -457,13 +432,10 @@
     		let searchParams = new URLSearchParams(window.location.search);
 			let param = searchParams.get('count');
 			$("#count_select option[value = '" + param + "']").attr("selected" , true);
-			
-			
     	})
     
     	$("#count_select").on("change" , function(){
     		$("#firstPrev").attr("href" , '/helperland/service-provider/upcoming-services?page=1&count=' + $("#count_select").val());
-    	
     		document.getElementById("firstPrev").click();
 	    })
 	    	
@@ -476,14 +448,10 @@
 				type : $(this).attr('method'),
 				data : $(this).serialize(),
 				success : function() {
-					console.log('success');
 					location.reload();
 				},
 				error : function(xhr, textStatus, xml) {
-					console.log("error");
-					console.log(xhr);
-					console.log(textStatus);
-					console.log(xml);
+					alert("Some error occured");
 				}
 			})
 		});
@@ -495,14 +463,10 @@
 				data : id,
 				contentType : "application/json",
 				success : function() {
-					console.log('success');
 					location.reload();
 				},
 				error : function(xhr, textStatus, xml) {
-					console.log("error");
-					console.log(xhr);
-					console.log(textStatus);
-					console.log(xml);
+					alert("Some error occured");
 				}
 			})
 	    }
@@ -515,10 +479,7 @@
 				data : id,
 				contentType : "application/json",
 				success : function(data) {
-						console.log(data);
-						
 						var d = new Date(data[0].service_start_date);
-						
 						var date1 = d.getDate() + "/" + (d.getMonth()+1) + "/" + d.getFullYear();
 						if(d.getMinutes() == 0){
 							var time1 = d.getHours() + ":00" ;
@@ -542,7 +503,6 @@
 							var time2 = h1 + ":" + m1;
 						}
 						
-						
 						$("#sdDate").html(date1 +" "+ time1 + "-" + time2); 
 						$("#sdDuration").html(data[0].service_hours + data[0].extra_hours + " hours");
 						$("#sdId").html(data[0].service_req_id);
@@ -557,9 +517,6 @@
 						}
 						
 						var extraServices = " ";
-						
-						console.log(data[2].cabinet);
-						
 						if(data[2].cabinet == 1){
 							extraServices = extraServices + " Inside Cabinets, ";
 						}
@@ -575,7 +532,6 @@
 						if(data[2].oven == 1){
 							extraServices = extraServices + " Inside Oven, ";
 						}
-						console.log(extraServices);
 						$("#sdExtra").html(extraServices);
 						
 						if(data[1].state != null){
@@ -592,15 +548,10 @@
 						}
 				},
 				error : function(xhr, textStatus, xml) {
-					console.log("error");
-					console.log(xhr);
-					console.log(textStatus);
-					console.log(xml);
+					alert("Some error occured");
 				}
-			})
-    		
+			})	
     	}
-	    
     </script>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

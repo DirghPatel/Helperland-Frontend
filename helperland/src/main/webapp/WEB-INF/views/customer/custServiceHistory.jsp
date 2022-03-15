@@ -10,9 +10,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<c:set var="sr" value="${service_requests }" />
-	<c:set var="u" value="${users }" />
-	<%-- <c:set var="srAddress" value="${srAddress }" /> --%>
+	<c:set var="service_requests" value="${service_requests }" />
+	<c:set var="users" value="${users }" />
 	<c:set var="spRating" value="${spRating }" />
 	<link href='<c:url value="/resources/css/navbar-2.css" />' rel="stylesheet" />
 	<link href='<c:url value="/resources/css/custDash.css" />' rel="stylesheet" />
@@ -114,32 +113,17 @@
                     </div>
                     <div>
                         <button class="navbar-toggler text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" aria-expanded="false" aria-label="Toggle navigation">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="40"
-                                height="40"
-                                fill="#fff"
-                                class="bi bi-list"
-                                viewBox="0 0 16 16"
-                                >
-                                <path
-                                    fill-rule="evenodd"
-                                    d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
-                                />
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="#fff" class="bi bi-list" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
                             </svg>
                         </button>
                     </div>   
                 </div>
             </div>
         </nav>
-
-
-
         <div class="position-relative custDash_header d-flex align-items-center justify-content-center">
             <p class="m-0">Welcome, <span class="text-bold">${user.first_name }!</span></p>
         </div>
-
-
         <div class="custDash_main d-flex justify-content-between h-100 m-3">
 
             <!-- --------------- Sidebar -------------- -->
@@ -194,7 +178,6 @@
                         </thead>
                         <tbody>
 							<c:forEach var="sr" items="${service_requests.pageList }" varStatus = "i">
-							
 								<tr>
 	                                <td scope="row">${sr.service_req_id }</td>
 									<td class="service_date cursorPointer" href="#serviceDetails" data-bs-toggle="modal" id="${sr.service_req_id }" onclick="myFunction($(this).attr('id'))">
@@ -229,12 +212,8 @@
 		                                        			<c:if test="${u.user_id == sr.service_provider_id}"> ${u.first_name } ${u.last_name }</c:if>
 		                                        		</c:forEach>
 		                                            </p>		                                            
-		                                            
-		                                            
 		                                            <div class="d-flex align-items-center">
-		                                                
 		                   								<c:forEach items="${spRating}" var="spRating">
-													        
 													        <c:if test="${spRating.key == sr.service_provider_id }">
 													        	<c:if test="${spRating.value == 0}">
 													        		<span class="icon" id="icon1" style="color: #e1e1e1">★</span>
@@ -280,7 +259,6 @@
 													        	</c:if>	
 			                                                	<p class="mb-0">${spRating.value }</p>
 													        </c:if>
-													        
 													    </c:forEach>                          	
 		                                            </div>
 		                                        </div>
@@ -301,7 +279,6 @@
 		                                <c:if test="${sr.status == 3}">
 		                                    <p class="m-auto cust_statusCompleted text-light px-2 ">Completed</p>
 		                                </c:if>
-		                                
 		                            </td>
 	                                <td class="button_main text-center">
 	                                    <a class="rateSP_button rounded-pill cursor-pointer text-light text-decoration-none<c:if test="${sr.status == 0 or sr.status == 1 }"> disabledButton</c:if>" 
@@ -316,12 +293,9 @@
 	                            </tr>
 							
 							</c:forEach> 
-
-
                         </tbody>
                     </table>
                     <div class="pagination p12 d-flex align-items-center justify-content-between">
-                    	
                     	<div class="d-flex pg-768">
                     		<div class="d-flex">
 	                    		<p class="mb-0">Show &nbsp</p>
@@ -333,7 +307,6 @@
 	                    	</div>
 	                    	<p class="mb-0"> &nbsp Entries total record: ${service_requests.nrOfElements }</p>
                     	</div>		
-                    
                     	<% 
 				        	String c = request.getParameter("count");
                     	 	if(c == null){
@@ -350,19 +323,18 @@
 					        </li>
 					        <li class="rounded-circle">
 						        <c:forEach begin="1" end="${service_requests.pageCount}" step="1"  varStatus="tagStatus">
-									  <c:choose>
-										    <c:when test="${(service_requests.page + 1) == tagStatus.index}">
-										      	<span class="is-active rounded-circle">${tagStatus.index}</span>
-										    </c:when>
-										    <c:otherwise>                
-										     	<a class="pageNoTag rounded-circle" href="/helperland/customer/service-history?page=${tagStatus.index}&count=${c }">${tagStatus.index}</a>
-										    </c:otherwise>
-									  </c:choose>
+								  	<c:choose>
+									    <c:when test="${(service_requests.page + 1) == tagStatus.index}">
+									      	<span class="is-active rounded-circle">${tagStatus.index}</span>
+									    </c:when>
+									    <c:otherwise>                
+									     	<a class="pageNoTag rounded-circle" href="/helperland/customer/service-history?page=${tagStatus.index}&count=${c }">${tagStatus.index}</a>
+									    </c:otherwise>
+								  	</c:choose>
 								</c:forEach>
 							</li>
 					        <li class="rounded-circle"><a id="nextIcon" href="/helperland/customer/service-history?page=${service_requests.page + 2 }&count=${c }" class="rounded-circle" <c:if test = "${service_requests.page + 1 ==  service_requests.pageCount}">style = "pointer-events: none"</c:if>> › </a></li>
 					        <li class="rounded-circle"><a id="lastNext" href="/helperland/customer/service-history?page=${service_requests.pageCount }&count=${c }" class="rounded-circle"> » </a></li>
-				        	
 				        </ul>
 				    </div>
                 </div>
@@ -457,7 +429,6 @@
                 <div class="modal-dialog modal-dialog-centered modal-md">
                     <div class="modal-content">
                         <div class="modal-header border-0">
-                            <!-- <h4 class="modal-title me-3" id="rateSpModalLabel2"></h4> -->
                             <div class="d-flex modal-title me-3" id="rateSpModalLabel2">
                                 <div class="sp_icon me-2 rounded-circle d-flex align-items-center justify-content-center" >
                                     <img alt="" height="48" width="48" id="ratingModalIcon">
@@ -471,7 +442,6 @@
                                     	<span class="icon" id="icon4">★</span>
                                     	<span class="icon" id="icon5">★</span>
                                     </div>
-                                    
                                 </div>
                             </div>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -684,14 +654,10 @@
     		let searchParams = new URLSearchParams(window.location.search);
 			let param = searchParams.get('count');
 			$("#count_select option[value = '" + param + "']").attr("selected" , true);
-			
-			console.log($("#count_select").val());
-			
     	})
     	
    		$("#count_select").on("change" , function(){
    			$("#firstPrev").attr("href" , '/helperland/customer/service-history?page=1&count=' + $("#count_select").val());
-       	
     		document.getElementById("firstPrev").click();
     	})
     
@@ -708,7 +674,6 @@
             let k = ratingAvg;
             <c:set var="avg" value="ratingAvg" />
             $('input[name= stars0][value= ${avg}]').prop('checked' , true);
-            
             $("#ratingHiddenValue").val(ratingAvg);
         });
         
@@ -749,7 +714,7 @@
 					$("#ratingModalIcon").attr("src" ,  "/helperland/resources/assets/custDash/"  + data[0].user_profile_picture+ ".png "   )
 				},
 				error : function(xhr, textStatus, xml) {
-
+					alert("Some error occured");
 				}
 			}) 
         	
@@ -767,118 +732,117 @@
 				contentType : "application/json",
 				success : function(data) {
 						
-						var d = new Date(data[0].service_start_date);
-						
-						var date1 = d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear();
-						if(d.getMinutes() == 0){
-							var time1 = d.getHours() + ":00" ;
-						}
-						else{
-							var time1 = d.getHours() + ":" + d.getMinutes();	
-						}
-						var t1 = d.getHours()+"."+d.getMinutes();
-						var totalTime = data[0].service_hours + data[0].extra_hours;
-						
-						var dt1 = ((d.getHours() * 60) + d.getMinutes()) / 60;
-						var dt2 = (dt1 + totalTime) * 60;
-						
-						var h1 = Math.floor(dt2 / 60);
-						var m1 = dt2 % 60;
-						
-						if(m1==0){
-							var time2 = h1 + ":00	";		
-						}
-						else{
-							var time2 = h1 + ":" + m1;
-						}
-						
-						
-						$("#sdDate").html(date1 +" "+ time1 + "-" + time2); 
-						$("#sdDuration").html(data[0].service_hours + data[0].extra_hours + " hours");
-						$("#sdId").html(data[0].service_req_id);
-						$("#sdAmount").html(data[0].total_cost + ",00 $");
-						$("#sdComments").html(data[0].comments);
-						
-						if(data[0].has_pets == 0){
-							$("#sdPets").html("I don't have pets at home.");
-						}
-						else{
-							$("#sdPets").html("I have pets at home.");	
-						}
-						
-						var extraServices = " ";
-						
-						if(data[2].cabinet == 1){
-							extraServices = extraServices + " Inside Cabinets, ";
-						}
-						if(data[2].windows == 1){
-							extraServices = extraServices + " Interior Windows, ";
-						}
-						if(data[2].laundry == 1){
-							extraServices = extraServices + " Inside Wash, ";
-						}
-						if(data[2].refrigerator == 1){
-							extraServices = extraServices + " Inside Fridge, ";
-						}
-						if(data[2].oven == 1){
-							extraServices = extraServices + " Inside Oven, ";
-						}
+					var d = new Date(data[0].service_start_date);
 					
-						$("#sdExtra").html(extraServices);
+					var date1 = d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear();
+					if(d.getMinutes() == 0){
+						var time1 = d.getHours() + ":00" ;
+					}
+					else{
+						var time1 = d.getHours() + ":" + d.getMinutes();	
+					}
+					var t1 = d.getHours()+"."+d.getMinutes();
+					var totalTime = data[0].service_hours + data[0].extra_hours;
+					
+					var dt1 = ((d.getHours() * 60) + d.getMinutes()) / 60;
+					var dt2 = (dt1 + totalTime) * 60;
+					
+					var h1 = Math.floor(dt2 / 60);
+					var m1 = dt2 % 60;
+					
+					if(m1==0){
+						var time2 = h1 + ":00	";		
+					}
+					else{
+						var time2 = h1 + ":" + m1;
+					}
+					
+					$("#sdDate").html(date1 +" "+ time1 + "-" + time2); 
+					$("#sdDuration").html(data[0].service_hours + data[0].extra_hours + " hours");
+					$("#sdId").html(data[0].service_req_id);
+					$("#sdAmount").html(data[0].total_cost + ",00 $");
+					$("#sdComments").html(data[0].comments);
+					
+					if(data[0].has_pets == 0){
+						$("#sdPets").html("I don't have pets at home.");
+					}
+					else{
+						$("#sdPets").html("I have pets at home.");	
+					}
+					
+					var extraServices = " ";
+					
+					if(data[2].cabinet == 1){
+						extraServices = extraServices + " Inside Cabinets, ";
+					}
+					if(data[2].windows == 1){
+						extraServices = extraServices + " Interior Windows, ";
+					}
+					if(data[2].laundry == 1){
+						extraServices = extraServices + " Inside Wash, ";
+					}
+					if(data[2].refrigerator == 1){
+						extraServices = extraServices + " Inside Fridge, ";
+					}
+					if(data[2].oven == 1){
+						extraServices = extraServices + " Inside Oven, ";
+					}
+				
+					$("#sdExtra").html(extraServices);
+					
+					if(data[1].state != null){
+						$("#sdAddress").html(" "+data[1].address_line1 + " " + data[1].address_line2 + ", "+data[1].postal_code +" "+data[1].city+" "+data[1].state);
+					}
+					if(data[1].state == null){
+						$("#sdAddress").html(" "+data[1].address_line1 + " " + data[1].address_line2 + ", "+data[1].postal_code +" "+data[1].city);
+					}
+					if(data[1].mobile != null){
+						$("#sdPhone").html(" "+data[1].mobile);
+					}
+					if(data[1].email != null){
+						$("#sdEmail").html(" "+data[1].email);
+					}
+					
+					if(data[0].user_id == data[0].service_provider_id){
+						$("#spDetailsRight").hide();
+						$("#sdTotalCleanings").hide();
+					}	
+					else{
+						$("#sdTotalCleanings").show();
+						$("#spDetailsRight").show();
+						$("#sdServiceProvider").html(data[3].first_name + " " + data[3].last_name);
+						$("#serviceModalIcon").attr("src" , "/helperland/resources/assets/custDash/"  + data[3].user_profile_picture+ ".png "   );
+					}
+					
+					if(data[4] == 0){
+						$("#icon1d ,#icon2d , #icon3d , #icon4d , #icon5d").css("color" , "#e1e1e1");
+					}
+					if(data[4] == 1){
+						$("#icon2d , #icon3d , #icon4d , #icon5d").css("color" , "#e1e1e1");
+						$("#icon1d").css("color" , "#ECB91C");
 						
-						if(data[1].state != null){
-							$("#sdAddress").html(" "+data[1].address_line1 + " " + data[1].address_line2 + ", "+data[1].postal_code +" "+data[1].city+" "+data[1].state);
-						}
-						if(data[1].state == null){
-							$("#sdAddress").html(" "+data[1].address_line1 + " " + data[1].address_line2 + ", "+data[1].postal_code +" "+data[1].city);
-						}
-						if(data[1].mobile != null){
-							$("#sdPhone").html(" "+data[1].mobile);
-						}
-						if(data[1].email != null){
-							$("#sdEmail").html(" "+data[1].email);
-						}
-						
-						if(data[0].user_id == data[0].service_provider_id){
-							$("#spDetailsRight").hide();
-							$("#sdTotalCleanings").hide();
-						}	
-						else{
-							$("#sdTotalCleanings").show();
-							$("#spDetailsRight").show();
-							$("#sdServiceProvider").html(data[3].first_name + " " + data[3].last_name);
-							$("#serviceModalIcon").attr("src" , "/helperland/resources/assets/custDash/"  + data[3].user_profile_picture+ ".png "   );
-						}
-						
-						if(data[4] == 0){
-							$("#icon1d ,#icon2d , #icon3d , #icon4d , #icon5d").css("color" , "#e1e1e1");
-						}
-						if(data[4] == 1){
-							$("#icon2d , #icon3d , #icon4d , #icon5d").css("color" , "#e1e1e1");
-							$("#icon1d").css("color" , "#ECB91C");
-							
-						}
-						if(data[4] == 2){
-							$("#icon3d , #icon4d , #icon5d").css("color" , "#e1e1e1");
-							$("#icon1d , #icon2d").css("color" , "#ECB91C");
-						}
-						if(data[4] == 3){
-							$("#icon4d , #icon5d").css("color" , "#e1e1e1");
-							$("#icon1d , #icon2d , #icon3d").css("color" , "#ECB91C");
-						}
-						if(data[4] == 4){
-							$("#icon5d").css("color" , "#e1e1e1");
-							$("#icon1d , #icon2d , #icon3d , #icon4d").css("color" , "#ECB91C");
-						}
-						
-						$("#sdTotalCleanings").html(data[5] + " cleanings");
-						
-						$("#rescheduleBtnModel").attr('data-spID' , data[0].service_req_id);
-						$("#cancelBtnModel").attr('data-spID' , data[0].service_req_id);
+					}
+					if(data[4] == 2){
+						$("#icon3d , #icon4d , #icon5d").css("color" , "#e1e1e1");
+						$("#icon1d , #icon2d").css("color" , "#ECB91C");
+					}
+					if(data[4] == 3){
+						$("#icon4d , #icon5d").css("color" , "#e1e1e1");
+						$("#icon1d , #icon2d , #icon3d").css("color" , "#ECB91C");
+					}
+					if(data[4] == 4){
+						$("#icon5d").css("color" , "#e1e1e1");
+						$("#icon1d , #icon2d , #icon3d , #icon4d").css("color" , "#ECB91C");
+					}
+					
+					$("#sdTotalCleanings").html(data[5] + " cleanings");
+					
+					$("#rescheduleBtnModel").attr('data-spID' , data[0].service_req_id);
+					$("#cancelBtnModel").attr('data-spID' , data[0].service_req_id);
 						
 				},
 				error : function(xhr, textStatus, xml) {
-					
+					alert("Some error occured");
 				}
 			})
     		
@@ -891,28 +855,21 @@
 		
 		$("#mainRatingForm").on("submit", function(e) {
 
-
 			e.preventDefault();
 			$.ajax({
 				url : $("#mainRatingForm").attr('action'),
 				type : $("#mainRatingForm").attr('method'),
 				data : $("#mainRatingForm").serialize(),
 				success : function(data , xhr) {
-				
 					location.reload();
-					
 				},
 				error : function(xhr, textStatus, xml) {
-					
-					
-
+					alert("Some error occured");
 				}
 			}) 
 		})
 	</script>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
-
 </body>
 </html>

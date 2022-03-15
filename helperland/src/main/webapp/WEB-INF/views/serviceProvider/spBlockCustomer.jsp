@@ -3,7 +3,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,13 +31,9 @@
                                 <p class="nav-link">Welcome,<br>${user.first_name } ${user.last_name }</p>
                             </div>
                             <div class="navcol_second navcol">
-                                <!-- <div class="nav-item nav_select1"  id="dashBoard1">
-                                    <a class="nav-link" href="#dashBoardTable">Dashboard</a>
-                                </div> -->
                                 <div class="nav-item nav_select1">
                                     <a class="nav-link" id="newServiceRequest1" href="dash">New Service Request</a>
                                 </div>
-            
                                 <div class="nav-item nav_select1">
                                     <a class="nav-link" id="upcomingServices1" href="upcoming-services">Upcoming Services</a>
                                 </div>
@@ -57,9 +52,6 @@
                                 <div class="nav-item nav_select1">
                                     <a class="nav-link" id="notification1" href="notification">Notification</a>
                                 </div>
-                                <!-- <div class="nav-item nav_select1">
-                                    <a class="nav-link">Invoice</a>
-                                </div> -->
                                 <div class="nav-item nav_select1">
                                     <a class="nav-link" href="mysettings">My Settings</a>
                                 </div>
@@ -123,18 +115,8 @@
                     </div>
                     <div>
                         <button class="navbar-toggler text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" aria-expanded="false" aria-label="Toggle navigation">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="40"
-                                height="40"
-                                fill="#fff"
-                                class="bi bi-list"
-                                viewBox="0 0 16 16"
-                                >
-                                <path
-                                    fill-rule="evenodd"
-                                    d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
-                                />
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="#fff" class="bi bi-list" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
                             </svg>
                         </button>
                     </div>   
@@ -142,7 +124,6 @@
             </div>
         </nav>
         
-
         <div class="position-relative spDash_header d-flex align-items-center justify-content-center">
             <p class="m-0">Welcome, <span class="text-bold">${user.first_name }!</span></p>
         </div>
@@ -150,9 +131,6 @@
         <div class="spDash_main d-flex justify-content-center h-100 m-3">
             <div class="dash_sidebar position-relative d-none d-lg-block d-xl-block">
                 <ul class="sidebar_inner">
-                    <!-- <li>
-                        <a class="text-light" aria-current="page" id="dashBoard" href="../ServiceProvider-Dash/spDash.html#dashBoardTable">Dashboard</a>
-                    </li> -->
                     <li>
                         <a id="newServiceRequest" class="text-light" href="dash">New Service Requests</a>
                     </li>
@@ -186,55 +164,25 @@
 	                                <img src="<c:url value = "/resources/assets/spDash/${u.user_profile_picture }.png" />" >
 	                            </div>
 	                            <p class="mb-3">${u.first_name } ${u.last_name }</p>
-	                            
-	                           	<%-- <c:forEach var="blocked" items="${blocked }"> --%>
-	                            	
-		                            <%-- <c:choose>
-		                            	<c:when test="${blocked.target_user_id == u.user_id }">
-		                            		<c:if test="${blocked.is_blocked == 1 }">
+                            	<c:if test = "${fn:contains(blockedId, u.user_id)}">
+	                            	<c:forEach var="blocked" items="${blocked }">
+	                            		<c:if test="${blocked.target_user_id == u.user_id }">
+	                            			<c:if test="${blocked.is_blocked == 1 }">
 		                            			<div class="btn block_button text-white rounded-pill" data-favblockId = "${blocked.target_user_id }" onclick="unblockFunction($(this).attr('data-favblockId'))">Unblock</div>		
 		                            		</c:if>
 		                            		<c:if test="${blocked.is_blocked == 0 }">
 		                            			<div class="btn block_button text-white rounded-pill" data-favblockId = "${blocked.target_user_id }" onclick="blockFunction($(this).attr('data-favblockId'))">Block</div>		
-		                            		</c:if>		
-		                            	</c:when>
-		                            	
-		                            	<c:otherwise>
-	                            			<div class="btn block_button text-white rounded-pill" data-favblockId = "${u.user_id }" onclick="blockFunction($(this).attr('data-favblockId'))">Block</div>
-	                            		</c:otherwise>
-	                            	</c:choose>  --%>
-	                            	
-		                            	<%-- <c:if test="${blocked.target_user_id == u.user_id }">
-		                            		<c:if test="${blocked.is_blocked == 1 }">
-		                            			<div class="btn block_button text-white rounded-pill" data-favblockId = "${blocked.target_user_id }" onclick="unblockFunction($(this).attr('data-favblockId'))">Unblock</div>		
-		                            		</c:if>
-		                            		<c:if test="${blocked.is_blocked == 0 }">
-		                            			<div class="btn block_button text-white rounded-pill" data-favblockId = "${blocked.target_user_id }" onclick="blockFunction($(this).attr('data-favblockId'))">Block</div>		
-		                            		</c:if>		
-		                            	</c:if> --%>
-		                            	<c:if test = "${fn:contains(blockedId, u.user_id)}">
-			                            	<c:forEach var="blocked" items="${blocked }">
-			                            		<c:if test="${blocked.target_user_id == u.user_id }">
-			                            			<c:if test="${blocked.is_blocked == 1 }">
-				                            			<div class="btn block_button text-white rounded-pill" data-favblockId = "${blocked.target_user_id }" onclick="unblockFunction($(this).attr('data-favblockId'))">Unblock</div>		
-				                            		</c:if>
-				                            		<c:if test="${blocked.is_blocked == 0 }">
-				                            			<div class="btn block_button text-white rounded-pill" data-favblockId = "${blocked.target_user_id }" onclick="blockFunction($(this).attr('data-favblockId'))">Block</div>		
-				                            		</c:if>	
-			                            		</c:if>
-			                            	</c:forEach>	
+		                            		</c:if>	
 	                            		</c:if>
-		                            	<c:if test = "${!fn:contains(blockedId, u.user_id)}">
-	                            			<div class="btn block_button text-white rounded-pill" data-favblockId = "${u.user_id }" onclick="blockFunction($(this).attr('data-favblockId'))">Block</div>
-	                            		</c:if>
-	                            	
-	                            <%-- </c:forEach>  --%>
+	                            	</c:forEach>	
+                           		</c:if>
+                            	<c:if test = "${!fn:contains(blockedId, u.user_id)}">
+                           			<div class="btn block_button text-white rounded-pill" data-favblockId = "${u.user_id }" onclick="blockFunction($(this).attr('data-favblockId'))">Block</div>
+                           		</c:if>
 	                        </div>
                         </c:forEach>
-
                     </div>
                     <div class="pagination p12 d-flex align-items-center justify-content-between">
-                    	
                     	<div class="d-flex pg-768">
                     		<div class="d-flex">
 	                    		<p class="mb-0">Show &nbsp</p>
@@ -261,24 +209,20 @@
 					        <li class="rounded-circle">
 					        	<a id="prevIcon" href="/helperland/service-provider/block-customer?page=<c:if test="${users.page == 1 or users.page == 0 }">1</c:if><c:if test="${users.page > 1 }">${users.page }</c:if>&count=${c}" class="rounded-circle" <c:if test = "${users.page ==  0}">style = "pointer-events: none"</c:if>>  ‹ </a>
 					        </li>
-					        
-					       
-					        
 					        <li class="rounded-circle">
 						        <c:forEach begin="1" end="${users.pageCount}" step="1"  varStatus="tagStatus">
-									  <c:choose>
-										    <c:when test="${(users.page + 1) == tagStatus.index}">
-										      	<span class="is-active rounded-circle">${tagStatus.index}</span>
-										    </c:when>
-										    <c:otherwise>                
-										     	<a class="pageNoTag rounded-circle" href="/helperland/service-provider/block-customer?page=${tagStatus.index}&count=${c}" id="${tagStatus.index }">${tagStatus.index}</a>
-										    </c:otherwise>
-									  </c:choose>
+								 	 <c:choose>
+									    <c:when test="${(users.page + 1) == tagStatus.index}">
+									      	<span class="is-active rounded-circle">${tagStatus.index}</span>
+									    </c:when>
+									    <c:otherwise>                
+									     	<a class="pageNoTag rounded-circle" href="/helperland/service-provider/block-customer?page=${tagStatus.index}&count=${c}" id="${tagStatus.index }">${tagStatus.index}</a>
+									    </c:otherwise>
+								  	</c:choose>
 								</c:forEach>
 							</li>
 					        <li class="rounded-circle"><a id="nextIcon" href="/helperland/service-provider/block-customer?page=${users.page + 2 }&count=${c}" class="rounded-circle" <c:if test = "${users.page + 1 ==  users.pageCount}">style = "pointer-events: none"</c:if>> › </a></li>
 					        <li class="rounded-circle"><a id="lastNext" href="/helperland/service-provider/block-customer?page=${users.pageCount }&count=${c}" class="rounded-circle"> » </a></li>
-				        	
 				        </ul>
 				    </div>
                 </div>
@@ -291,11 +235,10 @@
             <div class="modal fade" id="serviceDetails" aria-hidden="true" aria-labelledby="serviceDetailsLabel" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered vertical-align-center">
                     <div class="modal-content">
-                        <!-- <div class="modal-body"> -->
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="serviceDetailsLabel">Service Details</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="serviceDetailsLabel">Service Details</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
                         <div class="modal-body d-flex serviceDetailsModal p-2">
                             <div class="serviceModalLeft">
                                 <h4>22/12/2021 09:00 -14:30</h4>
@@ -389,14 +332,7 @@
             </div>
         </div>
     </div>
-    
-    <!-- <script src="./spDash.js"></script> -->
-    <!-- <script>
-        $(function () {
-            $("#footer").load("../footer.html");
-        });
-    </script> -->
-    
+   
     <script>
     
 		$(document).ready(function() {
@@ -404,72 +340,51 @@
 			let searchParams = new URLSearchParams(window.location.search);
 			let param = searchParams.get('count');
 			$("#count_select option[value = '" + param + "']").attr("selected" , true);
-			
-			console.log($("#count_select").val());
-			console.log($(".pageNoTag").attr("id"));
 			$("#prevIcon").attr("href" , '/helperland/service-provider/block-customer?page='+<c:if test="${users.page ==0 }">1</c:if><c:if test="${users.page >1 }">${users.page }</c:if>+'&count='+$("#count_select").val()); 
 			$("#nextIcon").attr("href" , '/helperland/service-provider/block-customer?page=${users.page + 2 }&count=' + $("#count_select").val());
 			$("#lastNext").attr("href" , '/helperland/service-provider/block-customer?page=${users.pageCount}&count=' + $("#count_select").val());
 			$("#firstPrev").attr("href" , '/helperland/service-provider/block-customer?page=1&count=' + $("#count_select").val());    		
-			
 		})
 		
 		$("#count_select").on("change" , function(){
        		$("#firstPrev").attr("href" , '/helperland/service-provider/block-customer?page=1&count=' + $("#count_select").val());
-       	
     		document.getElementById("firstPrev").click();
     	})
-    
     </script>
     
     <script>
     
 	    function blockFunction(id){
-	    	console.log("block called");
-			
+	    	
 			$.ajax({
 				url : 'favblock-block',
 				type : 'POST',
 				data : id,
 				contentType : "application/json",
 				success : function(data) {
-					console.log("accept");
 					location.reload();
 				},
 				error : function(xhr, textStatus, xml) {
-					console.log("error");
-					console.log(xhr);
-					console.log(textStatus);
-					console.log(xml);
+					alert("Some error occured");
 				}
 			})
-			
 		}
     
     	function unblockFunction(target_id){
-    		
-    		console.log(target_id);
-    		console.log("unblock called");
-
-   			$.ajax({
+    
+    		$.ajax({
    				url : 'favblock-unblock',
    				type : 'POST',
    				data : target_id,
    				contentType : "application/json",
    				success : function(data) {
-   					console.log("asa");
    					location.reload(); 
    				},
    				error : function(xhr, textStatus, xml) {
-   					console.log("error");
-   					console.log(xhr);
-   					console.log(textStatus);
-   					console.log(xml);
+   					alert("Some error occured");
    				}
    			})
-    		
     	}
-    
     </script>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

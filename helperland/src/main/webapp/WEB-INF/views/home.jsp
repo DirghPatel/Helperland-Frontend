@@ -341,7 +341,7 @@
 		
 	</div>
     
-    <div class="container-fluid main position-relative" style="<c:if test="${user_type_id  == 1 || user_type_id == 2}">margin-top: -70px !important;</c:if>">
+    <div class="container-fluid main position-relative" style="<c:if test="${user_type_id  == 1 || user_type_id == 2}">margin-top: -62px !important;</c:if>">
         
         <div class="main_content text-light" id="main_content">
             <h1>Do not feel like housework?</h1>

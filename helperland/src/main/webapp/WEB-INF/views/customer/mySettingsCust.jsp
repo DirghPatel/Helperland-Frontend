@@ -109,18 +109,8 @@
                     </div>
                     <div>
                         <button class="navbar-toggler text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" aria-expanded="false" aria-label="Toggle navigation">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="40"
-                                height="40"
-                                fill="#fff"
-                                class="bi bi-list"
-                                viewBox="0 0 16 16"
-                                >
-                                <path
-                                    fill-rule="evenodd"
-                                    d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
-                                />
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="#fff" class="bi bi-list" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
                             </svg>
                         </button>
                     </div>   
@@ -131,8 +121,6 @@
         <div class="position-relative custDash_header d-flex align-items-center justify-content-center">
             <p class="m-0">Welcome, <span class="text-bold">${user.first_name }!</span></p>
         </div>
-
-
         <div class="custDash_main d-flex justify-content-between h-100 m-3">
 
             <!-- --------------- Sidebar -------------- -->
@@ -185,8 +173,6 @@
                     </li>
                 </ul>
                 <div class="tab-content mt-3" id="myTabContent" >
-
-
                     <!-- ------- my details ---------  -->
                     <div class="tab-pane fade show active" id="myDetailsTab" role="tabpanel" aria-labelledby="myDetails">
                         <form class="row" method="post" action="update-mydetails">
@@ -220,8 +206,7 @@
                                 </div>
                                 <small class="text-danger">${errorInMobile }</small>
                             </div>
-                            
-                            
+                             
                             <div class="col-sm-4 mb-4">
                                 <div class="form-group">
                                     <div class="d-flex flex-column">
@@ -446,7 +431,6 @@
                                 </tbody>
                             </table>
                             <a href="#addNewAddressModal" data-bs-toggle="modal" role="button" class="btn reschedule_button text-light rounded-pill">Add New address </a>
-                            <!-- <a href="#cancelServiceRequest" data-bs-toggle="modal" role="button" class="cancel_button rounded-pill text-light text-decoration-none">Cancel</a> -->
                         </div>
 
                         <div class="modal fade" id="addNewAddressModal" aria-hidden="true" aria-labelledby="addNewAddressModalLabel2" tabindex="-1">
@@ -482,8 +466,6 @@
                                                         <label for="city">City</label>
                                                         <div class="d-inline-block">
                                                             <input name="city" placeholder="City" required class="minheight46 borderlight paddinginside w-100" />
-                                                                <!-- <option value="troisdorf" >Troisdorf</option> -->
-                                                            <!-- </select> -->
                                                         </div>
                                                     </div>
                                                 </div>
@@ -540,8 +522,6 @@
                                                         <label for="city">City</label>
                                                         <div class="d-inline-block">
                                                             <input name="city" id="editAddressCity" placeholder="City" class="minheight46 borderlight paddinginside w-100" />
-                                                                <!-- <option value="troisdorf" >Troisdorf</option> -->
-                                                            <!-- </select> -->
                                                         </div>
                                                     </div>
                                                 </div>
@@ -552,7 +532,6 @@
                                                             <input type="text" name="phonecode" class="borderlight minheight46 paddinginside" value="+91" disabled style="max-width: 55px;">
                                                             <input type="text" placeholder="Phone Number" id="editAddressMobile" name="mobile" class="borderlight minheight46 paddinginside">
                                                         </div>
-                                                        <form:errors path="mobile" />
                                                     </div>
                                                 </div>
                                                 <small id="editAddressError" class="text-danger mb-2"></small>
@@ -576,19 +555,16 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body ">
-                                        <!-- <form action="" onsubmit=""> -->
                                         <div>
                                             <p class="mb-3 color646464">Are You sure you want to delete this address?</p>
                                             <button class="mt-2 greenButton rounded-pill borderlight text-light px-3 paddinginside" id="confirmDeleteBtn">
                                                 Delete	
                                             </button>
                                         </div>
-                                        <!-- </form> -->
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
 
                     <!-- ----------- change password ----------- -->
@@ -617,9 +593,7 @@
                     </div>
                 </div>
             </div>
-
         </div>
-
     </div>
     
     <div id="footer" class="position-relative w-100 bottom-0">
@@ -680,14 +654,11 @@
 	    $(document).ready(function(){
 	    	
 	    	$("#firstname , #lastname , #emailaddress , #mobilenumber , #birthdate , #birthmonth , #birthyear").on("change" , function(){
-	    		
 	    		$("#myDetailsSaveBtn").removeAttr('disabled');
-	    		
 	    	})
 	    	
 	    	<c:if test="${user.date_of_birth != null}">
 		    	var dt = new Date(`${user.date_of_birth}`);
-		    	console.log(dt);
 		    	var dtDate = dt.getDate();
 		    	var dtMonth = dt.getMonth() + 1;
 		    	var dtYear = dt.getFullYear();
@@ -700,17 +671,14 @@
 		    	$("#birthdate").on('change' , function(){
 					dt.setDate($("#birthdate").val());
 					$("#date_of_birth").val(dt);
-					console.log(dt);
 				})
 				$("#birthmonth").on('change' , function(){
 					dt.setMonth($("#birthmonth").val() - 1);
 					$("#date_of_birth").val(dt);
-					console.log(dt);
 				})
 				$("#birthyear").on('change' , function(){
 					dt.setYear($("#birthyear").val());
 					$("#date_of_birth").val(dt);
-					console.log(dt);
 				})
 	    	</c:if>
 	    	<c:if test="${user.date_of_birth == null}">
@@ -719,7 +687,6 @@
 	    		var date3;
 		    	$("#birthdate").on('change' , function(){
 					date1 = $("#birthdate").val();
-					
 				})
 				$("#birthmonth").on('change' , function(){
 					date2 = $("#birthmonth").val();
@@ -730,41 +697,12 @@
 				
 				$("#myDetailsSaveBtn").on('click' , function(){
 					var dt = new Date();
-			    	console.log(dt);
 			    	dt.setDate(date1);
 			    	dt.setMonth(date2 - 1);
 			    	dt.setYear(date3);
-			    	$("#date_of_birth").val(dt);
-			    	console.log(dt);	
+			    	$("#date_of_birth").val(dt);	
 				})
-				
 	    	</c:if>
-	    	/* var dt = new Date(`${user.date_of_birth}`);
-	    	console.log(dt);
-	    	var dtDate = dt.getDate();
-	    	var dtMonth = dt.getMonth() + 1;
-	    	var dtYear = dt.getFullYear();
-	    	$("#date_of_birth").val(dt);
-	    	
-	    	$("#birthdate option[value = '" + dtDate + "']").attr('selected' , true);
-	    	$("#birthmonth option[value = '" + dtMonth + "']").attr('selected' , true);
-	    	$("#birthyear option[value = '" + dtYear + "']").attr('selected' , true); 
-	    
-			$("#birthdate").on('change' , function(){
-				dt.setDate($("#birthdate").val());
-				$("#date_of_birth").val(dt);
-				console.log(dt);
-			})
-			$("#birthmonth").on('change' , function(){
-				dt.setMonth($("#birthmonth").val() - 1);
-				$("#date_of_birth").val(dt);
-				console.log(dt);
-			})
-			$("#birthyear").on('change' , function(){
-				dt.setYear($("#birthyear").val());
-				$("#date_of_birth").val(dt);
-				console.log(dt);
-			}) */
 	    })
 		
 	</script>
@@ -786,9 +724,6 @@
 	        	$('#changePasswordBtn').attr('disabled' , true);	
 	        }
 	    });
-	    
-	    
-	    
 	    var dt = new Date();
 		
 	    var t = moment(new Date()).format("YYYY/MM/DD HH:mm:ss");
@@ -798,19 +733,6 @@
 	<script>
 	
 		function editAddressFunction(id){
-			
-			/* console.log(id);
-			
-			<c:forEach var="address" items="${addresses }">
-				if(${address.address_id} == id){
-					$("#editAddress1").val("${address.address_line1}");
-					$("#editAddress2").val("${address.address_line2}");
-					$("#editAddressPC").val("${address.postal_code}");
-					$("#editAddressMobile").val("${address.mobile}");
-					$("#editAddressCity").val("${address.city}");
-					$("#editAddressFormId").val("${address.address_id}");
-				}
-			</c:forEach> */
 	
 				$.ajax({
 					type : "POST",
@@ -828,7 +750,7 @@
 						$("#editAddressFormId").val(data.address_id);
 					},
 					error : function(xml, textStatus, xhr) {
-						console.log("error");
+						alert("Some error occured");
 					}
 				});
 			
@@ -837,13 +759,11 @@
 		
 		function deleteAddressFunction(id){
 			$("#confirmDeleteBtn").attr('data-addressId' , id);
-			console.log($("#confirmDeleteBtn").attr('data-addressId'));
 		}
 		
 		$("#confirmDeleteBtn").on("click" , function(){
 			
 			var id = $("#confirmDeleteBtn").attr('data-addressId');  
-			console.log(id);
 	
 			$.ajax({
 				type : "POST",
@@ -853,12 +773,10 @@
 				crossDomain : true,
 				success : function() {
 					$("#deleteAdressModal").modal('hide');
-					/* $("#myAddressesTab").load(location.href+" #myAddressesTab>*",""); */
-					
 					$("#myAddressesTable").load(location.href+" #myAddressesTable>*",""); 
 				},
 				error : function(xml, textStatus, xhr) {
-					console.log("error");
+					alert("Some error occured");
 				}
 			});
 			
@@ -868,26 +786,17 @@
 		$("#addNewAddressForm").submit(function addnewAddressFun(e) {
 	
 			$(this).find('input[type=checkbox]:checked').val(1);
-			
-	
-			console.log($(this).serialize());
 			e.preventDefault();
 			$.ajax({
 				url : $(this).attr('action'),
 				type : $(this).attr('method'),
 				data : $(this).serialize(),
 				success : function(data , xhr) {
-					
 					$("#addNewAddressModal").modal('hide');
-					/* $("#myAddressesTab").load(location.href+" #myAddressesTab>*",""); */
-					/* location.reload(); */
 					$("#myAddressesTable").load(location.href+" #myAddressesTable>*",""); 
-					 
 				},
 				error : function(xhr, textStatus, xml) {
-					console.log("error");
 					$("#addAddressError").html("Please enter all fields to add."); 
-					
 				}
 			})
 		})
@@ -895,25 +804,16 @@
 		$("#editAddressForm").submit(function editAddressFun(e) {
 	
 			$(this).find('input[type=checkbox]:checked').val(1);
-			
-	
-			console.log($(this).serialize());
 			e.preventDefault();
 			$.ajax({
 				url : $(this).attr('action'),
 				type : $(this).attr('method'),
 				data : $(this).serialize(),
 				success : function(data , xhr) {
-					
 					$("#editAddressModal").modal('hide');
-					$("#myAddressesTable").load(location.href+" #myAddressesTable>*",""); 
-					/* location.reload(); */
-					/* $("#myAddressesTabController").click(); */
-					/* document.getElementById("myAddressesTabController").click(); */
-					 
+					$("#myAddressesTable").load(location.href+" #myAddressesTable>*",""); 	 
 				},
 				error : function(xhr, textStatus, xml) {
-					console.log("error");
 					$("#editAddressError").html("Please enter all fields to update."); 
 				}
 			})
@@ -926,8 +826,6 @@
 				type : $(this).attr('method'),
 				data : $(this).serialize(),
 				success : function(data , xhr) {
-					
-					console.log("changed");
 					if(data == 'different'){
 						$("#differentPassword").html("Please enter same passwords!");
 					}
@@ -947,14 +845,6 @@
 				}
 			})	
 		})
-		
 	</script>
-	
-	<script>
-		
-	</script>
-	
-	
-
 </body>
 </html>

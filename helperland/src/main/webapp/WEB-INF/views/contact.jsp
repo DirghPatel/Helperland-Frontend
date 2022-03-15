@@ -11,32 +11,23 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<c:set var="user_type_id" value="${user.user_type_id }" />
-	
-	<%-- <link href="<c:url value="/resources/css/navbar.css" />" rel="stylesheet" /> --%>
-		
 	<c:if test="${user_type_id == 1 }">
-		<link href="<c:url value="/resources/css/navbar-2.css" />"
-		rel="stylesheet" />
+		<link href="<c:url value="/resources/css/navbar-2.css" />" rel="stylesheet" />
 	</c:if>
 	<c:if test="${user_type_id == 2 }">
-		<link href="<c:url value="/resources/css/navbar-2.css" />"
-		rel="stylesheet" />
+		<link href="<c:url value="/resources/css/navbar-2.css" />" rel="stylesheet" />
 	</c:if>
 	<c:if test="${user_type_id == null }">
-		<link href="<c:url value="/resources/css/navbar.css" />"
-		rel="stylesheet" />
+		<link href="<c:url value="/resources/css/navbar.css" />" rel="stylesheet" />
 	</c:if>
 	<link href='<c:url value="/resources/css/contact.css" />' rel="stylesheet" />
 	<link href='<c:url value="/resources/css/footer.css" />' rel="stylesheet" />
-	<link
-		href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-		rel="stylesheet" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 
 <body>
 
-	<c:if test="${user_type_id  == 1}">	
-	
+	<c:if test="${user_type_id  == 1}">		
 		<nav class="navbar navbar-expand-lg w-100 sticky-top" id="navbar">
             <div class="container-fluid navbar_main">
                 <a class="navbar-brand py-0" href="/helperland/home">
@@ -126,18 +117,8 @@
                     </div>
                     <div>
                         <button class="navbar-toggler text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" aria-expanded="false" aria-label="Toggle navigation">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="40"
-                                height="40"
-                                fill="#fff"
-                                class="bi bi-list"
-                                viewBox="0 0 16 16"
-                                >
-                                <path
-                                    fill-rule="evenodd"
-                                    d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
-                                />
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="#fff" class="bi bi-list" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
                             </svg>
                         </button>
                     </div>   
@@ -161,9 +142,6 @@
                                 <p class="nav-link">Welcome,<br>${user.first_name } ${user.last_name }</p>
                             </div>
                             <div class="navcol_second navcol">
-                                <!-- <div class="nav-item nav_select1"  id="dashBoard1">
-                                    <a class="nav-link" href="#dashBoardTable">Dashboard</a>
-                                </div> -->
                                 <div class="nav-item nav_select1">
                                     <a class="nav-link" id="newServiceRequest1" href="/helperland/service-provider/dash">New Service Request</a>
                                 </div>
@@ -186,9 +164,6 @@
                                 <div class="nav-item nav_select1">
                                     <a class="nav-link" id="notification1" href="/helperland/service-provider/notification">Notification</a>
                                 </div>
-                                <!-- <div class="nav-item nav_select1">
-                                    <a class="nav-link">Invoice</a>
-                                </div> -->
                                 <div class="nav-item nav_select1">
                                     <a class="nav-link" href="/helperland/service-provider/mysettings">My Settings</a>
                                 </div>
@@ -251,18 +226,8 @@
                     </div>
                     <div>
                         <button class="navbar-toggler text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" aria-expanded="false" aria-label="Toggle navigation">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="40"
-                                height="40"
-                                fill="#fff"
-                                class="bi bi-list"
-                                viewBox="0 0 16 16"
-                                >
-                                <path
-                                    fill-rule="evenodd"
-                                    d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
-                                />
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="#fff" class="bi bi-list" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
                             </svg>
                         </button>
                     </div>   
@@ -279,18 +244,8 @@
 	                <img src= ' <c:url value = "/resources/assets/nav-footer-assets/logo.png" />' alt="" height="54px" width="73px">
 	            </a>
 	            <button class="navbar-toggler text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-	                <svg
-	                    xmlns="http://www.w3.org/2000/svg"
-	                    width="40"
-	                    height="40"
-	                    fill="#fff"
-	                    class="bi bi-list"
-	                    viewBox="0 0 16 16"
-	                    >
-	                    <path
-	                        fill-rule="evenodd"
-	                        d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
-	                    />
+	                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="#fff" class="bi bi-list" viewBox="0 0 16 16">
+	                    <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
 	                </svg>
 	            </button>
 	            <div class="offcanvas offcanvas-end" id="navbarText" aria-labelledby="offcanvasExampleLabel" tabindex="-1">
@@ -322,8 +277,6 @@
 	    </nav>
 	</c:if>
     <div class="container-fluid p-0">
-        
-        <!-- <div id="navbar_load"></div> -->
         <div class="main_image">
             <img src='<c:url value = "/resources/assets/contact/first/contact-top.jpg" />' alt="" height="370"/>
         </div>
@@ -421,21 +374,11 @@
             </div>
         </div>
     </div>
-    <!-- <div class="container_map position-relative">
-        <img src="./assets/contact/map.jpg" alt="" class="map_image">
-        <div class="map_marker position-absolute">
-            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="67">
-                <path fill-rule="evenodd" fill="#FF6060" d="M45.959 16.672c-.238-.894-.722-1.846-1.08-2.68C40.598 3.688 31.242.5 23.688.5 13.575.5 2.437 6.785.95 20.782v2.859c0 .119.041 1.191.54 1.728.393 7.021 5.649 13.759 10.16 20.429 3.638 7.147 8.02 14.177 12.48 21.502 2.559-4.883 5.227-9.529 7.843-13.996.713-1.311 1.541-2.621 2.255-3.873.475-.833 1.384-1.666 2.052-2.441 3.971-7.743 11.2-15.546 11.2-23.23v-3.156c0-.834-1.3-3.752-1.521-3.932zM23.873 31.27c-2.973 0-6.226-1.731-7.473-5.842-.599-.654-.58-1.966-.58-2.086v-1.846c0-5.24 4.444-7.623 8.309-7.623 4.759 0 8.439 3.812 8.439 8.578 0 4.765-3.937 8.819-8.695 8.819z"/>
-            </svg>        
-        </div>
-    </div> -->
     <div class="container_map">
         <iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.6979157244114!2d72.49824711445191!3d23.034861321650208!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e8352e403437b%3A0xdc9d4dae36889fb9!2sTatvaSoft!5e0!3m2!1sen!2sin!4v1640187081460!5m2!1sen!2sin">
         </iframe>
     </div>
-
-    <!-- <div id="footer"></div> -->
 
     <div class="footer_section w-100">
         <div class="footer_main d-flex justify-content-center align-items-center position-relative">
@@ -486,6 +429,9 @@
         </div>
     </div>
 
+	<a class="position-fixed back_to_top" >
+		<img src=" <c:url value = "/resources/assets/homepage/ic-bktop.svg" />" alt="">
+	</a>
     <!-- ------------- login modals --------------  -->
     <div class="logInPopUp">
 
@@ -557,24 +503,31 @@
                 </div>
             </div>
         </div>
-
-        
     </div>
 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"> </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-    crossorigin="anonymous"></script>
+	<script>
+	
+		$(".back_to_top").on("click" , function(){
+			$(window).scrollTop(0);	
+		})
+		
+		$(window).on("scroll" , function(){
+			if($(window).scrollTop() > 60){
+				$(".back_to_top").show();
+			}
+			else{
+				$(".back_to_top").hide();	
+			}
+		})
+	
+	</script>
+    
     <script>
         
-        // $(function () {
-        //     $("#navbar_load").load("../navbar.html");
-        //     $("#footer").load("../footer.html");
-        // });
-    
         $('select').change(function() {
             console.log("hello");
             if ($(this).children('option:first-child').is(':selected')) {
@@ -583,8 +536,6 @@
                 $("select").css("color" , "black");
             }
         });
-        
-        
         
         var dt = new Date();
         var t = moment(new Date()).format("YYYY/MM/DD HH:mm:ss");

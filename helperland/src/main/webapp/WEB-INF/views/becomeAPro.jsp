@@ -12,8 +12,7 @@
 	<link href='<c:url value="/resources/css/becomeAPro.css" />' rel="stylesheet" />
 	<link href='<c:url value="/resources/css/footer.css" />' rel="stylesheet" />
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
-    </script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 </head>
 <body>
@@ -23,18 +22,8 @@
               <img src= ' <c:url value = "/resources/assets/nav-footer-assets/logo.png" />' alt="" height="54px" width="73px">
           </a>
           <button class="navbar-toggler text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-              <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="40"
-                  height="40"
-                  fill="#fff"
-                  class="bi bi-list"
-                  viewBox="0 0 16 16"
-                  >
-                  <path
-                      fill-rule="evenodd"
-                      d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
-                  />
+              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="#fff" class="bi bi-list" viewBox="0 0 16 16" >
+                  <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
               </svg>
           </button>
           <div class="offcanvas offcanvas-end" id="navbarText" aria-labelledby="offcanvasExampleLabel" tabindex="-1">
@@ -63,16 +52,9 @@
               </div>
           </div>
       </div>
-  </nav>
-  
-
-
-	
-    <div class="container-fluid p-0 main_container">
-      <!-- <div id="navbar_load"></div> -->
-      
+  </nav>	
+  <div class="container-fluid p-0 main_container">
       <div class="main_image d-flex align-items-center justify-content-center flex-column">
-        	
 		<div class="position-absolute w-100 " style="top : 70px">
         	<div class="alert alert-danger alert-dismissible fade show d-none w-75 m-0 mx-auto mt-1" ${displayError } role="alert">
 			  ${error }
@@ -138,10 +120,7 @@
             <input type="hidden" name="is_online" value="1">
             <input type="hidden" name="created_date" id="created_date" value="">
             <input type="hidden" name="modified_date" id="modified_date" value="">
-                
-            
           </form>
-          
         </div>
         <a href="#howItWorks" style="margin-top: 42px;">
           <svg xmlns="http://www.w3.org/2000/svg" width="47" height="47">
@@ -153,7 +132,6 @@
     </div>
 
     <div class="howItWorks position-relative" id="howItWorks">
-
       <div class="hiw_left">
         <svg xmlns="http://www.w3.org/2000/svg" width="199" height="219" class="svg_1">
           <path fill-rule="evenodd" fill="#F6F6F6" d="m195.94 45.631-10.999-2.114 6.004-12.35 8.045 8.19-3.05 6.274zm-40.835-14.435L129.21 54.528l-29.02-14.166 3.691-10.138-18.271-8.78s-9.745-5.658 3.177-9.331C96.431 9.939 123.869.744 123.869.744s5.62-2.099 11.662.851l53.158 25.965-7.873 16.195-25.711-12.559zM120.64 74.482s2.969 3.122.271 8.67c-1.968 4.049-5.529 2.121-7.731 6.982-1.539 2.834 2.172 5.814-.714 11.75-1.641 3.375-7.16 3.662-8.735 6.901-1.574 3.455-1.177 5.985-.241 7.753.936 2.462 13.496 17.282-.872 46.838-19.485 40.081-24.468 50.608-24.468 50.608s-2.438 6.891-7.272 4.53c-4.438-2.361-69.052-33.729-69.052-33.729s-4.32-3.113.403-12.83l21.65-44.535s19.475-41.089 63.819-69.029c6.139 2.751 32.942 16.091 32.942 16.091zM93.795 41.33l38.877 18.989-6.298 12.956-38.877-18.99 6.298-12.955zm81.834 3.899s-9.718 20.577-2.359 42.937c0 0 1.663 3.317-1.455 4.974-1.226.474-3.013.11-6.369-5.036-6.452-9.893-13.546-28.139-7.542-51.533l17.725 8.658z"/>
@@ -176,9 +154,7 @@
           <path fill-rule="evenodd" fill="#F6F6F6" d="M237.946 240.96c-2.688 2.701-6.207 4.16-9.733 4.16-3.522 0-7.045-1.459-9.733-4.16l-82.9-83.322 19.87-18.858 82.496 82.619c5.375 5.395 5.375 14.154 0 19.561zm-88.574-108.584-19.466 19.56-1.418 1.429-1.086 1.088-14.021-14.095-9.93-9.975L127.7 106.4l9.196 8.847 14.756 15.553-.862.146-1.418 1.43zM7.779 85.467c-3.286 1.34-6.264-.793-7.351-3.682-.287-.665-.028-1.6.272-2.427-.41-1.82.138-3.637 2.097-4.891a110.678 110.678 0 0 0 6.659-4.606c4.306-3.221 7.977-6.645 10.777-10.571 2.472-3.954 4.302-7.68 5.377-13.471.678-3.321 4.373-4.936 7.51-4.225 1.185.301 2.488.512 3.792.669.862.104 1.734.177 2.6.238.899.06 1.797.109 2.696.14l3.977-3.995c-.245-.685-.498-1.372-.811-2.038-.04-.081-.061-.165-.1-.246a7.433 7.433 0 0 1-.635-1.867 5.896 5.896 0 0 1 .221-3.032l1.501 1.304 1.52 2.113 1.521.531 10.969 9.528L80.59 62.42l-9.968-24.963-6.47-16.869-.792-2.058-.79-2.055-.309-.807A389.311 389.311 0 0 1 72.793 1.812C74.229.2 76.572.332 78.65.307c.679.211 1.305.549 1.887.957 1.443.394 1.046.859 1.44 1.402l.443-.063-.263.281c.318.489.57 1.013.698 1.594.025.112.06.226.09.342l38.565 95.112-23.989 24.498L7.779 85.467z"/>
         </svg>
       </div>
-      
-
-
+     
       <h1 class="text-center hiw_heading">How it works</h1>
       <div class="howItWorks_inner d-flex flex-column  align-items-center justify-content-center">
 
@@ -224,7 +200,6 @@
             <img src="<c:url value = "/resources/assets/becomeAPro/second/3.png" />" alt="" height="260" width="260">
           </div>
         </div>
-
       </div>
     </div>
 
@@ -277,6 +252,10 @@
       </div>
     </div>
     
+    
+    <a class="position-fixed back_to_top" >
+		<img src=" <c:url value = "/resources/assets/homepage/ic-bktop.svg" />" alt="">
+	</a>
     <!-- ------------- login modals --------------  -->
     <div class="logInPopUp">
 
@@ -292,16 +271,12 @@
                         <form action="login" method="post">
                             <div class="form-group position-relative my-3">
                                 <input type="email" required placeholder="Email Address" name="email" class="modalInputEmail inputHeightBorder">
-                                <img
-									src=" <c:url value = "/resources/assets/homepage/first/user.png" />" alt="" height="21"
-									width="20">
+                                <img src=" <c:url value = "/resources/assets/homepage/first/user.png" />" alt="" height="21" width="20">
                             </div>
                             
                             <div class="form-group position-relative my-3">
                                 <input type="password" required placeholder="Password" name="password" class="modalInputEmail inputHeightBorder">
-                                <img
-									src="<c:url value = "/resources/assets/homepage/first/lock.png" />" alt="" height="21"
-									width="20">
+                                <img src="<c:url value = "/resources/assets/homepage/first/lock.png" />" alt="" height="21" width="20">
                             </div>
 
                             <div class="form-group">
@@ -347,22 +322,28 @@
                     </div>
                 </div>
             </div>
-        </div>
-
-        
+        </div>    
     </div>
     
-
-  
-    <!-- <div id="footer"></div> -->
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     
-    <!-- <script>
-        $("#navbar_load").load("../navbar.html");
-        $("#footer").load("../footer.html");
-    </script> -->
+    <script>
+	
+		$(".back_to_top").on("click" , function(){
+			$(window).scrollTop(0);	
+		})
+		
+		$(window).on("scroll" , function(){
+			if($(window).scrollTop() > 60){
+				$(".back_to_top").show();
+			}
+			else{
+				$(".back_to_top").hide();	
+			}
+		})
+	
+	</script>
     
     <script>
 
@@ -384,18 +365,10 @@
     
 
         var dt = new Date();
-        /* var dtstring = dt.getFullYear()
-            + '-' +(dt.getMonth())
-            + '-' +(dt.getDate())
-            + ' ' +(dt.getHours())
-            + ':' +(dt.getMinutes())
-            + ':' +(dt.getSeconds()); */
-		
         var t = moment(new Date()).format("YYYY/MM/DD HH:mm:ss");
 		$('#created_date').val(t);
 		$('#modified_date').val(t);
-        
-
+       
         $(function () {
             $("#mobile").keypress(function (e) {
                 var keyCode = e.keyCode || e.which;
@@ -408,11 +381,6 @@
                 return isValid;
             });
         });
-
-      
-
-
-
     </script>
     
   </body>

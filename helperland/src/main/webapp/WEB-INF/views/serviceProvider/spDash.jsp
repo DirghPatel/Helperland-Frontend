@@ -340,9 +340,11 @@
                                 
                             </div>
                             <div class="serviceModalRight">
-                                <iframe width="350px" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.6979157244114!2d72.49824711445191!3d23.034861321650208!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e8352e403437b%3A0xdc9d4dae36889fb9!2sTatvaSoft!5e0!3m2!1sen!2sin!4v1640187081460!5m2!1sen!2sin">
-                                </iframe>
+                                	<!-- src="https://www.google.com/maps/embed/v1/place?q=410+walker+street+Lowell+MA+01851&amp;output=embed"> -->
+                                <!-- <iframe width="350px" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
+                                	src = "https://maps.google.com/maps?&amp;q=410+walker+street+Lowell+MA+01851&amp;output=embed">
+                                </iframe> -->
+<!--                                 	src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.6979157244114!2d72.49824711445191!3d23.034861321650208!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e8352e403437b%3A0xdc9d4dae36889fb9!2sTatvaSoft!5e0!3m2!1sen!2sin!4v1640187081460!5m2!1sen!2sin"> -->
                             </div>
 
                         </div>
@@ -440,6 +442,8 @@
             </div>
         </div>
     </div>
+    
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
     
     <script>
     
@@ -571,7 +575,17 @@
 						}
 						if(data[1].email != null){
 							$("#sdEmail").html(" "+data[1].email);
-						}		
+						}
+						
+						if(data[1].state == null){
+							var addrmap = data[1].address_line1 + " " + data[1].address_line2 + " " + data[1].postal_code + " "+data[1].city;
+						}
+						else{
+							var addrmap = data[1].address_line1 + " " + data[1].address_line2 + " " + data[1].postal_code + " "+ data[1].city+" "+data[1].state ; 
+						}
+						var embed = "<iframe width='350px' height='100%' frameborder='0' scrolling='no' marginheight='0' marginwidth='0' src = 'https://maps.google.com/maps?&amp;q="+encodeURIComponent( addrmap )+"&amp;output=embed'> </iframe>";
+						$(".serviceModalRight").html(embed);
+						
 				},
 				error : function(xhr, textStatus, xml) {
 					alert("Some error occured");

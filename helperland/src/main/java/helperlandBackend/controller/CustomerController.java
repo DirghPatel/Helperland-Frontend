@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -47,9 +49,6 @@ public class CustomerController {
 	
 	@Autowired
 	private ServiceRatingServiceImpl serviceRating;
-	
-	@Autowired
-	private MainController mainController;
 
 //	SERVICE STATUS CANCELLED 0
 //	SERVICE STATUS NEW 1
@@ -313,7 +312,7 @@ public class CustomerController {
 		this.serviceRequests.updateServiceRequestStatus(sr);
 		
 		UserModel userSp = this.userService.getUserByUserId(sr.getService_provider_id());
-//		this.mainController.sendMail(userSp.getEmail() , "Your Service Request #"+sr.getService_req_id()+" is cancelled by " + currentUser.getFirst_name() + " " + currentUser.getLast_name() + " because of "+ cancel_comment +" ." );
+//		sendMail(userSp.getEmail() , "Your Service Request #"+sr.getService_req_id()+" is cancelled by " + currentUser.getFirst_name() + " " + currentUser.getLast_name() + " because of "+ cancel_comment +" ." );
 	
 		return new ResponseEntity<HttpStatus>(HttpStatus.OK);
 	}
@@ -380,7 +379,7 @@ public class CustomerController {
 			sr.setModified_by(currentUser.getUser_id());
 			sr.setStatus(4);
 			
-//			this.mainController.sendMail(userSp.getEmail() , "Your Service Request #"+sr.getService_req_id()+" is rescheduled on " + service_start_date  + " by " + currentUser.getFirst_name() + " " + currentUser.getLast_name() + " ." );
+//			sendMail(userSp.getEmail() , "Your Service Request #"+sr.getService_req_id()+" is rescheduled on " + service_start_date  + " by " + currentUser.getFirst_name() + " " + currentUser.getLast_name() + " ." );
 			this.serviceRequests.updateServiceRequestStatus(sr);
 			return ResponseEntity.status(HttpStatus.OK).body("ok");
 		}
@@ -581,6 +580,18 @@ public class CustomerController {
 		}
 	}
 	
+	@Autowired
+	JavaMailSender emailService;
+	
+	public void sendMail(String email , String message) {
+		SimpleMailMessage emailToSend = new SimpleMailMessage();
+		emailToSend.setFrom("coding.tricks.8801@gmail.com");
+		emailToSend.setTo(email);
+		emailToSend.setSubject("Password Reset Request");
+		emailToSend.setText(message);
+		
+		emailService.send(emailToSend);
+	}
 }
 
 

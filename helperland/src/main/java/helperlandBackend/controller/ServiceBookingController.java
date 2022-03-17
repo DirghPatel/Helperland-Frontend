@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -32,9 +34,6 @@ public class ServiceBookingController {
 	@Autowired
 	private ServiceBookingServiceImpl serviceBookingService;
 	
-	@Autowired
-	private MainController mainController;
-
 	@RequestMapping(value = "/check-availability" , method =RequestMethod.POST)
 	public ResponseEntity<HttpStatus> checkAvailability(@RequestBody String postal_code ) {
 
@@ -143,17 +142,26 @@ public class ServiceBookingController {
 				}
 			}
 			for(UserModel i : userEmails) {
-//				this.mainController.sendMail(i.getEmail() , "A new Service Request #" + serviceRequest.getService_req_id() + " is available in your postal code " + i.getPostal_code() + " area.");
-//				System.out.println(i.getEmail());
-//				this.mainController.sendMail("dirghpatel8801@gmail.com" , "A new Service Request #" + serviceRequest.getService_req_id() + " is available in your postal code " + i.getPostal_code() + " area.");
+//				sendMail(i.getEmail() , "A new Service Request #" + serviceRequest.getService_req_id() + " is available in your postal code " + i.getPostal_code() + " area.");
 			}
 			if(serviceRequest.getService_provider_id() != serviceRequest.getUser_id()) {
 				UserModel userSpDirect = this.userService.getUserByUserId(serviceRequest.getService_provider_id());
-//				this.mainController.sendMail(userSpDirect.getEmail() , "A new Service Request #" + serviceRequest.getService_req_id() + " is directly assigned to you.");
-//				System.out.println(userSpDirect.getEmail() );
-//				this.mainController.sendMail("dirghpatel8801@gmail.com" , "A new Service Request #" + serviceRequest.getService_req_id() + " is directly assigned to you.");
+//				sendMail(userSpDirect.getEmail() , "A new Service Request #" + serviceRequest.getService_req_id() + " is directly assigned to you.");
 			}
 			return ResponseEntity.status(HttpStatus.OK).body(serviceRequest.getService_req_id());
 		}
+	}
+	
+	@Autowired
+	JavaMailSender emailService;
+	
+	public void sendMail(String email , String message) {
+		SimpleMailMessage emailToSend = new SimpleMailMessage();
+		emailToSend.setFrom("coding.tricks.8801@gmail.com");
+		emailToSend.setTo(email);
+		emailToSend.setSubject("Password Reset Request");
+		emailToSend.setText(message);
+		
+		emailService.send(emailToSend);
 	}
 }

@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -44,9 +46,6 @@ public class ServiceProviderController {
 	
 	@Autowired
 	private ServiceRatingServiceImpl serviceRating;
-	
-	@Autowired
-	private MainController mainController;
 
 	@RequestMapping(value = "/dash" , method = RequestMethod.GET)
 	public String spDash(Model model , @RequestParam(value="pets" , defaultValue = "1") int pet , @RequestParam(required=false, name="page") String page, @RequestParam(required=false, name="count") String count ) {
@@ -520,7 +519,7 @@ public class ServiceProviderController {
 			this.serviceRequests.updateServiceRequestStatus(sr);
 			
 			UserModel user = this.userService.getUserByUserId(sr.getUser_id());
-//			this.mainController.sendMail(user.getEmail() , "Your Service Request #"+sr.getService_req_id()+" is accepted by " + currentUser.getFirst_name() + " " + currentUser.getLast_name() + " ." );
+//			sendMail(user.getEmail() , "Your Service Request #"+sr.getService_req_id()+" is accepted by " + currentUser.getFirst_name() + " " + currentUser.getLast_name() + " ." );
 			
 			return ResponseEntity.status(HttpStatus.OK).body("updated");
 		}
@@ -544,7 +543,7 @@ public class ServiceProviderController {
 		this.serviceRequests.updateServiceRequestStatus(sr);
 		
 		UserModel customer = this.userService.getUserByUserId(sr.getUser_id());
-//		this.mainController.sendMail(customer.getEmail() , "Your Service Request #"+sr.getService_req_id()+" is cancelled by " + currentUser.getFirst_name() + " " + currentUser.getLast_name() + " because of " + cancel_comment+ " ." );
+//		sendMail(customer.getEmail() , "Your Service Request #"+sr.getService_req_id()+" is cancelled by " + currentUser.getFirst_name() + " " + currentUser.getLast_name() + " because of " + cancel_comment+ " ." );
 		
 		return new ResponseEntity<HttpStatus>(HttpStatus.OK);
 	}
@@ -563,7 +562,7 @@ public class ServiceProviderController {
 		this.serviceRequests.updateServiceRequestStatus(sr);
 		
 		UserModel customer = this.userService.getUserByUserId(sr.getUser_id());
-//		this.mainController.sendMail(customer.getEmail() , "Your Service Request #"+sr.getService_req_id()+" has been completed by " + currentUser.getFirst_name() + " " + currentUser.getLast_name() + " ." );
+//		sendMail(customer.getEmail() , "Your Service Request #"+sr.getService_req_id()+" has been completed by " + currentUser.getFirst_name() + " " + currentUser.getLast_name() + " ." );
 		return new ResponseEntity<HttpStatus>(HttpStatus.OK);
 	}
 	
@@ -683,6 +682,19 @@ public class ServiceProviderController {
 			return "redirect:mysettings";
 		}
 		
+	}
+	
+	@Autowired
+	JavaMailSender emailService;
+	
+	public void sendMail(String email , String message) {
+		SimpleMailMessage emailToSend = new SimpleMailMessage();
+		emailToSend.setFrom("coding.tricks.8801@gmail.com");
+		emailToSend.setTo(email);
+		emailToSend.setSubject("Password Reset Request");
+		emailToSend.setText(message);
+		
+		emailService.send(emailToSend);
 	}
 	
 }

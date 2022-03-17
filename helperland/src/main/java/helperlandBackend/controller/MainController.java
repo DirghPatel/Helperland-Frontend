@@ -8,9 +8,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -21,27 +19,20 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.DisabledException;
-import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.SystemPropertyUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute; 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import helperlandBackend.models.ContactUs;
@@ -319,17 +310,5 @@ public class MainController {
 		}
 	}
 	
-	@Autowired
-	JavaMailSender emailService;
-	
-	public void sendMail(String email , String message) {
-		SimpleMailMessage emailToSend = new SimpleMailMessage();
-		emailToSend.setFrom("coding.tricks.8801@gmail.com");
-		emailToSend.setTo(email);
-		emailToSend.setSubject("Password Reset Request");
-		emailToSend.setText(message);
-		
-		emailService.send(emailToSend);
-	}
 }
 

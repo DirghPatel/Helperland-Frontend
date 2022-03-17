@@ -208,8 +208,11 @@ label {
   color: #4f4f4f;
   min-width: fit-content;
 }
-a:hover{
+.service_date:hover> a{
 	color: #1d7a8c !important;
+}
+td a:hover{
+	color: unset !important;
 }
 @media (min-width: 1200px) {
   .offcanvas {

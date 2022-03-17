@@ -13,6 +13,8 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -44,7 +46,7 @@ public class AdminController {
 	
 	@Autowired
 	private ServiceRatingServiceImpl serviceRating;
-	
+
 	@RequestMapping("/service-requests")
 	public String serviceRequests(Model model) {
 		
@@ -439,7 +441,37 @@ public class AdminController {
 		
 		this.serviceRequests.updateServiceRequestStatus(sr);
 		this.serviceRequests.updateServiceRequestAddress(srAddress);
+		
+		List<UserModel> srUsers = new ArrayList<UserModel>();
+		
+		UserModel u = this.userService.getUserByUserId(sr.getUser_id());
+		srUsers.add(u);
+		
+		if(sr.getUser_id() != sr.getService_provider_id()) {
+			UserModel uSP = this.userService.getUserByUserId(sr.getService_provider_id());
+			srUsers.add(uSP);
+			
+			for(UserModel i: srUsers) {
+//				sendMail(i.getEmail(), "Your service request #" + sr.getService_req_id() + " is rescheduled on "+ service_start_date + " .");
+			}
+		}
+		
+		
+		
 		return ResponseEntity.status(HttpStatus.OK).body("updated");
+	}
+	
+	@Autowired
+	JavaMailSender emailService;
+	
+	public void sendMail(String email , String message) {
+		SimpleMailMessage emailToSend = new SimpleMailMessage();
+		emailToSend.setFrom("coding.tricks.8801@gmail.com");
+		emailToSend.setTo(email);
+		emailToSend.setSubject("Password Reset Request");
+		emailToSend.setText(message);
+		
+		emailService.send(emailToSend);
 	}
 }
 

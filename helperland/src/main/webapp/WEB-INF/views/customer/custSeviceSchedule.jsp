@@ -11,8 +11,9 @@
 	<link href='<c:url value="/resources/css/custDash.css" />' rel="stylesheet" />
 	<link href='<c:url value="/resources/css/footer.css" />' rel="stylesheet" />
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
-    </script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.1.1/fullcalendar.css" integrity="sha512-TYeA2J/CuJ9wIrwUIJRMesk6bA7YI+cNybetVP3Cz7lUBz3QioDW6Ee/+BSX3N4dzQewnEmtk7+CtVQiEx0BHw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    	
 </head>
 <body>
     <div style="min-height: 100vh; padding-bottom: 170px;">
@@ -148,10 +149,128 @@
             <div class="dash_content">
                 <!-- ----------- service schedule --------------  -->
                 <div id="serviceScheduleTable">
+                	<div id="calender">
+                		
+                	</div>
                 </div>
             </div>
         </div>
     </div>
+    
+    <div class="serviceDetailsPopUp">
+	    <div class="modal fade" id="serviceDetails" aria-hidden="true" aria-labelledby="serviceDetailsLabel" tabindex="-1">
+	        <div class="modal-dialog modal-dialog-centered vertical-align-center">
+	            <div class="modal-content">
+	                <div class="modal-header">
+	                    <h5 class="modal-title" id="serviceDetailsLabel">Service Details</h5>
+	                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	                </div>
+	                <div class="modal-body d-flex serviceDetailsModal p-2">
+	                    <div class="serviceModalLeft">
+	                        <h4 id="sdDate"></h4>
+	                        <p><b>Duration:</b>&nbsp<span id="sdDuration"></span></p>
+	                        <hr>
+	                        <p><b>Service Id:</b>&nbsp<span id="sdId"></span></p>
+	                        <p><b>Extras:</b><span id="sdExtra"></span></p>
+	                        <p><b>Net Amount:</b> <span class="table_payment fw-bolder" id="sdAmount"></span> </p>
+	                        
+	                        <hr>
+	                        
+	                        <p><b>Service Address:</b><span id="sdAddress"></span></p>
+	                        <p><b>Billing Address:</b>&nbspSame as cleaning Address</p>
+	                        <p><b>Phone:</b> +91 <span id="sdPhone"></span></p>
+	                        <p><b>Email:</b><span id="sdEmail"></span></p>
+	                        
+	                        <hr>
+	                        
+	                        <p><b>Comments</b></p>
+	                        <div>
+	                            <p id="sdComments"></p>
+	                        </div>
+	                        <p id="sdPets"></p>
+	                        
+	                        <hr>
+	                        
+	                    </div>
+	                    <div class="serviceModalRight">
+	                        <h4>Service Provider Details</h4>
+	                        <div class="sp_block justify-content-between align-items-center" id="spDetailsRight">
+	                            <div style="height: 64px; width: 64px;" class="sp_icon p-0 d-flex align-items-center justify-content-center rounded-circle">
+	                                <img id="serviceModalIcon" height="64" width="64">
+	                            </div>
+	                            <div>
+	                                <p class="sp_name mb-0" id="sdServiceProvider"></p>
+	                                <div id="ratingModelAvgStars">
+	                             	<span class="icon" id="icon1d">★</span>
+	                             	<span class="icon" id="icon2d">★</span>
+	                             	<span class="icon" id="icon3d">★</span>
+	                             	<span class="icon" id="icon4d">★</span>
+	                             	<span class="icon" id="icon5d">★</span>
+	                             </div>
+	                            </div>
+	                        </div>
+	                        <p class="mb-0" id="sdTotalCleanings"></p>
+	                    </div>
+	                </div>
+	                <div class="modal-footer justify-content-start">
+	                    <button class="btn text-white rounded-pill reschedule_button" data-bs-target="#scheduleServiceRequest" data-bs-toggle="modal" data-bs-dismiss="modal" id="rescheduleBtnModel" onclick="$('#rescheduleServiceReqId').val($(this).attr('data-spID'))">Reschedule</button>
+	                    <button class="btn text-white cancel_button rounded-pill" data-bs-target="#cancelServiceRequest" data-bs-toggle="modal" data-bs-dismiss="modal" id="cancelBtnModel" onclick="$('#cancelServiceReqId').val($(this).attr('data-spID'))">Cancel</button>
+	                </div>
+	            </div>
+	        </div>
+	    </div> 
+	    <div class="modal fade" id="scheduleServiceRequest" aria-hidden="true" aria-labelledby="serviceDetailsLabel2" tabindex="-1">
+	        <div class="modal-dialog modal-dialog-centered modal-md">
+	            <div class="modal-content" style="max-width : 500px">
+	                <div class="modal-header">
+	                    <h4 class="modal-title me-3" id="serviceDetailsLabel2">Reschedule Service Request</h4>
+	                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	                </div>
+	                <div class="modal-body ">
+	                    <p class="m-1">Select New Date & Time</p>
+	                    <form method="post" action="/helperland/customer/service-reschedule" id="rescheduleReqForm">
+	                        <div class="d-flex">
+	                        	<input type="hidden" name="service_req_id" id="rescheduleServiceReqId"/>
+	                            <input type="date" class="datePicker" name="servicedate" id="servicedate" >
+	                            <select class="timeSelect" name="servicetime" id="servicetime">
+	                                <option value="08:00:00">8:00</option>
+	                                <option value="08:30:00">8:30</option>
+	                                <option value="09:00:00">9:00</option>
+	                                <option value="09:30:00">9:30</option>
+	                                <option value="10:00:00">10:00</option>
+	                                <option value="10:30:00">10:30</option>
+	                            </select>
+	                            <input type="hidden" id="service_start_date" name="service_start_date">
+	                        </div>
+	                        <div class="p-1 w-100">
+	                        	<small class="text-danger" id="conflictError"></small>
+	                        </div>
+	                        <button class="mt-3 updateServiceButtton text-light rounded-pill border-0" onclick="$('#rescheduleReqForm').submit()">Update </button>
+	                    </form>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	
+	    <div class="modal fade" id="cancelServiceRequest" aria-hidden="true" aria-labelledby="cancelServiceRequestLabel2" tabindex="-1">
+	        <div class="modal-dialog modal-dialog-centered modal-md">
+	            <div class="modal-content">
+	                <div class="modal-header">
+	                    <h4 class="modal-title me-3" id="cancelServiceRequestLabel2">Cancel Service Request</h4>
+	                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	                </div>
+	                <div class="modal-body ">
+	                    <p class="mb-1">Why you want to cancel the service request?</p>
+	                    <form action="/helperland/customer/service-cancel" class="d-flex flex-column" id="cancelReqForm" method="post">
+	                    	<input type="hidden" name="service_req_id" id="cancelServiceReqId"/>
+	                        <textarea type="text" class="whyToCancel mb-2 p-2" name="cancel_comment" maxlength="500" rows="3"></textarea>
+	                        <button class="cancelServiceButton text-light rounded-pill border-0" onclick="$('#cancelReqForm').submit()">Cancel Now</button>
+	                    </form>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
     
     <div id="footer" class="position-relative w-100 bottom-0">
         <div class="footer_section w-100">
@@ -203,8 +322,269 @@
             </div>
         </div>
     </div>
+    
+    <div class="d-flex">
+    	<div class="d-flex align-items-center mx-1">
+    		<div class="red-bg bg-square"></div>
+    		<p class="m-0" style="font-size: 12px">Cancelled</p>
+    	</div>
+    	<div class="d-flex align-items-center mx-1">
+    		<div class="green-bg bg-square"></div>
+    		<p class="m-0" style="font-size: 12px">Pending</p>
+    	</div>
+    	<div class="d-flex align-items-center mx-1">
+    		<div class="grey-bg bg-square"></div>
+    		<p class="m-0" style="font-size: 12px">Completed</p>
+    	</div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+	 
+	<script src='http://fullcalendar.io/js/fullcalendar-2.1.1/lib/moment.min.js'></script>
+	<script src='http://fullcalendar.io/js/fullcalendar-2.1.1/lib/jquery.min.js'></script>
+	<script src="http://fullcalendar.io/js/fullcalendar-2.1.1/lib/jquery-ui.custom.min.js"></script>
+	<script src='http://fullcalendar.io/js/fullcalendar-2.1.1/fullcalendar.min.js'></script> 
+	<!-- <script src='http://code.jquery.com/jquery-3.6.0.min.map'></script> -->
+	
 
+	<script>
+	
+		$(document).ready(function() {
+			
+			var eventsArray = [];
+			
+			<c:forEach var="sr" items="${sr}">
+				
+				var id = ${sr.service_req_id};
+				var d = new Date("${sr.service_start_date}");
+				var date = moment(d).format("YYYY-MM-DD"); 
+				var t1 = d.getHours()+"."+d.getMinutes();
+				var totalTime = parseFloat("${sr.service_hours}")+parseFloat("${sr.extra_hours}") ; 
+				var dt1 = ((d.getHours() * 60) + d.getMinutes()) / 60;
+				var dt2 = (dt1 + totalTime) * 60;
+				var h1 = Math.floor(dt2 / 60);
+				var m1 = dt2 % 60;
+				
+				if(d.getHours() < 10 && d.getMinutes() < 10){
+					var time1 = "0"+d.getHours()+":"+"0"+d.getMinutes();
+				}
+				else if(d.getHours() < 10){
+					var time1 = "0"+d.getHours()+":"+d.getMinutes();	
+				}
+				else if(d.getMinutes() < 10){
+					var time1 = d.getHours()+":"+"0"+d.getMinutes();
+				}
+				else{
+					var time1 = d.getHours()+":"+d.getMinutes();	
+				}
+				if(m1==0){
+					var time2 = h1 + ":00	";	
+					title = time1 + "-" +time2;
+				}
+				else{
+					var time2 = h1 + ":" + m1;
+					title = time1 + "-" +time2;
+				}
+				
+				if(${sr.status} == 0){
+					var color = "#ff7272";
+				}
+				else if(${sr.status} == 3){
+					var color = "#aeaeae";	
+				}
+				else{
+					var color = "#1d7a8c";	
+				}
+				eventsArray.push({
+					id: id,
+					title: title,
+					date: date,
+					backgroundColor: color,
+					borderColor: color
+				}) 
+			</c:forEach>
+			
+	
+			$('#calender').fullCalendar({
+				header: {
+					left: 'prev,next title',
+					right: ''
+				},
+				editable: true,
+				eventLimit: true,
+				events: eventsArray,
+				eventClick: function(info) {
+					myFunction(info.id);
+				}
+			});
+			
+			$(".fc-right").append('<div class="d-flex"><div class="d-flex align-items-center mx-1"><div class="red-bg bg-square"></div><p class="m-0" style="font-size: 12px">Cancelled</p></div><div class="d-flex align-items-center mx-1"><div class="green-bg bg-square"></div><p class="m-0" style="font-size: 12px">Pending</p></div><div class="d-flex align-items-center mx-1"><div class="grey-bg bg-square"></div><p class="m-0" style="font-size: 12px">Completed</p></div></div>');
+			
+		});
+		
+		function myFunction(id){   
+    		$.ajax({
+				url : "/helperland/customer/service-details-data/"+id,
+				type : "POST",
+				success : function(data) {
+						$("#serviceDetails").modal("show");
+						var d = new Date(data[0].service_start_date);
+						var date1 = d.getDate() + "/" + (d.getMonth() + 1 ) + "/" + d.getFullYear();
+						if(d.getMinutes() == 0){
+							var time1 = d.getHours() + ":00" ;
+						}
+						else{
+							var time1 = d.getHours() + ":" + d.getMinutes();	
+						}
+						var t1 = d.getHours()+"."+d.getMinutes();
+						var totalTime = data[0].service_hours + data[0].extra_hours;
+						
+						var dt1 = ((d.getHours() * 60) + d.getMinutes()) / 60;
+						var dt2 = (dt1 + totalTime) * 60;
+						
+						var h1 = Math.floor(dt2 / 60);
+						var m1 = dt2 % 60;
+						
+						if(m1==0){
+							var time2 = h1 + ":00	";		
+						}
+						else{
+							var time2 = h1 + ":" + m1;
+						}
+						$("#sdDate").html(date1 +" "+ time1 + "-" + time2); 
+						$("#sdDuration").html(data[0].service_hours + data[0].extra_hours + " hours");
+						$("#sdId").html(data[0].service_req_id);
+						$("#sdAmount").html(data[0].total_cost + ",00 $");
+						$("#sdComments").html(data[0].comments);
+						
+						if(data[0].has_pets == 0){
+							$("#sdPets").html( "<img src='<c:url value = '/resources/assets/custDash/no-pets.png' />' height=25px width=25px> I don't have pets at home.");
+						}
+						else{
+							$("#sdPets").html("<img src='<c:url value = '/resources/assets/custDash/have-pets.png' />' height=25px width=25px> I have pets at home.");	
+						}
+						
+						var extraServices = " ";
+						
+						if(data[2].cabinet == 1){
+							extraServices = extraServices + " Inside Cabinets, ";
+						}
+						if(data[2].windows == 1){
+							extraServices = extraServices + " Interior Windows, ";
+						}
+						if(data[2].laundry == 1){
+							extraServices = extraServices + " Inside Wash, ";
+						}
+						if(data[2].refrigerator == 1){
+							extraServices = extraServices + " Inside Fridge, ";
+						}
+						if(data[2].oven == 1){
+							extraServices = extraServices + " Inside Oven, ";
+						}
+						$("#sdExtra").html(extraServices);
+						
+						if(data[1].state != null){
+							$("#sdAddress").html(" "+data[1].address_line1 + " " + data[1].address_line2 + ", "+data[1].postal_code +" "+data[1].city+" "+data[1].state);
+						}
+						if(data[1].state == null){
+							$("#sdAddress").html(" "+data[1].address_line1 + " " + data[1].address_line2 + ", "+data[1].postal_code +" "+data[1].city);
+						}
+						if(data[1].mobile != null){
+							$("#sdPhone").html(" "+data[1].mobile);
+						}
+						if(data[1].email != null){
+							$("#sdEmail").html(" "+data[1].email);
+						}
+						
+						if(data[0].user_id == data[0].service_provider_id){
+							$("#spDetailsRight").hide();
+							$("#sdTotalCleanings").hide();
+						}
+						else{
+							$("#sdTotalCleanings").show();
+							$("#spDetailsRight").show();
+							$("#sdServiceProvider").html(data[3].first_name + " " + data[3].last_name);
+							$("#serviceModalIcon").attr("src" , "/helperland/resources/assets/custDash/"  + data[3].user_profile_picture+ ".png "   );
+						}
+						
+						if(data[4] == 0){
+							$("#icon1d ,#icon2d , #icon3d , #icon4d , #icon5d").css("color" , "#e1e1e1");
+						}
+						if(data[4] == 1){
+							$("#icon2d , #icon3d , #icon4d , #icon5d").css("color" , "#e1e1e1");
+							$("#icon1d").css("color" , "#ECB91C");
+							
+						}
+						if(data[4] == 2){
+							$("#icon3d , #icon4d , #icon5d").css("color" , "#e1e1e1");
+							$("#icon1d , #icon2d").css("color" , "#ECB91C");
+						}
+						if(data[4] == 3){
+							$("#icon4d , #icon5d").css("color" , "#e1e1e1");
+							$("#icon1d , #icon2d , #icon3d").css("color" , "#ECB91C");
+						}
+						if(data[4] == 4){
+							$("#icon5d").css("color" , "#e1e1e1");
+							$("#icon1d , #icon2d , #icon3d , #icon4d").css("color" , "#ECB91C");
+						}
+						
+						$("#sdTotalCleanings").html(data[5] + " cleanings");
+						$("#rescheduleBtnModel").attr('data-spID' , data[0].service_req_id);
+						$("#cancelBtnModel").attr('data-spID' , data[0].service_req_id);
+				},
+				error : function(xhr, textStatus, xml) {
+					/* alert("Some error occured"); */
+				}
+			}) 
+    	}
+		
+		$("#cancelReqForm").on("submit" , function(){
+    		$.ajax({
+				url : $(this).attr("action"),
+				type : $(this).attr('method'),
+				data : $(this).serialize(),
+				success : function() {
+					location.reload();
+				},
+				error : function(xhr, textStatus, xml) {
+					alert("Some error occured");
+				}
+			})
+    	})
+    	
+    	
+    	$("#servicedate , #servicetime").on("change",function() {
+
+			var serviceDate = $("#servicedate").val();
+			var serviceTime = $("#servicetime").val();
+			var date = moment(serviceDate + ' ' + serviceTime).format("YYYY-MM-DD HH:mm:ss.SSS");
+
+			var sdate = new Date(date);
+			$("#service_start_date").val(sdate);
+		});
+    	
+    	$("#rescheduleReqForm").on("submit" , function(e){
+    		
+    		e.preventDefault();	
+    		$.ajax({
+				url : "service-reschedule",
+				type : "POST",
+				data : $(this).serialize(), 
+				success : function(data , xhr) {
+					location.reload();
+				},
+				error : function(data) {
+					var date = new Date(data.responseJSON[1]);
+					var date2 = new Date(data.responseJSON[2]);
+					if(data.responseJSON[0] == "conflict"){
+						$("#conflictError").html("Another service request has been assigned to the service provider on " + date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear() + " from " + date.toLocaleTimeString('pt-BR')  +" to " + date2.toLocaleTimeString('pt-BR') + ". Either choose another date or pick up a different time slot.");
+					}
+				}
+			})
+    	})
+
+	
+	</script>
 
 </body>
 </html>

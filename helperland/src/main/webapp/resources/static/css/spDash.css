@@ -134,6 +134,15 @@ td {
   background-color: #67b644;
   width: fit-content;
 }
+.tableHead h3{
+  color: #646464;
+  font-size: 22px;
+}
+.tableHead a{
+  padding: 10px 18px !important;
+  background-color: #1d7a8c !important;
+  font-size: 14px !important;
+}
 .counter{
   font-size: 44px;
   line-height: 100px;
@@ -232,7 +241,20 @@ td {
   max-width: 800px;
   color: #4f4f4f;
 }
-
+.fc-content{
+	text-align: center;
+}
+.fc-event{
+	border: 1px solid #1e7a8c ;
+    background-color: #1e7a8c ;
+}
+.fc-left{
+	font-size: 12px;
+}
+.fc-left h2{
+	font-size: 20px;
+	color: #212529;
+}
 
 @media (max-width: 1140px){
   .dash_sidebar{
@@ -332,15 +354,19 @@ td {
     grid-template-columns: auto;
   }
 }
-/* 
-#newServiceRequestTable,
-        #upcomingServicesTable,
-        #serviceScheduleTable,
-        #serviceHistoryTable,
-        #myRatingTable,
-        #blockCustomerTable,
-        #notificationTable{
-          display: none;
-} */
+.bg-square{
+	height: 15px;
+	width: 15px;
+	margin-right: 2px;
+}
 
+.red-bg{
+	background-color: #ff7272;
+}
+.green-bg{
+	background-color: #1d7a8c;
+}
+.grey-bg{
+	background-color: #aeaeae;
+}
 

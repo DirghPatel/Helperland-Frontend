@@ -20,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -54,6 +55,7 @@ public class CustomerController {
 //	SERVICE STATUS NEW 1
 //	SERVICE STATUS PENDING 2
 //	SERVICE STATUS COMPLETED 3
+	
 
 	
 	public int avgRatingCount(int service_provider_id) {
@@ -243,6 +245,12 @@ public class CustomerController {
 	
 	@RequestMapping("/service-schedule")
 	public String custSeviceSchedule(Model model) {
+		User loggedInUserDetails = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		UserModel currentUser = userService.getUserByEmail(loggedInUserDetails.getUsername());	
+		
+		List<ServiceRequest> sr = this.serviceRequests.getAllServiceRequestByUserId(currentUser.getUser_id());
+		model.addAttribute("sr" , sr);
+		
 		return "customer/custSeviceSchedule";
 	}
 	@RequestMapping("/mysettings")
@@ -262,6 +270,42 @@ public class CustomerController {
 	@SuppressWarnings("rawtypes")
 	@RequestMapping(value = "/service-details-data" , method = RequestMethod.POST)
 	public ResponseEntity serviceDetailsData(@RequestBody int serviceReqId) {
+		
+		ServiceRequest sr = this.serviceRequests.getServiceRequestById(serviceReqId);
+		ServiceRequestAddress srAddress = this.serviceRequests.getServiceRequestAddressById(serviceReqId);
+		ServiceRequestExtra srExtra = this.serviceRequests.getServiceRequestExtra(serviceReqId);
+		UserModel sp = this.userService.getUserByUserId(sr.getService_provider_id());
+				
+		List<RatingModel> ratings = this.serviceRating.getRatingsByRatingTo(sr.getService_provider_id());
+		
+		int avgRating = 0; 
+		
+		for(RatingModel i : ratings) {
+			   avgRating = avgRating + i.getRatings();
+		}
+		
+		if(ratings.size() == 0) {
+			avgRating = avgRating / 1;
+		}
+		else {
+			avgRating = avgRating / ratings.size();
+		}		
+		
+		List<ServiceRequest> totalCleanings = this.serviceRequests.getServiceRequestBySPId(sr.getService_provider_id());
+		
+		List<Object> srList = new ArrayList<Object>();
+		srList.add(sr);
+		srList.add(srAddress);
+		srList.add(srExtra);
+		srList.add(sp);
+		srList.add(avgRating);
+		srList.add(totalCleanings.size());
+		return ResponseEntity.status(HttpStatus.OK).body(srList);
+	}
+	
+	@SuppressWarnings("rawtypes")
+	@RequestMapping(value = "/service-details-data/{serviceReqId}" , method = RequestMethod.POST)
+	public ResponseEntity serviceDetailsDataSchedule(@PathVariable int serviceReqId) {
 		
 		ServiceRequest sr = this.serviceRequests.getServiceRequestById(serviceReqId);
 		ServiceRequestAddress srAddress = this.serviceRequests.getServiceRequestAddressById(serviceReqId);

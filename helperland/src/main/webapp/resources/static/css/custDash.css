@@ -304,6 +304,17 @@ button:focus , input:focus , textarea:focus , select:focus{
   text-shadow: 0 0 5px #ECB91C;
 }
 
+.fc-content{
+	text-align: center;
+}
+
+.fc-left{
+	font-size: 12px;
+}
+.fc-left h2{
+	font-size: 20px;
+	color: #212529;
+}
 @media (max-width: 1140px){
     .dash_sidebar{
         width: 200px;
@@ -387,3 +398,21 @@ button:focus , input:focus , textarea:focus , select:focus{
     margin-right: auto;
   }
 }
+
+.bg-square{
+	height: 15px;
+	width: 15px;
+	margin-right: 2px;
+}
+
+.red-bg{
+	background-color: #ff7272;
+}
+.green-bg{
+	background-color: #1d7a8c;
+}
+.grey-bg{
+	background-color: #aeaeae;
+}
+
+

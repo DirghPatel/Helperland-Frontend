@@ -17,6 +17,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -433,6 +434,11 @@ public class ServiceProviderController {
 	
 	@RequestMapping("/service-schedule")
 	public String spServiceSchedule(Model model) {	
+		User loggedInUserDetails = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		UserModel currentUser = userService.getUserByEmail(loggedInUserDetails.getUsername());	
+		
+		List<ServiceRequest> sr = this.serviceRequests.getServiceRequestBySPId(currentUser.getUser_id());
+		model.addAttribute("sr" , sr);
 		return "serviceProvider/spServiceSchedule";
 	}
 	
@@ -454,9 +460,25 @@ public class ServiceProviderController {
 		return "serviceProvider/mySettingsSP";
 	}
 	
+	
 	@SuppressWarnings("rawtypes")
 	@RequestMapping(value = "/service-details-data" , method = RequestMethod.POST)
 	public ResponseEntity serviceDetailsData(@RequestBody int serviceReqId) {
+		
+		ServiceRequest sr = this.serviceRequests.getServiceRequestById(serviceReqId);
+		ServiceRequestAddress srAddress = this.serviceRequests.getServiceRequestAddressById(serviceReqId);
+		ServiceRequestExtra srExtra = this.serviceRequests.getServiceRequestExtra(serviceReqId);
+		
+		List<Object> srList = new ArrayList<Object>();
+		srList.add(sr);
+		srList.add(srAddress);
+		srList.add(srExtra);
+		return ResponseEntity.status(HttpStatus.OK).body(srList);		
+	}
+	
+	@SuppressWarnings("rawtypes")
+	@RequestMapping(value = "/service-details-data/{serviceReqId}" , method = RequestMethod.POST)
+	public ResponseEntity serviceDetailsDataSchedule(@PathVariable int serviceReqId) {
 		
 		ServiceRequest sr = this.serviceRequests.getServiceRequestById(serviceReqId);
 		ServiceRequestAddress srAddress = this.serviceRequests.getServiceRequestAddressById(serviceReqId);

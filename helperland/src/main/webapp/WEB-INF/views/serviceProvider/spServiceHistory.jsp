@@ -13,10 +13,9 @@
 	<link href='<c:url value="/resources/css/navbar-2.css" />' rel="stylesheet" />
 	<link href='<c:url value="/resources/css/footer.css" />' rel="stylesheet" />
 	<link href='<c:url value="/resources/css/pagination.css" />' rel="stylesheet" />
-	
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
-    </script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="//cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
 </head>
 <body>
     <div style="min-height: 100vh; padding-bottom: 80px;">
@@ -160,7 +159,11 @@
             <div class="dash_content">
                 <!-- ---------- Service History ---------- -->
                 <div id="serviceHistoryTable">
-                    <table class="table table_1">
+                	<div class="tableHead d-flex justify-content-between align-items-center mb-2">
+                        <h3>Service History</h3>
+                        <a class="export_button rounded-pill text-decoration-none text-white" id="exportBtn" style="cursor: pointer;">Export</a>
+                    </div>
+                    <table class="table table_1" id="historyTable">
                         <thead>
                             <tr>
                                 <th scope="col" class="text-center">
@@ -409,6 +412,19 @@
     		document.getElementById("firstPrev").click();
     	})
     
+    	$("#exportBtn").click(function(){
+    		console.log("a");
+		  $("#historyTable").table2excel({
+		    name: "ServiceHistory",
+		    exclude:".ignoreRow",
+		    filename: "ServiceHistory" + new Date().toISOString().replace(/[\-\:\.]/g, ""),
+		    fileext: ".xls" ,
+		    exclude_img:true,
+		  	exclude_links:true,
+			exclude_inputs:true,
+		  }); 
+		});
+    	
     </script>
     
     <script>

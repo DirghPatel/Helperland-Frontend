@@ -18,8 +18,8 @@
 	<link href='<c:url value="/resources/css/footer.css" />' rel="stylesheet" />
 	<link href='<c:url value="/resources/css/pagination.css" />' rel="stylesheet" />
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
-    </script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<script src="//cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
 </head>
 <body>
     <div style="min-height: 100vh; padding-bottom: 170px;">
@@ -153,9 +153,9 @@
                 <div id="serviceHistoryTable">
                     <div class="tableHead d-flex justify-content-between align-items-center mb-2">
                         <h3>Service History</h3>
-                        <a href="#" class="export_button rounded-pill text-decoration-none text-white">Export</a>
+                        <a class="export_button rounded-pill text-decoration-none text-white" id="exportBtn" style="cursor: pointer;">Export</a>
                     </div>
-                    <table class="table table_1 p-3">
+                    <table class="table table_1 p-3" id="historyTable">
                         <thead>
                             <tr>
                                 <th scope="col" width="100">
@@ -173,7 +173,7 @@
                                 <th scope="col" class="text-center">
                                     Status
                                 </th>
-                                <th scope="col" class="text-center">Rate SP</th>
+                                <th scope="col" class="text-center ignoreRow">Rate SP</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -280,7 +280,7 @@
 		                                    <p class="m-auto cust_statusCompleted text-light px-2 ">Completed</p>
 		                                </c:if>
 		                            </td>
-	                                <td class="button_main text-center">
+	                                <td class="button_main text-center ignoreRow">
 	                                    <a class="rateSP_button rounded-pill cursor-pointer text-light text-decoration-none<c:if test="${sr.status == 0 or sr.status == 1 }"> disabledButton</c:if>" 
 		                                   role="button" data-spID = "${sr.service_provider_id }" data-srID = "${sr.service_req_id }" onclick="ratingModelFunction($(this).attr('data-spID') , $(this).attr('data-srID'))" 
 	                                    	<c:if test="${sr.status == 0 or sr.status == 1 }">
@@ -660,6 +660,19 @@
    			$("#firstPrev").attr("href" , '/helperland/customer/service-history?page=1&count=' + $("#count_select").val());
     		document.getElementById("firstPrev").click();
     	})
+    	
+    	$("#exportBtn").click(function(){
+    		console.log("a");
+		  $("#historyTable").table2excel({
+		    name: "ServiceHistory",
+		    exclude:".ignoreRow",
+		    filename: "ServiceHistory" + new Date().toISOString().replace(/[\-\:\.]/g, ""),
+		    fileext: ".xls" ,
+		    exclude_img:true,
+		  	exclude_links:true,
+			exclude_inputs:true,
+		  }); 
+		});
     
     </script>
     

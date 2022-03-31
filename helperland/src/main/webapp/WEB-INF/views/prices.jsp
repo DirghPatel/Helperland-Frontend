@@ -541,7 +541,7 @@
 
 
 
-	<div class="footer_section w-100">
+	<%-- <div class="footer_section w-100">
 		<div
 			class="footer_main d-flex justify-content-center align-items-center position-relative">
 			<div
@@ -582,12 +582,14 @@
 				<span><a href="" class="text-decoration-none">Terms and Conditions</a></span> | <span><a href="" class="text-decoration-none">Privacy Policy</a></span>
 			</p>
 		</div>
-	</div>
+	</div> --%>
 	
-	<a class="position-fixed back_to_top" >
+	<%-- <a class="position-fixed back_to_top" >
 		<img src=" <c:url value = "/resources/assets/homepage/ic-bktop.svg" />" alt="">
-	</a>
+	</a> --%>
 
+	<jsp:include page="footer.jsp" />
+	<jsp:include page="/WEB-INF/views/loader.jsp" />
 
     <!-- ------------- login modals --------------  -->
     <div class="logInPopUp">
@@ -682,6 +684,26 @@
 		})
 	
 	</script>
-	
+	<script>
+    
+	    $(document).ajaxSend(function(){
+	        $(loadingSpinner).fadeIn(250);
+	        $('html').css("overflow" , "hidden");
+	    });
+	    $(document).ajaxComplete(function(){
+	        $(loadingSpinner).fadeOut(250);
+	        $('html').css("overflow" , "initial");
+	    });
+	    document.onreadystatechange = function() {
+	        if (document.readyState !== "complete") {
+	        	$(loadingSpinner).fadeIn(250);
+	        	$('html').css("overflow" , "hidden");
+	        } else {
+	        	$(loadingSpinner).fadeOut(250);
+	        	$('html').css("overflow" , "initial");
+	        }
+	    };
+	    
+    </script>
 </body>
 </html>

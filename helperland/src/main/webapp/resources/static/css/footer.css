@@ -64,6 +64,39 @@
   color: #9ba0a3;
 }
 
+#loadingSpinner{
+	position: absolute;
+	top: 0px;
+	height: 100vh;
+	width: 100vw;
+	z-index: 111111;
+	background-color: #0000008f;
+	text-align: center;
+	display: none;
+}
+.donut {
+	width: 5rem;
+	height: 5rem;
+	border-radius: 50%;
+	border: 10px solid #b3f4ff;
+	border-top-color: #00000000;
+	border-bottom-color: #00000000;
+	animation: 1s spin infinite linear;
+	vertical-align: middle;
+	position:absolute;
+  	top: 0; 
+  	bottom: 0; 
+  	left: 0; 
+  	right: 0;
+  	margin: auto;
+  	
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @media (max-width: 768px){
   .footer_mid ul{
       display: grid !important;

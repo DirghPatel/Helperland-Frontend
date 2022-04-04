@@ -86,7 +86,7 @@
             </div>
             <div class="form-group">
             	<div class="d-flex">
-                	<input type="text" name="areacode" readonly="readonly" disabled class="form_areacode form-control p-0 ps-1" value="+49">
+                	<input type="text" name="areacode" readonly="readonly" disabled class="form_areacode form-control p-0 ps-1" value="+91">
                 	<input type="text" name="mobile" placeholder="Phone Number" id="mobile" class="form-control" required>
                 </div>
 	            <small id="phoneNumberMessage"></small>

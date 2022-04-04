@@ -104,9 +104,9 @@
                         <th scope="col">
                             User Type 
                         </th>
-                        <th scope="col">
+                        <!-- <th scope="col">
                             Role
-                        </th>
+                        </th> -->
                         <th scope="col">
                             Postal Code
                             <span>
@@ -118,14 +118,14 @@
                         <th scope="col">
                             City
                         </th>
-                        <th scope="col" class="text-center">
+                        <!-- <th scope="col" class="text-center">
                             Radius
                             <span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14">
                                     <path fill-rule="evenodd" fill="#9B9B9B" d="m13.829 9.159-4.67 4.67c.261.116-.233.571-.409.571-.116 0-.291-.455-.408-.571a.53.53 0 0 1-.175-.409V.579c0-.292.292-.179.583-.179h1.168c.292 0 .584-.113.584.179v7.88c0 .291.35.408.768.233l.924-1.167a.53.53 0 0 1 .409-.175c.117 0 .292.058.507.175l.719.817c.116.117.571.233.571.408 0 .176-.455.67-.571.409zM5.248 14.4H4.81c-1.021 0-1.313-.688-1.313-.98V5.54c0-.292-.35-.408-.525-.233L1.804 6.474a.527.527 0 0 1-.408.175.63.63 0 0 1-.409-.175L.17 5.657c.36-.117.23-.234.23-.409 0 .482.13-.292-.23-.408L4.84.17c.116.36.89.23.408.23.175 0 .292.13.409-.23a.53.53 0 0 1 .175.409V13.42c0 .292-.292.98-.584.98z"/>
                                 </svg>
                             </span>
-                        </th>
+                        </th> -->
                         <th scope="col" class="text-center">
                             User Status
                             <span>
@@ -151,8 +151,11 @@
 	                        	<c:if test="${user.user_type_id == 2 }">
 	                        		Service Provider
 	                        	</c:if>
+	                        	<c:if test="${user.user_type_id == 3 }">
+	                        		Admin
+	                        	</c:if>
 	                        </td>
-	                        <td scope="row">Inquiry Manager</td>
+	                        <!-- <td scope="row">Inquiry Manager</td> -->
 	                        <td scope="row">${user.postal_code }</td>
 	                        <td scope="row" >
 	                        	
@@ -165,7 +168,7 @@
 	                        	</c:forEach>
 	                        
 	                        </td>
-	                        <td scope="row" class="text-center">10 km</td>
+	                        <!-- <td scope="row" class="text-center">10 km</td> -->
 	                        <td scope="row" class="text-center">
 	                            <c:if test="${user.status == 1 }">
 		                            <span class="statusActive">
@@ -233,7 +236,12 @@
 				}
 			})
     	}
-    
+    	
+    	$(document).ready(function() {
+    	if (window.history.replaceState) {
+    		  window.history.replaceState( null, null, window.location.href );
+    		}
+    	});
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>

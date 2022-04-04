@@ -103,6 +103,7 @@ hr{
 }
 .disabledBtn{
 	background-color: #1d7a8c9e !important;
+	pointer-events: none;
 }
 .height46{
     height: 46px;

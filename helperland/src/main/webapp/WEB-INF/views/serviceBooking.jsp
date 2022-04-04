@@ -509,7 +509,7 @@
 									<ul class="address_list p-0" id="address_list">
 										<c:forEach var="address" items="${addresses }">
 	
-											<li class="address_listItem px-3 py-2 my-2">
+											<li class="address_listItem px-3 py-2 my-2 d-flex justify-content-between">
 												<label
 													class="d-flex align-items-center"> 
 													<input
@@ -526,6 +526,9 @@
 														</p>
 													</div>
 												</label>
+												<a href="#editAddressModal" data-bs-toggle="modal" role="button" data-addressId = "${address.address_id }" onclick="editAddressFunction($(this).attr('data-addressId'))">
+													<img src="<c:url value = "/resources/assets/custDash/edit-icon.png" />" alt="" height="22" width="22">
+		                                        </a>
 											</li>
 	
 										</c:forEach>
@@ -540,11 +543,6 @@
 	
 									<p><small class="text-danger mb-0 fs-small" id="selectAddressError"></small></p>
 									<hr class="mt-5 mb-3">
-									<!-- <div class="d-flex justify-content-end">
-	                                        <button type="submit" class="btn greenButton my-2 text-light rounded-pill" >
-	                                            Continue
-	                                        </button>
-	                                    </div> -->
 								</form> 
 								
 								<div class="my-3 collapse multi-collapse newAddress_collapse"
@@ -580,9 +578,6 @@
 												<div class="form-group d-flex flex-column">
 													<label for="city">City</label>
 													<div class="d-inline-block">
-														<!-- <select name="city" id="" class="height46 borderlight paddinginner w-100" >
-                                                            <option value="troisdorf" >Troisdorf</option>
-                                                        </select> -->
 														<input required type="text" name="city"
 															class="height46 borderlight paddinginner w-100 needed_in_address3"
 															placeholder="City">
@@ -599,18 +594,13 @@
 														<input
 															type="text" required placeholder="Phone Number"
 															name="mobile" id="addNewAddressMobile"
-															class="borderlight minheight46 paddinginner"
+															class="borderlight minheight46 paddinginner mobile_valid"
 															>
 													</div>
 												</div>
 											</div>
 											<small id="addAddressError" class="text-danger mb-2"></small>
 										</div>
-										<%-- <input type="hidden" value="${user.user_id }" name="user_id">
-										<input type="hidden" name="is_default" value="0"> <input
-											type="hidden" name="is_deleted" value="0"> <input
-											type="hidden" name="email" value="${user.email }"> --%>
-										
 										<button type="submit" id="addressSubmitBtn"
 											class="greenButton disabledBtn rounded-pill borderlight text-light px-3 paddinginner">
 											Save</button>
@@ -836,6 +826,64 @@
 				</div>
 			</div>
 		</div>
+		
+		<div class="modal fade" id="editAddressModal" aria-hidden="true" aria-labelledby="editAddressModalLabel2" tabindex="-1">
+	        <div class="modal-dialog modal-dialog-centered modal-lg">
+	            <div class="modal-content">
+	                <div class="modal-header">
+	                    <h4 class="modal-title me-3 color646464" id="editAddressModalLabel2">Edit Address</h4>
+	                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	                </div>
+	                <div class="modal-body ">
+	                    <form action="/helperland/edit-address" method="POST" id="editAddressForm">
+	                        <div class="row newAddress_form">
+	                            <div class="col-sm-6 mb-4">
+	                                <div class="form-group d-flex flex-column">
+	                                    <label for="streetname">Street Name</label>
+	                                    <input type="text" id="editAddress1" placeholder="Street Name" name="address_line1" class="borderlight height46 paddinginner w-100">
+	                                </div>
+	                            </div>
+	                            <div class="col-sm-6 mb-4">
+	                                <div class="form-group d-flex flex-column">
+	                                    <label for="housenumber">House number</label>
+	                                    <input type="text" id="editAddress2" placeholder="House Number" name="address_line2" class="borderlight height46 paddinginner w-100">
+	                                </div>
+	                            </div>
+	                            <div class="col-sm-6 mb-4">
+	                                <div class="form-group d-flex flex-column">
+	                                    <label for="postalcode">Postal Code</label>
+	                                    <input type="text" id="editAddressPC" placeholder="Postal Code" name="postal_code" class="borderlight height46 paddinginner w-100">
+	                                </div>
+	                            </div>
+	                            <div class="col-sm-6">
+	                                <div class="form-group d-flex flex-column">
+	                                    <label for="city">City</label>
+	                                    <div class="d-inline-block">
+	                                        <input name="city" id="editAddressCity" placeholder="City" class="borderlight height46 paddinginner w-100" />
+	                                    </div>
+	                                </div>
+	                            </div>
+	                            <div class="col-md-6 mb-4">
+	                                <div class="form-group d-flex flex-column">
+	                                    <label for="phonenumber">Phone Number</label>
+	                                    <div class="d-flex">
+	                                        <input type="text" name="phonecode" class="borderlight height46 paddinginner" value="+91" disabled style="max-width: 55px;">
+	                                        <input type="text" placeholder="Phone Number" id="editAddressMobile" name="mobile" class="borderlight height46 paddinginner mobile_valid1">
+	                                    </div>
+	                                </div>
+	                            </div>
+	                            <small id="editAddressError" class="text-danger mb-2"></small>
+	                        </div>
+	                        <input type="hidden" name="address_id" id="editAddressFormId" >
+	                        
+	                        <button type="submit" class="greenButton disabledBtn rounded-pill borderlight text-light px-3 paddinginner" id="addressEditBtn">
+	                            Update
+	                        </button>
+	                    </form>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
 
 	</div>
 	<jsp:include page="footer.jsp" />
@@ -879,8 +927,8 @@
 
 	<script>
 		
-		$(".needed_in_address1 , .needed_in_address2 , .needed_in_address3").on("keyup" , function(){
-			if($(".needed_in_address1").val().length > 0 && $(".needed_in_address2").val().length > 0 && $(".needed_in_address3").val().length > 0){
+		$(".needed_in_address1 , .needed_in_address2 , .needed_in_address3, .mobile_valid").on("keyup" , function(){
+			if($(".needed_in_address1").val().length > 0 && $(".needed_in_address2").val().length > 0 && $(".needed_in_address3").val().length > 0 && $(".mobile_valid").val().length >= 10 && $(".mobile_valid").val().length <= 12){
 				$("#addressSubmitBtn").removeAttr('disabled');
 				$("#addressSubmitBtn").removeClass('disabledBtn');
 			}
@@ -889,13 +937,28 @@
 				$("#addressSubmitBtn").attr('disabled' , true);	
 			}
 			
-			if($(".needed_in_address1").val().length == 0 || $(".needed_in_address2").val().length == 0 || $(".needed_in_address3").val().length == 0){
+			if($(".needed_in_address1").val().length == 0 || $(".needed_in_address2").val().length == 0 || $(".needed_in_address3").val().length == 0 || $(".mobile_valid").val().length < 10 || $(".mobile_valid").val().length > 12){
 				$("#addressSubmitBtn").attr('disabled' , true);
 				$("#addressSubmitBtn").addClass('disabledBtn');
 			}
 			
 		}); 
 		
+		$("#editAddress1 , #editAddressPC , #editAddressCity , .mobile_valid1").on("keyup" , function(){
+			if($("#editAddress1").val().length > 0 && $("#editAddressPC").val().length > 0 && $("#editAddressCity").val().length > 0 && $(".mobile_valid1").val().length >= 10 && $(".mobile_valid1").val().length <= 12){
+				$("#addressEditBtn").removeAttr('disabled');
+				$("#addressEditBtn").removeClass('disabledBtn');
+			}
+			else{
+				$("#addressEditBtn").addClass('disabledBtn');
+				$("#addressEditBtn").attr('disabled' , true);	
+			}
+			
+			if($("#editAddress1").val().length == 0 || $("#editAddressPC").val().length == 0 || $("#editAddressCity").val().length == 0 || $(".mobile_valid1").val().length < 10 || $(".mobile_valid1").val().length > 12){
+				$("#addressEditBtn").attr('disabled' , true);
+				$("#addressEditBtn").addClass('disabledBtn');
+			}
+		});
 		$("#postal_code").on("keyup" , function(){
 			if($("#postal_code").val().length > 4){
 				$("#checkAvailability").removeAttr('disabled');
@@ -909,7 +972,47 @@
 			location.reload(true);
 		})
 		
+		function editAddressFunction(id){
 	
+				$.ajax({
+					type : "POST",
+					contentType : "application/json",
+					url : "/helperland/address-details",
+					data : id,
+					crossDomain : true,
+					success : function(data) {
+						$("#editAddress1").val(data.address_line1);
+						$("#editAddress2").val(data.address_line2);
+						$("#editAddressPC").val(data.postal_code);
+						$("#editAddressMobile").val(data.mobile);
+						$("#editAddressCity").val(data.city);
+						$("#editAddressFormId").val(data.address_id);
+					},
+					error : function(xml, textStatus, xhr) {
+						alert("Some error occured");
+					}
+				});
+			
+		}
+		
+		$("#editAddressForm").submit(function editAddressFun(e) {
+			
+			$(this).find('input[type=checkbox]:checked').val(1);
+			e.preventDefault();
+			$.ajax({
+				url : $(this).attr('action'),
+				type : $(this).attr('method'),
+				data : $(this).serialize(),
+				success : function(data , xhr) {
+					$("#editAddressModal").modal('hide');
+					$("#address_list").load(document.URL + " #address_list");	 
+				},
+				error : function(xhr, textStatus, xml) {
+					$("#editAddressError").html("Please enter all fields to update."); 
+				}
+			})
+		})
+		
 	</script>
 	<script>
 		$("#servicedate , #servicetime").on(

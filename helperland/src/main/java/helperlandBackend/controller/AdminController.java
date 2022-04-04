@@ -121,64 +121,80 @@ public class AdminController {
 		Map<Integer, Integer> spRating = new HashMap<Integer, Integer>();
 		List<ServiceRequest> sr = new ArrayList<ServiceRequest>();
 		
+		System.out.println(sr_id + " " + custId + " " + spId + " " + status);
+		
 		for(ServiceRequest i: sr1) {
 			String id = String.valueOf(i.getService_req_id());
 			String cid = String.valueOf(i.getUser_id());
 			String sid = String.valueOf(i.getService_provider_id());
 			String sts = String.valueOf(i.getStatus());
 			
-			if(id.equals(sr_id) || cid.equals(custId)  || sid.equals(spId) || sts.equals(status)) {
-				if(id.equals(sr_id) && cid.equals("null") && sid.equals("null") && sts.equals("null")) {
+			
+			if(sr_id.equals(id) || spId.equals(sid)  || custId.equals(cid) || status.equals(sts)) {
+				if(sr_id.equals(cid) && custId.equals("null") && spId.equals("null") && status.equals("null")) {
 					sr.add(i);
+					System.out.println("1");
 				}
-				else if(id.equals("null") && cid.equals(custId) && sid.equals("null") && sts.equals("null")) {
+				else if(sr_id.equals("null") && custId.equals(cid) && spId.equals("null") && status.equals("null")) {
 					sr.add(i);
+					System.out.println("2");
 				}
-				else if(id.equals("null") && cid.equals("null") && sid.equals(spId) && sts.equals("null")) {
+				else if(sr_id.equals("null") && custId.equals("null") && spId.equals(sid) && status.equals("null")) {
 					sr.add(i);
+					System.out.println("3");
 				}
-				else if(id.equals("null") && cid.equals("null") && sid.equals("null") && sts.equals(status)) {
+				else if(sr_id.equals("null") && custId.equals("null") && spId.equals("null") && status.equals(sts)) {
 					sr.add(i);
+					System.out.println("4");
 				}
-				else if(id.equals(sr_id) && cid.equals(custId) && sid.equals("null") && sts.equals("null")) {
+				else if(sr_id.equals(id) && custId.equals(cid) && spId.equals("null") && status.equals("null")) {
 					sr.add(i);
+					System.out.println("5");
 				}
-				else if(id.equals(sr_id) && cid.equals("null") && sid.equals(spId) && sts.equals("null")) {
+				else if(sr_id.equals(id) && custId.equals("null") && spId.equals(sid) && status.equals("null")) {
 					sr.add(i);
+					System.out.println("6");
 				}
-				else if(id.equals(sr_id) && cid.equals("null") && sid.equals("null") && sts.equals(status)) {
+				else if(sr_id.equals(id) && custId.equals("null") && spId.equals("null") && status.equals(sts)) {
 					sr.add(i);
+					System.out.println("7");
 				}
-				else if(id.equals("null") && cid.equals(custId) && sid.equals(spId) && sts.equals("null")) {
+				else if(sr_id.equals("null") && custId.equals(cid) && spId.equals(sid) && status.equals("null")) {
 					sr.add(i);
+					System.out.println("8");
 				}
-				else if(id.equals("null") && cid.equals(custId) && sid.equals("null") && sts.equals(status)) {
+				else if(sr_id.equals("null") && custId.equals(cid) && spId.equals("null") && status.equals(sts)) {
 					sr.add(i);
+					System.out.println("9");
 				}
-				else if(id.equals("null") && cid.equals("null") && sid.equals(spId) && sts.equals(status)) {
+				else if(sr_id.equals("null") && custId.equals("null") && spId.equals(sid) && status.equals(sts)) {
 					sr.add(i);
+					System.out.println("10");
 				}
-				else if(id.equals(sr_id) && cid.equals(custId) && sid.equals(spId) && sts.equals("null")) {
+				else if(sr_id.equals(id) && custId.equals(cid) && spId.equals(sid) && status.equals("null")) {
 					sr.add(i);
+					System.out.println("11");
 				}
-				else if(id.equals(sr_id) && cid.equals(custId) && sid.equals("null") && sts.equals(status)) {
+				else if(sr_id.equals(id) && custId.equals(cid) && spId.equals("null") && status.equals(sts)) {
 					sr.add(i);
+					System.out.println("12");
 				}
-				else if(id.equals(sr_id) && cid.equals("null") && sid.equals(spId) && sts.equals(status)) {
+				else if(sr_id.equals(id) && custId.equals("null") && spId.equals(sid) && status.equals(sts)) {
 					sr.add(i);
+					System.out.println("13");
 				}
-				else if(id.equals("null") && cid.equals(custId) && sid.equals(spId) && sts.equals(status)) {
+				else if(sr_id.equals("null") && custId.equals(cid) && spId.equals(sid) && status.equals(sts)) {
 					sr.add(i);
+					System.out.println("14");
 				}
-				else if(id.equals(sr_id) && cid.equals(custId) && sid.equals(spId) && sts.equals(status)) {
+				else if(sr_id.equals(id) && custId.equals(cid) && spId.equals(sid) && status.equals(sts)) {
 					sr.add(i);
-				}
-				else {
-					sr.add(i);
+					System.out.println("15");
 				}
 			}
 			else if(sr_id.equals("null") && custId.equals("null") && spId.equals("null") && status.equals("null")) {
 				sr.add(i);
+				System.out.println("17");
 			}
 		}
 
@@ -189,11 +205,13 @@ public class AdminController {
 				Date todt = new SimpleDateFormat("yyyy-MM-dd").parse(toDate);
 				if(!checkDate(fromdt , todt , i.getService_start_date())) {
 					srIds.add(i);
+					System.out.println("18");
 				}
 			}
 		}
 		for(ServiceRequest i: srIds) {
 			sr.remove(i);
+			System.out.println("19");
 		}
 		
 		for(ServiceRequest i: sr) {
@@ -256,6 +274,8 @@ public class AdminController {
 		List<UserAddress> addresses = this.userService.getAllUserAddress();
 		List<UserModel> userAdd = new ArrayList<UserModel>();
 		
+		System.out.println(username + " " + userrole + " " + mobile + " " + postalcode);
+		
 		for(UserModel u: users) {
 			String type_id = String.valueOf(u.getUser_type_id());
 			if(u.getEmail() == null) {
@@ -310,9 +330,7 @@ public class AdminController {
 				else if(username.equals(u.getEmail()) && mobile.equals(u.getMobile()) && userrole.equals(type_id) && postalcode.equals(u.getPostal_code())) {
 					userAdd.add(u);
 				}
-				else {
-					userAdd.add(u);
-				}
+				
 			}
 			else if(username.equals("null") && mobile.equals("null") && userrole.equals("null") && postalcode.equals("null")){
 				userAdd.add(u);
